@@ -36,4 +36,17 @@ class ThemeProvider extends ChangeNotifier {
     return _theme;
   }
 
+  // function to set the splash logo image
+  String getSplashLogo(){
+    if(_theme == MyTheme.blackAndWhiteTheme){
+      return "assets/SVG/SplashLogoDW.svg";
+    }else if(_theme == MyTheme.purpleAndWhiteTheme){
+      return "assets/SVG/SplashLogoWP.svg";
+    }else if(_theme == MyTheme.darkPurpleTheme){
+      return "assets/SVG/SplashLogoPP.svg";
+    }else {
+      return "assets/SVG/SplashLogoBG.svg";
+    }
+  }
+
 }
