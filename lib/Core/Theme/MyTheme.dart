@@ -39,8 +39,18 @@ class MyTheme {
       bodySmall: TextStyle( color: black )
     ),
     // set the color of the progress indicator
-    progressIndicatorTheme:const ProgressIndicatorThemeData(color: black , )
-
+    progressIndicatorTheme:const ProgressIndicatorThemeData(color: black , ),
+    // set the elevated button theme 
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ButtonStyle(
+        shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
+        backgroundColor: MaterialStateProperty.all(black),
+        foregroundColor: MaterialStateProperty.all(white),
+        elevation: MaterialStateProperty.all(0),
+        textStyle: MaterialStateProperty.all(const TextStyle(fontWeight: FontWeight.w500 , fontSize: 20 , color: white))
+      )
+    )
+      
   );
 
   // the purple & white theme
@@ -48,7 +58,7 @@ class MyTheme {
 
     // set the scaffold background color with the color white
     scaffoldBackgroundColor: white,
-    // set the primary color with the color black
+    // set the primary color with the color lightPurple
     primaryColor: lightPurple,
     // set the text styles
     textTheme: const TextTheme(
@@ -63,7 +73,87 @@ class MyTheme {
         bodySmall: TextStyle( color: lightPurple )
     ),
     // set the color of the progress indicator
-    progressIndicatorTheme:const ProgressIndicatorThemeData(color: lightPurple , )
+    progressIndicatorTheme:const ProgressIndicatorThemeData(color: lightPurple , ),
+
+    // set the elevated button theme
+    elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ButtonStyle(
+            shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
+            backgroundColor: MaterialStateProperty.all(lightPurple),
+            foregroundColor: MaterialStateProperty.all(white),
+            elevation: MaterialStateProperty.all(0),
+            textStyle: MaterialStateProperty.all(const TextStyle(fontWeight: FontWeight.w500 , fontSize: 20 , color: white))
+        )
+    )
+
+
+  );
+
+  // the darkPurple & lightPurple theme
+  static ThemeData darkPurpleTheme = ThemeData(
+
+    // set the scaffold background color with the color white
+    scaffoldBackgroundColor: darkPurple,
+    // set the primary color with the color lightPurple
+    primaryColor: lightPurple,
+    // set the text styles
+    textTheme: const TextTheme(
+        titleLarge: TextStyle( color: lightPurple ),
+        titleMedium: TextStyle( color: lightPurple ),
+        titleSmall: TextStyle( color: lightPurple ),
+        labelLarge: TextStyle( color: lightPurple ),
+        labelMedium: TextStyle( color: lightPurple ),
+        labelSmall: TextStyle( color: lightPurple ),
+        bodyLarge: TextStyle( color: lightPurple ),
+        bodyMedium: TextStyle( color: lightPurple ),
+        bodySmall: TextStyle( color: lightPurple )
+    ),
+    // set the color of the progress indicator
+    progressIndicatorTheme:const ProgressIndicatorThemeData(color: lightPurple , ),
+    // set the elevated button theme
+    elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ButtonStyle(
+            shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
+            backgroundColor: MaterialStateProperty.all(lightPurple),
+            foregroundColor: MaterialStateProperty.all(darkPurple),
+            elevation: MaterialStateProperty.all(0),
+            textStyle: MaterialStateProperty.all(const TextStyle(fontWeight: FontWeight.w500 , fontSize: 20 , color: darkPurple))
+        )
+    )
+
+  );
+
+  // the darkBlue & gold theme
+  static ThemeData darkBlueTheme = ThemeData(
+
+    // set the scaffold background color with the color white
+      scaffoldBackgroundColor: darkBlue,
+      // set the primary color with the color lightPurple
+      primaryColor: lightGold,
+      // set the text styles
+      textTheme: const TextTheme(
+          titleLarge: TextStyle( color: lightGold ),
+          titleMedium: TextStyle( color: lightGold ),
+          titleSmall: TextStyle( color: lightGold ),
+          labelLarge: TextStyle( color: lightGold ),
+          labelMedium: TextStyle( color: lightGold ),
+          labelSmall: TextStyle( color: lightGold ),
+          bodyLarge: TextStyle( color: lightGold ),
+          bodyMedium: TextStyle( color: lightGold ),
+          bodySmall: TextStyle( color: lightGold )
+      ),
+      // set the color of the progress indicator
+      progressIndicatorTheme:const ProgressIndicatorThemeData(color: lightGold , ),
+      // set the elevated button theme
+      elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ButtonStyle(
+              shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
+              backgroundColor: MaterialStateProperty.all(lightGold),
+              foregroundColor: MaterialStateProperty.all(darkBlue),
+              elevation: MaterialStateProperty.all(0),
+              textStyle: MaterialStateProperty.all(const TextStyle(fontWeight: FontWeight.w500 , fontSize: 20 , color: darkBlue))
+          )
+      )
 
   );
 
