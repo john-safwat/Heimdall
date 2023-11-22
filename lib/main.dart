@@ -5,6 +5,7 @@ import 'package:heimdall/Core/Providers/LocalProvider.dart';
 import 'package:heimdall/Core/Providers/ThemeProvider.dart';
 import 'package:heimdall/Core/Theme/MyTheme.dart';
 import 'package:heimdall/Presentation/UI/Login/LoginView.dart';
+import 'package:heimdall/Presentation/UI/Splash/SplashScreen.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -57,11 +58,13 @@ class MyApp extends StatelessWidget {
       supportedLocales: AppLocalizations.supportedLocales,
       // define the application routes that hold all the
       routes: {
+        SplashScreen.routeName : (context) => SplashScreen(),
         LoginView.routeName : (context) => LoginView()
       },
 
       // the initial route to start the program from
-      initialRoute: LoginView.routeName,
+
+      initialRoute: SplashScreen.routeName,
       theme: themeProvider.getTheme(),
 
     );
