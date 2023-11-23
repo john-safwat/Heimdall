@@ -49,10 +49,38 @@ class _IntroViewState extends BaseState<IntroView , IntroViewModel> implements I
             // set theme page
             PageViewModel(
                 decoration: pageDecoration,
-                image: ThemeSlider(),
-                title: viewModel!.local!.yourLanguage,
-                body: ""
+                image: Lottie.asset("assets/animations/theme.json"),
+                title: viewModel!.local!.makeItYourOwn,
+                bodyWidget: ThemeSwitch()
             ),
+            // Welcome Message
+            PageViewModel(
+                decoration: pageDecoration,
+                image: Lottie.asset("assets/animations/hello.json"),
+                title: viewModel!.local!.welcome,
+                body: viewModel!.local!.welcomeMessage
+            ),
+            // security Message
+            PageViewModel(
+                decoration: pageDecoration,
+                image: Lottie.asset(viewModel!.getSecurityAnimation()),
+                title: viewModel!.local!.yourSecurity,
+                body: viewModel!.local!.yourSecurityMessage
+            ),
+            // security Message
+            PageViewModel(
+                decoration: pageDecoration,
+                image: Lottie.asset(viewModel!.getQRAnimation()),
+                title: viewModel!.local!.qrCode,
+                body: viewModel!.local!.qrCodeMessage
+            ),
+            // security Message
+            PageViewModel(
+                decoration: pageDecoration,
+                image: Lottie.asset(viewModel!.getKeyAnimation()),
+                title: viewModel!.local!.loginTitle,
+                body: viewModel!.local!.loginMessage
+            )
           ],
           done: Text(viewModel!.local!.finish),
           next: Text(viewModel!.local!.next),
