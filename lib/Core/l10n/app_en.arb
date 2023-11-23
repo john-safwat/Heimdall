@@ -8,5 +8,15 @@
   "yourLanguage"  : "Choose Your Language ?",
   "finish" : "Finish",
   "next" : "Next",
-  "back" :  "Back"
+  "back" :  "Back",
+  "makeItYourOwn" : "Crafted exclusively for you, customize your experience with personal flair.",
+  "welcome" : "Welcome To Heimdall",
+  "welcomeMessage" : "We Are Very Excited To Have You In Our Community",
+  "yourSecurity" : "Our Goal ... Your Security",
+  "yourSecurityMessage" : "Your security is our top priority. We employ cutting-edge measures to safeguard your information and trust 24/7",
+  "qrCode" : "Ready to dive in?",
+  "qrCodeMessage" : "1 Step and You are Good To Go...Scan the QR code to effortlessly set up and activate. Your seamless experience awaits you!",
+  "loginTitle" :  "Who's there?",
+  "loginMessage" : "Tell us a bit about yourself! Get started by registering or logging into your account on our mobile app."
+
 }
