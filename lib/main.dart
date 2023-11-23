@@ -4,6 +4,7 @@ import 'package:heimdall/Core/Providers/AppConfigProvider.dart';
 import 'package:heimdall/Core/Providers/LocalProvider.dart';
 import 'package:heimdall/Core/Providers/ThemeProvider.dart';
 import 'package:heimdall/Core/Theme/MyTheme.dart';
+import 'package:heimdall/Presentation/UI/Intro/IntroView.dart';
 import 'package:heimdall/Presentation/UI/Login/LoginView.dart';
 import 'package:heimdall/Presentation/UI/Splash/SplashScreen.dart';
 import 'package:provider/provider.dart';
@@ -59,6 +60,7 @@ class MyApp extends StatelessWidget {
       // define the application routes that hold all the
       routes: {
         SplashScreen.routeName : (context) => SplashScreen(),
+        IntroView.routeName : (context) => IntroView(),
         LoginView.routeName : (context) => LoginView()
       },
 
