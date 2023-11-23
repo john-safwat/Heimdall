@@ -3,6 +3,6 @@ import 'package:heimdall/Presentation/UI/Intro/IntroNavigator.dart';
 
 class IntroViewModel extends BaseViewModel<IntroNavigator> {
 
-
+  onDonePress(){}
 
 }

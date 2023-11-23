@@ -6,5 +6,7 @@
   "arabic" : "Arabic" ,
   "english" : "English",
   "yourLanguage"  : "Choose Your Language ?",
-  "welcomeToEl3b" : "Welcome To El3b , We are So Excited To Have You In Our Community"
+  "finish" : "Finish",
+  "next" : "Next",
+  "back" :  "Back"
 }
