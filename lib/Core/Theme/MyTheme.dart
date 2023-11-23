@@ -26,6 +26,8 @@ class MyTheme {
     scaffoldBackgroundColor: white,
     // set the primary color with the color black
     primaryColor: black,
+    // set the accent color
+    secondaryHeaderColor: gray,
     // set the text styles
     textTheme: const TextTheme(
       titleLarge: TextStyle( color: black ),
@@ -60,6 +62,8 @@ class MyTheme {
     scaffoldBackgroundColor: white,
     // set the primary color with the color lightPurple
     primaryColor: lightPurple,
+    // set the accent color
+    secondaryHeaderColor: gray,
     // set the text styles
     textTheme: const TextTheme(
         titleLarge: TextStyle( color: lightPurple ),
@@ -96,6 +100,8 @@ class MyTheme {
     scaffoldBackgroundColor: darkPurple,
     // set the primary color with the color lightPurple
     primaryColor: lightPurple,
+    // set the accent color
+    secondaryHeaderColor: white,
     // set the text styles
     textTheme: const TextTheme(
         titleLarge: TextStyle( color: lightPurple ),
@@ -130,6 +136,8 @@ class MyTheme {
       scaffoldBackgroundColor: darkBlue,
       // set the primary color with the color lightPurple
       primaryColor: lightGold,
+      // set the accent color
+      secondaryHeaderColor: lightBlue,
       // set the text styles
       textTheme: const TextTheme(
           titleLarge: TextStyle( color: lightGold ),

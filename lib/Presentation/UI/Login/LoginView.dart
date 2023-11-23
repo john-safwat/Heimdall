@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:heimdall/Core/Base/BaseState.dart';
-import 'package:heimdall/Core/Providers/ThemeProvider.dart';
 import 'package:heimdall/Core/Theme/MyTheme.dart';
 import 'package:heimdall/Presentation/UI/Login/LoginNavigator.dart';
 import 'package:heimdall/Presentation/UI/Login/LoginViewModel.dart';

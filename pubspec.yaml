@@ -44,6 +44,8 @@ dependencies:
   icons_launcher: ^2.1.5
   introduction_screen: ^3.1.12
   lottie: ^2.7.0
+  animated_toggle_switch: ^0.8.0
+  icons_plus: ^4.0.0
 
 dev_dependencies:
   flutter_test:
@@ -71,6 +73,7 @@ flutter:
   assets:
     - assets/SVG/
     - assets/images/
+    - assets/animations/
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
