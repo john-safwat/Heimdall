@@ -4,6 +4,7 @@ import 'package:heimdall/Core/Theme/MyTheme.dart';
 import 'package:heimdall/Presentation/UI/Intro/IntroNavigator.dart';
 import 'package:heimdall/Presentation/UI/Intro/IntroViewModel.dart';
 import 'package:heimdall/Presentation/UI/Widgets/LanguageSwitch.dart';
+import 'package:heimdall/Presentation/UI/Widgets/ThemeSlider.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
@@ -48,7 +49,7 @@ class _IntroViewState extends BaseState<IntroView , IntroViewModel> implements I
             // set theme page
             PageViewModel(
                 decoration: pageDecoration,
-                image: Lottie.asset("assets/animations/language.json"),
+                image: ThemeSlider(),
                 title: viewModel!.local!.yourLanguage,
                 body: ""
             ),
