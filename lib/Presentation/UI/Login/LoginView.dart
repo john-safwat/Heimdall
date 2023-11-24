@@ -4,6 +4,7 @@ import 'package:heimdall/Core/Base/BaseState.dart';
 import 'package:heimdall/Core/Theme/MyTheme.dart';
 import 'package:heimdall/Presentation/UI/Login/LoginNavigator.dart';
 import 'package:heimdall/Presentation/UI/Login/LoginViewModel.dart';
+import 'package:heimdall/Presentation/UI/Registration/RegistrationView.dart';
 import 'package:heimdall/Presentation/UI/Widgets/LanguageSwitch.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:provider/provider.dart';
@@ -143,11 +144,11 @@ class _LoginViewState extends BaseState<LoginView, LoginViewModel>
                     children: [
                       Text(value.local!.dontHaveAccount , style: Theme.of(context).textTheme.bodyLarge,),
                       TextButton(
-                          onPressed: () {},
+                          onPressed: value.goToRegisterScreen,
                           child: Text(value.local!.createAccount)),
                     ],
                   ),
-                  const SizedBox(height: 20,),
+                  const SizedBox(height: 10,),
                   // or space
                   Row(
                     children: [
@@ -190,5 +191,10 @@ class _LoginViewState extends BaseState<LoginView, LoginViewModel>
   @override
   LoginViewModel? initViewModel() {
     return LoginViewModel();
+  }
+
+  @override
+  goToRegistrationScreen() {
+    Navigator.pushNamed(context, RegistrationView.routeName);
   }
 }

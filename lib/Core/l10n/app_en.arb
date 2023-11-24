@@ -27,5 +27,6 @@
   "dontHaveAccount" : "Don't Have Account ?",
   "createAccount" : "Create Account",
   "or" : "Or",
-  "loginWithGoogle" : "Login With Google"
+  "loginWithGoogle" : "Login With Google",
+  "registration" : "Registration"
 }

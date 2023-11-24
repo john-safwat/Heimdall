@@ -20,6 +20,12 @@ class MyTheme {
   // the black & white theme
   static ThemeData blackAndWhiteTheme = ThemeData(
 
+      // app bar theme
+      appBarTheme: const AppBarTheme(
+        backgroundColor: Colors.transparent,
+        foregroundColor: black,
+        centerTitle: true
+      ),
       // set the scaffold background color with the color white
       scaffoldBackgroundColor: white,
       // set the primary color with the color black
@@ -96,7 +102,7 @@ class MyTheme {
               color: Colors.red,
             )),
       ),
-      dividerColor: black,
+      dividerTheme:const DividerThemeData( color: black ),
       // set text button theme
       textButtonTheme: TextButtonThemeData(
           style: ButtonStyle(
@@ -105,9 +111,16 @@ class MyTheme {
               textStyle: MaterialStateProperty.all(const TextStyle(
                   fontSize: 16, fontWeight: FontWeight.bold, color: black)))));
 
+  // ---------------------------------------------------------------------------------
   // the purple & white theme
+  // ---------------------------------------------------------------------------------
   static ThemeData purpleAndWhiteTheme = ThemeData(
-
+      // app bar theme
+      appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.transparent,
+          foregroundColor: lightPurple,
+          centerTitle: true
+      ),
       // set the scaffold background color with the color white
       scaffoldBackgroundColor: white,
       // set the primary color with the color lightPurple
@@ -185,7 +198,7 @@ class MyTheme {
               color: Colors.red,
             )),
       ),
-      dividerColor: lightPurple,
+      dividerTheme:const DividerThemeData( color: lightPurple ),
       // set text button theme
       textButtonTheme: TextButtonThemeData(
           style: ButtonStyle(
@@ -198,7 +211,12 @@ class MyTheme {
 
   // the darkPurple & lightPurple theme
   static ThemeData darkPurpleTheme = ThemeData(
-
+      // app bar theme
+      appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.transparent,
+          foregroundColor: lightGold,
+          centerTitle: true
+      ),
       // set the scaffold background color with the color white
       scaffoldBackgroundColor: darkPurple,
       // set the primary color with the color lightPurple
@@ -277,7 +295,7 @@ class MyTheme {
               color: Colors.red,
             )),
       ),
-      dividerColor: lightPurple,
+      dividerTheme:const DividerThemeData( color: lightPurple ),
       // set text button theme
       textButtonTheme: TextButtonThemeData(
           style: ButtonStyle(
@@ -290,7 +308,12 @@ class MyTheme {
 
   // the darkBlue & gold theme
   static ThemeData darkBlueTheme = ThemeData(
-
+      // app bar theme
+      appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.transparent,
+          foregroundColor: lightGold,
+          centerTitle: true
+      ),
       // set the scaffold background color with the color white
       scaffoldBackgroundColor: darkBlue,
       // set the primary color with the color lightPurple
@@ -369,7 +392,7 @@ class MyTheme {
               color: Colors.red,
             )),
       ),
-      dividerColor: lightGold,
+      dividerTheme:const DividerThemeData( color: lightGold ),
       // set text button theme
       textButtonTheme: TextButtonThemeData(
           style: ButtonStyle(
