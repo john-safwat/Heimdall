@@ -1,10 +1,4 @@
 {
-  "theme0":"ابيض و اسود" ,
-  "theme1":"بنفسجي و اسود" ,
-  "theme2":"فاتح و غامق" ,
-  "theme3":"ازرق و ذهبي",
-  "arabic" : "عربي" ,
-  "english" : "امجليزي",
   "yourLanguage"  : "اختر لغتك ؟",
   "finish" : "انتهاء",
   "next" : "التالي",
@@ -19,8 +13,19 @@
   "loginTitle" :  "من هناك ؟",
   "loginMessage" : "أخبرنا قليلا عن نفسك! ابدأ بالتسجيل أو تسجيل الدخول إلى حسابك على تطبيق الهاتف المحمول الخاص بنا.",
   "chatTitle" : "ابق علي اتصال",
-  "chatMessage" : "يمكنك الاتصال بالجميع في اي وقع بغطة زر منك",
+  "chatMessage" : "يمكنك الاتصال بالجميع في اي وقع بضغطة زر منك",
   "loading" : "جار التحميل ...",
-  "someThingWentWrong" : "حدث خطاء ما"
-
+  "someThingWentWrong" : "حدث خطاء ما",
+  "emailCantBeEmpty":"يجب ادخال بريد الكتروني",
+  "enterAValidEmail": "برجاء ادخال بريد الكتروني صحيح",
+  "passwordCantBeEmpty" : "يجب ادخال كلمة المرور",
+  "invalidPasswordLength" : "كلمة المرور يجب ان تكون اكبر من 8 حروف",
+  "email" : "البريد الالكتروني" ,
+  "password" : "كلمة المرور",
+  "forgetPassword" : "نسيت كلمة المرور ؟",
+  "login" :"تسجل الدخول",
+  "dontHaveAccount" : "ليس لديك حساب ؟",
+  "createAccount" : "انشئ حساب",
+  "or" : "او",
+  "loginWithGoogle" : "تسجيل الدخول بحساب جوجل"
 }

@@ -21,7 +21,8 @@ class _LanguageSwitchState extends State<LanguageSwitch> {
     return AnimatedToggleSwitch.size (
       current: localProvider.getLocal(),
       values: const ["en", "ar"],
-      height: 50,
+      height: 40,
+      fittingMode: FittingMode.preventHorizontalOverlapping,
       iconBuilder: (value) {
           if(value == "en"){
             return SvgPicture.asset("assets/SVG/En.svg" , height: 35,);

@@ -101,7 +101,7 @@ abstract class BaseState<T extends StatefulWidget , VM extends BaseViewModel> ex
   showSuccessNotification({required String message}){
     ElegantNotification(
       icon:const Icon(Bootstrap.check , color: MyTheme.white,),
-      description: Text(message , style: Theme.of(context).textTheme.titleSmall,),
+      description: Text(message , style: Theme.of(context).textTheme.titleSmall!.copyWith(color: MyTheme.white),),
       background: Colors.green,
       animation: AnimationType.fromTop,
       displayCloseButton: false,
@@ -117,7 +117,7 @@ abstract class BaseState<T extends StatefulWidget , VM extends BaseViewModel> ex
   showErrorNotification({required String message}){
     ElegantNotification(
       icon:const Icon(Bootstrap.x_circle , color: MyTheme.white,),
-      description: Text(message , style: Theme.of(context).textTheme.titleSmall,),
+      description: Text(message , style: Theme.of(context).textTheme.titleSmall!.copyWith(color: MyTheme.white),),
       background: Colors.red,
       animation: AnimationType.fromTop,
       displayCloseButton: false,
@@ -138,7 +138,7 @@ abstract class BaseState<T extends StatefulWidget , VM extends BaseViewModel> ex
   }){
     ElegantNotification(
       icon:Icon(iconData , color: MyTheme.white,),
-      description: Text(message , style: Theme.of(context).textTheme.titleSmall),
+      description: Text(message , style: Theme.of(context).textTheme.titleSmall!.copyWith(color: MyTheme.white)),
       background: background,
       animation: AnimationType.fromTop,
       displayCloseButton: false,

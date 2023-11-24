@@ -1,10 +1,4 @@
 {
-  "theme0":"Black And White" ,
-  "theme1":"Purple And White" ,
-  "theme2":"Purple And Purple" ,
-  "theme3":"Blue And Gold",
-  "arabic" : "Arabic" ,
-  "english" : "English",
   "yourLanguage"  : "Choose Your Language ?",
   "finish" : "Finish",
   "next" : "Next",
@@ -21,6 +15,17 @@
   "chatTitle" : "Keep In Touch",
   "chatMessage" : "You Can Chat & Make Calls To any one any Time You are Just one step Away",
   "loading" : "Loading ... ",
-  "someThingWentWrong" : "Some Thing Went Wrong"
-
+  "someThingWentWrong" : "Some Thing Went Wrong",
+  "emailCantBeEmpty":"The Email Can't Be Empty",
+  "enterAValidEmail": "Please Enter A Valid Email",
+  "passwordCantBeEmpty" : "The Password Can't Be Empty",
+  "invalidPasswordLength" : "The Password Must be More Than 8 Characters",
+  "email" : "Email" ,
+  "password" : "Password",
+  "forgetPassword" : "Forget Password ?",
+  "login" :"Login",
+  "dontHaveAccount" : "Don't Have Account ?",
+  "createAccount" : "Create Account",
+  "or" : "Or",
+  "loginWithGoogle" : "Login With Google"
 }
