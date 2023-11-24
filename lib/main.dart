@@ -12,7 +12,14 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 
-void main(){
+void main()async{
+
+  // block the code building for the loading of data
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
+  // call shared pref to get some value
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  var firstTime = prefs.getBool("firstTime");
 
   runApp(
     MultiProvider(
@@ -21,14 +28,17 @@ void main(){
         ChangeNotifierProvider(create: (context) => LocalProvider(),),
         ChangeNotifierProvider(create: (context) => AppConfigProvider(),)
       ],
-      child: MyApp()
+      child: MyApp(firstTime: firstTime,)
     )
   );
 
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({super.key});
+
+  bool? firstTime ;
+
+  MyApp({required this.firstTime,super.key});
 
   // define the needed provider
   late ThemeProvider themeProvider;
@@ -59,14 +69,13 @@ class MyApp extends StatelessWidget {
       supportedLocales: AppLocalizations.supportedLocales,
       // define the application routes that hold all the
       routes: {
-        SplashScreen.routeName : (context) => SplashScreen(),
-        IntroView.routeName : (context) => IntroView(),
-        LoginView.routeName : (context) => LoginView()
+        SplashScreen.routeName : (context) => SplashScreen(firstTime: firstTime??true),
+        IntroView.routeName : (context) => const IntroView(),
+        LoginView.routeName : (context) => const LoginView()
       },
 
       // the initial route to start the program from
-
-      initialRoute: SplashScreen.routeName,
+      home: SplashScreen(firstTime:firstTime??true ),
       theme: themeProvider.getTheme(),
 
     );

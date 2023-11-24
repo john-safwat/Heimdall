@@ -51,8 +51,11 @@ class MyTheme {
         elevation: MaterialStateProperty.all(0),
         textStyle: MaterialStateProperty.all(const TextStyle(fontWeight: FontWeight.w500 , fontSize: 20 , color: white))
       )
+    ),
+    // set the dialog background color
+    dialogTheme:const  DialogTheme(
+      backgroundColor: white,
     )
-      
   );
 
   // the purple & white theme
@@ -88,8 +91,11 @@ class MyTheme {
             elevation: MaterialStateProperty.all(0),
             textStyle: MaterialStateProperty.all(const TextStyle(fontWeight: FontWeight.w500 , fontSize: 20 , color: white))
         )
+    ),
+    // set the dialog background color
+    dialogTheme:const  DialogTheme(
+      backgroundColor: white,
     )
-
 
   );
 
@@ -125,9 +131,11 @@ class MyTheme {
             elevation: MaterialStateProperty.all(0),
             textStyle: MaterialStateProperty.all(const TextStyle(fontWeight: FontWeight.w500 , fontSize: 20 , color: darkPurple))
         )
-    )
-
-  );
+    ),
+    // set the dialog background color
+    dialogTheme:const  DialogTheme(
+      backgroundColor: darkPurple,
+    )  );
 
   // the darkBlue & gold theme
   static ThemeData darkBlueTheme = ThemeData(
@@ -161,6 +169,10 @@ class MyTheme {
               elevation: MaterialStateProperty.all(0),
               textStyle: MaterialStateProperty.all(const TextStyle(fontWeight: FontWeight.w500 , fontSize: 20 , color: darkBlue))
           )
+      ),
+      // set the dialog background color
+      dialogTheme:const  DialogTheme(
+        backgroundColor: darkBlue,
       )
 
   );

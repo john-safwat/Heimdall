@@ -3,6 +3,7 @@ import 'package:heimdall/Core/Base/BaseState.dart';
 import 'package:heimdall/Core/Theme/MyTheme.dart';
 import 'package:heimdall/Presentation/UI/Intro/IntroNavigator.dart';
 import 'package:heimdall/Presentation/UI/Intro/IntroViewModel.dart';
+import 'package:heimdall/Presentation/UI/Login/LoginView.dart';
 import 'package:heimdall/Presentation/UI/Widgets/LanguageSwitch.dart';
 import 'package:heimdall/Presentation/UI/Widgets/ThemeSlider.dart';
 import 'package:introduction_screen/introduction_screen.dart';
@@ -46,13 +47,6 @@ class _IntroViewState extends BaseState<IntroView , IntroViewModel> implements I
               title: viewModel!.local!.yourLanguage,
               bodyWidget: const LanguageSwitch()
             ),
-            // set theme page
-            PageViewModel(
-                decoration: pageDecoration,
-                image: Lottie.asset("assets/animations/theme.json"),
-                title: viewModel!.local!.makeItYourOwn,
-                bodyWidget: ThemeSwitch()
-            ),
             // Welcome Message
             PageViewModel(
                 decoration: pageDecoration,
@@ -60,6 +54,14 @@ class _IntroViewState extends BaseState<IntroView , IntroViewModel> implements I
                 title: viewModel!.local!.welcome,
                 body: viewModel!.local!.welcomeMessage
             ),
+            // set theme page
+            PageViewModel(
+                decoration: pageDecoration,
+                image: Lottie.asset("assets/animations/theme.json"),
+                title: viewModel!.local!.makeItYourOwn,
+                bodyWidget: ThemeSwitch()
+            ),
+
             // security Message
             PageViewModel(
                 decoration: pageDecoration,
@@ -73,6 +75,13 @@ class _IntroViewState extends BaseState<IntroView , IntroViewModel> implements I
                 image: Lottie.asset(viewModel!.getQRAnimation()),
                 title: viewModel!.local!.qrCode,
                 body: viewModel!.local!.qrCodeMessage
+            ),
+            // security Message
+            PageViewModel(
+                decoration: pageDecoration,
+                image: Lottie.asset(viewModel!.getChatAnimation()),
+                title: viewModel!.local!.chatTitle,
+                body: viewModel!.local!.chatMessage
             ),
             // security Message
             PageViewModel(
@@ -117,5 +126,11 @@ class _IntroViewState extends BaseState<IntroView , IntroViewModel> implements I
   @override
   IntroViewModel? initViewModel() {
     return IntroViewModel();
+  }
+
+  // function to navigate to login screen
+  @override
+  goToLoginScreen() {
+    Navigator.pushReplacementNamed(context, LoginView.routeName);
   }
 }
