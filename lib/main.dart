@@ -6,6 +6,7 @@ import 'package:heimdall/Core/Providers/ThemeProvider.dart';
 import 'package:heimdall/Core/Theme/MyTheme.dart';
 import 'package:heimdall/Presentation/UI/Intro/IntroView.dart';
 import 'package:heimdall/Presentation/UI/Login/LoginView.dart';
+import 'package:heimdall/Presentation/UI/Registration/RegistrationView.dart';
 import 'package:heimdall/Presentation/UI/Splash/SplashScreen.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -71,7 +72,8 @@ class MyApp extends StatelessWidget {
       routes: {
         SplashScreen.routeName : (context) => SplashScreen(firstTime: firstTime??true),
         IntroView.routeName : (context) => const IntroView(),
-        LoginView.routeName : (context) => const LoginView()
+        LoginView.routeName : (context) => const LoginView(),
+        RegistrationView.routeName : (context) => RegistrationView(),
       },
 
       // the initial route to start the program from

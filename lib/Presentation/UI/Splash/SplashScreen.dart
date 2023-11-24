@@ -23,7 +23,7 @@ class SplashScreen extends StatelessWidget {
           child: SvgPicture.asset(themeProvider.getSplashLogo())
         ),
       ),
-      nextScreen:firstTime? const IntroView(): const LoginView(),
+      nextScreen:!firstTime? const IntroView(): const LoginView(),
       duration: 2000,
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       splashIconSize: double.infinity,

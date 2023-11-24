@@ -27,5 +27,6 @@
   "dontHaveAccount" : "ليس لديك حساب ؟",
   "createAccount" : "انشئ حساب",
   "or" : "او",
-  "loginWithGoogle" : "تسجيل الدخول بحساب جوجل"
+  "loginWithGoogle" : "تسجيل الدخول بحساب جوجل",
+  "registration" : "انشاء حساب"
 }

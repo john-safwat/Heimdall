@@ -5,8 +5,6 @@ import 'package:heimdall/Presentation/UI/Login/LoginNavigator.dart';
 
 class LoginViewModel extends BaseViewModel<LoginNavigator>{
 
-
-
   // define the from key and text field controller
   final formKey = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController();
@@ -73,5 +71,12 @@ class LoginViewModel extends BaseViewModel<LoginNavigator>{
     visible = !visible;
     notifyListeners();
   }
+
+  // navigation functions
+  // function to go to the registration screen
+  goToRegisterScreen(){
+    navigator!.goToRegistrationScreen();
+  }
+
 
 }
