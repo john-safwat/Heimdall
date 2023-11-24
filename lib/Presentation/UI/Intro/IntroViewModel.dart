@@ -1,11 +1,22 @@
 import 'package:heimdall/Core/Base/BaseViewModel.dart';
 import 'package:heimdall/Core/Theme/MyTheme.dart';
 import 'package:heimdall/Presentation/UI/Intro/IntroNavigator.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class IntroViewModel extends BaseViewModel<IntroNavigator> {
 
 
-  onDonePress() {
+  onDonePress() async{
+    navigator!.showLoading(message: local!.loading);
+    try{
+      SharedPreferences pref = await SharedPreferences.getInstance();
+      pref.setBool("firstTime", false);
+      navigator!.goBack();
+      navigator!.goToLoginScreen();
+    }catch(e){
+      navigator!.goBack();
+      navigator!.showFailMessage(message: local!.someThingWentWrong);
+    }
 
 
   }
@@ -39,13 +50,26 @@ class IntroViewModel extends BaseViewModel<IntroNavigator> {
   // function to return animation suitable for current theme
   String getKeyAnimation(){
     if(themeProvider!.getTheme() == MyTheme.blackAndWhiteTheme){
-      return "assets/animations/keyLight.json";
+      return "assets/animations/loginBlack.json";
     }else if (themeProvider!.getTheme() == MyTheme.purpleAndWhiteTheme){
-      return "assets/animations/keyDark2.json";
+      return "assets/animations/loginPurple.json";
     }else if (themeProvider!.getTheme() == MyTheme.darkPurpleTheme){
-      return "assets/animations/keyDark2.json";
+      return "assets/animations/loginPurple.json";
     }else {
-      return "assets/animations/keyDark.json";
+      return "assets/animations/loginBlue.json";
+    }
+  }
+
+  // function to return animation suitable for current theme
+  String getChatAnimation(){
+    if(themeProvider!.getTheme() == MyTheme.blackAndWhiteTheme){
+      return "assets/animations/ChatBlack.json";
+    }else if (themeProvider!.getTheme() == MyTheme.purpleAndWhiteTheme){
+      return "assets/animations/ChatPurple.json";
+    }else if (themeProvider!.getTheme() == MyTheme.darkPurpleTheme){
+      return "assets/animations/ChatPurple.json";
+    }else {
+      return "assets/animations/ChatBlue.json";
     }
   }
 

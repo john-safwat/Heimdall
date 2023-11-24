@@ -9,7 +9,8 @@ import 'package:provider/provider.dart';
 class SplashScreen extends StatelessWidget {
 
   static const String routeName = "SplashScreen";
-  SplashScreen({super.key});
+  bool firstTime ;
+  SplashScreen({required this.firstTime ,super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,7 @@ class SplashScreen extends StatelessWidget {
           child: SvgPicture.asset(themeProvider.getSplashLogo())
         ),
       ),
-      nextScreen:const IntroView(),
+      nextScreen:firstTime? const IntroView(): const LoginView(),
       duration: 2000,
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       splashIconSize: double.infinity,
