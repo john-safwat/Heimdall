@@ -4,6 +4,7 @@ import 'package:heimdall/Core/Base/BaseState.dart';
 import 'package:heimdall/Domain/Models/Users/User.dart';
 import 'package:heimdall/Presentation/UI/ExtraInfo/ExtraInfoNavigator.dart';
 import 'package:heimdall/Presentation/UI/ExtraInfo/ExtraInfoViewModel.dart';
+import 'package:heimdall/Presentation/UI/Widgets/ThemeSlider.dart';
 import 'package:provider/provider.dart';
 
 class ExtraInfoView extends StatefulWidget {
@@ -58,9 +59,7 @@ class _ExtraInfoViewState extends BaseState<ExtraInfoView, ExtraInfoViewModel>
                     // the button to open bottom sheet 
                     InkWell(
                       overlayColor: MaterialStateProperty.all(Colors.transparent),
-                      onTap: () {
-                        
-                      },
+                      onTap: value.showModalBottomSheet,
                       child: Container(
                         padding:const  EdgeInsets.all(20),
                         width:value.mediaQuery!.width * 0.7,
@@ -80,7 +79,9 @@ class _ExtraInfoViewState extends BaseState<ExtraInfoView, ExtraInfoViewModel>
                           ],
                         ),
                       ),
-                    )
+                    ),
+                    const SizedBox(height: 30,),
+                    ThemeSwitch(),
                   ],
                 ),
               ),
@@ -93,4 +94,6 @@ class _ExtraInfoViewState extends BaseState<ExtraInfoView, ExtraInfoViewModel>
   ExtraInfoViewModel? initViewModel() {
     return ExtraInfoViewModel();
   }
+
+
 }

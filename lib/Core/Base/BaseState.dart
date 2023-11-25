@@ -151,4 +151,47 @@ abstract class BaseState<T extends StatefulWidget , VM extends BaseViewModel> ex
   }
 
 
+  // show modal bottom sheet to read image from user
+  @override
+  showImagePickerModalBottomSheet() {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) => Container(
+        padding: const EdgeInsets.all(20),
+        height: 130,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(viewModel!.local!.pickYourImagePickingMethod , style: Theme.of(context).textTheme.titleMedium,),
+            const SizedBox(height: 10,),
+            Row(
+              children: [
+                Expanded(
+                  child: ElevatedButton(
+                      onPressed: viewModel!.pickImageFromCamera,
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Text(viewModel!.local!.camera),
+                      )
+                  ),
+                ),
+                const SizedBox(width: 10,),
+                Expanded(
+                  child: ElevatedButton(
+                      onPressed: viewModel!.pickImageFromGallery,
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Text(viewModel!.local!.gallery),
+                      )
+                  ),
+                )
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+
 }
