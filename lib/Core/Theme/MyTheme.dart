@@ -110,7 +110,21 @@ class MyTheme {
               overlayColor: MaterialStateProperty.all(Colors.transparent),
               foregroundColor:MaterialStateProperty.all(black) ,
               textStyle: MaterialStateProperty.all(const TextStyle(
-                  fontSize: 16, fontWeight: FontWeight.bold, color: black)))));
+                  fontSize: 16, fontWeight: FontWeight.bold, color: black)))),
+
+      // set modal bottom sheet style
+      bottomSheetTheme: BottomSheetThemeData(
+        backgroundColor: white,
+        shape:const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20),
+            topRight: Radius.circular(20),
+          )
+        ),
+        modalBarrierColor: black.withOpacity(0.5)
+      )
+
+  );
 
   // ---------------------------------------------------------------------------------
   // the purple & white theme
@@ -209,7 +223,20 @@ class MyTheme {
               textStyle: MaterialStateProperty.all(const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
-                  color: lightPurple)))));
+                  color: lightPurple)))),
+      // set modal bottom sheet style
+      bottomSheetTheme: BottomSheetThemeData(
+          backgroundColor: white,
+          shape:const RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(20),
+                topRight: Radius.circular(20),
+              )
+          ),
+          modalBarrierColor: black.withOpacity(0.5)
+      )
+
+  );
 
   // the darkPurple & lightPurple theme
   static ThemeData darkPurpleTheme = ThemeData(
@@ -307,7 +334,20 @@ class MyTheme {
               textStyle: MaterialStateProperty.all(const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
-                  color: lightPurple)))));
+                  color: lightPurple)))),
+      // set modal bottom sheet style
+      bottomSheetTheme: BottomSheetThemeData(
+          backgroundColor: darkPurple,
+          shape:const RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(20),
+                topRight: Radius.circular(20),
+              )
+          ),
+          modalBarrierColor: black.withOpacity(0.5)
+      )
+
+  );
 
   // the darkBlue & gold theme
   static ThemeData darkBlueTheme = ThemeData(
@@ -405,5 +445,18 @@ class MyTheme {
               textStyle: MaterialStateProperty.all(const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
-                  color: lightGold)))));
+                  color: lightGold)))),
+      // set modal bottom sheet style
+      bottomSheetTheme: BottomSheetThemeData(
+          backgroundColor: darkBlue,
+          shape:const RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(20),
+                topRight: Radius.circular(20),
+              )
+          ),
+          modalBarrierColor: black.withOpacity(0.5)
+      )
+
+  );
 }

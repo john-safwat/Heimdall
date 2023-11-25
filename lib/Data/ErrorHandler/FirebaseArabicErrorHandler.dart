@@ -64,7 +64,7 @@ class FirebaseArabicErrorHandler {
         error = "الملف الموجود على العميل لا يتطابق مع حجم الملف الذي يتلقاه الخادم. حاول التحميل مرة أخرى.";
         break;
       default:
-        error = error.toString();
+        error = "خطاء في الاتصال بالخادم";
     }
     return error;
   }
@@ -84,7 +84,7 @@ class FirebaseArabicErrorHandler {
         error = "البريد الاليكتروني قيد الاستخدام";
         break;
       default:
-        error = error.toString();
+        error = "خطاء في الاتصال بالخادم";
     }
     return error;
   }

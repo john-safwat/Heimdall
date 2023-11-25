@@ -40,5 +40,9 @@
   "ok" : "Ok",
   "tryAgain" : "Try Again",
   "timeOutError" : "This Operation Timed Out",
-  "unknownError" : "Unknown Error"
+  "unknownError" : "Unknown Error",
+  "completeProfile" : "Complete Profile",
+  "hello" : "Hello",
+  "weNeedToKnowMoreAboutYou" : "We Need To Know More About You",
+  "pickYourImage" : "Pick Your Image"
 }

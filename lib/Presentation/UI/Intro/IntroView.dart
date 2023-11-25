@@ -47,13 +47,6 @@ class _IntroViewState extends BaseState<IntroView , IntroViewModel> implements I
               title: viewModel!.local!.yourLanguage,
               bodyWidget: const LanguageSwitch()
             ),
-            // Welcome Message
-            PageViewModel(
-                decoration: pageDecoration,
-                image: Lottie.asset("assets/animations/hello.json"),
-                title: viewModel!.local!.welcome,
-                body: viewModel!.local!.welcomeMessage
-            ),
             // set theme page
             PageViewModel(
                 decoration: pageDecoration,
@@ -61,7 +54,13 @@ class _IntroViewState extends BaseState<IntroView , IntroViewModel> implements I
                 title: viewModel!.local!.makeItYourOwn,
                 bodyWidget: ThemeSwitch()
             ),
-
+            // Welcome Message
+            PageViewModel(
+                decoration: pageDecoration,
+                image: Lottie.asset("assets/animations/hello.json"),
+                title: viewModel!.local!.welcome,
+                body: viewModel!.local!.welcomeMessage
+            ),
             // security Message
             PageViewModel(
                 decoration: pageDecoration,
