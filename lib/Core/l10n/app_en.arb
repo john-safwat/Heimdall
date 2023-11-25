@@ -44,5 +44,8 @@
   "completeProfile" : "Complete Profile",
   "hello" : "Hello",
   "weNeedToKnowMoreAboutYou" : "We Need To Know More About You",
-  "pickYourImage" : "Pick Your Image"
+  "pickYourImage" : "Pick Your Image",
+  "camera" : "Camera",
+  "gallery" : "Gallery",
+  "pickYourImagePickingMethod" : "Pick Image From"
 }

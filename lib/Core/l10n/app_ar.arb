@@ -43,5 +43,8 @@
   "unknownError" : "خطأ غير معروف",
   "completeProfile" : "اكمل الملف",
   "hello" : "مرحبا",
-  "pickYourImage" : "اخر صورتك"
+  "pickYourImage" : "اختر صورتك",
+  "camera" : "الكاميرا",
+  "gallery" : "المعرض",
+  "pickYourImagePickingMethod" : "اختر صورتك من :"
 }

@@ -23,4 +23,9 @@ class ExtraInfoViewModel extends BaseViewModel<ExtraInfoNavigator> {
     }
   }
 
+
+  // function to show modal bottom sheet of the image picker
+  showModalBottomSheet(){
+    navigator!.showImagePickerModalBottomSheet();
+  }
 }
