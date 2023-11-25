@@ -40,5 +40,8 @@
   "ok" : "تم",
   "tryAgain" : "حاول مجددا",
   "timeOutError" : "انتهت مهلة هذه العملية",
-  "unknownError" : "خطأ غير معروف"
+  "unknownError" : "خطأ غير معروف",
+  "completeProfile" : "اكمل الملف",
+  "hello" : "مرحبا",
+  "pickYourImage" : "اخر صورتك"
 }

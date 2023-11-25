@@ -63,7 +63,7 @@ class FirebaseEnglishErrorHandler {
         error = "File on the client does not match the size of the file recieved by the server. Try uploading again.";
         break;
       default:
-        error = error.toString();
+        error = "Network Error";
     }
     return error;
   }
@@ -83,7 +83,7 @@ class FirebaseEnglishErrorHandler {
         error = "Email Already In Use";
         break;
       default:
-        error = error.toString();
+        error = "Network Error";
     }
     return error;
   }

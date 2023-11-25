@@ -32,6 +32,7 @@ class _RegistrationViewState extends BaseState<RegistrationView , RegistrationVi
             title: Text(value.local!.registration),
           ),
           body: SingleChildScrollView(
+            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
             physics: const BouncingScrollPhysics(),
             child: Padding(
               padding: const EdgeInsets.all(20.0),
