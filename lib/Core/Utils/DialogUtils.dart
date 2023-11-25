@@ -25,7 +25,7 @@ class MyDialogUtils {
               FittedBox(
                 child: Text(
                   message,
-                  style: Theme.of(context).textTheme.titleLarge,
+                  style: Theme.of(context).textTheme.titleMedium,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,
                 ),
@@ -108,7 +108,7 @@ class MyDialogUtils {
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
                   message,
-                  style: Theme.of(context).textTheme.titleLarge,
+                  style: Theme.of(context).textTheme.titleMedium,
                   textAlign: TextAlign.center,
                 ),
               ),
@@ -194,7 +194,7 @@ class MyDialogUtils {
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
                   message,
-                  style: Theme.of(context).textTheme.titleLarge,
+                  style: Theme.of(context).textTheme.titleMedium,
                   textAlign: TextAlign.center,
                 ),
               ),
@@ -277,7 +277,7 @@ class MyDialogUtils {
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
                   message,
-                  style: Theme.of(context).textTheme.titleLarge,
+                  style: Theme.of(context).textTheme.titleMedium,
                   textAlign: TextAlign.center,
                 ),
               ),

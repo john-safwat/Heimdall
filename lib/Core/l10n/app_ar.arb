@@ -28,5 +28,17 @@
   "createAccount" : "انشئ حساب",
   "or" : "او",
   "loginWithGoogle" : "تسجيل الدخول بحساب جوجل",
-  "registration" : "انشاء حساب"
+  "registration" : "انشاء حساب",
+  "nameCantBeEmpty": "يجب ادخال اسم",
+  "invalidName" : "يجب ادخال اسم مناسب",
+  "passwordDoseNotMatch": "كلمة المرور غير متطابقة",
+  "name" : "الاسم",
+  "passwordConfirmation" : "تاكيد كلمة المرور",
+  "alreadyHaveAccount" : "بالفعل لديك حساب ؟",
+  "accountCreatedSuccessfully" : "تم انشاء حساب بنجاح",
+  "weSentVerificationMail" : "لقد تم ارسال بريد التاكيد",
+  "ok" : "تم",
+  "tryAgain" : "حاول مجددا",
+  "timeOutError" : "انتهت مهلة هذه العملية",
+  "unknownError" : "خطأ غير معروف"
 }

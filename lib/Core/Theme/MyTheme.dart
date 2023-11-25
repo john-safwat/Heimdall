@@ -24,7 +24,8 @@ class MyTheme {
       appBarTheme: const AppBarTheme(
         backgroundColor: Colors.transparent,
         foregroundColor: black,
-        centerTitle: true
+        centerTitle: true,
+        elevation: 0
       ),
       // set the scaffold background color with the color white
       scaffoldBackgroundColor: white,
@@ -119,7 +120,8 @@ class MyTheme {
       appBarTheme: const AppBarTheme(
           backgroundColor: Colors.transparent,
           foregroundColor: lightPurple,
-          centerTitle: true
+          centerTitle: true,
+          elevation: 0
       ),
       // set the scaffold background color with the color white
       scaffoldBackgroundColor: white,
@@ -214,8 +216,9 @@ class MyTheme {
       // app bar theme
       appBarTheme: const AppBarTheme(
           backgroundColor: Colors.transparent,
-          foregroundColor: lightGold,
-          centerTitle: true
+          foregroundColor: lightPurple,
+          centerTitle: true,
+          elevation: 0
       ),
       // set the scaffold background color with the color white
       scaffoldBackgroundColor: darkPurple,
@@ -312,7 +315,8 @@ class MyTheme {
       appBarTheme: const AppBarTheme(
           backgroundColor: Colors.transparent,
           foregroundColor: lightGold,
-          centerTitle: true
+          centerTitle: true,
+          elevation: 0
       ),
       // set the scaffold background color with the color white
       scaffoldBackgroundColor: darkBlue,
