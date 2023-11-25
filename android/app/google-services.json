@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "162564554099",
+    "project_id": "heimdall-5aecb",
+    "storage_bucket": "heimdall-5aecb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:162564554099:android:b9e5b2719f2b7a36d1d906",
+        "android_client_info": {
+          "package_name": "com.example.heimdall"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAVWXtVDuqS4RHmzm8ujqrZOhgLTX-nYEs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

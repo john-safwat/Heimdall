@@ -48,6 +48,10 @@ dependencies:
   animated_toggle_switch: ^0.8.0
   icons_plus: ^4.0.0
   elegant_notification: ^1.11.2
+  firebase_core: ^2.23.0
+  firebase_auth: ^4.14.1
+  cloud_firestore: ^4.13.2
+  google_sign_in: ^6.1.6
 
 dev_dependencies:
   flutter_test:

@@ -193,8 +193,9 @@ class _LoginViewState extends BaseState<LoginView, LoginViewModel>
     return LoginViewModel();
   }
 
+  // function to go to registration screen
   @override
   goToRegistrationScreen() {
-    Navigator.pushNamed(context, RegistrationView.routeName);
+    Navigator.pushReplacementNamed(context, RegistrationView.routeName);
   }
 }

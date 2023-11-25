@@ -4,6 +4,7 @@ import 'package:heimdall/Core/Providers/AppConfigProvider.dart';
 import 'package:heimdall/Core/Providers/LocalProvider.dart';
 import 'package:heimdall/Core/Providers/ThemeProvider.dart';
 import 'package:heimdall/Core/Theme/MyTheme.dart';
+import 'package:heimdall/Presentation/UI/ExtraInfo/ExtraInfoView.dart';
 import 'package:heimdall/Presentation/UI/Intro/IntroView.dart';
 import 'package:heimdall/Presentation/UI/Login/LoginView.dart';
 import 'package:heimdall/Presentation/UI/Registration/RegistrationView.dart';
@@ -11,7 +12,8 @@ import 'package:heimdall/Presentation/UI/Splash/SplashScreen.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 void main()async{
 
@@ -22,6 +24,9 @@ void main()async{
   SharedPreferences prefs = await SharedPreferences.getInstance();
   var firstTime = prefs.getBool("firstTime");
 
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(
     MultiProvider(
       providers: [

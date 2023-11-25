@@ -28,5 +28,17 @@
   "createAccount" : "Create Account",
   "or" : "Or",
   "loginWithGoogle" : "Login With Google",
-  "registration" : "Registration"
+  "registration" : "Registration",
+  "nameCantBeEmpty": "Name Can't be Empty",
+  "invalidName" : "Invalid Name",
+  "passwordDoseNotMatch": "Password Doesn't Match",
+  "name" : "Name",
+  "passwordConfirmation" : "Password Confirmation",
+  "alreadyHaveAccount" : "Already Have Account ?",
+  "accountCreatedSuccessfully" : "Account Created Successfully",
+  "weSentVerificationMail" : "We Sent Verification Mail",
+  "ok" : "Ok",
+  "tryAgain" : "Try Again",
+  "timeOutError" : "This Operation Timed Out",
+  "unknownError" : "Unknown Error"
 }
