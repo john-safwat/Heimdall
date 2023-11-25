@@ -43,8 +43,17 @@
   "unknownError" : "خطأ غير معروف",
   "completeProfile" : "اكمل الملف",
   "hello" : "مرحبا",
+  "weNeedToKnowMoreAboutYou" : "نحن نحتاج اللي معرفة المزيد عنك",
   "pickYourImage" : "اختر صورتك",
   "camera" : "الكاميرا",
   "gallery" : "المعرض",
-  "pickYourImagePickingMethod" : "اختر صورتك من :"
+  "pickYourImagePickingMethod" : "اختر صورتك من :",
+  "birthDate" : "تاريخ الميلاد" ,
+  "enterPhoneNumber" : "برجاء ادخال رقم الهاتف" ,
+  "enterValidMobileNumber" :  "يرجي ادخال رقم هاتف صحيح",
+  "phone": "الهاتف",
+  "cancel" : "الغاء",
+  "selectYourBirthDate" : "برجاء ادخال تاريخ الميلاد",
+  "selectYourGender" : "من فلك اختر النوع",
+  "accountCompletedSuccessfully" : "تم تحديث الحساب بنحاج"
 }
