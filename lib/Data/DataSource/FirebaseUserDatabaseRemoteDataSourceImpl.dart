@@ -56,4 +56,31 @@ class FirebaseUserDatabaseRemoteDataSourceImpl  implements FirebaseUserDatabaseR
 
 
 
+  // function to update user
+  @override
+  Future<void> updateUserProfile({required String local, required UserDTO user}) async{
+    try {
+      var response = await userDatabase.updateUserData(user: user).timeout(const Duration(seconds: 60));
+      return response;
+    } on FirebaseAuthException catch (e){ // handle firebase auth exception in en of ar
+      throw FirebaseUserAuthException(
+          errorMessage: local == "en"
+              ? englishErrorHandler.handleFirebaseAuthException(error: e.code)
+              : arabicErrorHandler.handleFirebaseAuthException(error: e.code));
+    } on FirebaseException catch (e) { // handle firebase exception in en of ar
+      throw FirebaseDatabaseException(
+          errorMessage: local == "en"
+              ? englishErrorHandler.handleFirebaseAuthException(error: e.code)
+              : arabicErrorHandler.handleFirebaseAuthException(error: e.code)
+      );
+    }on IOException {
+      throw InternetConnectionException(errorMessage: "I/O Exception");
+    } on TimeoutException {// handle timeout exception
+      throw TimeOutOperationsException(errorMessage: "Timeout");
+    } catch (e){ // handle unknown exceptions
+      throw UnknownException(errorMessage: e.toString());
+    }
+  }
+
+
 }

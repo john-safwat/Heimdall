@@ -47,5 +47,13 @@
   "pickYourImage" : "Pick Your Image",
   "camera" : "Camera",
   "gallery" : "Gallery",
-  "pickYourImagePickingMethod" : "Pick Image From"
+  "pickYourImagePickingMethod" : "Pick Image From",
+  "birthDate" : "Birth Date" ,
+  "enterPhoneNumber" : "Enter Phone Number" ,
+  "enterValidMobileNumber" :  "Enter Valid Phone Number",
+  "phone": "Phone",
+  "cancel" : "Cancel",
+  "selectYourBirthDate" : "Select Your Birth Date",
+  "selectYourGender" : "Select Your Gender",
+  "accountCompletedSuccessfully" : "Account Completed Successfully"
 }
