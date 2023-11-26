@@ -5,13 +5,15 @@ import 'package:heimdall/Domain/Exceptions/FirebaseUserAuthException.dart';
 import 'package:heimdall/Domain/Exceptions/FirebaseDatabaseException.dart';
 import 'package:heimdall/Domain/Exceptions/TimeOutOperationsException.dart';
 import 'package:heimdall/Domain/Models/Users/User.dart';
+import 'package:heimdall/Domain/UseCase/AddUserUseCase.dart';
 import 'package:heimdall/Domain/UseCase/CreateAccountUseCase.dart';
 import 'package:heimdall/Presentation/UI/Registration/RegistrationNavigator.dart';
 
 class RegistrationViewModel extends BaseViewModel<RegistrationNavigator> {
 
   CreateAccountUseCase createAccountUseCase;
-  RegistrationViewModel({required this.createAccountUseCase});
+  AddUserUseCase addUserUseCase;
+  RegistrationViewModel({required this.createAccountUseCase , required this.addUserUseCase});
 
   final formKey = GlobalKey<FormState>();
   TextEditingController nameController = TextEditingController();
@@ -109,7 +111,7 @@ class RegistrationViewModel extends BaseViewModel<RegistrationNavigator> {
             uid: "",
             name: nameController.text,
             email: emailController.text,
-            password: passwordController.text,
+            password: "Private",
             image: "",
             phoneNumber: "",
             birthDate: "--/--/----",
@@ -121,6 +123,7 @@ class RegistrationViewModel extends BaseViewModel<RegistrationNavigator> {
         appConfigProvider!.updateUser(user: response);
         // update the uid in the user object by the id in response
         user.uid = response.uid;
+        await addUserUseCase.invoke(local: localProvider!.getLocal(), user: user);
         // show success dialog
         navigator!.goBack();
         navigator!.showSuccessMessage(

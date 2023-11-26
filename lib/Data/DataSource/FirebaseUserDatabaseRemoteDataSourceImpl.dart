@@ -65,13 +65,38 @@ class FirebaseUserDatabaseRemoteDataSourceImpl  implements FirebaseUserDatabaseR
     } on FirebaseAuthException catch (e){ // handle firebase auth exception in en of ar
       throw FirebaseUserAuthException(
           errorMessage: local == "en"
-              ? englishErrorHandler.handleFirebaseAuthException(error: e.code)
-              : arabicErrorHandler.handleFirebaseAuthException(error: e.code));
+              ? englishErrorHandler.handleFirebaseFireStoreError(e.code)
+              : arabicErrorHandler.handleFirebaseFireStoreError(e.code));
     } on FirebaseException catch (e) { // handle firebase exception in en of ar
       throw FirebaseDatabaseException(
           errorMessage: local == "en"
-              ? englishErrorHandler.handleFirebaseAuthException(error: e.code)
-              : arabicErrorHandler.handleFirebaseAuthException(error: e.code)
+              ? englishErrorHandler.handleFirebaseFireStoreError(e.code)
+              : arabicErrorHandler.handleFirebaseFireStoreError(e.code)
+      );
+    }on IOException {
+      throw InternetConnectionException(errorMessage: "I/O Exception");
+    } on TimeoutException {// handle timeout exception
+      throw TimeOutOperationsException(errorMessage: "Timeout");
+    } catch (e){ // handle unknown exceptions
+      throw UnknownException(errorMessage: e.toString());
+    }
+  }
+
+  @override
+  Future<bool> checkIfUserExist({required String local, required String uid}) async{
+    try{
+      var response = await userDatabase.userExist(uid: uid);
+      return response;
+    }on FirebaseAuthException catch (e){ // handle firebase auth exception in en of ar
+      throw FirebaseUserAuthException(
+          errorMessage: local == "en"
+              ? englishErrorHandler.handleFirebaseFireStoreError(e.code)
+              : arabicErrorHandler.handleFirebaseFireStoreError(e.code));
+    } on FirebaseException catch (e) { // handle firebase exception in en of ar
+      throw FirebaseDatabaseException(
+          errorMessage: local == "en"
+              ? englishErrorHandler.handleFirebaseFireStoreError(e.code)
+              : arabicErrorHandler.handleFirebaseFireStoreError(e.code)
       );
     }on IOException {
       throw InternetConnectionException(errorMessage: "I/O Exception");

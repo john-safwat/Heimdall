@@ -2,7 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:heimdall/Core/Base/BaseState.dart';
 import 'package:heimdall/Core/Theme/MyTheme.dart';
+import 'package:heimdall/Domain/Models/Users/User.dart';
+import 'package:heimdall/Domain/UseCase/AddUserUseCase.dart';
+import 'package:heimdall/Domain/UseCase/CheckIfUserExistUseCase.dart';
+import 'package:heimdall/Domain/UseCase/SignInWithGoogleUseCase.dart';
+import 'package:heimdall/Domain/UseCase/SignUserInWithEmailAndPasswordUseCase.dart';
+import 'package:heimdall/Presentation/UI/ExtraInfo/ExtraInfoView.dart';
 import 'package:heimdall/Presentation/UI/ForgetPassword/ForgetPasswordView.dart';
+import 'package:heimdall/Presentation/UI/Home/HomeView.dart';
 import 'package:heimdall/Presentation/UI/Login/LoginNavigator.dart';
 import 'package:heimdall/Presentation/UI/Login/LoginViewModel.dart';
 import 'package:heimdall/Presentation/UI/Registration/RegistrationView.dart';
@@ -131,7 +138,7 @@ class _LoginViewState extends BaseState<LoginView, LoginViewModel>
                         const SizedBox(height: 10,),
                         // login button
                         ElevatedButton(
-                            onPressed: () {},
+                            onPressed: viewModel!.signInWithEmailAndPassword,
                             child: Padding(
                               padding: const EdgeInsets.all(12.0),
                               child: Row(
@@ -169,7 +176,7 @@ class _LoginViewState extends BaseState<LoginView, LoginViewModel>
                         const SizedBox(height: 20,),
                         // login button
                         ElevatedButton(
-                            onPressed: () {},
+                            onPressed: viewModel!.loginWithGoogle,
                             child: Padding(
                               padding: const EdgeInsets.all(12.0),
                               child: Row(
@@ -198,7 +205,12 @@ class _LoginViewState extends BaseState<LoginView, LoginViewModel>
 
   @override
   LoginViewModel? initViewModel() {
-    return LoginViewModel();
+    return LoginViewModel(
+      checkIfUserExistUseCase: injectCheckIfUserExistUseCase(),
+      signUserInWithEmailAndPasswordUseCase: injectSignUserInWithEmailAndPasswordUseCase(),
+      addUserUseCase: injectAddUserUseCase(),
+      signInWithGoogleUseCase: injectSignInWithGoogleUseCase()
+    );
   }
 
   // function to go to registration screen
@@ -210,5 +222,21 @@ class _LoginViewState extends BaseState<LoginView, LoginViewModel>
   @override
   goToForgetPasswordScreen() {
     Navigator.pushNamed(context, ForgetPasswordView.routeName);
+  }
+
+  @override
+  goToHomeScreen() {
+    Navigator.pushReplacementNamed(context, HomeView.routeName);
+  }
+
+  // function to go to extra info screen
+  @override
+  goToExtraInfoScreen(MyUser user) {
+    Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+            builder: (context) => ExtraInfoView(
+              user: user,
+            )));
   }
 }

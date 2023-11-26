@@ -41,8 +41,8 @@ class FirebaseImagesRemoteDatasourceImpl
     } on FirebaseException catch (e) {
       throw FirebaseImagesException(
           errorMessage: local == "en"
-              ? englishErrorHandler.handleFirebaseAuthException(error: e.code)
-              : arabicErrorHandler.handleFirebaseAuthException(error: e.code));
+              ? englishErrorHandler.handleFirebaseImageDatabaseExceptions(error: e.code)
+              : arabicErrorHandler.handleFirebaseImageDatabaseExceptions(error: e.code));
     } on TimeoutException catch (e) {
       throw TimeOutOperationsException(
           errorMessage: "Uploading Image Timed Out Try Again");

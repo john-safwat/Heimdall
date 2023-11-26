@@ -9,5 +9,9 @@ abstract class UserRepository {
   Future<String> uploadUserImageToDatabase({required String local , required XFile image});
   Future<User> updateUserImageInUserCredential({required String local , required String image});
   Future<void> updateUser({required String local , required MyUser user});
+  Future<void> resetPassword({required String local , required String email});
+  Future<User> signInWithEmailAndPassword({required String local ,required String email ,required String password});
+  Future<bool> checkIfUserExist({required String local , required String uid});
+  Future<User> signInWithGoogle({required String local});
 
 }

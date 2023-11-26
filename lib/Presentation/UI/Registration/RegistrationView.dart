@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:heimdall/Core/Base/BaseState.dart';
 import 'package:heimdall/Domain/Models/Users/User.dart';
+import 'package:heimdall/Domain/UseCase/AddUserUseCase.dart';
 import 'package:heimdall/Domain/UseCase/CreateAccountUseCase.dart';
 import 'package:heimdall/Presentation/UI/ExtraInfo/ExtraInfoView.dart';
 import 'package:heimdall/Presentation/UI/Login/LoginView.dart';
@@ -12,7 +13,6 @@ import 'package:icons_plus/icons_plus.dart';
 import 'package:provider/provider.dart';
 
 class RegistrationView extends StatefulWidget {
-
   static const String routeName = "Registration";
   const RegistrationView({super.key});
 
@@ -20,7 +20,9 @@ class RegistrationView extends StatefulWidget {
   State<RegistrationView> createState() => _RegistrationViewState();
 }
 
-class _RegistrationViewState extends BaseState<RegistrationView , RegistrationViewModel> implements RegistrationNavigator{
+class _RegistrationViewState
+    extends BaseState<RegistrationView, RegistrationViewModel>
+    implements RegistrationNavigator {
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -35,7 +37,8 @@ class _RegistrationViewState extends BaseState<RegistrationView , RegistrationVi
             children: [
               Expanded(
                 child: SingleChildScrollView(
-                  keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+                  keyboardDismissBehavior:
+                      ScrollViewKeyboardDismissBehavior.onDrag,
                   physics: const BouncingScrollPhysics(),
                   child: Padding(
                     padding: const EdgeInsets.all(20.0),
@@ -43,7 +46,7 @@ class _RegistrationViewState extends BaseState<RegistrationView , RegistrationVi
                       children: [
                         // the white space in the top of tha screen
                         const SizedBox(
-                          height:20,
+                          height: 20,
                         ),
                         // logo image
                         Row(
@@ -51,8 +54,8 @@ class _RegistrationViewState extends BaseState<RegistrationView , RegistrationVi
                           children: [
                             InkWell(
                                 enableFeedback: false,
-                                overlayColor:
-                                MaterialStateProperty.all(Colors.transparent),
+                                overlayColor: MaterialStateProperty.all(
+                                    Colors.transparent),
                                 onTap: value.changeTheme,
                                 child: SvgPicture.asset(value.getLogo()))
                           ],
@@ -72,7 +75,8 @@ class _RegistrationViewState extends BaseState<RegistrationView , RegistrationVi
                                 validator: (value) {
                                   return viewModel!.nameValidation(value ?? "");
                                 },
-                                autovalidateMode: AutovalidateMode.onUserInteraction,
+                                autovalidateMode:
+                                    AutovalidateMode.onUserInteraction,
                                 cursorColor: Theme.of(context).primaryColor,
                                 keyboardType: TextInputType.name,
                                 cursorHeight: 20,
@@ -84,15 +88,19 @@ class _RegistrationViewState extends BaseState<RegistrationView , RegistrationVi
                                   hintText: value.local!.name,
                                 ),
                               ),
-                              const SizedBox(height: 20,),
+                              const SizedBox(
+                                height: 20,
+                              ),
                               // the text from field for the email
                               TextFormField(
                                 style: Theme.of(context).textTheme.bodyLarge,
                                 controller: value.emailController,
                                 validator: (value) {
-                                  return viewModel!.emailValidation(value ?? "");
+                                  return viewModel!
+                                      .emailValidation(value ?? "");
                                 },
-                                autovalidateMode: AutovalidateMode.onUserInteraction,
+                                autovalidateMode:
+                                    AutovalidateMode.onUserInteraction,
                                 cursorColor: Theme.of(context).primaryColor,
                                 keyboardType: TextInputType.emailAddress,
                                 cursorHeight: 20,
@@ -104,15 +112,19 @@ class _RegistrationViewState extends BaseState<RegistrationView , RegistrationVi
                                   hintText: value.local!.email,
                                 ),
                               ),
-                              const SizedBox(height: 20,),
+                              const SizedBox(
+                                height: 20,
+                              ),
                               // the text from field for the email
                               TextFormField(
                                 style: Theme.of(context).textTheme.bodyLarge,
                                 controller: value.passwordController,
                                 validator: (value) {
-                                  return viewModel!.passwordValidation(value ?? "");
+                                  return viewModel!
+                                      .passwordValidation(value ?? "");
                                 },
-                                autovalidateMode: AutovalidateMode.onUserInteraction,
+                                autovalidateMode:
+                                    AutovalidateMode.onUserInteraction,
                                 cursorColor: Theme.of(context).primaryColor,
                                 keyboardType: TextInputType.visiblePassword,
                                 obscureText: !value.passwordVisible,
@@ -135,15 +147,21 @@ class _RegistrationViewState extends BaseState<RegistrationView , RegistrationVi
                                       ),
                                     )),
                               ),
-                              const SizedBox(height: 20,),
+                              const SizedBox(
+                                height: 20,
+                              ),
                               // the text from field for the email
                               TextFormField(
                                 style: Theme.of(context).textTheme.bodyLarge,
-                                controller: value.passwordConfirmationController,
+                                controller:
+                                    value.passwordConfirmationController,
                                 validator: (value) {
-                                  return viewModel!.passwordConfirmationValidation(value ?? "");
+                                  return viewModel!
+                                      .passwordConfirmationValidation(
+                                          value ?? "");
                                 },
-                                autovalidateMode: AutovalidateMode.onUserInteraction,
+                                autovalidateMode:
+                                    AutovalidateMode.onUserInteraction,
                                 cursorColor: Theme.of(context).primaryColor,
                                 keyboardType: TextInputType.visiblePassword,
                                 obscureText: !value.passwordConfineVisible,
@@ -155,7 +173,8 @@ class _RegistrationViewState extends BaseState<RegistrationView , RegistrationVi
                                     ),
                                     hintText: value.local!.passwordConfirmation,
                                     suffixIcon: InkWell(
-                                      onTap: value.changePasswordConfirmVisibility,
+                                      onTap:
+                                          value.changePasswordConfirmVisibility,
                                       overlayColor: MaterialStateProperty.all(
                                           Colors.transparent),
                                       child: Icon(
@@ -169,7 +188,9 @@ class _RegistrationViewState extends BaseState<RegistrationView , RegistrationVi
                             ],
                           ),
                         ),
-                        const SizedBox(height: 30,),
+                        const SizedBox(
+                          height: 30,
+                        ),
                         // login button
                         ElevatedButton(
                             onPressed: value.createAccount,
@@ -181,20 +202,26 @@ class _RegistrationViewState extends BaseState<RegistrationView , RegistrationVi
                                   Text(value.local!.createAccount),
                                 ],
                               ),
-                            )
+                            )),
+                        const SizedBox(
+                          height: 10,
                         ),
-                        const SizedBox(height: 10,),
                         // create account button
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(value.local!.alreadyHaveAccount , style: Theme.of(context).textTheme.bodyLarge,),
+                            Text(
+                              value.local!.alreadyHaveAccount,
+                              style: Theme.of(context).textTheme.bodyLarge,
+                            ),
                             TextButton(
                                 onPressed: value.goToLoginScreen,
                                 child: Text(value.local!.login)),
                           ],
                         ),
-                        const SizedBox(height: 10,),
+                        const SizedBox(
+                          height: 10,
+                        ),
                         const LanguageSwitch()
                       ],
                     ),
@@ -210,13 +237,20 @@ class _RegistrationViewState extends BaseState<RegistrationView , RegistrationVi
 
   @override
   RegistrationViewModel? initViewModel() {
-    return RegistrationViewModel(createAccountUseCase: injectCreateAccountUseCase());
+    return RegistrationViewModel(
+        createAccountUseCase: injectCreateAccountUseCase(),
+        addUserUseCase: injectAddUserUseCase());
   }
 
   // function to go to extra info screen
   @override
   goToExtraInfoScreen(MyUser user) {
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ExtraInfoView(user: user,)));
+    Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+            builder: (context) => ExtraInfoView(
+                  user: user,
+                )));
   }
 
   // function to return to login screen

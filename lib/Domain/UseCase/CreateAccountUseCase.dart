@@ -17,7 +17,6 @@ class CreateAccountUseCase {
     var response = await userRepository.createUserFirebaseAuth(local: local, user: user);
     user.uid = response.uid;
     await response.sendEmailVerification();
-    await userRepository.createUserFirebaseDatabase(local: local, user: user);
     return response;
   }
 

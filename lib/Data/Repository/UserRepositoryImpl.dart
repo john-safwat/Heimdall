@@ -63,4 +63,28 @@ class UserRepositoryImpl implements UserRepository {
   Future<void> updateUser({required String local, required MyUser user}) async{
     await userDatabaseRemoteDataSource.updateUserProfile(local: local, user: user.toDataSource());
   }
+
+  @override
+  Future<void> resetPassword({required String local, required String email}) async{
+    await authRemoteDataSource.resetPassword(local :local , email: email);
+  }
+
+  @override
+  Future<User> signInWithEmailAndPassword({required String local, required String email, required String password}) async{
+    var response = await authRemoteDataSource.signInWithEmailAndPassword(local: local, email: email, password: password);
+    return response;
+  }
+
+  @override
+  Future<bool> checkIfUserExist({required String local, required String uid}) async{
+    var response = await userDatabaseRemoteDataSource.checkIfUserExist(local: local, uid: uid);
+    return response;
+  }
+
+  @override
+  Future<User> signInWithGoogle({required String local}) async{
+    var response = await authRemoteDataSource.signInWithGoogle(local: local);
+    return response;
+  }
+
 }

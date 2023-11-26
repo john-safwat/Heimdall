@@ -57,5 +57,12 @@
   "selectYourGender" : "Select Your Gender",
   "accountCompletedSuccessfully" : "Account Completed Successfully",
   "forgetPasswordTitle" : "Forget Password",
-  "sendEmail" : "Send Email"
+  "sendEmail" : "Send Email",
+  "pleaseEnterEmail" : "Please Enter Email Address",
+  "resetPasswordEmailSent" : "We Sent Reset Password Mail To Your Email",
+  "loggingYouIn" : "Logging You In ...",
+  "welcomeBack" : "Welcome Back",
+  "emailNotVerified" : "Your Email Not Verified",
+  "resend" : "Resend",
+  "home" : "Home"
 }
