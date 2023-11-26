@@ -90,7 +90,7 @@ class ExtraInfoViewModel extends BaseViewModel<ExtraInfoNavigator> {
       navigator!.showFailMessage(message:local!.selectYourBirthDate , posActionTitle: local!.ok , posAction: showDatePicker);
       return;
     }
-    if(selectedDate == "none"){
+    if(selectedGender == "none"){
       navigator!.showFailMessage(message:local!.selectYourGender , posActionTitle: local!.ok );
       return;
     }

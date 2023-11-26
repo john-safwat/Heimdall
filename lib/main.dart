@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:heimdall/Core/Providers/AppConfigProvider.dart';
@@ -6,6 +7,7 @@ import 'package:heimdall/Core/Providers/ThemeProvider.dart';
 import 'package:heimdall/Core/Theme/MyTheme.dart';
 import 'package:heimdall/Presentation/UI/ExtraInfo/ExtraInfoView.dart';
 import 'package:heimdall/Presentation/UI/ForgetPassword/ForgetPasswordView.dart';
+import 'package:heimdall/Presentation/UI/Home/HomeView.dart';
 import 'package:heimdall/Presentation/UI/Intro/IntroView.dart';
 import 'package:heimdall/Presentation/UI/Login/LoginView.dart';
 import 'package:heimdall/Presentation/UI/Registration/RegistrationView.dart';
@@ -24,18 +26,22 @@ void main()async{
   // call shared pref to get some value
   SharedPreferences prefs = await SharedPreferences.getInstance();
   var firstTime = prefs.getBool("firstTime");
+  var loggedIn = prefs.getBool("loggedin");
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  User? user = FirebaseAuth.instance.currentUser;
+
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => ThemeProvider(),),
         ChangeNotifierProvider(create: (context) => LocalProvider(),),
-        ChangeNotifierProvider(create: (context) => AppConfigProvider(),)
+        ChangeNotifierProvider(create: (context) => AppConfigProvider(user: user),)
       ],
-      child: MyApp(firstTime: firstTime,)
+      child: MyApp(firstTime: firstTime, loggedIn: loggedIn, user: user,)
     )
   );
 
@@ -44,8 +50,10 @@ void main()async{
 class MyApp extends StatelessWidget {
 
   bool? firstTime ;
+  bool? loggedIn ;
+  User? user;
 
-  MyApp({required this.firstTime,super.key});
+  MyApp({required this.firstTime , required this.loggedIn , required this.user ,super.key});
 
   // define the needed provider
   late ThemeProvider themeProvider;
@@ -76,15 +84,16 @@ class MyApp extends StatelessWidget {
       supportedLocales: AppLocalizations.supportedLocales,
       // define the application routes that hold all the
       routes: {
-        SplashScreen.routeName : (context) => SplashScreen(firstTime: firstTime??true),
+        SplashScreen.routeName : (context) => SplashScreen(firstTime: firstTime??true , loggedIn: loggedIn??true, user: user,),
         IntroView.routeName : (context) => const IntroView(),
         LoginView.routeName : (context) => const LoginView(),
         RegistrationView.routeName : (context) => RegistrationView(),
-        ForgetPasswordView.routeName : (context) => ForgetPasswordView()
+        ForgetPasswordView.routeName : (context) => ForgetPasswordView(),
+        HomeView.routeName : (context) => HomeView()
       },
 
       // the initial route to start the program from
-      home: SplashScreen(firstTime:firstTime??true ),
+      home: SplashScreen(firstTime:firstTime??true , loggedIn: loggedIn??true,user: user ),
       theme: themeProvider.getTheme(),
 
     );

@@ -826,6 +826,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.99"
+  sliding_clipped_nav_bar:
+    dependency: "direct main"
+    description:
+      name: sliding_clipped_nav_bar
+      sha256: "625622b4f3afc31c6026b57df01adec1bb44339d255f02d2e0879bd8450d1f55"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.1.0+4"
   source_span:
     dependency: transitive
     description:

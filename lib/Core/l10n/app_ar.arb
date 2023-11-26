@@ -57,5 +57,12 @@
   "selectYourGender" : "من فلك اختر النوع",
   "accountCompletedSuccessfully" : "تم تحديث الحساب بنحاج",
   "forgetPasswordTitle" : "نسيت كلمة المرور",
-  "sendEmail" : "ارسال رابط التفعيل"
+  "sendEmail" : "ارسال رابط التفعيل",
+  "pleaseEnterEmail" : "برجاء ادخال عنوان البريد الالكتروني",
+  "resetPasswordEmailSent" : "لقد أرسلنا بريدًا لإعادة تعيين كلمة المرور إلى بريدك الإلكتروني",
+  "loggingYouIn" : "جاري تسجيل الدخول ...",
+  "welcomeBack" : "مرحبا بك",
+  "emailNotVerified" : "لم يتم تفعيل حسابك",
+  "resend" : "ارسال",
+  "home" : "الرئيسية"
 }
