@@ -22,9 +22,8 @@ class FirebaseImagesDatabase {
   // upload image to firebase storage
   Future<String> uploadImage({required XFile file})async{
 
-    // file = await compressImage(file, file.path);
     // upload image to firebase storage
-    var snapshot = await _firebaseStorage.ref().child('images/${generateName()}').putFile(File(file.path));
+    var snapshot = await _firebaseStorage.ref().child('images/${generateName()}').putFile(File(file.path),  SettableMetadata(contentType: "image/jpeg"));
     // get the image URL from firebase storage
     var downloadUrl = await snapshot.ref.getDownloadURL();
     return downloadUrl;
