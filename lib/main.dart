@@ -5,6 +5,7 @@ import 'package:heimdall/Core/Providers/LocalProvider.dart';
 import 'package:heimdall/Core/Providers/ThemeProvider.dart';
 import 'package:heimdall/Core/Theme/MyTheme.dart';
 import 'package:heimdall/Presentation/UI/ExtraInfo/ExtraInfoView.dart';
+import 'package:heimdall/Presentation/UI/ForgetPassword/ForgetPasswordView.dart';
 import 'package:heimdall/Presentation/UI/Intro/IntroView.dart';
 import 'package:heimdall/Presentation/UI/Login/LoginView.dart';
 import 'package:heimdall/Presentation/UI/Registration/RegistrationView.dart';
@@ -79,6 +80,7 @@ class MyApp extends StatelessWidget {
         IntroView.routeName : (context) => const IntroView(),
         LoginView.routeName : (context) => const LoginView(),
         RegistrationView.routeName : (context) => RegistrationView(),
+        ForgetPasswordView.routeName : (context) => ForgetPasswordView()
       },
 
       // the initial route to start the program from

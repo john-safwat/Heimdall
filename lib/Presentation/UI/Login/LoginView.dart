@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:heimdall/Core/Base/BaseState.dart';
 import 'package:heimdall/Core/Theme/MyTheme.dart';
+import 'package:heimdall/Presentation/UI/ForgetPassword/ForgetPasswordView.dart';
 import 'package:heimdall/Presentation/UI/Login/LoginNavigator.dart';
 import 'package:heimdall/Presentation/UI/Login/LoginViewModel.dart';
 import 'package:heimdall/Presentation/UI/Registration/RegistrationView.dart';
@@ -123,7 +124,7 @@ class _LoginViewState extends BaseState<LoginView, LoginViewModel>
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             TextButton(
-                                onPressed: () {},
+                                onPressed: value.goToForgetPasswordScreen ,
                                 child: Text(value.local!.forgetPassword)),
                           ],
                         ),
@@ -204,5 +205,10 @@ class _LoginViewState extends BaseState<LoginView, LoginViewModel>
   @override
   goToRegistrationScreen() {
     Navigator.pushReplacementNamed(context, RegistrationView.routeName);
+  }
+
+  @override
+  goToForgetPasswordScreen() {
+    Navigator.pushNamed(context, ForgetPasswordView.routeName);
   }
 }

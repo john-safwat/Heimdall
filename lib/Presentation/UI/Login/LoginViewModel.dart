@@ -78,5 +78,10 @@ class LoginViewModel extends BaseViewModel<LoginNavigator>{
     navigator!.goToRegistrationScreen();
   }
 
+  // function to go to forgetPassword screen
+  goToForgetPasswordScreen(){
+    navigator!.goToForgetPasswordScreen();
+  }
+
 
 }
