@@ -55,5 +55,7 @@
   "cancel" : "Cancel",
   "selectYourBirthDate" : "Select Your Birth Date",
   "selectYourGender" : "Select Your Gender",
-  "accountCompletedSuccessfully" : "Account Completed Successfully"
+  "accountCompletedSuccessfully" : "Account Completed Successfully",
+  "forgetPasswordTitle" : "Forget Password",
+  "sendEmail" : "Send Email"
 }

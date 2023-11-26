@@ -46,6 +46,7 @@ class _ExtraInfoViewState extends BaseState<ExtraInfoView, ExtraInfoViewModel>
               children: [
                 Expanded(
                   child: SingleChildScrollView(
+                    keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
                     physics: const BouncingScrollPhysics(),
                     child: Padding(
                       padding: const EdgeInsets.all(20.0),

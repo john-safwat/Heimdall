@@ -55,5 +55,7 @@
   "cancel" : "الغاء",
   "selectYourBirthDate" : "برجاء ادخال تاريخ الميلاد",
   "selectYourGender" : "من فلك اختر النوع",
-  "accountCompletedSuccessfully" : "تم تحديث الحساب بنحاج"
+  "accountCompletedSuccessfully" : "تم تحديث الحساب بنحاج",
+  "forgetPasswordTitle" : "نسيت كلمة المرور",
+  "sendEmail" : "ارسال رابط التفعيل"
 }
