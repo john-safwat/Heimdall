@@ -93,6 +93,7 @@ class FirebaseArabicErrorHandler {
     switch (error) {
       case "ERROR_WRONG_PASSWORD":
       case "wrong-password":
+      case "invalid-credential":
         error = "مزيج خاطئ من البريد الإلكتروني/كلمة المرور.";
         break;
       case "ERROR_USER_NOT_FOUND":
