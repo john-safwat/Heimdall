@@ -26,7 +26,7 @@ void main()async{
   // call shared pref to get some value
   SharedPreferences prefs = await SharedPreferences.getInstance();
   var firstTime = prefs.getBool("firstTime");
-  var loggedIn = prefs.getBool("loggedin");
+  var loggedIn = prefs.getBool("loggedIn");
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,

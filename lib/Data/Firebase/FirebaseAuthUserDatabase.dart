@@ -4,12 +4,6 @@ import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:heimdall/Data/Models/Users/UserDTO.dart';
-import 'package:heimdall/Domain/Exceptions/FirebaseDatabaseException.dart';
-import 'package:heimdall/Domain/Exceptions/FirebaseUserAuthException.dart';
-import 'package:heimdall/Domain/Exceptions/InternetConnectionException.dart';
-import 'package:heimdall/Domain/Exceptions/TimeOutOperationsException.dart';
-import 'package:heimdall/Domain/Exceptions/UnknownException.dart';
-import 'package:icons_plus/icons_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 // dependency injection
@@ -53,7 +47,7 @@ class FirebaseAuthUserDatabase {
   Future<User> signInUserWithEmailAndPassword({required String email , required String password}) async{
     await _firebase.signInWithEmailAndPassword(email: email, password: password);
     SharedPreferences pref =await SharedPreferences.getInstance();
-    pref.setBool("loggedin", true);
+    pref.setBool("loggedIn", true);
     return _firebase.currentUser!;
   }
 
@@ -73,7 +67,7 @@ class FirebaseAuthUserDatabase {
     );
     await _firebase.signInWithCredential(user);
     SharedPreferences pref =await SharedPreferences.getInstance();
-    pref.setBool("loggedin", true);
+    pref.setBool("loggedIn", true);
     return _firebase.currentUser!;
   }
 
