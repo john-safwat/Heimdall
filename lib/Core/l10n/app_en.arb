@@ -64,5 +64,10 @@
   "welcomeBack" : "Welcome Back",
   "emailNotVerified" : "Your Email Not Verified",
   "resend" : "Resend",
-  "home" : "Home"
+  "home" : "Home",
+  "locks" : "Locks",
+  "keys" : "Keys",
+  "chat" : "chat",
+  "alerts" : "Alerts",
+  "profile" : "Profile"
 }

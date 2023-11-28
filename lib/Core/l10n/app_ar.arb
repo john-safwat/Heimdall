@@ -64,5 +64,10 @@
   "welcomeBack" : "مرحبا بك",
   "emailNotVerified" : "لم يتم تفعيل حسابك",
   "resend" : "ارسال",
-  "home" : "الرئيسية"
+  "home" : "الرئيسية",
+  "locks" : "اقفال",
+  "keys" : "مفاتيح",
+  "chat" : "دردشة",
+  "alerts" : "تنبيهات",
+  "profile" : "الملف"
 }

@@ -84,7 +84,7 @@ class MyApp extends StatelessWidget {
       supportedLocales: AppLocalizations.supportedLocales,
       // define the application routes that hold all the
       routes: {
-        SplashScreen.routeName : (context) => SplashScreen(firstTime: firstTime??true , loggedIn: loggedIn??true, user: user,),
+        SplashScreen.routeName : (context) => SplashScreen(firstTime: firstTime??true , loggedIn: loggedIn??false, user: user,),
         IntroView.routeName : (context) => const IntroView(),
         LoginView.routeName : (context) => const LoginView(),
         RegistrationView.routeName : (context) => RegistrationView(),
@@ -93,7 +93,7 @@ class MyApp extends StatelessWidget {
       },
 
       // the initial route to start the program from
-      home: SplashScreen(firstTime:firstTime??true , loggedIn: loggedIn??true,user: user ),
+      home: SplashScreen(firstTime:firstTime??true , loggedIn: loggedIn??false,user: user ),
       theme: themeProvider.getTheme(),
 
     );

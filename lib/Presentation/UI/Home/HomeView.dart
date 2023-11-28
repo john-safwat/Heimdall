@@ -4,6 +4,8 @@ import 'package:heimdall/Core/Base/BaseState.dart';
 import 'package:heimdall/Domain/Models/Users/User.dart';
 import 'package:heimdall/Presentation/UI/Home/HomeNavigator.dart';
 import 'package:heimdall/Presentation/UI/Home/HomeViewModel.dart';
+import 'package:heimdall/Presentation/UI/Widgets/LanguageSwitch.dart';
+import 'package:heimdall/Presentation/UI/Widgets/ThemeSlider.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:provider/provider.dart';
 
@@ -28,31 +30,38 @@ class _HomeViewState extends BaseState<HomeView , HomeViewModel >implements Home
           appBar: AppBar(
             title :Text(viewModel!.local!.home),
           ),
+          body: Column(children: [
+            LanguageSwitch(),
+            ThemeSwitch()
+          ],),
           bottomNavigationBar:FlashyTabBar(
             selectedIndex: viewModel!.selectedIndex,
-            showElevation: true,
+            showElevation: false,
             onItemSelected: (index) => viewModel!.changeIndex(index),
+            backgroundColor: Theme.of(context).primaryColor,
+            height: 60,
             items: [
               FlashyTabBarItem(
-                icon: Icon(Icons.event),
-                title: Text('Events'),
+                icon: Icon(EvaIcons.lock , color: Theme.of(context).scaffoldBackgroundColor, size: 30,),
+                title: Text(viewModel!.local!.locks , style: Theme.of(context).textTheme.titleMedium!.copyWith(color: Theme.of(context).scaffoldBackgroundColor),),
               ),
               FlashyTabBarItem(
-                icon: Icon(Icons.search),
-                title: Text('Search'),
+                icon: Icon(FontAwesome.key , color: Theme.of(context).scaffoldBackgroundColor, size: 25,),
+                title: Text(viewModel!.local!.keys , style: Theme.of(context).textTheme.titleMedium!.copyWith(color: Theme.of(context).scaffoldBackgroundColor),),
               ),
               FlashyTabBarItem(
-                icon: Icon(Icons.highlight),
-                title: Text('Highlights'),
+                icon: Icon(Bootstrap.chat_dots_fill , color: Theme.of(context).scaffoldBackgroundColor, size: 25),
+                title: Text(viewModel!.local!.chat , style: Theme.of(context).textTheme.titleMedium!.copyWith(color: Theme.of(context).scaffoldBackgroundColor),),
               ),
               FlashyTabBarItem(
-                icon: Icon(Icons.settings),
-                title: Text('Settings'),
+                icon: Icon(EvaIcons.bell , color: Theme.of(context).scaffoldBackgroundColor, size: 25,),
+                title: Text(viewModel!.local!.alerts , style: Theme.of(context).textTheme.titleMedium!.copyWith(color: Theme.of(context).scaffoldBackgroundColor),),
               ),
               FlashyTabBarItem(
-                icon: Icon(Icons.settings),
-                title: Text('한국어'),
+                icon: Icon(Bootstrap.person_circle , color: Theme.of(context).scaffoldBackgroundColor, size: 25,),
+                title: Text(viewModel!.local!.profile , style: Theme.of(context).textTheme.titleMedium!.copyWith(color: Theme.of(context).scaffoldBackgroundColor),),
               ),
+
             ],
           ),
         ),
