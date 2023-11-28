@@ -177,6 +177,13 @@ class DarkBlueTheme {
         headerBackgroundColor: darkBlue,
         headerForegroundColor: lightGold,
         rangePickerBackgroundColor: darkBlue,
+      ),
+      bottomNavigationBarTheme:const BottomNavigationBarThemeData(
+          backgroundColor: lightGold,
+          selectedIconTheme: IconThemeData(color: darkBlue),
+          unselectedIconTheme:IconThemeData(color: darkBlue) ,
+          showUnselectedLabels: false,
+          showSelectedLabels: false
       )
   );
 }
