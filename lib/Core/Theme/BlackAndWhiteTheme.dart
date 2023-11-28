@@ -171,6 +171,14 @@ class BlackAndWhiteTheme {
         headerBackgroundColor: white,
         headerForegroundColor: black,
         rangePickerBackgroundColor: white,
-      )
+      ),
+
+    bottomNavigationBarTheme:const BottomNavigationBarThemeData(
+      backgroundColor: black,
+      selectedIconTheme: IconThemeData(color: white),
+      unselectedIconTheme:IconThemeData(color: white) ,
+      showUnselectedLabels: false,
+      showSelectedLabels: false
+    )
   );
 }

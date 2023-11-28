@@ -179,6 +179,13 @@ class DarkPurpleTheme {
         headerBackgroundColor: darkPurple,
         headerForegroundColor: lightPurple,
         rangePickerBackgroundColor: darkPurple,
+      ),
+      bottomNavigationBarTheme:const BottomNavigationBarThemeData(
+          backgroundColor: lightPurple,
+          selectedIconTheme: IconThemeData(color: darkPurple),
+          unselectedIconTheme:IconThemeData(color: darkPurple) ,
+          showUnselectedLabels: false,
+          showSelectedLabels: false
       )
   );
 }

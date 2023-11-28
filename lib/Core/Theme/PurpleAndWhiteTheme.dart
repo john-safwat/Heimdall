@@ -177,6 +177,13 @@ class PurpleAndWhiteTheme {
         headerBackgroundColor: white,
         headerForegroundColor: lightPurple,
         rangePickerBackgroundColor: white,
+      ),
+      bottomNavigationBarTheme:const BottomNavigationBarThemeData(
+          backgroundColor: lightPurple,
+          selectedIconTheme: IconThemeData(color: white),
+          unselectedIconTheme:IconThemeData(color: white) ,
+          showUnselectedLabels: false,
+          showSelectedLabels: false
       )
   );
 
