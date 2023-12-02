@@ -29,61 +29,58 @@ class UserRepositoryImpl implements UserRepository {
 
   // create user in the firebase auth
   @override
-  Future<User> createUserFirebaseAuth(
-      {required String local, required MyUser user}) async {
-    var response = await authRemoteDataSource.createUser(
-        local: local, user: user.toDataSource());
+  Future<User> createUserFirebaseAuth({ required MyUser user}) async {
+    var response = await authRemoteDataSource.createUser(user: user.toDataSource());
     return response;
   }
 
   // create user in the firebase database
   @override
   Future<void> createUserFirebaseDatabase(
-      {required String local, required MyUser user}) async {
-    await userDatabaseRemoteDataSource.createUserFirebaseDatabase(
-        local: local, user: user.toDataSource());
+      { required MyUser user}) async {
+    await userDatabaseRemoteDataSource.createUserFirebaseDatabase(user: user.toDataSource());
   }
 
   // function to upload user image to firebase storage
   @override
-  Future<User> updateUserImageInUserCredential({required String local, required String image}) async{
-    var response = await authRemoteDataSource.updateUserImage(local: local, image: image);
+  Future<User> updateUserImageInUserCredential({required String image}) async{
+    var response = await authRemoteDataSource.updateUserImage( image: image);
     return response;
   }
 
   // upload user image to data base
   @override
-  Future<String> uploadUserImageToDatabase({required String local, required XFile image}) async{
-    var response = await imagesRemoteDatasource.uploadImage(local: local, file: image);
+  Future<String> uploadUserImageToDatabase({required XFile image}) async{
+    var response = await imagesRemoteDatasource.uploadImage(file: image);
     return response;
   }
 
   // function to update user in database firebase fire Store
   @override
-  Future<void> updateUser({required String local, required MyUser user}) async{
-    await userDatabaseRemoteDataSource.updateUserProfile(local: local, user: user.toDataSource());
+  Future<void> updateUser({required MyUser user}) async{
+    await userDatabaseRemoteDataSource.updateUserProfile( user: user.toDataSource());
   }
 
   @override
-  Future<void> resetPassword({required String local, required String email}) async{
-    await authRemoteDataSource.resetPassword(local :local , email: email);
+  Future<void> resetPassword({ required String email}) async{
+    await authRemoteDataSource.resetPassword(email: email);
   }
 
   @override
-  Future<User> signInWithEmailAndPassword({required String local, required String email, required String password}) async{
-    var response = await authRemoteDataSource.signInWithEmailAndPassword(local: local, email: email, password: password);
+  Future<User> signInWithEmailAndPassword({ required String email, required String password}) async{
+    var response = await authRemoteDataSource.signInWithEmailAndPassword(email: email, password: password);
     return response;
   }
 
   @override
-  Future<bool> checkIfUserExist({required String local, required String uid}) async{
-    var response = await userDatabaseRemoteDataSource.checkIfUserExist(local: local, uid: uid);
+  Future<bool> checkIfUserExist({ required String uid}) async{
+    var response = await userDatabaseRemoteDataSource.checkIfUserExist(uid: uid);
     return response;
   }
 
   @override
-  Future<User> signInWithGoogle({required String local}) async{
-    var response = await authRemoteDataSource.signInWithGoogle(local: local);
+  Future<User> signInWithGoogle() async{
+    var response = await authRemoteDataSource.signInWithGoogle();
     return response;
   }
 

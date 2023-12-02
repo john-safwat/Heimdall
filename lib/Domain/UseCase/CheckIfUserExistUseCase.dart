@@ -10,8 +10,8 @@ class CheckIfUserExistUseCase {
   UserRepository repository;
   CheckIfUserExistUseCase({required this.repository});
 
-  Future<bool> invoke({required String local , required String uid})async{
-    var response = await repository.checkIfUserExist(local: local, uid: uid);
+  Future<bool> invoke({required String uid})async{
+    var response = await repository.checkIfUserExist( uid: uid);
     return response;
   }
 

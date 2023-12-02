@@ -102,25 +102,17 @@ class ExtraInfoViewModel extends BaseViewModel<ExtraInfoNavigator> {
       try{
         // if the image is not null upload the image and update app config Provider  
         if(image != null){
-          var response = await uploadUserImageUseCase.invoke(local: localProvider!.getLocal(), image: image!);
+          var response = await uploadUserImageUseCase.invoke(image: image!);
           user.image = response.photoURL??"";
           appConfigProvider!.updateUser(user: response);
         }
-        await updateUserDataUseCase.invoke(local: localProvider!.getLocal(), user: user, currentUser: appConfigProvider!.getUser()!);
+        await updateUserDataUseCase.invoke(user: user, currentUser: appConfigProvider!.getUser()!);
         navigator!.goBack();
         navigator!.showSuccessMessage(message: local!.accountCompletedSuccessfully , posActionTitle: local!.ok , posAction: goToLoginScreen);
       }catch (e){
         // show fail dialog
         navigator!.goBack();
-        if(e is FirebaseUserAuthException){
-          navigator!.showFailMessage(message: e.errorMessage , negativeActionTitle: local!.tryAgain);
-        }else if (e is FirebaseDatabaseException) {
-          navigator!.showFailMessage(message: e.errorMessage , negativeActionTitle: local!.tryAgain);
-        }else if (e is TimeOutOperationsException){
-          navigator!.showFailMessage(message: local!.timeOutError , negativeActionTitle: local!.tryAgain);
-        }else {
-          navigator!.showFailMessage(message: local!.unknownError , negativeActionTitle: local!.tryAgain);
-        }
+        navigator!.showFailMessage(message: handleErrorMessage(e as Exception) , negativeActionTitle: local!.tryAgain);
       }
       
     }

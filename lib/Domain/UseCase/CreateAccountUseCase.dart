@@ -13,8 +13,8 @@ class CreateAccountUseCase {
   UserRepository userRepository;
   CreateAccountUseCase ({required this.userRepository});
 
-  Future<User> invoke({required String local , required MyUser user})async{
-    var response = await userRepository.createUserFirebaseAuth(local: local, user: user);
+  Future<User> invoke({required MyUser user})async{
+    var response = await userRepository.createUserFirebaseAuth(user: user);
     user.uid = response.uid;
     await response.sendEmailVerification();
     return response;

@@ -11,8 +11,8 @@ class SignInWithGoogleUseCase {
   UserRepository repository;
   SignInWithGoogleUseCase({required this.repository});
 
-  Future<User> invoke({required String local})async{
-    var response = await repository.signInWithGoogle(local: local);
+  Future<User> invoke()async{
+    var response = await repository.signInWithGoogle();
     return response;
   }
 

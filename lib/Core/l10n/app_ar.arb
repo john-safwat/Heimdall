@@ -69,5 +69,7 @@
   "keys" : "مفاتيح",
   "chat" : "دردشة",
   "alerts" : "تنبيهات",
-  "profile" : "الملف"
+  "profile" : "الملف",
+  "checkYourInternetConnection" : "برجاء التحقق من الاتصال بالانترنت",
+  "weDontHavePermissions" : "لا نمتلك التصريح المطلوب"
 }

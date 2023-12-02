@@ -1,8 +1,6 @@
 import 'dart:async';
 
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:heimdall/Data/ErrorHandler/FirebaseArabicErrorHandler.dart';
-import 'package:heimdall/Data/ErrorHandler/FirebaseEnglishErrorHandler.dart';
 import 'package:heimdall/Data/Firebase/FirebaseImagesDatabase.dart';
 import 'package:heimdall/Domain/DataSource/FirebaseImagesRemoteDatasource.dart';
 import 'package:heimdall/Domain/Exceptions/FirebaseImagesException.dart';
@@ -13,39 +11,26 @@ import 'package:image_picker/image_picker.dart';
 // dependency injection
 FirebaseImagesRemoteDatasource injectFirebaseImagesRemoteDatasource() {
   return FirebaseImagesRemoteDatasourceImpl(
-      database: injectFirebaseImagesDatabase(),
-      arabicErrorHandler: injectFirebaseArabicErrorHandler(),
-      englishErrorHandler: injectFirebaseEnglishErrorHandler());
+      database: injectFirebaseImagesDatabase());
 }
 
 // the object
 class FirebaseImagesRemoteDatasourceImpl
     implements FirebaseImagesRemoteDatasource {
   FirebaseImagesDatabase database;
-  FirebaseEnglishErrorHandler englishErrorHandler;
-  FirebaseArabicErrorHandler arabicErrorHandler;
   FirebaseImagesRemoteDatasourceImpl(
-      {required this.database,
-      required this.englishErrorHandler,
-      required this.arabicErrorHandler});
+      {required this.database});
 
   // function to upload user image to firebase fireStore
   @override
-  Future<String> uploadImage(
-      {required String local, required XFile file}) async {
+  Future<String> uploadImage({ required XFile file}) async {
     try {
-      var response = await database
-          .uploadImage(file: file)
-          .timeout(const Duration(seconds: 60));
+      var response = await database.uploadImage(file: file).timeout(const Duration(seconds: 60));
       return response;
     } on FirebaseException catch (e) {
-      throw FirebaseImagesException(
-          errorMessage: local == "en"
-              ? englishErrorHandler.handleFirebaseImageDatabaseExceptions(error: e.code)
-              : arabicErrorHandler.handleFirebaseImageDatabaseExceptions(error: e.code));
+      throw FirebaseImagesException(errorMessage: e.code);
     } on TimeoutException catch (e) {
-      throw TimeOutOperationsException(
-          errorMessage: "Uploading Image Timed Out Try Again");
+      throw TimeOutOperationsException(errorMessage: "Uploading Image Timed Out Try Again");
     } catch (e) {
       throw UnknownException(errorMessage: "UnKnown Error");
     }
