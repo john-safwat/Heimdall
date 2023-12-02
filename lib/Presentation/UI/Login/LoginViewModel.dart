@@ -107,10 +107,9 @@ class LoginViewModel extends BaseViewModel<LoginNavigator> {
       try {
         var response = await signUserInWithEmailAndPasswordUseCase.invoke(
             email: emailController.text,
-            password: passwordController.text,
-            local: localProvider!.getLocal());
+            password: passwordController.text,);
         var exist = await checkIfUserExistUseCase.invoke(
-            uid: response.uid, local: localProvider!.getLocal());
+            uid: response.uid);
         appConfigProvider!.updateUser(user: response);
         if (exist) {
           navigator!.goBack();
@@ -130,7 +129,6 @@ class LoginViewModel extends BaseViewModel<LoginNavigator> {
           try {
             // add user data to database
             await addUserUseCase.invoke(
-                local: localProvider!.getLocal(),
                 user: MyUser(
                     uid: appConfigProvider!.getUser()!.uid,
                     name: appConfigProvider!.getUser()!.displayName ?? "",
@@ -158,27 +156,10 @@ class LoginViewModel extends BaseViewModel<LoginNavigator> {
         }
       } catch (e) {
         navigator!.goBack();
-        if (e is FirebaseUserAuthException) {
-          navigator!.showFailMessage(
-            message: e.errorMessage,
-            posActionTitle: local!.tryAgain,
-          );
-        } else if (e is TimeOutOperationsException) {
-          navigator!.showFailMessage(
-            message: e.errorMessage,
-            posActionTitle: local!.tryAgain,
-          );
-        } else if (e is UnknownException) {
-          navigator!.showFailMessage(
-            message: e.errorMessage,
-            posActionTitle: local!.tryAgain,
-          );
-        } else {
-          navigator!.showFailMessage(
-            message: e.toString(),
-            posActionTitle: local!.tryAgain,
-          );
-        }
+        navigator!.showFailMessage(
+          message: handleErrorMessage(e as Exception),
+          posActionTitle: local!.tryAgain,
+        );
       }
     }
   }
@@ -189,12 +170,12 @@ class LoginViewModel extends BaseViewModel<LoginNavigator> {
     navigator!.showLoading(message: local!.loading);
     try{
       // sing user in using google sign in
-      var response = await signInWithGoogleUseCase.invoke(local: localProvider!.getLocal());
+      var response = await signInWithGoogleUseCase.invoke();
       // update Provider
       appConfigProvider!.updateUser(user: response);
       try{
         // check if user exist in data base to make sure that we have the user info
-        var exist = await checkIfUserExistUseCase.invoke(local: localProvider!.getLocal() ,uid: response.uid);
+        var exist = await checkIfUserExistUseCase.invoke(uid: response.uid);
         // if exist navigate to home screen else add user data to database
         navigator!.goBack();
         if(exist) {
@@ -216,7 +197,6 @@ class LoginViewModel extends BaseViewModel<LoginNavigator> {
                 gender: "none");
             // add user data to database
             await addUserUseCase.invoke(
-                local: localProvider!.getLocal(),
                 user: user);
             navigator!.showSuccessMessage(
                 message: local!.welcomeBack,
@@ -232,32 +212,10 @@ class LoginViewModel extends BaseViewModel<LoginNavigator> {
       }
     }catch(e){
       navigator!.goBack();
-      if (e is FirebaseUserAuthException) {
-        navigator!.showFailMessage(
-          message: e.errorMessage,
-          posActionTitle: local!.tryAgain,
-        );
-      } else if (e is TimeOutOperationsException) {
-        navigator!.showFailMessage(
-          message: e.errorMessage,
-          posActionTitle: local!.tryAgain,
-        );
-      } else if (e is UnknownException) {
-        navigator!.showFailMessage(
-          message: e.errorMessage,
-          posActionTitle: local!.tryAgain,
-        );
-      } else if (e is FirebaseDatabaseException) {
-        navigator!.showFailMessage(
-          message: e.errorMessage,
-          posActionTitle: local!.tryAgain,
-        );
-      } else {
-        navigator!.showFailMessage(
-          message: e.toString(),
-          posActionTitle: local!.tryAgain,
-        );
-      }
+      navigator!.showFailMessage(
+        message: handleErrorMessage(e as Exception),
+        posActionTitle: local!.tryAgain,
+      );
     }
   }
 

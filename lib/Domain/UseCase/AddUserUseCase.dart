@@ -11,8 +11,8 @@ class AddUserUseCase {
   UserRepository repository;
   AddUserUseCase({required this.repository});
 
-  Future<void> invoke({required String local , required MyUser user})async {
-    await repository.createUserFirebaseDatabase(local: local, user: user);
+  Future<void> invoke({required MyUser user})async {
+    await repository.createUserFirebaseDatabase(user: user);
   }
 
 }

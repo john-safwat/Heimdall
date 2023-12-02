@@ -2,8 +2,6 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:heimdall/Data/ErrorHandler/FirebaseArabicErrorHandler.dart';
-import 'package:heimdall/Data/ErrorHandler/FirebaseEnglishErrorHandler.dart';
 import 'package:heimdall/Data/Firebase/FirebaseAuthUserDatabase.dart';
 import 'package:heimdall/Data/Models/Users/UserDTO.dart';
 import 'package:heimdall/Domain/DataSource/FirebaseAuthRemoteDataSource.dart';
@@ -15,25 +13,16 @@ import 'package:heimdall/Domain/Exceptions/UnknownException.dart';
 
 // dependency injection
 FirebaseAuthRemoteDataSource injectFirebaseAuthRemoteDataSource() {
-  return FirebaseAuthRemoteDataSourceImpl(
-      authDatabase: injectFirebaseAuthUserDatabase(),
-      englishErrorHandler: injectFirebaseEnglishErrorHandler(),
-      arabicErrorHandler: injectFirebaseArabicErrorHandler());
+  return FirebaseAuthRemoteDataSourceImpl(authDatabase: injectFirebaseAuthUserDatabase());
 }
 
 class FirebaseAuthRemoteDataSourceImpl implements FirebaseAuthRemoteDataSource {
   FirebaseAuthUserDatabase authDatabase;
-  FirebaseArabicErrorHandler arabicErrorHandler;
-  FirebaseEnglishErrorHandler englishErrorHandler;
-  FirebaseAuthRemoteDataSourceImpl(
-      {required this.authDatabase,
-      required this.arabicErrorHandler,
-      required this.englishErrorHandler});
+  FirebaseAuthRemoteDataSourceImpl({required this.authDatabase});
 
   // function to create user in firebase auth and handle any exception
   @override
-  Future<User> createUser(
-      {required String local, required UserDTO user}) async {
+  Future<User> createUser({ required UserDTO user}) async {
     try {
       // send user data to database
       var response = await authDatabase
@@ -43,16 +32,10 @@ class FirebaseAuthRemoteDataSourceImpl implements FirebaseAuthRemoteDataSource {
       return response;
     } on FirebaseAuthException catch (e) {
       // handle firebase auth exception in en of ar
-      throw FirebaseUserAuthException(
-          errorMessage: local == "en"
-              ? englishErrorHandler.handleFirebaseAuthException(error: e.code)
-              : arabicErrorHandler.handleFirebaseAuthException(error: e.code));
+      throw FirebaseUserAuthException(errorMessage: e.code);
     } on FirebaseException catch (e) {
       // handle firebase exception in en of ar
-      throw FirebaseDatabaseException(
-          errorMessage: local == "en"
-              ? englishErrorHandler.handleFirebaseAuthException(error: e.code)
-              : arabicErrorHandler.handleFirebaseAuthException(error: e.code));
+      throw FirebaseDatabaseException(errorMessage: e.code);
     } on IOException {
       throw InternetConnectionException(errorMessage: "I/O Exception");
     } on TimeoutException {
@@ -66,8 +49,7 @@ class FirebaseAuthRemoteDataSourceImpl implements FirebaseAuthRemoteDataSource {
 
   // function to update user photo in user firebase auth
   @override
-  Future<User> updateUserImage(
-      {required String local, required String image}) async {
+  Future<User> updateUserImage({ required String image}) async {
     try {
       // send user data to database
       var response = await authDatabase
@@ -77,16 +59,10 @@ class FirebaseAuthRemoteDataSourceImpl implements FirebaseAuthRemoteDataSource {
       return response;
     } on FirebaseAuthException catch (e) {
       // handle firebase auth exception in en of ar
-      throw FirebaseUserAuthException(
-          errorMessage: local == "en"
-              ? englishErrorHandler.handleFirebaseAuthException(error: e.code)
-              : arabicErrorHandler.handleFirebaseAuthException(error: e.code));
+      throw FirebaseUserAuthException(errorMessage:e.code);
     } on FirebaseException catch (e) {
       // handle firebase exception in en of ar
-      throw FirebaseDatabaseException(
-          errorMessage: local == "en"
-              ? englishErrorHandler.handleFirebaseAuthException(error: e.code)
-              : arabicErrorHandler.handleFirebaseAuthException(error: e.code));
+      throw FirebaseDatabaseException(errorMessage: e.code);
     } on IOException {
       throw InternetConnectionException(errorMessage: "I/O Exception");
     } on TimeoutException {
@@ -99,8 +75,7 @@ class FirebaseAuthRemoteDataSourceImpl implements FirebaseAuthRemoteDataSource {
   }
 
   @override
-  Future<void> resetPassword(
-      {required String local, required String email}) async {
+  Future<void> resetPassword({ required String email}) async {
     try {
       await authDatabase
           .resetPassword(email: email)
@@ -108,15 +83,11 @@ class FirebaseAuthRemoteDataSourceImpl implements FirebaseAuthRemoteDataSource {
     } on FirebaseAuthException catch (e) {
       // handle firebase auth exception in en of ar
       throw FirebaseUserAuthException(
-          errorMessage: local == "en"
-              ? englishErrorHandler.handleFirebaseAuthException(error: e.code)
-              : arabicErrorHandler.handleFirebaseAuthException(error: e.code));
+          errorMessage: e.code);
     } on FirebaseException catch (e) {
       // handle firebase exception in en of ar
       throw FirebaseDatabaseException(
-          errorMessage: local == "en"
-              ? englishErrorHandler.handleFirebaseAuthException(error: e.code)
-              : arabicErrorHandler.handleFirebaseAuthException(error: e.code));
+          errorMessage: e.code);
     } on IOException {
       throw InternetConnectionException(errorMessage: "I/O Exception");
     } on TimeoutException {
@@ -129,22 +100,18 @@ class FirebaseAuthRemoteDataSourceImpl implements FirebaseAuthRemoteDataSource {
   }
 
   @override
-  Future<User> signInWithEmailAndPassword({required String local,required String email,required String password}) async{
+  Future<User> signInWithEmailAndPassword({required String email,required String password}) async{
     try{
       var response = await authDatabase.signInUserWithEmailAndPassword(email: email, password: password);
       return response;
     }on FirebaseAuthException catch (e) {
       // handle firebase auth exception in en of ar
       throw FirebaseUserAuthException(
-          errorMessage: local == "en"
-              ? englishErrorHandler.handleLoginError( e.code)
-              : arabicErrorHandler.handleLoginError( e.code));
+          errorMessage: e.code);
     } on FirebaseException catch (e) {
       // handle firebase exception in en of ar
       throw FirebaseDatabaseException(
-          errorMessage: local == "en"
-              ? englishErrorHandler.handleLoginError( e.code)
-              : arabicErrorHandler.handleLoginError(e.code));
+          errorMessage: e.code);
     } on IOException {
       throw InternetConnectionException(errorMessage: "I/O Exception");
     } on TimeoutException {
@@ -157,22 +124,16 @@ class FirebaseAuthRemoteDataSourceImpl implements FirebaseAuthRemoteDataSource {
   }
 
   @override
-  Future<User> signInWithGoogle({required String local}) async{
+  Future<User> signInWithGoogle() async{
     try{
       var response = await authDatabase.signInWithGoogle();
       return response;
     }on FirebaseAuthException catch (e) {
       // handle firebase auth exception in en of ar
-      throw FirebaseUserAuthException(
-          errorMessage: local == "en"
-              ? englishErrorHandler.handleLoginError( e.code)
-              : arabicErrorHandler.handleLoginError( e.code));
+      throw FirebaseUserAuthException(errorMessage: e.code);
     } on FirebaseException catch (e) {
       // handle firebase exception in en of ar
-      throw FirebaseDatabaseException(
-          errorMessage: local == "en"
-              ? englishErrorHandler.handleLoginError( e.code)
-              : arabicErrorHandler.handleLoginError(e.code));
+      throw FirebaseDatabaseException(errorMessage: e.code);
     } on IOException {
       throw InternetConnectionException(errorMessage: "I/O Exception");
     } on TimeoutException {

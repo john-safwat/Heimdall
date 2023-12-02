@@ -10,8 +10,8 @@ class ResetPasswordUseCase {
   UserRepository repository;
   ResetPasswordUseCase({required this.repository});
 
-  Future<void> invoke ({required String local , required String email})async{
-    await repository.resetPassword(local: local, email: email);
+  Future<void> invoke ({required String email})async{
+    await repository.resetPassword(email: email);
   }
 
 }

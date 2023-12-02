@@ -13,9 +13,9 @@ class UploadUserImageUseCase {
   UserRepository repository;
   UploadUserImageUseCase({required this.repository});
 
-  Future<User> invoke({required String local , required XFile image})async{
-    var imageURL = await repository.uploadUserImageToDatabase(local: local, image: image);
-    var response = await repository.updateUserImageInUserCredential(local: local, image: imageURL);
+  Future<User> invoke({required XFile image})async{
+    var imageURL = await repository.uploadUserImageToDatabase(image: image);
+    var response = await repository.updateUserImageInUserCredential(image: imageURL);
     return response;
   }
 

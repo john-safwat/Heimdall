@@ -118,12 +118,12 @@ class RegistrationViewModel extends BaseViewModel<RegistrationNavigator> {
             gender: "none"
         );
         // call the use case to create user account
-        var response = await createAccountUseCase.invoke(local: localProvider!.getLocal(), user: user);
+        var response = await createAccountUseCase.invoke(user: user);
         // update user in app config provider to allow all app to use it
         appConfigProvider!.updateUser(user: response);
         // update the uid in the user object by the id in response
         user.uid = response.uid;
-        await addUserUseCase.invoke(local: localProvider!.getLocal(), user: user);
+        await addUserUseCase.invoke(user: user);
         // show success dialog
         navigator!.goBack();
         navigator!.showSuccessMessage(
@@ -134,15 +134,7 @@ class RegistrationViewModel extends BaseViewModel<RegistrationNavigator> {
       }catch (e){
         // show fail dialog
         navigator!.goBack();
-        if(e is FirebaseUserAuthException){
-          navigator!.showFailMessage(message: e.errorMessage , negativeActionTitle: local!.tryAgain);
-        }else if (e is FirebaseDatabaseException) {
-          navigator!.showFailMessage(message: e.errorMessage , negativeActionTitle: local!.tryAgain);
-        }else if (e is TimeOutOperationsException){
-          navigator!.showFailMessage(message: local!.timeOutError , negativeActionTitle: local!.tryAgain);
-        }else {
-          navigator!.showFailMessage(message: local!.unknownError , negativeActionTitle: local!.tryAgain);
-        }
+        navigator!.showFailMessage(message: handleErrorMessage(e as Exception) , negativeActionTitle: local!.tryAgain);
       }
     }
 

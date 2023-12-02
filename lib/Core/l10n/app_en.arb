@@ -69,5 +69,7 @@
   "keys" : "Keys",
   "chat" : "chat",
   "alerts" : "Alerts",
-  "profile" : "Profile"
+  "profile" : "Profile",
+  "checkYourInternetConnection" : "Check Your Internet Connection",
+  "weDontHavePermissions" : "We Don't Have Permission"
 }

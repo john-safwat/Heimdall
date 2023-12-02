@@ -52,21 +52,13 @@ class ForgetPasswordViewModel extends BaseViewModel<ForgetPasswordNavigator>{
     if(formKey.currentState!.validate()){
       navigator!.showLoading(message: local!.loading);
       try{
-        await resetPasswordUseCase.invoke(local: localProvider!.getLocal(), email: emailController.text);
+        await resetPasswordUseCase.invoke( email: emailController.text);
         navigator!.goBack();
         navigator!.showSuccessMessage(message: local!.resetPasswordEmailSent , posActionTitle: local!.ok);
       }catch (e){
         // show fail dialog
         navigator!.goBack();
-        if(e is FirebaseUserAuthException){
-          navigator!.showFailMessage(message: e.errorMessage , negativeActionTitle: local!.tryAgain);
-        }else if (e is FirebaseDatabaseException) {
-          navigator!.showFailMessage(message: e.errorMessage , negativeActionTitle: local!.tryAgain);
-        }else if (e is TimeOutOperationsException){
-          navigator!.showFailMessage(message: local!.timeOutError , negativeActionTitle: local!.tryAgain);
-        }else {
-          navigator!.showFailMessage(message: local!.unknownError , negativeActionTitle: local!.tryAgain);
-        }
+        navigator!.showFailMessage(message: handleErrorMessage(e as Exception) , negativeActionTitle: local!.tryAgain);
       }
     }
 

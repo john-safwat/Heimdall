@@ -13,8 +13,8 @@ class UpdateUserDataUseCase {
   UserRepository repository ;
   UpdateUserDataUseCase ({required this.repository});
 
-  Future<void> invoke({required String local , required MyUser user , required User currentUser})async{
-    await repository.updateUser(local: local, user: user);
+  Future<void> invoke({required MyUser user , required User currentUser})async{
+    await repository.updateUser(user: user);
   }
 
 }

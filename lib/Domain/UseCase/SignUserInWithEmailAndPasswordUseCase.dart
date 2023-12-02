@@ -12,8 +12,8 @@ class SignUserInWithEmailAndPasswordUseCase{
   SignUserInWithEmailAndPasswordUseCase({required this.repository});
 
 
-  Future<User> invoke({required String local , required String email , required String password})async{
-    var response = await repository.signInWithEmailAndPassword(local: local, email: email, password: password);
+  Future<User> invoke({ required String email , required String password})async{
+    var response = await repository.signInWithEmailAndPassword(email: email, password: password);
     return response;
   }
 
