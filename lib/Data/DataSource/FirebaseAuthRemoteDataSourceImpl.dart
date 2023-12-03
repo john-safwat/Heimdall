@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:heimdall/Data/Firebase/FirebaseAuthUserDatabase.dart';
 import 'package:heimdall/Data/Models/Users/UserDTO.dart';
 import 'package:heimdall/Domain/DataSource/FirebaseAuthRemoteDataSource.dart';
+import 'package:heimdall/Domain/Exceptions/FirebaseLoginException.dart';
 import 'package:heimdall/Domain/Exceptions/FirebaseUserAuthException.dart';
 import 'package:heimdall/Domain/Exceptions/FirebaseDatabaseException.dart';
 import 'package:heimdall/Domain/Exceptions/InternetConnectionException.dart';
@@ -106,8 +107,7 @@ class FirebaseAuthRemoteDataSourceImpl implements FirebaseAuthRemoteDataSource {
       return response;
     }on FirebaseAuthException catch (e) {
       // handle firebase auth exception in en of ar
-      throw FirebaseUserAuthException(
-          errorMessage: e.code);
+      throw FirebaseLoginException(errorMessage: e.code);
     } on FirebaseException catch (e) {
       // handle firebase exception in en of ar
       throw FirebaseDatabaseException(
@@ -130,7 +130,7 @@ class FirebaseAuthRemoteDataSourceImpl implements FirebaseAuthRemoteDataSource {
       return response;
     }on FirebaseAuthException catch (e) {
       // handle firebase auth exception in en of ar
-      throw FirebaseUserAuthException(errorMessage: e.code);
+      throw FirebaseLoginException(errorMessage: e.code);
     } on FirebaseException catch (e) {
       // handle firebase exception in en of ar
       throw FirebaseDatabaseException(errorMessage: e.code);

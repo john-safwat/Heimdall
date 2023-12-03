@@ -111,7 +111,7 @@ class RegistrationViewModel extends BaseViewModel<RegistrationNavigator> {
             uid: "",
             name: nameController.text,
             email: emailController.text,
-            password: "Private",
+            password: passwordController.text,
             image: "",
             phoneNumber: "",
             birthDate: "--/--/----",

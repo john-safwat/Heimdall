@@ -8,6 +8,7 @@ import 'package:heimdall/Core/Providers/ThemeProvider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:heimdall/Domain/Exceptions/FirebaseDatabaseException.dart';
 import 'package:heimdall/Domain/Exceptions/FirebaseImagesException.dart';
+import 'package:heimdall/Domain/Exceptions/FirebaseLoginException.dart';
 import 'package:heimdall/Domain/Exceptions/FirebaseUserAuthException.dart';
 import 'package:heimdall/Domain/Exceptions/InternetConnectionException.dart';
 import 'package:heimdall/Domain/Exceptions/PermissionDeniedException.dart';
@@ -63,9 +64,13 @@ abstract class BaseViewModel<N extends BaseNavigator> extends ChangeNotifier {
           : firebaseArabicErrorHandler.handleFirebaseImageDatabaseExceptions(error: e.errorMessage,);
     } else if (e is FirebaseUserAuthException) {
       return localProvider!.getLocal() == "en"
+          ? firebaseEnglishErrorHandler.handleFirebaseAuthException(error: e.errorMessage,)
+          : firebaseArabicErrorHandler.handleFirebaseAuthException(error: e.errorMessage,);
+    } else if (e is FirebaseLoginException){
+      return localProvider!.getLocal() == "en"
           ? firebaseEnglishErrorHandler.handleLoginError(e.errorMessage,)
           : firebaseArabicErrorHandler.handleLoginError(e.errorMessage,);
-    } else if (e is InternetConnectionException) {
+    }else if (e is InternetConnectionException) {
       return local!.checkYourInternetConnection ;
     } else if (e is PermissionDeniedException) {
       return local!.weDontHavePermissions;
