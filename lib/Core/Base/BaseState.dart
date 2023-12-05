@@ -3,8 +3,10 @@ import 'package:elegant_notification/resources/arrays.dart';
 import 'package:flutter/material.dart';
 import 'package:heimdall/Core/Base/BaseNavigator.dart';
 import 'package:heimdall/Core/Base/BaseViewModel.dart';
-import 'package:heimdall/Core/ErrorHandler/FirebaseArabicErrorHandler.dart';
-import 'package:heimdall/Core/ErrorHandler/FirebaseEnglishErrorHandler.dart';
+import 'package:heimdall/Core/Errors/FirebaseAuthExceptionHandler.dart';
+import 'package:heimdall/Core/Errors/FirebaseFireStoreErrorHandler.dart';
+import 'package:heimdall/Core/Errors/FirebaseImageDatabaseExceptionsHandler.dart';
+import 'package:heimdall/Core/Errors/FirebaseLoginErrorHandler.dart';
 import 'package:heimdall/Core/Providers/AppConfigProvider.dart';
 import 'package:heimdall/Core/Providers/LocalProvider.dart';
 import 'package:heimdall/Core/Providers/ThemeProvider.dart';
@@ -24,8 +26,10 @@ abstract class BaseState<T extends StatefulWidget , VM extends BaseViewModel> ex
     viewModel = initViewModel();
     viewModel!.navigator = this;
     viewModel!.appConfigProvider = Provider.of<AppConfigProvider>(context , listen: false);
-    viewModel!.firebaseEnglishErrorHandler= injectFirebaseEnglishErrorHandler();
-    viewModel!.firebaseArabicErrorHandler = injectFirebaseArabicErrorHandler();
+    viewModel!.firebaseLoginErrorHandler = injectFirebaseLoginErrorHandler();
+    viewModel!.firebaseAuthExceptionHandler = injectFirebaseAuthExceptionHandler();
+    viewModel!.firebaseFireStoreErrorHandler = injectFirebaseFireStoreErrorHandler();
+    viewModel!.firebaseImageDatabaseExceptionsHandler = injectFirebaseImageDatabaseExceptionsHandler();
   }
 
   @override
