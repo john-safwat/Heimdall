@@ -19,7 +19,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.1.6 <4.0.0'
+  sdk: '>=3.2.3 <4.0.0'
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -46,14 +46,14 @@ dependencies:
   introduction_screen: ^3.1.12
   lottie: ^2.7.0
   animated_toggle_switch: ^0.8.0
-  icons_plus: ^4.0.0
+  icons_plus: ^5.0.0
   elegant_notification: ^1.11.2
   firebase_core: ^2.24.0
-  firebase_auth: ^4.14.1
-  cloud_firestore: ^4.13.3
-  google_sign_in: ^6.1.6
-  image_picker: ^1.0.4
-  firebase_storage: ^11.5.2
+  firebase_auth: ^4.15.3
+  cloud_firestore: ^4.13.6
+  google_sign_in: ^6.2.1
+  image_picker: ^1.0.5
+  firebase_storage: ^11.5.6
   randomstring_dart: ^0.0.4
 
 dev_dependencies:
