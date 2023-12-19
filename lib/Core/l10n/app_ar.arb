@@ -71,5 +71,6 @@
   "alerts" : "تنبيهات",
   "profile" : "الملف",
   "checkYourInternetConnection" : "برجاء التحقق من الاتصال بالانترنت",
-  "weDontHavePermissions" : "لا نمتلك التصريح المطلوب"
+  "weDontHavePermissions" : "لا نمتلك التصريح المطلوب",
+  "messages" :"الرسائل"
 }

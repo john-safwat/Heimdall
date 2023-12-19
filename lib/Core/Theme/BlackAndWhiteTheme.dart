@@ -58,7 +58,7 @@ class BlackAndWhiteTheme {
         errorStyle: const TextStyle(color: red, fontSize: 12),
         iconColor: black,
         contentPadding: const EdgeInsets.all(15),
-        hintStyle: const TextStyle(color: gray, fontSize: 16),
+        hintStyle: const TextStyle(color: black, fontSize: 16),
         prefixIconColor: black,
         suffixIconColor: black,
         border: OutlineInputBorder(

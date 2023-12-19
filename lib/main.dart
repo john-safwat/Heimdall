@@ -5,6 +5,7 @@ import 'package:heimdall/Core/Providers/AppConfigProvider.dart';
 import 'package:heimdall/Core/Providers/LocalProvider.dart';
 import 'package:heimdall/Core/Providers/ThemeProvider.dart';
 import 'package:heimdall/Core/Theme/MyTheme.dart';
+import 'package:heimdall/Presentation/UI/ContactChat/ContactChatView.dart';
 import 'package:heimdall/Presentation/UI/ExtraInfo/ExtraInfoView.dart';
 import 'package:heimdall/Presentation/UI/ForgetPassword/ForgetPasswordView.dart';
 import 'package:heimdall/Presentation/UI/Home/HomeView.dart';
@@ -89,9 +90,9 @@ class MyApp extends StatelessWidget {
         LoginView.routeName : (context) => const LoginView(),
         RegistrationView.routeName : (context) => RegistrationView(),
         ForgetPasswordView.routeName : (context) => ForgetPasswordView(),
-        HomeView.routeName : (context) => HomeView()
+        HomeView.routeName : (context) => HomeView(),
+        ContactChatView.routeName : (context) => ContactChatView(),
       },
-
       // the initial route to start the program from
       home: SplashScreen(firstTime:firstTime??true , loggedIn: loggedIn??false,user: user ),
       theme: themeProvider.getTheme(),
