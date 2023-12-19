@@ -63,7 +63,7 @@ class DarkBlueTheme {
         errorStyle: const TextStyle(color: red, fontSize: 12),
         contentPadding: const EdgeInsets.all(15),
         iconColor: lightGold,
-        hintStyle: const TextStyle(color: lightBlue, fontSize: 16),
+        hintStyle: const TextStyle(color: lightGold, fontSize: 16),
         prefixIconColor: lightGold,
         suffixIconColor: lightGold,
         border: OutlineInputBorder(

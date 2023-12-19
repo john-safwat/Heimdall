@@ -71,5 +71,6 @@
   "alerts" : "Alerts",
   "profile" : "Profile",
   "checkYourInternetConnection" : "Check Your Internet Connection",
-  "weDontHavePermissions" : "We Don't Have Permission"
+  "weDontHavePermissions" : "We Don't Have Permission",
+  "messages" :"Messages"
 }
