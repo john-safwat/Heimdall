@@ -39,7 +39,8 @@ class _LoginViewState extends BaseState<LoginView, LoginViewModel>
             children: [
               Expanded(
                 child: SingleChildScrollView(
-                  keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+                  keyboardDismissBehavior:
+                      ScrollViewKeyboardDismissBehavior.onDrag,
                   physics: const BouncingScrollPhysics(),
                   child: Padding(
                     padding: const EdgeInsets.all(20.0),
@@ -55,8 +56,8 @@ class _LoginViewState extends BaseState<LoginView, LoginViewModel>
                           children: [
                             InkWell(
                                 enableFeedback: false,
-                                overlayColor:
-                                    MaterialStateProperty.all(Colors.transparent),
+                                overlayColor: MaterialStateProperty.all(
+                                    Colors.transparent),
                                 onTap: value.changeTheme,
                                 child: SvgPicture.asset(value.getLogo()))
                           ],
@@ -75,9 +76,11 @@ class _LoginViewState extends BaseState<LoginView, LoginViewModel>
                                 style: Theme.of(context).textTheme.bodyLarge,
                                 controller: value.emailController,
                                 validator: (value) {
-                                  return viewModel!.emailValidation(value ?? "");
+                                  return viewModel!
+                                      .emailValidation(value ?? "");
                                 },
-                                autovalidateMode: AutovalidateMode.onUserInteraction,
+                                autovalidateMode:
+                                    AutovalidateMode.onUserInteraction,
                                 cursorColor: Theme.of(context).primaryColor,
                                 keyboardType: TextInputType.emailAddress,
                                 cursorHeight: 20,
@@ -97,9 +100,11 @@ class _LoginViewState extends BaseState<LoginView, LoginViewModel>
                                 style: Theme.of(context).textTheme.bodyLarge,
                                 controller: value.passwordController,
                                 validator: (value) {
-                                  return viewModel!.passwordValidation(value ?? "");
+                                  return viewModel!
+                                      .passwordValidation(value ?? "");
                                 },
-                                autovalidateMode: AutovalidateMode.onUserInteraction,
+                                autovalidateMode:
+                                    AutovalidateMode.onUserInteraction,
                                 cursorColor: Theme.of(context).primaryColor,
                                 keyboardType: TextInputType.visiblePassword,
                                 obscureText: !value.visible,
@@ -125,17 +130,21 @@ class _LoginViewState extends BaseState<LoginView, LoginViewModel>
                             ],
                           ),
                         ),
-                        const SizedBox(height: 10,),
+                        const SizedBox(
+                          height: 10,
+                        ),
                         // forget password button
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             TextButton(
-                                onPressed: value.goToForgetPasswordScreen ,
+                                onPressed: value.goToForgetPasswordScreen,
                                 child: Text(value.local!.forgetPassword)),
                           ],
                         ),
-                        const SizedBox(height: 10,),
+                        const SizedBox(
+                          height: 10,
+                        ),
                         // login button
                         ElevatedButton(
                             onPressed: viewModel!.signInWithEmailAndPassword,
@@ -147,33 +156,52 @@ class _LoginViewState extends BaseState<LoginView, LoginViewModel>
                                   Text(value.local!.login),
                                 ],
                               ),
-                            )
+                            )),
+                        const SizedBox(
+                          height: 10,
                         ),
-                        const SizedBox(height: 10,),
                         // create account button
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(value.local!.dontHaveAccount , style: Theme.of(context).textTheme.bodyLarge,),
+                            Text(
+                              value.local!.dontHaveAccount,
+                              style: Theme.of(context).textTheme.bodyLarge,
+                            ),
                             TextButton(
                                 onPressed: value.goToRegisterScreen,
                                 child: Text(value.local!.createAccount)),
                           ],
                         ),
-                        const SizedBox(height: 10,),
+                        const SizedBox(
+                          height: 10,
+                        ),
                         // or space
                         Row(
                           children: [
-                            const SizedBox(width: 30,),
+                            const SizedBox(
+                              width: 30,
+                            ),
                             const Expanded(child: Divider()),
-                            const SizedBox(width: 10,),
-                            Text(value.local!.or , style: Theme.of(context).textTheme.titleMedium,),
-                            const SizedBox(width: 10,),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              value.local!.or,
+                              style: Theme.of(context).textTheme.titleMedium,
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
                             const Expanded(child: Divider()),
-                            const SizedBox(width: 30,),
+                            const SizedBox(
+                              width: 30,
+                            ),
                           ],
                         ),
-                        const SizedBox(height: 20,),
+                        const SizedBox(
+                          height: 20,
+                        ),
                         // login button
                         ElevatedButton(
                             onPressed: viewModel!.loginWithGoogle,
@@ -182,14 +210,23 @@ class _LoginViewState extends BaseState<LoginView, LoginViewModel>
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Icon(EvaIcons.google , color: Theme.of(context).scaffoldBackgroundColor,),
-                                  const SizedBox(width: 15,),
-                                  FittedBox(child: Text(value.local!.loginWithGoogle)),
+                                  Icon(
+                                    EvaIcons.google,
+                                    color: Theme.of(context)
+                                        .scaffoldBackgroundColor,
+                                  ),
+                                  const SizedBox(
+                                    width: 15,
+                                  ),
+                                  FittedBox(
+                                      child:
+                                          Text(value.local!.loginWithGoogle)),
                                 ],
                               ),
-                            )
+                            )),
+                        const SizedBox(
+                          height: 20,
                         ),
-                        const SizedBox(height: 20,),
                         const LanguageSwitch()
                       ],
                     ),
@@ -206,11 +243,11 @@ class _LoginViewState extends BaseState<LoginView, LoginViewModel>
   @override
   LoginViewModel? initViewModel() {
     return LoginViewModel(
-      checkIfUserExistUseCase: injectCheckIfUserExistUseCase(),
-      signUserInWithEmailAndPasswordUseCase: injectSignUserInWithEmailAndPasswordUseCase(),
-      addUserUseCase: injectAddUserUseCase(),
-      signInWithGoogleUseCase: injectSignInWithGoogleUseCase()
-    );
+        checkIfUserExistUseCase: injectCheckIfUserExistUseCase(),
+        signUserInWithEmailAndPasswordUseCase:
+            injectSignUserInWithEmailAndPasswordUseCase(),
+        addUserUseCase: injectAddUserUseCase(),
+        signInWithGoogleUseCase: injectSignInWithGoogleUseCase());
   }
 
   // function to go to registration screen
@@ -236,7 +273,7 @@ class _LoginViewState extends BaseState<LoginView, LoginViewModel>
         context,
         MaterialPageRoute(
             builder: (context) => ExtraInfoView(
-              user: user,
-            )));
+                  user: user,
+                )));
   }
 }

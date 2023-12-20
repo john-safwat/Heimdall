@@ -73,6 +73,7 @@
   "checkYourInternetConnection" : "Check Your Internet Connection",
   "weDontHavePermissions" : "We Don't Have Permission",
   "messages" :"Messages",
+  "sendMessage": "Send Message",
   "findContact" :  "Find Contact",
   "addContact" : "Add Contact",
   "enterEmail" : "Enter Email"

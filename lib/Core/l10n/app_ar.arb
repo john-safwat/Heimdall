@@ -73,6 +73,7 @@
   "checkYourInternetConnection" : "برجاء التحقق من الاتصال بالانترنت",
   "weDontHavePermissions" : "لا نمتلك التصريح المطلوب",
   "messages" :"الرسائل",
+  "sendMessage" : "ارسال رسالة",
   "findContact" :  "البحث في جهات الاتصال",
   "addContact" : "اضافة جهة اتصال",
   "enterEmail" : "ادخل بريد الكتروني"
