@@ -14,8 +14,9 @@ class HomeView extends StatefulWidget {
   State<HomeView> createState() => _HomeViewState();
 }
 
-class _HomeViewState extends BaseState<HomeView, HomeViewModel>
+class _HomeViewState extends BaseState<HomeView, HomeViewModel> with TickerProviderStateMixin
     implements HomeNavigator {
+
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -31,9 +32,9 @@ class _HomeViewState extends BaseState<HomeView, HomeViewModel>
           bottomNavigationBar: BottomNavigationBar(
             items: const[
               BottomNavigationBarItem(
-                icon: Icon(Bootstrap.house),
-                activeIcon: Icon(Bootstrap.house_fill),
-                label: ""
+                  icon: Icon(Bootstrap.house),
+                  activeIcon: Icon(Bootstrap.house_fill),
+                  label: ""
               ),
               BottomNavigationBarItem(
                   icon: Icon(Bootstrap.key),
@@ -61,7 +62,7 @@ class _HomeViewState extends BaseState<HomeView, HomeViewModel>
             currentIndex: value.selectedIndex,
             onTap: (index) => value.changeIndex(index),
           ),
-          
+
         )
       ),
     );
@@ -71,4 +72,5 @@ class _HomeViewState extends BaseState<HomeView, HomeViewModel>
   HomeViewModel? initViewModel() {
     return HomeViewModel();
   }
+
 }
