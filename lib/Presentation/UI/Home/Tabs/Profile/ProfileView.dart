@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:heimdall/Core/Base/BaseState.dart';
 import 'package:heimdall/Presentation/UI/Home/Tabs/Profile/ProfileNavigator.dart';
 import 'package:heimdall/Presentation/UI/Home/Tabs/Profile/ProfileViewModel.dart';
+import 'package:heimdall/Presentation/UI/Widgets/ThemeSlider.dart';
 
 class ProfileView extends StatefulWidget {
   const ProfileView({super.key});
@@ -14,8 +15,8 @@ class _ProfileViewState extends BaseState<ProfileView , ProfileViewModel> implem
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return Container(
-      color: Colors.cyan,
+    return Center(
+      child: ThemeSwitch(),
     );
   }
 

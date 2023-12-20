@@ -186,6 +186,13 @@ class DarkPurpleTheme {
           unselectedIconTheme:IconThemeData(color: darkPurple) ,
           showUnselectedLabels: false,
           showSelectedLabels: false
+      ),
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+          backgroundColor: lightPurple,
+          foregroundColor: darkPurple,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15)
+          )
       )
   );
 }

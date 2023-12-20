@@ -72,5 +72,8 @@
   "profile" : "Profile",
   "checkYourInternetConnection" : "Check Your Internet Connection",
   "weDontHavePermissions" : "We Don't Have Permission",
-  "messages" :"Messages"
+  "messages" :"Messages",
+  "findContact" :  "Find Contact",
+  "addContact" : "Add Contact",
+  "enterEmail" : "Enter Email"
 }

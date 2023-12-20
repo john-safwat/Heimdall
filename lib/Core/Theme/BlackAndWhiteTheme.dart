@@ -179,6 +179,14 @@ class BlackAndWhiteTheme {
       unselectedIconTheme:IconThemeData(color: white) ,
       showUnselectedLabels: false,
       showSelectedLabels: false
+    ),
+
+    floatingActionButtonTheme: FloatingActionButtonThemeData(
+      backgroundColor: black,
+      foregroundColor: white,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15)
+      )
     )
   );
 }

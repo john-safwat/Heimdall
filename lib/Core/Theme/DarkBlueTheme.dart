@@ -184,6 +184,13 @@ class DarkBlueTheme {
           unselectedIconTheme:IconThemeData(color: darkBlue) ,
           showUnselectedLabels: false,
           showSelectedLabels: false
+      ),
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+          backgroundColor: lightGold,
+          foregroundColor: darkBlue,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15)
+          )
       )
   );
 }
