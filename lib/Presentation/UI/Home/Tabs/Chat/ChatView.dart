@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:heimdall/Core/Base/BaseState.dart';
-import 'package:heimdall/Presentation/UI/ContactChat/ContactChatView.dart';
 import 'package:heimdall/Presentation/UI/Home/Tabs/Chat/ChatNavigator.dart';
 import 'package:heimdall/Presentation/UI/Home/Tabs/Chat/ChatViewModel.dart';
 import 'package:heimdall/Presentation/UI/Home/Tabs/Chat/Widgets/Widgets.dart';
@@ -64,7 +63,6 @@ class _ChatViewState extends BaseState<ChatView, ChatViewModel>
       ),
     );
   }
-
   @override
   ChatViewModel? initViewModel() {
     return ChatViewModel();

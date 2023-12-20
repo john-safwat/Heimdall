@@ -1,6 +1,14 @@
 import 'package:heimdall/Core/Base/BaseViewModel.dart';
-import 'package:heimdall/Presentation/UI/Home/Tabs/Chat/ChatNavigator.dart';
+import 'package:heimdall/Presentation/UI/ContactChat/ContactChatNavigator.dart';
+enum SampleItem { itemOne, itemTwo }
+class ContactChatViewModel extends BaseViewModel<ContactChatNavigator> {
+  SampleItem? selectedMenu;
 
-class ChatViewModel extends BaseViewModel<ChatNavigator> {
-
+  changeSelectedItem(SampleItem item){
+    selectedMenu = item;
+    notifyListeners();
+  }
+  showModalBottomSheet(){
+    navigator!.showImagePickerModalBottomSheet();
+  }
 }
