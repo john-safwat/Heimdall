@@ -73,5 +73,8 @@
   "checkYourInternetConnection" : "Check Your Internet Connection",
   "weDontHavePermissions" : "We Don't Have Permission",
   "messages" :"Messages",
-  "send_message": "Send Message"
+  "sendMessage": "Send Message",
+  "findContact" :  "Find Contact",
+  "addContact" : "Add Contact",
+  "enterEmail" : "Enter Email"
 }

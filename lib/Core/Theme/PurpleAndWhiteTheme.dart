@@ -184,7 +184,13 @@ class PurpleAndWhiteTheme {
           unselectedIconTheme:IconThemeData(color: white) ,
           showUnselectedLabels: false,
           showSelectedLabels: false
-      )
-  );
+      ),
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+          backgroundColor: lightPurple,
+          foregroundColor: white,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15)
+          )
+      )  );
 
 }
