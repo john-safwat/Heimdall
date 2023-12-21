@@ -43,6 +43,7 @@ To cater to diverse user preferences, the **Smart Door Lock App** offers a spect
 
 In addition to visual customization, the app supports two languages, enhancing accessibility for a global user base. Users can seamlessly switch between languages, ensuring that language barriers do not hinder their ability to interact with and control their smart door locks.
 
+<hr>
 ## Conclusion
 
 In conclusion, the **Smart Door Lock App** stands as a testament to the convergence of security, convenience, and connectivity in the realm of smart home technology. By providing users with the ability to remotely control their locks, view live streams, manage E-Keys, and communicate within the app, this application transforms the way individuals engage with their home security systems.
