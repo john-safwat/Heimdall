@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:heimdall/Core/Base/BaseState.dart';
+import 'package:heimdall/Presentation/UI/ContactChat/ContactChatView.dart';
 import 'package:heimdall/Presentation/UI/Home/Tabs/Chat/ChatNavigator.dart';
 import 'package:heimdall/Presentation/UI/Home/Tabs/Chat/ChatViewModel.dart';
 import 'package:heimdall/Presentation/UI/Home/Tabs/Chat/Widgets/BottomSheetWidget.dart';
@@ -63,7 +64,6 @@ class _ChatViewState extends BaseState<ChatView, ChatViewModel>
             ),
             Expanded(
               child: ListView.builder(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
                 itemCount: 20,
                 itemBuilder: (BuildContext context, int index) {
                   return UserWidget(

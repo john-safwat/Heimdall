@@ -76,5 +76,7 @@
   "sendMessage": "Send Message",
   "findContact" :  "Find Contact",
   "addContact" : "Add Contact",
-  "enterEmail" : "Enter Email"
+  "enterEmail" : "Enter Email",
+  "deleteContact" : "Delete Contact",
+  "blockContact" : "Block Contact"
 }

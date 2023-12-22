@@ -20,7 +20,7 @@ class UserWidget extends StatelessWidget {
     return InkWell(
       onTap:() =>  navigationFunction(),
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 10),
+        padding: const EdgeInsets.symmetric(vertical: 10 , horizontal: 20),
         child: Row(
           children: [
             Container(
