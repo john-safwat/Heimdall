@@ -15,6 +15,7 @@ class ContactChatView extends StatefulWidget {
 //hello this a test
 //SECOND TEST
 //final test i hope :)
+//this a test
 class _ContactChatViewState
     extends BaseState<ContactChatView, ContactChatViewModel>
     implements ContactChatNavigator {
