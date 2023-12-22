@@ -45,8 +45,6 @@ In addition to visual customization, the app supports two languages, enhancing a
 
 <hr>
 <hr>
-<hr>
-<hr>
 
 ## Conclusion
 
