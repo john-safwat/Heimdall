@@ -76,5 +76,7 @@
   "sendMessage" : "ارسال رسالة",
   "findContact" :  "البحث في جهات الاتصال",
   "addContact" : "اضافة جهة اتصال",
-  "enterEmail" : "ادخل بريد الكتروني"
+  "enterEmail" : "ادخل بريد الكتروني",
+  "deleteContact" : "حذف جهة الاتصال",
+  "blockContact" : "حظر حهة الاتصال"
 }
