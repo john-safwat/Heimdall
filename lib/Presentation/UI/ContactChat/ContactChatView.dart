@@ -12,7 +12,9 @@ class ContactChatView extends StatefulWidget {
   @override
   State<ContactChatView> createState() => _ContactChatViewState();
 }
-
+//hello this a test
+//SECOND TEST
+//final test i hope :)
 class _ContactChatViewState
     extends BaseState<ContactChatView, ContactChatViewModel>
     implements ContactChatNavigator {
