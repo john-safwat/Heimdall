@@ -12,14 +12,6 @@ class ContactChatView extends StatefulWidget {
   @override
   State<ContactChatView> createState() => _ContactChatViewState();
 }
-//test
-//test
-//test
-//test
-//test
-//test
-//test
-//test
 
 class _ContactChatViewState
     extends BaseState<ContactChatView, ContactChatViewModel>
@@ -32,6 +24,7 @@ class _ContactChatViewState
       child: Consumer<ContactChatViewModel>(
         builder: (context, value, child) => Scaffold(
           appBar: AppBar(
+            leadingWidth: 30,
             actions: <Widget>[
               IconButton(
                 icon: const Icon(Icons.call),

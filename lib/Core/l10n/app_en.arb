@@ -82,7 +82,10 @@
   "userNotExist" : "User Doesn't Exist",
   "contactAlreadyExist": "This Contact Already Exist",
   "contactAddedSuccessfully" : "Contact Added Successfully",
-  "recursiveChatUnAvailable" : "Unfortunately  You Can't Chat With Your Self",
+  "recursiveChatUnAvailable" : "Unfortunately You Can't Chat With Your Self",
   "youAddedThisUser" : "You Added This Contact",
-  "thisContactJustAddedYou" : "This Contact Just Added You"
+  "thisContactJustAddedYou" : "This Contact Just Added You",
+  "edit" : "Edit",
+  "setting" : "Setting",
+  "language" : "Language"
 }
