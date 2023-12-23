@@ -78,5 +78,11 @@
   "addContact" : "Add Contact",
   "enterEmail" : "Enter Email",
   "deleteContact" : "Delete Contact",
-  "blockContact" : "Block Contact"
+  "blockContact" : "Block Contact",
+  "userNotExist" : "User Doesn't Exist",
+  "contactAlreadyExist": "This Contact Already Exist",
+  "contactAddedSuccessfully" : "Contact Added Successfully",
+  "recursiveChatUnAvailable" : "Unfortunately  You Can't Chat With Your Self",
+  "youAddedThisUser" : "You Added This Contact",
+  "thisContactJustAddedYou" : "This Contact Just Added You"
 }

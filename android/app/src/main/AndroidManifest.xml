@@ -1,11 +1,12 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
     <application
         android:label="Heimdall"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
 		android:roundIcon="@mipmap/ic_launcher_rounded"
         android:usesCleartextTraffic="true"
-        >
+        tools:targetApi="m">
         <activity
             android:name=".MainActivity"
             android:exported="true"

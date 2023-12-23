@@ -13,5 +13,6 @@ abstract class UserRepository {
   Future<User> signInWithEmailAndPassword({ required String email ,required String password});
   Future<bool> checkIfUserExist({ required String uid});
   Future<User> signInWithGoogle();
+  Future<MyUser> getUserDataByEmail({required String email});
 
 }

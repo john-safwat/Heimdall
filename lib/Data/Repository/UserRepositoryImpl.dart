@@ -84,4 +84,10 @@ class UserRepositoryImpl implements UserRepository {
     return response;
   }
 
+  @override
+  Future<MyUser> getUserDataByEmail({required String email})async {
+    var response = await userDatabaseRemoteDataSource.getUserDataByEmail(email: email);
+    return response;
+  }
+
 }

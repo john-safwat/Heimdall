@@ -1,0 +1,3 @@
+class ContactExistException implements Exception {
+
+}

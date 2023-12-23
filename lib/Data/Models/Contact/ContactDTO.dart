@@ -1,5 +1,7 @@
-class ContactDTO {
+import 'package:heimdall/Domain/Models/Contact/Contact.dart';
 
+class ContactDTO {
+  String contactId;
   String firstUserUID;
   String secondUserUID;
   String firstUserName;
@@ -16,8 +18,8 @@ class ContactDTO {
   bool isRemovedFromFirstUser;
   bool isRemovedFromSecondUser;
 
-
   ContactDTO({
+    required this.contactId,
     required this.firstUserUID,
     required this.secondUserUID,
     required this.firstUserName,
@@ -35,42 +37,63 @@ class ContactDTO {
     required this.isRemovedFromSecondUser,
   });
 
-  ContactDTO.fromFireStore(Map<String , dynamic> json):this(
-     firstUserUID: json["firstUserUID"],
-     secondUserUID: json["secondUserUID"],
-     firstUserName: json["firstUserName"],
-     secondUserName: json["secondUserName"],
-     firstUserImage: json["firstUserImage"],
-     secondUserImage: json["secondUserImage"],
-     lastMessage: json["lastMessage"],
-     lastMessageTime: json["lastMessageTime"],
-     lastMessageReadied: json["lastMessageReadied"],
-     firstUserSentLastMessage: json["firstUserSentLastMessage"],
-     secondUserSentLastMessage: json["secondUserSentLastMessage"],
-     isBlockedByFirstUser: json["isBlockedByFirstUser"],
-     isBlockedBySecondUser: json["isBlockedBySecondUser"],
-     isRemovedFromFirstUser: json["isRemovedFromFirstUser"],
-     isRemovedFromSecondUser: json["isRemovedFromSecondUser"]
-  );
+  ContactDTO.fromFireStore(Map<String, dynamic> json)
+      : this(
+            contactId: json["contactId"],
+            firstUserUID: json["firstUserUID"],
+            secondUserUID: json["secondUserUID"],
+            firstUserName: json["firstUserName"],
+            secondUserName: json["secondUserName"],
+            firstUserImage: json["firstUserImage"],
+            secondUserImage: json["secondUserImage"],
+            lastMessage: json["lastMessage"],
+            lastMessageTime: json["lastMessageTime"],
+            lastMessageReadied: json["lastMessageReadied"],
+            firstUserSentLastMessage: json["firstUserSentLastMessage"],
+            secondUserSentLastMessage: json["secondUserSentLastMessage"],
+            isBlockedByFirstUser: json["isBlockedByFirstUser"],
+            isBlockedBySecondUser: json["isBlockedBySecondUser"],
+            isRemovedFromFirstUser: json["isRemovedFromFirstUser"],
+            isRemovedFromSecondUser: json["isRemovedFromSecondUser"]);
 
-  Map<String , dynamic> toFireStore(){
+  Map<String, dynamic> toFireStore() {
     return {
-      "firstUserUID" : firstUserUID,
-      "secondUserUID" : secondUserUID,
-      "firstUserName" : firstUserName,
-      "secondUserName" : secondUserName,
-      "firstUserImage" : firstUserImage,
-      "secondUserImage" : secondUserImage,
-      "lastMessage" : lastMessage,
-      "lastMessageTime" : lastMessageTime,
-      "lastMessageReadied" : lastMessageReadied,
-      "firstUserSentLastMessage" : firstUserSentLastMessage,
-      "secondUserSentLastMessage" : secondUserSentLastMessage,
-      "isBlockedByFirstUser" : isBlockedByFirstUser,
-      "isBlockedBySecondUser" : isBlockedBySecondUser,
-      "isRemovedFromFirstUser" : isRemovedFromFirstUser,
-      "isRemovedFromSecondUser" : isRemovedFromSecondUser
+      "contactId": contactId,
+      "firstUserUID": firstUserUID,
+      "secondUserUID": secondUserUID,
+      "firstUserName": firstUserName,
+      "secondUserName": secondUserName,
+      "firstUserImage": firstUserImage,
+      "secondUserImage": secondUserImage,
+      "lastMessage": lastMessage,
+      "lastMessageTime": lastMessageTime,
+      "lastMessageReadied": lastMessageReadied,
+      "firstUserSentLastMessage": firstUserSentLastMessage,
+      "secondUserSentLastMessage": secondUserSentLastMessage,
+      "isBlockedByFirstUser": isBlockedByFirstUser,
+      "isBlockedBySecondUser": isBlockedBySecondUser,
+      "isRemovedFromFirstUser": isRemovedFromFirstUser,
+      "isRemovedFromSecondUser": isRemovedFromSecondUser
     };
   }
 
+  Contact toDomain() {
+    return Contact(
+        contactId: contactId,
+        firstUserUID: firstUserUID,
+        secondUserUID: secondUserUID,
+        firstUserName: firstUserName,
+        secondUserName: secondUserName,
+        firstUserImage: firstUserImage,
+        secondUserImage: secondUserImage,
+        lastMessage: lastMessage,
+        lastMessageTime: lastMessageTime,
+        lastMessageReadied: lastMessageReadied,
+        firstUserSentLastMessage: firstUserSentLastMessage,
+        secondUserSentLastMessage: secondUserSentLastMessage,
+        isBlockedByFirstUser: isBlockedByFirstUser,
+        isBlockedBySecondUser: isBlockedBySecondUser,
+        isRemovedFromFirstUser: isRemovedFromFirstUser,
+        isRemovedFromSecondUser: isRemovedFromSecondUser);
+  }
 }

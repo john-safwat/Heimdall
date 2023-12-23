@@ -1,0 +1,1 @@
+class RecursiveChatUnAvailableException implements Exception {}
