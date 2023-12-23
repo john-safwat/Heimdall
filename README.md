@@ -44,14 +44,6 @@ To cater to diverse user preferences, the **Smart Door Lock App** offers a spect
 In addition to visual customization, the app supports two languages, enhancing accessibility for a global user base. Users can seamlessly switch between languages, ensuring that language barriers do not hinder their ability to interact with and control their smart door locks.
 
 <hr>
-<hr>
-<hr>
-<hr>
-<hr>
-
-<hr>
-
-<hr>
 
 ## Conclusion Of The Project 
 
