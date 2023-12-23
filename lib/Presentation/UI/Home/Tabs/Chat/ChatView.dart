@@ -9,7 +9,6 @@ import 'package:heimdall/Presentation/UI/Home/Tabs/Chat/Widgets/BottomSheetWidge
 import 'package:heimdall/Presentation/UI/Home/Tabs/Chat/Widgets/ChatContactWidget.dart';
 import 'package:heimdall/Presentation/UI/Widgets/NoChatErroWidget.dart';
 import 'package:icons_plus/icons_plus.dart';
-import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
 class ChatView extends StatefulWidget {

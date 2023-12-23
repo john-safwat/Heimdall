@@ -7,13 +7,13 @@ import 'package:icons_plus/icons_plus.dart';
 class ProfileViewModel extends BaseViewModel<ProfileNavigator> {
   late List<Button> buttonsData = [
     Button(id: 1, icon: EvaIcons.settings, title: local!.setting, onClickListener: goToSettingScreen),
-    Button(id: 2, icon: EvaIcons.settings, title: local!.setting, onClickListener: goToSettingScreen),
-    Button(id: 3, icon: EvaIcons.settings, title: local!.setting, onClickListener: goToSettingScreen),
-    Button(id: 4, icon: EvaIcons.settings, title: local!.setting, onClickListener: goToSettingScreen),
-    Button(id: 5, icon: EvaIcons.settings, title: local!.setting, onClickListener: goToSettingScreen),
-    Button(id: 6, icon: EvaIcons.settings, title: local!.setting, onClickListener: goToSettingScreen)
+    Button(id: 2, icon: EvaIcons.lock, title: local!.lockManagement, onClickListener: goToLockManagementScreen),
+    Button(id: 3, icon: EvaIcons.smiling_face_outline, title: local!.yourFeedBack, onClickListener: goToFeedbackScreen),
+    Button(id: 4, icon: EvaIcons.alert_triangle, title: local!.reportIssue, onClickListener: goToReportIssueScreen),
+    Button(id: 5, icon: EvaIcons.alert_circle, title: local!.aboutUs, onClickListener: goToAboutUsScreen),
+    Button(id: 6, icon: EvaIcons.trash, title: local!.deleteAccount, onClickListener: goToSettingScreen),
+    Button(id: 7, icon: EvaIcons.arrow_circle_right, title: local!.signOut, onClickListener: goToSettingScreen)
   ];
-
   // navigation function
   // function to go to update profile screen
   goToUpdateProfileScreen() {}
@@ -21,6 +21,22 @@ class ProfileViewModel extends BaseViewModel<ProfileNavigator> {
   // function to go to setting screen
   goToSettingScreen() {
     navigator!.goToSettingScreen();
+  }
+  // function to go to Feedback screen
+  goToFeedbackScreen(){
+    navigator!.goToFeedbackScreen();
+  }
+  // function to go to ReportIssue screen
+  goToReportIssueScreen(){
+    navigator!.goToReportIssueScreen();
+  }
+  // function to go to About Us screen
+  goToAboutUsScreen(){
+    navigator!.goToAboutUsScreen();
+  }
+  // function to go to Lock Management screen
+  goToLockManagementScreen(){
+    navigator!.goToLockManagementScreen();
   }
 
   // function to return the icon of the app

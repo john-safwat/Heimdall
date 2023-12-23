@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:heimdall/Core/Base/BaseState.dart';
+import 'package:heimdall/Presentation/UI/AboutUs/AboutUsView.dart';
+import 'package:heimdall/Presentation/UI/Feedback/FeedbackVeiw.dart';
 import 'package:heimdall/Presentation/UI/Home/Tabs/Profile/ProfileNavigator.dart';
 import 'package:heimdall/Presentation/UI/Home/Tabs/Profile/ProfileViewModel.dart';
 import 'package:heimdall/Presentation/UI/Home/Tabs/Profile/Widgets/CustomButton.dart';
 import 'package:heimdall/Presentation/UI/Home/Tabs/Profile/Widgets/UserProfileDataWidget.dart';
+import 'package:heimdall/Presentation/UI/LockManagement/LockManagementView.dart';
+import 'package:heimdall/Presentation/UI/ReportIssue/ReportIssueView.dart';
 import 'package:heimdall/Presentation/UI/Setting/SettingView.dart';
-import 'package:icons_plus/icons_plus.dart';
 
 class ProfileView extends StatefulWidget {
   const ProfileView({super.key});
@@ -49,5 +52,25 @@ class _ProfileViewState extends BaseState<ProfileView, ProfileViewModel>
   @override
   goToSettingScreen() {
     Navigator.pushNamed(context, SettingView.routeName);
+  }
+
+  @override
+  goToFeedbackScreen() {
+    Navigator.pushNamed(context, FeedbackView.routeName);
+  }
+
+  @override
+  goToReportIssueScreen() {
+    Navigator.pushNamed(context, ReportIssueView.routeName);
+  }
+
+  @override
+  goToAboutUsScreen() {
+    Navigator.pushNamed(context, AboutUsView.routeName);
+  }
+
+  @override
+  goToLockManagementScreen() {
+    Navigator.pushNamed(context, LockManagementView.routeName);
   }
 }
