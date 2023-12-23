@@ -7,7 +7,9 @@ import 'package:heimdall/Presentation/UI/Home/Tabs/Chat/ChatNavigator.dart';
 import 'package:heimdall/Presentation/UI/Home/Tabs/Chat/ChatViewModel.dart';
 import 'package:heimdall/Presentation/UI/Home/Tabs/Chat/Widgets/BottomSheetWidget.dart';
 import 'package:heimdall/Presentation/UI/Home/Tabs/Chat/Widgets/ChatContactWidget.dart';
+import 'package:heimdall/Presentation/UI/Widgets/NoChatErroWidget.dart';
 import 'package:icons_plus/icons_plus.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
 class ChatView extends StatefulWidget {
@@ -19,7 +21,6 @@ class ChatView extends StatefulWidget {
 
 class _ChatViewState extends BaseState<ChatView, ChatViewModel>
     implements ChatNavigator {
-
   @override
   void initState() {
     super.initState();
@@ -35,7 +36,10 @@ class _ChatViewState extends BaseState<ChatView, ChatViewModel>
         child: Scaffold(
           floatingActionButton: FloatingActionButton(
             onPressed: () => viewModel!.showAddContactBottomSheet(),
-            child:const Icon(BoxIcons.bx_chat , size: 32,),
+            child: const Icon(
+              BoxIcons.bx_chat,
+              size: 32,
+            ),
           ),
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -61,11 +65,11 @@ class _ChatViewState extends BaseState<ChatView, ChatViewModel>
                       cursorColor: Theme.of(context).primaryColor,
                       cursorHeight: 20,
                       decoration: InputDecoration(
-                        prefixIcon:const Icon(
+                        prefixIcon: const Icon(
                           EvaIcons.search,
                           size: 30,
                         ),
-                        hintText:viewModel!.local!.findContact,
+                        hintText: viewModel!.local!.findContact,
                       ),
                     ),
                   ],
@@ -77,17 +81,24 @@ class _ChatViewState extends BaseState<ChatView, ChatViewModel>
               Expanded(
                 child: Consumer<ChatViewModel>(
                   builder: (context, value, child) {
-                    if (value.errorMessage != null){
+                    if (value.errorMessage != null) {
                       return const Center(
                         child: Text("Error"),
                       );
-                    }else if (value.loading){
-                      return const Center(child: CircularProgressIndicator(),);
-                    }else if (value.contacts.isEmpty){
+                    } else if (value.loading) {
                       return const Center(
-                        child: Text("Empty"),
+                        child: CircularProgressIndicator(),
                       );
-                    }else {
+                    } else if (value.contacts.isEmpty) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                        child: NoChatErrorWidget(
+                          image: viewModel!.getNoChatAnimation(),
+                          errorMessage:
+                              viewModel!.local!.youHaveNoContactsToChatWith,
+                        ),
+                      );
+                    } else {
                       return ListView.builder(
                         itemBuilder: (context, index) => ChatContactWidget(
                           contact: value.contacts[index],
@@ -106,12 +117,12 @@ class _ChatViewState extends BaseState<ChatView, ChatViewModel>
       ),
     );
   }
+
   @override
   ChatViewModel? initViewModel() {
     return ChatViewModel(
-      addContactUseCase: injectAddContactUseCase(),
-      getContactsUseCase: injectGetContactsUseCase()
-    );
+        addContactUseCase: injectAddContactUseCase(),
+        getContactsUseCase: injectGetContactsUseCase());
   }
 
   @override
@@ -122,12 +133,12 @@ class _ChatViewState extends BaseState<ChatView, ChatViewModel>
   @override
   showAddContactModalBottomSheet() {
     showModalBottomSheet(
-      context: context,
-      builder: (context) =>BottomSheetWidget(
-        controller: viewModel!.contactController,
-        hintTitle: viewModel!.local!.enterEmail,
-        buttonTitle: viewModel!.local!.addContact,
-        addContactFunction: viewModel!.addContact,
-      ));
+        context: context,
+        builder: (context) => BottomSheetWidget(
+              controller: viewModel!.contactController,
+              hintTitle: viewModel!.local!.enterEmail,
+              buttonTitle: viewModel!.local!.addContact,
+              addContactFunction: viewModel!.addContact,
+            ));
   }
 }

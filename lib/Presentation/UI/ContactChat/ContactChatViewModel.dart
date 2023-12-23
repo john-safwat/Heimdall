@@ -14,6 +14,7 @@ class ContactChatViewModel extends BaseViewModel<ContactChatNavigator> {
     //todo to be implemented
   }
 
+
   // navigation function
   showModalBottomSheet(){
     navigator!.showImagePickerModalBottomSheet();

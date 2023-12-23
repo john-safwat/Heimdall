@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:heimdall/Core/Base/BaseViewModel.dart';
+import 'package:heimdall/Core/Theme/MyTheme.dart';
 import 'package:heimdall/Domain/Models/Contact/Contact.dart';
 import 'package:heimdall/Domain/UseCase/AddContactUseCase.dart';
 import 'package:heimdall/Domain/UseCase/GetContactsUseCase.dart';
@@ -34,7 +35,18 @@ class ChatViewModel extends BaseViewModel<ChatNavigator> {
     }
 
   }
-
+  // function to Change The Icon Depending on the running theme
+  String getNoChatAnimation(){
+    if(themeProvider!.getTheme() == MyTheme.blackAndWhiteTheme){
+      return "assets/animations/BlackAndWhite.json";
+    }else if (themeProvider!.getTheme() == MyTheme.purpleAndWhiteTheme){
+      return "assets/animations/DarkPurple.json";
+    }else if (themeProvider!.getTheme() == MyTheme.darkPurpleTheme){
+      return "assets/animations/DarkPurple.json";
+    }else {
+      return "assets/animations/Gold.json";
+    }
+  }
   // function to add new contact
   addContact() async {
     if (contactController.text.isNotEmpty) {

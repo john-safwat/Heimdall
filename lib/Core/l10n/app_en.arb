@@ -85,6 +85,7 @@
   "recursiveChatUnAvailable" : "Unfortunately You Can't Chat With Your Self",
   "youAddedThisUser" : "You Added This Contact",
   "thisContactJustAddedYou" : "This Contact Just Added You",
+  "youHaveNoContactsToChatWith": "You Have No Contacts To Chat With, Try Adding New Contacts",
   "edit" : "Edit",
   "setting" : "Setting",
   "language" : "Language"
