@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:heimdall/Core/Base/BaseState.dart';
 import 'package:heimdall/Presentation/UI/Home/Tabs/Profile/ProfileNavigator.dart';
 import 'package:heimdall/Presentation/UI/Home/Tabs/Profile/ProfileViewModel.dart';
+import 'package:heimdall/Presentation/UI/Home/Tabs/Profile/Widgets/CustomButton.dart';
 import 'package:heimdall/Presentation/UI/Home/Tabs/Profile/Widgets/UserProfileDataWidget.dart';
 import 'package:heimdall/Presentation/UI/Setting/SettingView.dart';
 import 'package:icons_plus/icons_plus.dart';
@@ -27,23 +28,13 @@ class _ProfileViewState extends BaseState<ProfileView, ProfileViewModel>
             getIcon: viewModel!.getIcon,
             buttonAction: viewModel!.goToUpdateProfileScreen),
         Expanded(
-          child: ListView(
-            padding:const EdgeInsets.all(20),
-            children: [
-              ElevatedButton(
-                onPressed: viewModel!.goToSettingScreen,
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Row(
-                    children: [
-                      const Icon(EvaIcons.settings),
-                      const SizedBox(width: 10,),
-                      Text(viewModel!.local!.setting),
-                    ],
-                  ),
-                )
-              )
-            ],
+          child: ListView.separated(
+            itemBuilder: (context, index) => CustomButton(button: viewModel!.buttonsData[index]),
+            itemCount: viewModel!.buttonsData.length,
+            separatorBuilder: (context, index) => const Padding(
+              padding:  EdgeInsets.symmetric(horizontal: 20.0),
+              child: Divider(thickness: 1,),
+            ),
           ),
         ),
       ],
