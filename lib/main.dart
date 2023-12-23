@@ -12,6 +12,7 @@ import 'package:heimdall/Presentation/UI/Home/HomeView.dart';
 import 'package:heimdall/Presentation/UI/Intro/IntroView.dart';
 import 'package:heimdall/Presentation/UI/Login/LoginView.dart';
 import 'package:heimdall/Presentation/UI/Registration/RegistrationView.dart';
+import 'package:heimdall/Presentation/UI/Setting/SettingView.dart';
 import 'package:heimdall/Presentation/UI/Splash/SplashScreen.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -88,10 +89,11 @@ class MyApp extends StatelessWidget {
         SplashScreen.routeName : (context) => SplashScreen(firstTime: firstTime??true , loggedIn: loggedIn??false, user: user,),
         IntroView.routeName : (context) => const IntroView(),
         LoginView.routeName : (context) => const LoginView(),
-        RegistrationView.routeName : (context) => RegistrationView(),
-        ForgetPasswordView.routeName : (context) => ForgetPasswordView(),
-        HomeView.routeName : (context) => HomeView(),
-        ContactChatView.routeName : (context) => ContactChatView(),
+        RegistrationView.routeName : (context) => const RegistrationView(),
+        ForgetPasswordView.routeName : (context) => const ForgetPasswordView(),
+        HomeView.routeName : (context) => const HomeView(),
+        ContactChatView.routeName : (context) =>const ContactChatView(),
+        SettingView.routeName : (context) => const SettingView()
       },
       // the initial route to start the program from
       home: SplashScreen(firstTime:firstTime??true , loggedIn: loggedIn??false,user: user ),
