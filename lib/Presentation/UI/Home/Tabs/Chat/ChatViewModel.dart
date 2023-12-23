@@ -57,6 +57,7 @@ class ChatViewModel extends BaseViewModel<ChatNavigator> {
           await addContactUseCase.invoke(email: contactController.text, user: appConfigProvider!.getUser()!);
           navigator!.goBack();
           navigator!.showSuccessMessage(message: local!.contactAddedSuccessfully , posActionTitle: local!.ok , posAction: () {
+            loadContacts();
             navigator!.goBack();
           },);
           contactController.text = "";

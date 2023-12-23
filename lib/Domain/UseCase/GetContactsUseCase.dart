@@ -31,7 +31,7 @@ class GetContactsUseCase {
     for(int i = 0 ; i< contacts.length-1 ; i++){
       var swapped= false;
       for(int j = 0 ; j<contacts.length - i -1 ; j++ ){
-        if(contacts[j].lastMessageTime > contacts[j+1].lastMessageTime){
+        if(contacts[j].lastMessageTime < contacts[j+1].lastMessageTime){
           var temp = contacts[j];
           contacts[j] = contacts[j+1];
           contacts[j+1] = temp;

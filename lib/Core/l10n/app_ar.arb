@@ -85,5 +85,8 @@
   "recursiveChatUnAvailable" : "لسوء الحظ لا يمكنك التحدث مع نفسك",
   "youAddedThisUser" : "لقد أضفت جهة الاتصال هذه",
   "thisContactJustAddedYou" : "جهة الاتصال هذه أضافتك للتو",
-  "youHaveNoContactsToChatWith" : "ليس لديك أي جهات اتصال للدردشة معها، حاول إضافة جهات اتصال جديدة"
+  "youHaveNoContactsToChatWith" : "ليس لديك أي جهات اتصال للدردشة معها، حاول إضافة جهات اتصال جديدة",
+  "edit" : "تعديل",
+  "setting" : "الاعدادات",
+  "language" : "اللغة"
 }
