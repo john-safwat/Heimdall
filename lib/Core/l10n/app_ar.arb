@@ -78,5 +78,11 @@
   "addContact" : "اضافة جهة اتصال",
   "enterEmail" : "ادخل بريد الكتروني",
   "deleteContact" : "حذف جهة الاتصال",
-  "blockContact" : "حظر حهة الاتصال"
+  "blockContact" : "حظر حهة الاتصال",
+  "userNotExist" : "المستخدم غير موجود",
+  "contactAlreadyExist": "جهة الاتصال موجودة بالفعل",
+  "contactAddedSuccessfully" : "تم اضافة جهة الاتصال بنجاح",
+  "recursiveChatUnAvailable" : "لسوء الحظ لا يمكنك التحدث مع نفسك",
+  "youAddedThisUser" : "لقد أضفت جهة الاتصال هذه",
+  "thisContactJustAddedYou" : "جهة الاتصال هذه أضافتك للتو"
 }

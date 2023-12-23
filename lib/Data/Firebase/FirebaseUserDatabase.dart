@@ -44,5 +44,12 @@ class FirebaseUserDatabase {
     var doc = await getCollectionReference().doc(uid).get();
     return doc.data();
   }
+  
+  // function to get user data using email address 
+  Future<UserDTO?> getUserDataByEmail({required String email})async{
+    var doc = await getCollectionReference().where("email", isEqualTo: email).get();
+    var users = doc.docs.map((e) => e.data()).toList();
+    return users.isEmpty? null : users.first;
+  } 
 
 }

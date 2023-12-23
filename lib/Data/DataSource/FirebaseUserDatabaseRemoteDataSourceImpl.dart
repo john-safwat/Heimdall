@@ -10,6 +10,8 @@ import 'package:heimdall/Domain/Exceptions/FirebaseDatabaseException.dart';
 import 'package:heimdall/Domain/Exceptions/InternetConnectionException.dart';
 import 'package:heimdall/Domain/Exceptions/TimeOutOperationsException.dart';
 import 'package:heimdall/Domain/Exceptions/UnknownException.dart';
+import 'package:heimdall/Domain/Exceptions/UserNotExistException.dart';
+import 'package:heimdall/Domain/Models/Users/User.dart';
 
 FirebaseUserDatabaseRemoteDataSource injectFirebaseUserDatabaseRemoteDataSource(){
   return FirebaseUserDatabaseRemoteDataSourceImpl(
@@ -76,6 +78,27 @@ class FirebaseUserDatabaseRemoteDataSourceImpl  implements FirebaseUserDatabaseR
     } on TimeoutException {// handle timeout exception
       throw TimeOutOperationsException(errorMessage: "Timeout");
     } catch (e){ // handle unknown exceptions
+      throw UnknownException(errorMessage: e.toString());
+    }
+  }
+
+  @override
+  Future<MyUser> getUserDataByEmail({required String email}) async{
+    try{
+      var response = await userDatabase.getUserDataByEmail(email: email);
+      if(response == null){
+        throw UserNotExistException();
+      }
+      return response.toDomain();
+    } on FirebaseException catch (e) { // handle firebase exception in en of ar
+      throw FirebaseDatabaseException(errorMessage: e.code);
+    }on IOException {
+      throw InternetConnectionException(errorMessage: "I/O Exception");
+    } on TimeoutException {// handle timeout exception
+      throw TimeOutOperationsException(errorMessage: "Timeout");
+    } on UserNotExistException {
+      throw UserNotExistException();
+    }catch (e){ // handle unknown exceptions
       throw UnknownException(errorMessage: e.toString());
     }
   }

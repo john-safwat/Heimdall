@@ -20,7 +20,6 @@ class BottomSheetWidget extends StatelessWidget {
             TextFormField(
               controller: controller,
               style: Theme.of(context).textTheme.bodyLarge,
-              autovalidateMode: AutovalidateMode.onUserInteraction,
               cursorColor: Theme.of(context).primaryColor,
               cursorHeight: 20,
               decoration: InputDecoration(
