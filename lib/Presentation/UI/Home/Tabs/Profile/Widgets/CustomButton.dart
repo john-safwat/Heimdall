@@ -16,17 +16,13 @@ class CustomButton extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(5),
               decoration: BoxDecoration(
-                color: button.id == 4
-                    ? MyTheme.yellow
-                    : button.id == 6 || button.id == 7
-                        ? MyTheme.red
-                        : Theme.of(context).primaryColor,
+                color: button.color,
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Icon(
                 button.icon,
                 size: 25,
-                color: Theme.of(context).scaffoldBackgroundColor,
+                color: MyTheme.white,
               ),
             ),
             const SizedBox(

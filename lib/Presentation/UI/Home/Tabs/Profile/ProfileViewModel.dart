@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:heimdall/Core/Base/BaseViewModel.dart';
 import 'package:heimdall/Core/Theme/MyTheme.dart';
 import 'package:heimdall/Presentation/Models/Button/Button.dart';
@@ -6,14 +8,50 @@ import 'package:icons_plus/icons_plus.dart';
 
 class ProfileViewModel extends BaseViewModel<ProfileNavigator> {
   late List<Button> buttonsData = [
-    Button(id: 1, icon: EvaIcons.settings, title: local!.setting, onClickListener: goToSettingScreen),
-    Button(id: 2, icon: EvaIcons.lock, title: local!.lockManagement, onClickListener: goToLockManagementScreen),
-    Button(id: 3, icon: EvaIcons.smiling_face_outline, title: local!.yourFeedBack, onClickListener: goToFeedbackScreen),
-    Button(id: 4, icon: EvaIcons.alert_triangle, title: local!.reportIssue, onClickListener: goToReportIssueScreen),
-    Button(id: 5, icon: EvaIcons.alert_circle, title: local!.aboutUs, onClickListener: goToAboutUsScreen),
-    Button(id: 6, icon: EvaIcons.trash, title: local!.deleteAccount, onClickListener: goToSettingScreen),
-    Button(id: 7, icon: EvaIcons.arrow_circle_right, title: local!.signOut, onClickListener: goToSettingScreen)
+    Button(
+        id: 1,
+        icon: EvaIcons.settings,
+        title: local!.setting,
+        onClickListener: goToSettingScreen,
+        color: const Color(0xff007aff)),
+    Button(
+        id: 2,
+        icon: EvaIcons.lock,
+        title: local!.lockManagement,
+        onClickListener: goToLockManagementScreen,
+        color: const Color(0xff4cd964)),
+    Button(
+        id: 3,
+        icon: EvaIcons.smiling_face_outline,
+        title: local!.yourFeedBack,
+        onClickListener: goToFeedbackScreen,
+        color: const Color(0xff34aadc)),
+    Button(
+        id: 4,
+        icon: EvaIcons.alert_triangle,
+        title: local!.reportIssue,
+        onClickListener: goToReportIssueScreen,
+        color: const Color(0xffff9500)),
+    Button(
+        id: 5,
+        icon: EvaIcons.alert_circle,
+        title: local!.aboutUs,
+        onClickListener: goToAboutUsScreen,
+        color: const Color(0xff007aff)),
+    Button(
+        id: 6,
+        icon: EvaIcons.trash,
+        title: local!.deleteAccount,
+        onClickListener: goToSettingScreen,
+        color: const Color(0xFFF73645)),
+    Button(
+        id: 7,
+        icon: EvaIcons.arrow_circle_right,
+        title: local!.signOut,
+        onClickListener: goToSettingScreen,
+        color: const Color(0xFFF73645))
   ];
+
   // navigation function
   // function to go to update profile screen
   goToUpdateProfileScreen() {}
@@ -22,20 +60,24 @@ class ProfileViewModel extends BaseViewModel<ProfileNavigator> {
   goToSettingScreen() {
     navigator!.goToSettingScreen();
   }
+
   // function to go to Feedback screen
-  goToFeedbackScreen(){
+  goToFeedbackScreen() {
     navigator!.goToFeedbackScreen();
   }
+
   // function to go to ReportIssue screen
-  goToReportIssueScreen(){
+  goToReportIssueScreen() {
     navigator!.goToReportIssueScreen();
   }
+
   // function to go to About Us screen
-  goToAboutUsScreen(){
+  goToAboutUsScreen() {
     navigator!.goToAboutUsScreen();
   }
+
   // function to go to Lock Management screen
-  goToLockManagementScreen(){
+  goToLockManagementScreen() {
     navigator!.goToLockManagementScreen();
   }
 
