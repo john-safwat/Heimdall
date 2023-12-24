@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:heimdall/Core/Base/BaseState.dart';
+import 'package:heimdall/Domain/UseCase/SendReportUseCase.dart';
 import 'package:heimdall/Presentation/UI/ReportIssue/ReportIssueNavigator.dart';
 import 'package:heimdall/Presentation/UI/ReportIssue/ReportIssueViewModel.dart';
 
@@ -21,48 +22,45 @@ class _ReportIssueViewState extends BaseState<ReportIssueView , ReportIssueViewM
       create: (context) => viewModel!,
       child: Scaffold(
         appBar: AppBar(title: Text(viewModel!.local!.report,),),
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20,),
-            child: Column(
-              children: [
-                const SizedBox(
-                  height: 20,
-                ),
-                Text(viewModel!.local!.weAreHereToHelp,style: Theme.of(context).textTheme.titleLarge),
-                const SizedBox(
-                  height: 20,
-                ),
-                Text(viewModel!.local!.reportBodyText,style: Theme.of(context).textTheme.bodyLarge,textAlign: TextAlign.center,),
-                const SizedBox(
-                  height: 20,
-                ),
-                TextFormField(
-                  maxLines: 5,
-                  decoration: InputDecoration(
-                    hintText: viewModel!.local!.yourReport,
-                    labelStyle: TextStyle(
-                      color: Theme.of(context).primaryColor,
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                ElevatedButton(
-                    onPressed: () => viewModel!.sendReport(),
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(viewModel!.local!.sendYourReport),
-                        ],
-                      ),
-                    ))
-              ],
+        body: ListView(
+          padding: const EdgeInsets.symmetric(horizontal: 20,),
+          children: [
+            const SizedBox(
+              height: 20,
             ),
-          ),
+            Text(viewModel!.local!.weAreHereToHelp,style: Theme.of(context).textTheme.titleLarge ,textAlign: TextAlign.center,),
+            const SizedBox(
+              height: 20,
+            ),
+            Text(viewModel!.local!.reportBodyText,style: Theme.of(context).textTheme.bodyLarge,textAlign: TextAlign.center,),
+            const SizedBox(
+              height: 20,
+            ),
+            TextFormField(
+              maxLines: 5,
+              controller: viewModel!.controller,
+              decoration: InputDecoration(
+                hintText: viewModel!.local!.yourReport,
+                labelStyle: TextStyle(
+                  color: Theme.of(context).primaryColor,
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            ElevatedButton(
+                onPressed: () => viewModel!.sendReport(),
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(viewModel!.local!.sendYourReport),
+                    ],
+                  ),
+                ))
+          ],
         ),
       ),
     );
@@ -70,6 +68,8 @@ class _ReportIssueViewState extends BaseState<ReportIssueView , ReportIssueViewM
 
   @override
   ReportIssueViewModel? initViewModel() {
-    return ReportIssueViewModel();
+    return ReportIssueViewModel(
+      sendReportUseCase: injectSendReportUseCase()
+    );
   }
 }
