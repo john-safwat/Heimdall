@@ -29,23 +29,10 @@ class _AboutUsViewState extends BaseState<AboutUsView , AboutUsViewModel> implem
                 const SizedBox(
                   height: 20,
                 ),
-                Text(viewModel!.local!.aboutUsFirstHeadline,style: Theme.of(context).textTheme.titleLarge,),
+                Text(viewModel!.local!.aboutUsFirstHeadline,style: Theme.of(context).textTheme.bodyLarge,),
                 const SizedBox(
                   height: 20,
                 ),
-                Text(viewModel!.local!.aboutUsFirstBodyText,style: Theme.of(context).textTheme.bodyMedium,),
-                const SizedBox(
-                  height: 10,
-                ),
-                Text(viewModel!.local!.aboutUsSecondBodyText,style: Theme.of(context).textTheme.bodyMedium,),
-                const SizedBox(
-                  height: 20,
-                ),
-                Text(viewModel!.local!.aboutUsSecondHeadline,style: Theme.of(context).textTheme.titleLarge,),
-                const SizedBox(
-                  height: 20,
-                ),
-                Text(viewModel!.local!.aboutUsThirdBodyText,style: Theme.of(context).textTheme.bodyMedium,),
               ],
             ),
           ),

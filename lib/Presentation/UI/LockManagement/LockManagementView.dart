@@ -20,13 +20,6 @@ class _LockManagementViewState extends BaseState<LockManagementView , LockManage
       create: (context) => viewModel!,
       child: Scaffold(
         appBar: AppBar(title: Text("LockManagement"),),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              Text("LockManagement"),
-            ],
-          ),
-        ),
       ),
     );
   }

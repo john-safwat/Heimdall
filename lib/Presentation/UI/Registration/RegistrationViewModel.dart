@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:heimdall/Core/Base/BaseViewModel.dart';
 import 'package:heimdall/Core/Theme/MyTheme.dart';
-import 'package:heimdall/Domain/Exceptions/FirebaseUserAuthException.dart';
-import 'package:heimdall/Domain/Exceptions/FirebaseDatabaseException.dart';
-import 'package:heimdall/Domain/Exceptions/TimeOutOperationsException.dart';
 import 'package:heimdall/Domain/Models/Users/User.dart';
 import 'package:heimdall/Domain/UseCase/AddUserUseCase.dart';
 import 'package:heimdall/Domain/UseCase/CreateAccountUseCase.dart';
