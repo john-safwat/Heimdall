@@ -125,5 +125,8 @@
   "mohammedMahmoud" : "محمد محمود",
   "reportSent" : "تم ارسال التقرير بنجاح و رقم الشكوي : ",
   "reportCantBeEmpty" :"لا يمكن ارسال تقرير فارغ",
-  "supervisedByDrGoudaIsmail" :"يشرف عليها :\nالاستاذ الدكتور جودة اسماعيل"
+  "supervisedByDrGoudaIsmail" :"يشرف عليها :\nالاستاذ الدكتور جودة اسماعيل",
+  "areYouSureToExit" : "هل أنت متأكد أنك تريد الخروج",
+  "areYouSureToDeleteAccount" : "هل أنت متأكد أنك تريد حذف الحساب كن حذرا"
+
 }

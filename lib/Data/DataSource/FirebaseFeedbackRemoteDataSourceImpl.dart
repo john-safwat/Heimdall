@@ -1,10 +1,12 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:heimdall/Data/Firebase/FirebaseFeedbackDatabase.dart';
 import 'package:heimdall/Data/Models/Feedback/FeedbackDTO.dart';
 import 'package:heimdall/Domain/DataSource/FirebaseFeedbackRemoteDataSource.dart';
 import 'package:heimdall/Domain/Exceptions/FirebaseDatabaseException.dart';
+import 'package:heimdall/Domain/Exceptions/InternetConnectionException.dart';
 import 'package:heimdall/Domain/Exceptions/TimeOutOperationsException.dart';
 import 'package:heimdall/Domain/Exceptions/UnknownException.dart';
 
@@ -24,6 +26,8 @@ class FirebaseFeedbackRemoteDataSourceImpl extends FirebaseFeedbackRemoteDataSou
       return response;
     } on FirebaseException catch (e) {
       throw FirebaseDatabaseException(errorMessage: e.code);
+    }on IOException {
+      throw InternetConnectionException(errorMessage: "I/O Exception");
     } on TimeoutException catch (e) {
       throw TimeOutOperationsException(errorMessage: "User Auth Timed Out");
     } catch (e) {

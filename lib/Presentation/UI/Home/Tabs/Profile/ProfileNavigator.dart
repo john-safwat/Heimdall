@@ -7,4 +7,5 @@ abstract class ProfileNavigator extends BaseNavigator {
   goToFeedbackScreen();
   goToReportIssueScreen();
   goToAboutUsScreen();
+  goToLoginScreen();
 }

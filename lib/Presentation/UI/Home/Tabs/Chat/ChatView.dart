@@ -7,8 +7,8 @@ import 'package:heimdall/Presentation/UI/Home/Tabs/Chat/ChatNavigator.dart';
 import 'package:heimdall/Presentation/UI/Home/Tabs/Chat/ChatViewModel.dart';
 import 'package:heimdall/Presentation/UI/Home/Tabs/Chat/Widgets/BottomSheetWidget.dart';
 import 'package:heimdall/Presentation/UI/Home/Tabs/Chat/Widgets/ChatContactWidget.dart';
-import 'package:heimdall/Presentation/UI/Widgets/NoChatErroWidget.dart';
 import 'package:icons_plus/icons_plus.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
 class ChatView extends StatefulWidget {
@@ -81,8 +81,17 @@ class _ChatViewState extends BaseState<ChatView, ChatViewModel>
                 child: Consumer<ChatViewModel>(
                   builder: (context, value, child) {
                     if (value.errorMessage != null) {
-                      return const Center(
-                        child: Text("Error"),
+                      return Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Row(),
+                              Lottie.asset("assets/animations/error.json" , width: viewModel!.mediaQuery!.width *0.5),
+                              const SizedBox(height: 40),
+                              Text(value.errorMessage! , style: Theme.of(context).textTheme.titleMedium,textAlign: TextAlign.center,)
+                            ],
+                          )
                       );
                     } else if (value.loading) {
                       return const Center(
@@ -91,11 +100,14 @@ class _ChatViewState extends BaseState<ChatView, ChatViewModel>
                     } else if (value.contacts.isEmpty) {
                       return Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                        child: NoChatErrorWidget(
-                          image: viewModel!.getNoChatAnimation(),
-                          errorMessage:
-                              viewModel!.local!.youHaveNoContactsToChatWith,
-                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Lottie.asset(viewModel!.getNoChatAnimation()),
+                            const SizedBox(height: 20),
+                            Text(value.local!.youHaveNoContactsToChatWith , style: Theme.of(context).textTheme.titleMedium,textAlign: TextAlign.center,)
+                          ],
+                        )
                       );
                     } else {
                       return ListView.builder(

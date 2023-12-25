@@ -1,10 +1,12 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:heimdall/Data/Firebase/FirebaseReportDataBase.dart';
 import 'package:heimdall/Data/Models/Report/ReportDTO.dart';
 import 'package:heimdall/Domain/DataSource/FirebaseReportRemoteDataSource.dart';
 import 'package:heimdall/Domain/Exceptions/FirebaseDatabaseException.dart';
+import 'package:heimdall/Domain/Exceptions/InternetConnectionException.dart';
 import 'package:heimdall/Domain/Exceptions/TimeOutOperationsException.dart';
 import 'package:heimdall/Domain/Exceptions/UnknownException.dart';
 import 'package:heimdall/Domain/Models/Report/Report.dart';
@@ -25,6 +27,8 @@ class FirebaseReportRemoteDataSourceImpl implements FirebaseReportRemoteDataSour
       return response.toDomain();
     } on FirebaseException catch (e) {
       throw FirebaseDatabaseException(errorMessage: e.code);
+    } on IOException {
+      throw InternetConnectionException(errorMessage: "I/O Exception");
     } on TimeoutException catch (e) {
       throw TimeOutOperationsException(errorMessage: "User Auth Timed Out");
     } catch (e) {
