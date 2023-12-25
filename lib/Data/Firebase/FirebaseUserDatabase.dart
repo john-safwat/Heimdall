@@ -50,6 +50,11 @@ class FirebaseUserDatabase {
     var doc = await getCollectionReference().where("email", isEqualTo: email).get();
     var users = doc.docs.map((e) => e.data()).toList();
     return users.isEmpty? null : users.first;
-  } 
+  }
+
+  // function to delete user data
+  Future<void> deleteUserData({required String uid})async{
+    await getCollectionReference().doc(uid).delete();
+  }
 
 }

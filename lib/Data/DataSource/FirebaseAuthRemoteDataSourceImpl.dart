@@ -144,4 +144,46 @@ class FirebaseAuthRemoteDataSourceImpl implements FirebaseAuthRemoteDataSource {
       throw UnknownException(errorMessage: e.toString());
     }
   }
+
+  @override
+  Future<void> deleteAccount() async{
+    try{
+      await authDatabase.deleteAccount();
+    }on FirebaseAuthException catch (e) {
+      // handle firebase auth exception in en of ar
+      throw FirebaseLoginException(errorMessage: e.code);
+    } on FirebaseException catch (e) {
+      // handle firebase exception in en of ar
+      throw FirebaseDatabaseException(errorMessage: e.code);
+    } on IOException {
+      throw InternetConnectionException(errorMessage: "I/O Exception");
+    } on TimeoutException {
+      // handle timeout exception
+      throw TimeOutOperationsException(errorMessage: "Timeout");
+    } catch (e) {
+      // handle unknown exceptions
+      throw UnknownException(errorMessage: e.toString());
+    }
+  }
+
+  @override
+  Future<void> signOut() async{
+    try{
+      await authDatabase.signOut();
+    }on FirebaseAuthException catch (e) {
+      // handle firebase auth exception in en of ar
+      throw FirebaseLoginException(errorMessage: e.code);
+    } on FirebaseException catch (e) {
+      // handle firebase exception in en of ar
+      throw FirebaseDatabaseException(errorMessage: e.code);
+    } on IOException {
+      throw InternetConnectionException(errorMessage: "I/O Exception");
+    } on TimeoutException {
+      // handle timeout exception
+      throw TimeOutOperationsException(errorMessage: "Timeout");
+    } catch (e) {
+      // handle unknown exceptions
+      throw UnknownException(errorMessage: e.toString());
+    }
+  }
 }

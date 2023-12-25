@@ -14,5 +14,7 @@ abstract class UserRepository {
   Future<bool> checkIfUserExist({ required String uid});
   Future<User> signInWithGoogle();
   Future<MyUser> getUserDataByEmail({required String email});
+  Future<void> deleteAccount({required String uid});
+  Future<void> signOut();
 
 }

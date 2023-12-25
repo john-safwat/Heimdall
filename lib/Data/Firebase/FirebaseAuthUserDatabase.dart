@@ -71,6 +71,18 @@ class FirebaseAuthUserDatabase {
     return _firebase.currentUser!;
   }
 
+  // function to delete account
+  Future<void> deleteAccount()async{
+    await _firebase.currentUser!.delete();
+    SharedPreferences pref =await SharedPreferences.getInstance();
+    pref.setBool("loggedIn", false);
+  }
 
+  // function to signUserOut
+  Future<void> signOut()async{
+    await _firebase.signOut();
+    SharedPreferences pref =await SharedPreferences.getInstance();
+    pref.setBool("loggedIn", false);
+  }
 
 }

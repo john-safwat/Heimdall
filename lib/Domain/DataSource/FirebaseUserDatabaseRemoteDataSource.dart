@@ -7,5 +7,6 @@ abstract class FirebaseUserDatabaseRemoteDataSource {
   Future<void> updateUserProfile({required UserDTO user });
   Future<bool> checkIfUserExist({required String uid});
   Future<MyUser> getUserDataByEmail({required String email});
+  Future<void> deleteAccount({required String uid});
 
 }

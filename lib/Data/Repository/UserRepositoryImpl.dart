@@ -90,4 +90,15 @@ class UserRepositoryImpl implements UserRepository {
     return response;
   }
 
+  @override
+  Future<void> deleteAccount({required String uid}) async{
+    await authRemoteDataSource.deleteAccount();
+    await userDatabaseRemoteDataSource.deleteAccount(uid: uid);
+  }
+
+  @override
+  Future<void> signOut() async{
+    await authRemoteDataSource.signOut();
+  }
+
 }

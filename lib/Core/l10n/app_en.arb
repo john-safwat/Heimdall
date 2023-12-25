@@ -125,5 +125,7 @@
   "mohammedMahmoud" : "Mohammed Mahmoud",
   "reportSent" : "Report Sent Successfully and Report Code : ",
   "reportCantBeEmpty" :"You Can't Send Empty Report",
-  "supervisedByDrGoudaIsmail" :"Supervised By :\nProf. Dr. Gouda Ismail"
+  "supervisedByDrGoudaIsmail" :"Supervised By :\nProf. Dr. Gouda Ismail",
+  "areYouSureToExit" : "Are You Sure You Want To Exit",
+  "areYouSureToDeleteAccount" : "Are You Sure You Want To Delete Account Be Careful"
 }
