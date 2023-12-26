@@ -8,4 +8,6 @@ abstract class FirebaseContactsRemoteDataSource {
   Future<Contact> createNewContact({required ContactDTO contact});
   Future<List<ContactDTO>>  getFirstUserContact({required String uid});
   Future<List<ContactDTO>> getSecondUserContact({required String uid});
+  Future<void> deleteUserContacts({required String uid});
+
 }

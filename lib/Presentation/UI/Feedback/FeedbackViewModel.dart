@@ -29,6 +29,7 @@ class FeedbackViewModel extends BaseViewModel<FeedbackNavigator>{
       try{
         await useCase.invoke(
             feedback: Feedback(
+                id : "",
                 uid: appConfigProvider!.getUser()!.uid,
                 message: controller.text,
                 rating: rating,

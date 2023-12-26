@@ -7,5 +7,6 @@ abstract class ContactsRepository {
   Future<Contact> createNewContact({required Contact contact});
   Future<List<Contact>>  getFirstUserContact({required String uid});
   Future<List<Contact>>  getSecondUserContact({required String uid});
+  Future<void> deleteUserContacts({required String uid});
 
 }

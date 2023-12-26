@@ -18,4 +18,9 @@ class FeedbackRepositoryImpl implements FeedbackRepository {
     return response;
   }
 
+  @override
+  Future<void> deleteUserFeedbacks({required String uid}) async {
+    remoteDataSource.deleteUserFeedbacks(uid: uid);
+  }
+
 }
