@@ -1,5 +1,6 @@
 class FeedbackDTO {
 
+  String id;
   String uid;
   String message;
   double rating;
@@ -8,6 +9,7 @@ class FeedbackDTO {
   String image;
 
   FeedbackDTO({
+    required this.id,
     required this.uid,
     required this.message,
     required this.rating,
@@ -18,6 +20,7 @@ class FeedbackDTO {
 
 
   FeedbackDTO.fromFireStore(Map<String , dynamic> json):this(
+    id : json["id"],
     uid : json["uid"],
     message : json["message"],
     rating : json["rating"],
@@ -28,6 +31,7 @@ class FeedbackDTO {
 
   Map<String , dynamic> toFireStore(){
     return {
+      "id" : id,
       "uid" : uid,
       "message" : message,
       "rating" : rating,

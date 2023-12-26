@@ -64,4 +64,18 @@ class FirebaseContactsDatabase {
     return response.docs.map((e) => e.data()).toList();
   }
 
+  // function to delete user account contact
+  Future<void> deleteUserContact({required String uid})async{
+    var data = await getCollectionReference().where("firstUserUID" ,isEqualTo: uid).get();
+    var list = data.docs.map((e) => e.data()).toList();
+    for(int i = 0 ; i<list.length ; i++){
+      await getCollectionReference().doc(list[i].contactId).delete();
+    }
+    data = await getCollectionReference().where("secondUserUID" ,isEqualTo: uid).get();
+    list = data.docs.map((e) => e.data()).toList();
+    for(int i = 0 ; i<list.length ; i++){
+      await getCollectionReference().doc(list[i].contactId).delete();
+    }
+  }
+
 }

@@ -18,7 +18,7 @@ class FirebaseFeedbackDatabase {
 
   // get collection Feedback collection references
   CollectionReference<FeedbackDTO> getCollectionReference(){
-    return FirebaseFirestore.instance.collection("Feedback").withConverter(
+    return FirebaseFirestore.instance.collection("Feedbacks").withConverter(
       fromFirestore: (snapshot, options) => FeedbackDTO.fromFireStore(snapshot.data()!),
       toFirestore: (value, options) => value.toFireStore(),
     );
@@ -26,8 +26,19 @@ class FirebaseFeedbackDatabase {
 
   // function to send feedback to database
   Future<String> addFeedback({required FeedbackDTO feedback})async{
-    await getCollectionReference().doc().set(feedback);
+    var ref = getCollectionReference().doc();
+    feedback.id = ref.id;
+    await ref.set(feedback);
     return "Feedback Sent";
+  }
+
+  // function to delete user account feedback
+  Future<void> deleteUserFeedbacks({required String uid})async{
+    var data = await getCollectionReference().where("uid" ,isEqualTo: uid).get();
+    var list = data.docs.map((e) => e.data()).toList();
+    for(int i = 0 ; i<list.length ; i++){
+      await getCollectionReference().doc(list[i].id).delete();
+    }
   }
 
 }

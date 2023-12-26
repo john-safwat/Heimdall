@@ -38,5 +38,10 @@ class ContactsRepositoryImpl implements ContactsRepository {
     return response.map((e) => e.toDomain()).toList();
   }
 
+  @override
+  Future<void> deleteUserContacts({required String uid}) async{
+    await contactsRemoteDataSource.deleteUserContacts(uid: uid);
+  }
+
 
 }

@@ -1,6 +1,7 @@
 import 'package:heimdall/Data/Models/Feedback/FeedbackDTO.dart';
 
 class Feedback {
+  String id;
   String uid;
   String message;
   double rating;
@@ -9,6 +10,7 @@ class Feedback {
   String image;
 
   Feedback({
+    required this.id,
     required this.uid,
     required this.message,
     required this.rating,
@@ -19,6 +21,7 @@ class Feedback {
 
   FeedbackDTO toDataSource() {
     return FeedbackDTO(
+        id: id,
         uid: uid,
         message: message,
         rating: rating,
