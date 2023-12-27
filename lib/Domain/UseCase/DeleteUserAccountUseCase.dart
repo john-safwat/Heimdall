@@ -29,7 +29,7 @@ class DeleteUserAccountUseCase {
   Future<void> invoke({required String uid})async{
     await userRepository.deleteAccount(uid: uid);
     await contactsRepository.deleteUserContacts(uid: uid);
-    await contactsRepository.deleteUserContacts(uid: uid);
+    await feedbackRepository.deleteUserFeedbacks(uid: uid);
   }
 
 }
