@@ -7,7 +7,6 @@ import 'package:heimdall/Core/Providers/ThemeProvider.dart';
 import 'package:heimdall/Core/Theme/MyTheme.dart';
 import 'package:heimdall/Presentation/UI/AboutUs/AboutUsView.dart';
 import 'package:heimdall/Presentation/UI/ContactChat/ContactChatView.dart';
-import 'package:heimdall/Presentation/UI/ExtraInfo/ExtraInfoView.dart';
 import 'package:heimdall/Presentation/UI/Feedback/FeedbackVeiw.dart';
 import 'package:heimdall/Presentation/UI/ForgetPassword/ForgetPasswordView.dart';
 import 'package:heimdall/Presentation/UI/Home/HomeView.dart';
@@ -96,7 +95,7 @@ class MyApp extends StatelessWidget {
         RegistrationView.routeName : (context) => const RegistrationView(),
         ForgetPasswordView.routeName : (context) => const ForgetPasswordView(),
         HomeView.routeName : (context) => const HomeView(),
-        ContactChatView.routeName : (context) =>const ContactChatView(),
+        ContactChatView.routeName : (context) =>ContactChatView(),
         SettingView.routeName : (context) => const SettingView(),
         FeedbackView.routeName : (context) => const FeedbackView(),
         ReportIssueView.routeName : (context) => const ReportIssueView(),

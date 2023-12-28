@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:heimdall/Core/Base/BaseState.dart';
+import 'package:heimdall/Domain/Models/Contact/Contact.dart';
 import 'package:heimdall/Domain/UseCase/AddContactUseCase.dart';
 import 'package:heimdall/Domain/UseCase/GetContactsUseCase.dart';
 import 'package:heimdall/Presentation/UI/ContactChat/ContactChatView.dart';
@@ -58,11 +59,13 @@ class _ChatViewState extends BaseState<ChatView, ChatViewModel>
                       height: 10,
                     ),
                     TextFormField(
-                      controller: viewModel!.searchController,
                       style: Theme.of(context).textTheme.bodyLarge,
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       cursorColor: Theme.of(context).primaryColor,
                       cursorHeight: 20,
+                      onChanged: (value) {
+                        viewModel!.search(value);
+                      },
                       decoration: InputDecoration(
                         prefixIcon: const Icon(
                           EvaIcons.search,
@@ -137,8 +140,8 @@ class _ChatViewState extends BaseState<ChatView, ChatViewModel>
   }
 
   @override
-  goToContactChatScreen() {
-    Navigator.pushNamed(context, ContactChatView.routeName);
+  goToContactChatScreen(Contact contact) {
+    Navigator.push(context, MaterialPageRoute(builder: (context) => ContactChatView(contact: contact)));
   }
 
   @override
