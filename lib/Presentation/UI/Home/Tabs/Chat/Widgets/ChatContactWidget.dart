@@ -18,7 +18,7 @@ class ChatContactWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     AppLocalizations local = AppLocalizations.of(context)!;
     return InkWell(
-      onTap: () => navigationFunction(),
+      onTap: () => navigationFunction(contact),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
         child: Row(

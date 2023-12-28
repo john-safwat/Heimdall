@@ -1,8 +1,10 @@
 import 'package:heimdall/Core/Base/BaseViewModel.dart';
+import 'package:heimdall/Domain/Models/Contact/Contact.dart';
 import 'package:heimdall/Presentation/UI/ContactChat/ContactChatNavigator.dart';
 
 class ContactChatViewModel extends BaseViewModel<ContactChatNavigator> {
 
+  late Contact contact;
 
   // function to block contact
   blockContact(){
