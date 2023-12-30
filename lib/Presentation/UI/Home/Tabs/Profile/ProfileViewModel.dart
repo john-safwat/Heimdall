@@ -67,17 +67,21 @@ class ProfileViewModel extends BaseViewModel<ProfileNavigator> {
   }
 
   // Function to sign out user
-  onSignOutPress(){
-    navigator!.showQuestionMessage(message: local!.areYouSureToExit , negativeActionTitle: local!.cancel , posActionTitle:local!.ok , posAction: signOut);
+  onSignOutPress() {
+    navigator!.showQuestionMessage(
+        message: local!.areYouSureToExit,
+        negativeActionTitle: local!.cancel,
+        posActionTitle: local!.ok,
+        posAction: signOut);
   }
 
-  signOut()async{
+  signOut() async {
     navigator!.showLoading(message: local!.loading);
-    try{
+    try {
       await signOutUserUseCase.invoke();
       navigator!.goBack();
       navigator!.goToLoginScreen();
-    }catch(e) {
+    } catch (e) {
       navigator!.goBack();
       navigator!.showFailMessage(
         message: handleErrorMessage(e as Exception),
@@ -87,17 +91,21 @@ class ProfileViewModel extends BaseViewModel<ProfileNavigator> {
   }
 
   // Function to sign out user
-  onDeleteAccountPress(){
-    navigator!.showQuestionMessage(message: local!.areYouSureToDeleteAccount , negativeActionTitle: local!.cancel , posActionTitle:local!.ok , posAction: deleteAccount);
+  onDeleteAccountPress() {
+    navigator!.showQuestionMessage(
+        message: local!.areYouSureToDeleteAccount,
+        negativeActionTitle: local!.cancel,
+        posActionTitle: local!.ok,
+        posAction: deleteAccount);
   }
 
-  deleteAccount()async{
+  deleteAccount() async {
     navigator!.showLoading(message: local!.loading);
-    try{
+    try {
       await deleteUserAccountUseCase.invoke(uid: appConfigProvider!.user!.uid);
       navigator!.goBack();
       navigator!.goToLoginScreen();
-    }catch(e) {
+    } catch (e) {
       navigator!.goBack();
       navigator!.showFailMessage(
         message: handleErrorMessage(e as Exception),
@@ -121,7 +129,9 @@ class ProfileViewModel extends BaseViewModel<ProfileNavigator> {
 
   // navigation function
   // function to go to update profile screen
-  goToUpdateProfileScreen() {}
+  goToUpdateProfileScreen() {
+    navigator!.goToUpdateProfileScreen();
+  }
 
   // function to go to setting screen
   goToSettingScreen() {

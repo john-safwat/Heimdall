@@ -121,5 +121,24 @@ class FirebaseUserDatabaseRemoteDataSourceImpl  implements FirebaseUserDatabaseR
     }
   }
 
+  @override
+  Future<MyUser> getUserData({required String uid}) async{
+    try{
+      var response = await userDatabase.getUserData(uid: uid);
+      return response!.toDomain();
+    }on FirebaseException catch (e) {
+      // handle firebase exception in en of ar
+      throw FirebaseDatabaseException(errorMessage: e.code);
+    } on IOException {
+      throw InternetConnectionException(errorMessage: "I/O Exception");
+    } on TimeoutException {
+      // handle timeout exception
+      throw TimeOutOperationsException(errorMessage: "Timeout");
+    } catch (e) {
+      // handle unknown exceptions
+      throw UnknownException(errorMessage: e.toString());
+    }
+  }
+
 
 }

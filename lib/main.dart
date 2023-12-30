@@ -17,6 +17,7 @@ import 'package:heimdall/Presentation/UI/Registration/RegistrationView.dart';
 import 'package:heimdall/Presentation/UI/ReportIssue/ReportIssueView.dart';
 import 'package:heimdall/Presentation/UI/Setting/SettingView.dart';
 import 'package:heimdall/Presentation/UI/Splash/SplashScreen.dart';
+import 'package:heimdall/Presentation/UI/UpdateProfile/UpdateProfileView.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -100,7 +101,8 @@ class MyApp extends StatelessWidget {
         FeedbackView.routeName : (context) => const FeedbackView(),
         ReportIssueView.routeName : (context) => const ReportIssueView(),
         AboutUsView.routeName : (context) => const AboutUsView(),
-        LockManagementView.routeName : (context) => const LockManagementView()
+        LockManagementView.routeName : (context) => const LockManagementView(),
+        UpdateProfileView.routeName : (context) => const UpdateProfileView()
       },
       // the initial route to start the program from
       home: SplashScreen(firstTime:firstTime??true , loggedIn: loggedIn??false,user: user ),

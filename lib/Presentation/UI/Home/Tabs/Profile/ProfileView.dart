@@ -13,7 +13,7 @@ import 'package:heimdall/Presentation/UI/LockManagement/LockManagementView.dart'
 import 'package:heimdall/Presentation/UI/Login/LoginView.dart';
 import 'package:heimdall/Presentation/UI/ReportIssue/ReportIssueView.dart';
 import 'package:heimdall/Presentation/UI/Setting/SettingView.dart';
-import 'package:icons_plus/icons_plus.dart';
+import 'package:heimdall/Presentation/UI/UpdateProfile/UpdateProfileView.dart';
 import 'package:provider/provider.dart';
 
 class ProfileView extends StatefulWidget {
@@ -91,5 +91,10 @@ class _ProfileViewState extends BaseState<ProfileView, ProfileViewModel>
   @override
   goToLoginScreen() {
     Navigator.pushReplacementNamed(context, LoginView.routeName);
+  }
+
+  @override
+  goToUpdateProfileScreen() {
+    Navigator.pushNamed(context, UpdateProfileView.routeName);
   }
 }

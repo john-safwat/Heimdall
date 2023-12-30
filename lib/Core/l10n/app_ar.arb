@@ -127,6 +127,7 @@
   "reportCantBeEmpty" :"لا يمكن ارسال تقرير فارغ",
   "supervisedByDrGoudaIsmail" :"يشرف عليها :\nالاستاذ الدكتور جودة اسماعيل",
   "areYouSureToExit" : "هل أنت متأكد أنك تريد الخروج",
-  "areYouSureToDeleteAccount" : "هل أنت متأكد أنك تريد حذف الحساب كن حذرا"
+  "areYouSureToDeleteAccount" : "هل أنت متأكد أنك تريد حذف الحساب كن حذرا",
+  "updateProfile" : "تحديث الملف"
 
 }
