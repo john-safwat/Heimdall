@@ -16,5 +16,6 @@ abstract class UserRepository {
   Future<MyUser> getUserDataByEmail({required String email});
   Future<void> deleteAccount({required String uid});
   Future<void> signOut();
+  Future<MyUser> getUserData({required String uid});
 
 }

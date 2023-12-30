@@ -101,4 +101,10 @@ class UserRepositoryImpl implements UserRepository {
     await authRemoteDataSource.signOut();
   }
 
+  @override
+  Future<MyUser> getUserData({required String uid}) async{
+    var response = await userDatabaseRemoteDataSource.getUserData(uid: uid);
+    return response;
+  }
+
 }
