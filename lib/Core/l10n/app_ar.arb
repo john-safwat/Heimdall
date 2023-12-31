@@ -128,6 +128,7 @@
   "supervisedByDrGoudaIsmail" :"يشرف عليها :\nالاستاذ الدكتور جودة اسماعيل",
   "areYouSureToExit" : "هل أنت متأكد أنك تريد الخروج",
   "areYouSureToDeleteAccount" : "هل أنت متأكد أنك تريد حذف الحساب كن حذرا",
-  "updateProfile" : "تحديث الملف"
+  "updateProfile" : "تحديث الملف",
+  "tabToPickImage" : "انقر لتختار صورة جديدة"
 
 }
