@@ -7,6 +7,7 @@ import 'package:heimdall/Core/Base/BaseState.dart';
 import 'package:heimdall/Domain/UseCase/GetUserDataUseCase.dart';
 import 'package:heimdall/Presentation/UI/UpdateProfile/UpdateProfileNavigator.dart';
 import 'package:heimdall/Presentation/UI/UpdateProfile/UpdateProfileViewModel.dart';
+import 'package:icons_plus/icons_plus.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
@@ -111,16 +112,14 @@ class _UpdateProfileViewState
                                             end: Alignment.bottomCenter),
                                         borderRadius:
                                             BorderRadius.circular(20)),
-                                    child: Text(
-                                      value.local!.tabToPickImage,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleMedium!
-                                          .copyWith(
-                                              color: Theme.of(context)
-                                                  .scaffoldBackgroundColor),
-                                      textAlign: TextAlign.center,
-                                    ),
+                                    child: Text(value.local!.tabToPickImage,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleMedium!
+                                            .copyWith(
+                                                color: Theme.of(context)
+                                                    .scaffoldBackgroundColor),
+                                        textAlign: TextAlign.center),
                                   ))
                                 ],
                               ),
@@ -145,7 +144,8 @@ class _UpdateProfileViewState
                                         .copyWith(
                                             color: Theme.of(context)
                                                 .scaffoldBackgroundColor),
-                                  )
+                                  ),
+
                                 ],
                               ),
                             ),
@@ -156,6 +156,132 @@ class _UpdateProfileViewState
                               File(value.image!.path),
                               fit: BoxFit.cover,
                             )),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                Form(
+                  key: value.formKey,
+                  child: Column(
+                    children: [
+                      // the text from field for the name
+                      TextFormField(
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyLarge,
+                        controller: value.nameController,
+                        validator: (value) {
+                          return viewModel!
+                              .nameValidation(value ?? "");
+                        },
+                        autovalidateMode: AutovalidateMode
+                            .onUserInteraction,
+                        cursorColor:
+                        Theme.of(context).primaryColor,
+                        keyboardType: TextInputType.name,
+                        cursorHeight: 20,
+                        decoration: InputDecoration(
+                          prefixIcon: const Icon(
+                            EvaIcons.person,
+                            size: 30,
+                          ),
+                          hintText: value.local!.name,
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      TextFormField(
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyLarge,
+                        controller: value.phoneController,
+                        validator: (value) {
+                          return viewModel!
+                              .phoneValidation(value ?? "");
+                        },
+                        autovalidateMode: AutovalidateMode
+                            .onUserInteraction,
+                        cursorColor:
+                        Theme.of(context).primaryColor,
+                        keyboardType: TextInputType.phone,
+                        cursorHeight: 20,
+                        decoration: InputDecoration(
+                          prefixIcon: const Icon(
+                            EvaIcons.phone,
+                            size: 30,
+                          ),
+                          hintText: value.local!.phone,
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      // Date Picker
+                      InkWell(
+                        overlayColor: MaterialStateProperty.all(Colors.transparent),
+                        onTap: value.showDatePicker,
+                        child: Container(
+                          padding:const EdgeInsets.symmetric(horizontal: 5 , vertical: 12),
+                          decoration: BoxDecoration(
+                              border: Border.all(width: 2 , color: Theme.of(context).primaryColor),
+                              borderRadius: BorderRadius.circular(15)
+                          ),
+                          child: Row(
+                            children: [
+                              Icon(
+                                EvaIcons.calendar,
+                                size: 30,
+                                color: Theme.of(context).primaryColor,
+                              ),
+                              const SizedBox(width: 10,),
+                              Text(value.selectedDate , style: Theme.of(context).textTheme.bodyLarge,)
+                            ],
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      // drop down to select the gender
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 15 , vertical: 2),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            border: Border.all(width: 2 , color: Theme.of(context).primaryColor)
+                        ),
+                        child: DropdownButton(
+                          isExpanded: true,
+                          underline: const SizedBox(),
+                          // Initial Value
+                          value: value.selectedGender,
+                          style: Theme.of(context).textTheme.titleMedium,
+                          borderRadius: BorderRadius.circular(20),
+                          dropdownColor: Theme.of(context).scaffoldBackgroundColor,
+                          // Down Arrow Icon
+                          icon: Icon(EvaIcons.arrow_down , color: Theme.of(context).primaryColor,),
+                          // Array list of items
+                          items: value.genders.map((String items) {
+                            return DropdownMenuItem(
+                              value: items,
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 2),
+                                child: Text(items),
+                              ),
+                            );
+                          }).toList(),
+                          // After selecting the desired option,it will
+                          // change button value to selected value
+                          onChanged: (gender) => value.changeSelectedGender(gender??"none"),
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      ElevatedButton(
+                          onPressed: (){},
+                          child: Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(value.local!.updateProfile),
+                              ],
+                            ),
+                          )
+                      )
+                    ],
                   ),
                 ),
               ],
@@ -170,5 +296,16 @@ class _UpdateProfileViewState
   UpdateProfileViewModel? initViewModel() {
     return UpdateProfileViewModel(
         getUserDataUseCase: injectGetUserDataUseCase());
+  }
+
+  @override
+  showMyDatePicker() async {
+    viewModel!.changeDate(await showDatePicker(
+      context: context,
+      firstDate: DateTime(1800),
+      lastDate: DateTime.now(),
+      barrierDismissible: false,
+      currentDate: DateTime.now(),
+    ));
   }
 }
