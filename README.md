@@ -50,3 +50,6 @@ In addition to visual customization, the app supports two languages, enhancing a
 In conclusion, the **Smart Door Lock App** stands as a testament to the convergence of security, convenience, and connectivity in the realm of smart home technology. By providing users with the ability to remotely control their locks, view live streams, manage E-Keys, and communicate within the app, this application transforms the way individuals engage with their home security systems.
 
 With an intuitive interface featuring five tabs for easy navigation and customization options such as themes and language support, the **Smart Door Lock App** not only prioritizes functionality but also places a strong emphasis on user experience. As technology continues to redefine the boundaries of what is possible, the **Smart Door Lock App** remains at the forefront, empowering users to take command of their security with unprecedented ease and sophistication.
+
+Project documentation will be assosiated
+
