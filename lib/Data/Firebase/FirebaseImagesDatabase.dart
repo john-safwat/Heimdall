@@ -29,6 +29,16 @@ class FirebaseImagesDatabase {
     return downloadUrl;
   }
 
+
+  // upload image to firebase storage
+  Future<String> updateImage({required String url , required XFile file})async{
+    // upload image to firebase storage
+    var snapshot = await _firebaseStorage.refFromURL(url).putFile(File(file.path),  SettableMetadata(contentType: "image/jpeg"));
+    // get the image URL from firebase storage
+    var downloadUrl = await snapshot.ref.getDownloadURL();
+    return downloadUrl;
+  }
+
   // generate random string for image name
   String generateName(){
     return RandomString().getRandomString(

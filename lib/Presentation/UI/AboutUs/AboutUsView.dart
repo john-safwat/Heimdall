@@ -42,16 +42,12 @@ class _AboutUsViewState extends BaseState<AboutUsView, AboutUsViewModel>
                     color: Theme.of(context).scaffoldBackgroundColor),
               ),
             ),
-            const SizedBox(
-              height: 20,
-            ),
-            Text(
-              viewModel!.local!.aboutUs1,
-              style: Theme.of(context)
-                  .textTheme
-                  .titleLarge!
-                  .copyWith(fontWeight: FontWeight.bold),
-            ),
+            const SizedBox(height: 20),
+            Text(viewModel!.local!.aboutUs1,
+                style: Theme.of(context)
+                    .textTheme
+                    .titleLarge!
+                    .copyWith(fontWeight: FontWeight.bold)),
             const SizedBox(height: 20),
             Text(viewModel!.local!.aboutUs2,
                 style: Theme.of(context).textTheme.bodyLarge),
@@ -82,7 +78,8 @@ class _AboutUsViewState extends BaseState<AboutUsView, AboutUsViewModel>
             const SizedBox(height: 20),
             TextCard(content: viewModel!.local!.aboutUs8),
             const SizedBox(height: 20),
-            Text(viewModel!.local!.aboutUs9, style: Theme.of(context).textTheme.bodyLarge),
+            Text(viewModel!.local!.aboutUs9,
+                style: Theme.of(context).textTheme.bodyLarge),
             const SizedBox(height: 30),
             TextCard(content: viewModel!.local!.developmentTeam),
             const SizedBox(height: 10),
@@ -92,26 +89,20 @@ class _AboutUsViewState extends BaseState<AboutUsView, AboutUsViewModel>
             ),
             const SizedBox(height: 20),
             TextCard(content: viewModel!.local!.supervisedByDrGoudaIsmail),
-            const SizedBox(height: 10),
-            GridView(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                childAspectRatio: 2,
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10
-              ),
-              children: [
-                TextCard(content: viewModel!.local!.johnSafwat),
-                TextCard(content: viewModel!.local!.abdelrahmanMosaad),
-                TextCard(content: viewModel!.local!.dawoudElsabah),
-                TextCard(content: viewModel!.local!.sherifSayed),
-                TextCard(content: viewModel!.local!.ahmedYassen),
-                TextCard(content: viewModel!.local!.mohamedMaher),
-                TextCard(content: viewModel!.local!.mohammedMahmoud),
-              ],
-            ),
+            const SizedBox(height: 8),
+            TextCard(content: viewModel!.local!.johnSafwat),
+            const SizedBox(height: 8),
+            TextCard(content: viewModel!.local!.abdelrahmanMosaad),
+            const SizedBox(height: 8),
+            TextCard(content: viewModel!.local!.dawoudElsabah),
+            const SizedBox(height: 8),
+            TextCard(content: viewModel!.local!.sherifSayed),
+            const SizedBox(height: 8),
+            TextCard(content: viewModel!.local!.ahmedYassen),
+            const SizedBox(height: 8),
+            TextCard(content: viewModel!.local!.mohamedMaher),
+            const SizedBox(height: 8),
+            TextCard(content: viewModel!.local!.mohammedMahmoud),
           ],
         ),
       ),
