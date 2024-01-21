@@ -40,4 +40,20 @@ class FirebaseImagesRemoteDatasourceImpl
     }
   }
 
+  @override
+  Future<String> updateImage({required XFile file,required String url}) async{
+    try {
+      var response = await database.updateImage(file: file, url: url).timeout(const Duration(seconds: 60));
+      return response;
+    } on FirebaseException catch (e) {
+      throw FirebaseImagesException(errorMessage: e.code);
+    } on IOException {
+      throw InternetConnectionException(errorMessage: "I/O Exception");
+    }on TimeoutException catch (e) {
+      throw TimeOutOperationsException(errorMessage: "Uploading Image Timed Out Try Again");
+    } catch (e) {
+      throw UnknownException(errorMessage: "UnKnown Error");
+    }
+  }
+
 }

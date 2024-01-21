@@ -186,4 +186,30 @@ class FirebaseAuthRemoteDataSourceImpl implements FirebaseAuthRemoteDataSource {
       throw UnknownException(errorMessage: e.toString());
     }
   }
+  //update user display name
+  @override
+  Future<User> updateUserDisplayName ({required String name}) async{
+    try {
+      // send user data to database
+      var response = await authDatabase
+          .updateUserDisplayName(name)
+          .timeout(const Duration(seconds: 60));
+      // return the response of the user
+      return response;
+    } on FirebaseAuthException catch (e) {
+      // handle firebase auth exception in en of ar
+      throw FirebaseUserAuthException(errorMessage:e.code);
+    } on FirebaseException catch (e) {
+      // handle firebase exception in en of ar
+      throw FirebaseDatabaseException(errorMessage: e.code);
+    } on IOException {
+      throw InternetConnectionException(errorMessage: "I/O Exception");
+    } on TimeoutException {
+      // handle timeout exception
+      throw TimeOutOperationsException(errorMessage: "Timeout");
+    } catch (e) {
+      // handle unknown exceptions
+      throw UnknownException(errorMessage: e.toString());
+    }
+  }
 }

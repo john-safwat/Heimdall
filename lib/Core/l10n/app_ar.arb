@@ -129,6 +129,8 @@
   "areYouSureToExit" : "هل أنت متأكد أنك تريد الخروج",
   "areYouSureToDeleteAccount" : "هل أنت متأكد أنك تريد حذف الحساب كن حذرا",
   "updateProfile" : "تحديث الملف",
-  "tabToPickImage" : "انقر لتختار صورة جديدة"
+  "tabToPickImage" : "انقر لتختار صورة جديدة",
+  "accountUpdated" : "تم تحديث الحساب",
+  "enterYourPhoneNumber" : "أدخل رقم هاتفك"
 
 }
