@@ -1,10 +1,10 @@
 import 'dart:io';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:heimdall/Core/Base/BaseState.dart';
 import 'package:heimdall/Domain/UseCase/GetUserDataUseCase.dart';
+import 'package:heimdall/Domain/UseCase/UpdateUserDataUseCase.dart';
 import 'package:heimdall/Presentation/UI/UpdateProfile/UpdateProfileNavigator.dart';
 import 'package:heimdall/Presentation/UI/UpdateProfile/UpdateProfileViewModel.dart';
 import 'package:icons_plus/icons_plus.dart';
@@ -145,7 +145,6 @@ class _UpdateProfileViewState
                                             color: Theme.of(context)
                                                 .scaffoldBackgroundColor),
                                   ),
-
                                 ],
                               ),
                             ),
@@ -165,18 +164,13 @@ class _UpdateProfileViewState
                     children: [
                       // the text from field for the name
                       TextFormField(
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyLarge,
+                        style: Theme.of(context).textTheme.bodyLarge,
                         controller: value.nameController,
                         validator: (value) {
-                          return viewModel!
-                              .nameValidation(value ?? "");
+                          return viewModel!.nameValidation(value ?? "");
                         },
-                        autovalidateMode: AutovalidateMode
-                            .onUserInteraction,
-                        cursorColor:
-                        Theme.of(context).primaryColor,
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        cursorColor: Theme.of(context).primaryColor,
                         keyboardType: TextInputType.name,
                         cursorHeight: 20,
                         decoration: InputDecoration(
@@ -189,18 +183,13 @@ class _UpdateProfileViewState
                       ),
                       const SizedBox(height: 20),
                       TextFormField(
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyLarge,
+                        style: Theme.of(context).textTheme.bodyLarge,
                         controller: value.phoneController,
                         validator: (value) {
-                          return viewModel!
-                              .phoneValidation(value ?? "");
+                          return viewModel!.phoneValidation(value ?? "");
                         },
-                        autovalidateMode: AutovalidateMode
-                            .onUserInteraction,
-                        cursorColor:
-                        Theme.of(context).primaryColor,
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        cursorColor: Theme.of(context).primaryColor,
                         keyboardType: TextInputType.phone,
                         cursorHeight: 20,
                         decoration: InputDecoration(
@@ -214,14 +203,17 @@ class _UpdateProfileViewState
                       const SizedBox(height: 20),
                       // Date Picker
                       InkWell(
-                        overlayColor: MaterialStateProperty.all(Colors.transparent),
+                        overlayColor:
+                            MaterialStateProperty.all(Colors.transparent),
                         onTap: value.showDatePicker,
                         child: Container(
-                          padding:const EdgeInsets.symmetric(horizontal: 5 , vertical: 12),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 5, vertical: 12),
                           decoration: BoxDecoration(
-                              border: Border.all(width: 2 , color: Theme.of(context).primaryColor),
-                              borderRadius: BorderRadius.circular(15)
-                          ),
+                              border: Border.all(
+                                  width: 2,
+                                  color: Theme.of(context).primaryColor),
+                              borderRadius: BorderRadius.circular(15)),
                           child: Row(
                             children: [
                               Icon(
@@ -229,8 +221,13 @@ class _UpdateProfileViewState
                                 size: 30,
                                 color: Theme.of(context).primaryColor,
                               ),
-                              const SizedBox(width: 10,),
-                              Text(value.selectedDate , style: Theme.of(context).textTheme.bodyLarge,)
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              Text(
+                                value.selectedDate,
+                                style: Theme.of(context).textTheme.bodyLarge,
+                              )
                             ],
                           ),
                         ),
@@ -238,11 +235,13 @@ class _UpdateProfileViewState
                       const SizedBox(height: 20),
                       // drop down to select the gender
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 15 , vertical: 2),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 15, vertical: 2),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15),
-                            border: Border.all(width: 2 , color: Theme.of(context).primaryColor)
-                        ),
+                            border: Border.all(
+                                width: 2,
+                                color: Theme.of(context).primaryColor)),
                         child: DropdownButton(
                           isExpanded: true,
                           underline: const SizedBox(),
@@ -250,27 +249,33 @@ class _UpdateProfileViewState
                           value: value.selectedGender,
                           style: Theme.of(context).textTheme.titleMedium,
                           borderRadius: BorderRadius.circular(20),
-                          dropdownColor: Theme.of(context).scaffoldBackgroundColor,
+                          dropdownColor:
+                              Theme.of(context).scaffoldBackgroundColor,
                           // Down Arrow Icon
-                          icon: Icon(EvaIcons.arrow_down , color: Theme.of(context).primaryColor,),
+                          icon: Icon(
+                            EvaIcons.arrow_down,
+                            color: Theme.of(context).primaryColor,
+                          ),
                           // Array list of items
                           items: value.genders.map((String items) {
                             return DropdownMenuItem(
                               value: items,
                               child: Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 2),
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 2),
                                 child: Text(items),
                               ),
                             );
                           }).toList(),
                           // After selecting the desired option,it will
                           // change button value to selected value
-                          onChanged: (gender) => value.changeSelectedGender(gender??"none"),
+                          onChanged: (gender) =>
+                              value.changeSelectedGender(gender ?? "none"),
                         ),
                       ),
                       const SizedBox(height: 20),
                       ElevatedButton(
-                          onPressed: (){},
+                          onPressed: viewModel!.updateUserData,
                           child: Padding(
                             padding: const EdgeInsets.all(15.0),
                             child: Row(
@@ -279,8 +284,7 @@ class _UpdateProfileViewState
                                 Text(value.local!.updateProfile),
                               ],
                             ),
-                          )
-                      )
+                          ))
                     ],
                   ),
                 ),
@@ -295,9 +299,9 @@ class _UpdateProfileViewState
   @override
   UpdateProfileViewModel? initViewModel() {
     return UpdateProfileViewModel(
-        getUserDataUseCase: injectGetUserDataUseCase());
+        getUserDataUseCase: injectGetUserDataUseCase(),
+        updateUserDataUseCase: injectUpdateUserDataUseCase());
   }
-
   @override
   showMyDatePicker() async {
     viewModel!.changeDate(await showDatePicker(

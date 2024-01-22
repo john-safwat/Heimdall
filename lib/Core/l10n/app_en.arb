@@ -129,5 +129,7 @@
   "areYouSureToExit" : "Are You Sure You Want To Exit",
   "areYouSureToDeleteAccount" : "Are You Sure You Want To Delete Account Be Careful",
   "updateProfile" : "Update Profile",
-  "tabToPickImage" : "Tab To Pick New Image"
+  "tabToPickImage" : "Tab To Pick New Image",
+  "accountUpdated" : "Account Updated Successfully",
+  "enterYourPhoneNumber" : "Enter Your Phone Number"
 }
