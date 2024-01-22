@@ -124,17 +124,16 @@ class UpdateProfileViewModel extends BaseViewModel<UpdateProfileNavigator> {
       return;
     }
     if (formKey.currentState!.validate()) {
-      navigator!.showLoading(message: local!.loading);
-      user!.name = nameController.text;
-      user!.birthDate = birthDate.toString();
-      user!.phoneNumber = phoneController.text;
-      user!.gender = selectedGender;
       try {
+        navigator!.showLoading(message: local!.loading);
+        user!.name = nameController.text;
+        user!.birthDate = birthDate.toString();
+        user!.phoneNumber = phoneController.text;
+        user!.gender = selectedGender;
         var response = await updateUserDataUseCase.invoke(
             user: user!,
             currentUser: appConfigProvider!.getUser()!,
             file: image);
-        print(response.displayName);
         appConfigProvider!.updateUser(user: response);
         navigator!.goBack();
         navigator!.showSuccessMessage(
