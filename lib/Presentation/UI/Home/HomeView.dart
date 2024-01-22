@@ -14,7 +14,7 @@ class HomeView extends StatefulWidget {
   State<HomeView> createState() => _HomeViewState();
 }
 
-class _HomeViewState extends BaseState<HomeView, HomeViewModel> with TickerProviderStateMixin
+class _HomeViewState extends BaseState<HomeView, HomeViewModel>
     implements HomeNavigator {
 
   @override
