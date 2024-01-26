@@ -22,10 +22,10 @@ class _FeedbackViewState extends BaseState<FeedbackView, FeedbackViewModel>
   Widget build(BuildContext context) {
     super.build(context);
     return ChangeNotifierProvider(
-      create: (context) => viewModel!,
+      create: (context) => viewModel,
       child: Scaffold(
         appBar: AppBar(
-          title: Text(viewModel!.local!.feedback),
+          title: Text(viewModel.local!.feedback),
         ),
         body: Consumer<FeedbackViewModel>(
           builder:(context, value, child) => Column(
@@ -38,7 +38,7 @@ class _FeedbackViewState extends BaseState<FeedbackView, FeedbackViewModel>
                   children: [
                     const SizedBox(height: 20,),
                     Text(
-                      viewModel!.local!.feedbackBodyText,
+                      viewModel.local!.feedbackBodyText,
                       textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                         fontWeight: FontWeight.w500,
@@ -46,7 +46,7 @@ class _FeedbackViewState extends BaseState<FeedbackView, FeedbackViewModel>
                     ),
                     const SizedBox(height: 20,),
                     RatingBar.builder(
-                      initialRating: viewModel!.rating,
+                      initialRating: viewModel.rating,
                       minRating: 0,
                       direction: Axis.horizontal,
                       allowHalfRating: true,
@@ -60,26 +60,26 @@ class _FeedbackViewState extends BaseState<FeedbackView, FeedbackViewModel>
                         color: Colors.amber,
                       ),
                       onRatingUpdate: (rating) {
-                        viewModel!.changeRating(rating);
+                        viewModel.changeRating(rating);
                       },
                     ),
                     const SizedBox(height: 20,),
                     TextFormField(
                       maxLines: 5,
-                      controller: viewModel!.controller,
+                      controller: viewModel.controller,
                       decoration: InputDecoration(
-                        hintText: viewModel!.local!.yourFeedBack,
+                        hintText: viewModel.local!.yourFeedBack,
                       ),
                     ),
                     const SizedBox(height: 20,),
                     ElevatedButton(
-                        onPressed: () => viewModel!.sendFeedback(),
+                        onPressed: () => viewModel.sendFeedback(),
                         child: Padding(
                           padding: const EdgeInsets.all(16.0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text(viewModel!.local!.sendYourFeedback),
+                              Text(viewModel.local!.sendYourFeedback),
                             ],
                           ),
                         ))
@@ -94,7 +94,7 @@ class _FeedbackViewState extends BaseState<FeedbackView, FeedbackViewModel>
   }
 
   @override
-  FeedbackViewModel? initViewModel() {
+  FeedbackViewModel initViewModel() {
     return FeedbackViewModel(
       useCase: injectSendFeedBackUseCase()
     );

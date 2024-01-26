@@ -21,7 +21,7 @@ class _HomeViewState extends BaseState<HomeView, HomeViewModel>
   Widget build(BuildContext context) {
     super.build(context);
     return ChangeNotifierProvider(
-      create: (context) => viewModel!,
+      create: (context) => viewModel,
       child: Consumer<HomeViewModel>(
         builder: (context, value, child) => Scaffold(
 
@@ -69,7 +69,7 @@ class _HomeViewState extends BaseState<HomeView, HomeViewModel>
   }
 
   @override
-  HomeViewModel? initViewModel() {
+  HomeViewModel initViewModel() {
     return HomeViewModel();
   }
 

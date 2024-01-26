@@ -17,7 +17,7 @@ class _LockManagementViewState extends BaseState<LockManagementView , LockManage
   Widget build(BuildContext context) {
     super.build(context);
     return ChangeNotifierProvider(
-      create: (context) => viewModel!,
+      create: (context) => viewModel,
       child: Scaffold(
         appBar: AppBar(title: Text("LockManagement"),),
       ),
@@ -25,7 +25,7 @@ class _LockManagementViewState extends BaseState<LockManagementView , LockManage
   }
 
   @override
-  LockManagementViewModel? initViewModel() {
+  LockManagementViewModel initViewModel() {
     return LockManagementViewModel();
   }
 }

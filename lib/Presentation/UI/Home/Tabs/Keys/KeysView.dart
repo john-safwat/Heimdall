@@ -23,7 +23,7 @@ class _KeysViewState extends BaseState<KeysView , KeysViewModel> implements Keys
   }
 
   @override
-  KeysViewModel? initViewModel() {
+  KeysViewModel initViewModel() {
     return KeysViewModel();
   }
 }

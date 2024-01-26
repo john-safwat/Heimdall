@@ -36,7 +36,7 @@ class _IntroViewState extends BaseState<IntroView , IntroViewModel> implements I
     );
 
     return ChangeNotifierProvider(
-      create: (context) => viewModel!,
+      create: (context) => viewModel,
       child: Scaffold(
         body: IntroductionScreen(
           pages: [
@@ -44,55 +44,55 @@ class _IntroViewState extends BaseState<IntroView , IntroViewModel> implements I
             PageViewModel(
               decoration: pageDecoration,
               image: Lottie.asset("assets/animations/language.json"),
-              title: viewModel!.local!.yourLanguage,
+              title: viewModel.local!.yourLanguage,
               bodyWidget: const LanguageSwitch()
             ),
             // set theme page
             PageViewModel(
                 decoration: pageDecoration,
                 image: Lottie.asset("assets/animations/theme.json"),
-                title: viewModel!.local!.makeItYourOwn,
+                title: viewModel.local!.makeItYourOwn,
                 bodyWidget: ThemeSwitch()
             ),
             // Welcome Message
             PageViewModel(
                 decoration: pageDecoration,
                 image: Lottie.asset("assets/animations/hello.json"),
-                title: viewModel!.local!.welcome,
-                body: viewModel!.local!.welcomeMessage
+                title: viewModel.local!.welcome,
+                body: viewModel.local!.welcomeMessage
             ),
             // security Message
             PageViewModel(
                 decoration: pageDecoration,
-                image: Lottie.asset(viewModel!.getSecurityAnimation()),
-                title: viewModel!.local!.yourSecurity,
-                body: viewModel!.local!.yourSecurityMessage
+                image: Lottie.asset(viewModel.getSecurityAnimation()),
+                title: viewModel.local!.yourSecurity,
+                body: viewModel.local!.yourSecurityMessage
             ),
             // security Message
             PageViewModel(
                 decoration: pageDecoration,
-                image: Lottie.asset(viewModel!.getQRAnimation()),
-                title: viewModel!.local!.qrCode,
-                body: viewModel!.local!.qrCodeMessage
+                image: Lottie.asset(viewModel.getQRAnimation()),
+                title: viewModel.local!.qrCode,
+                body: viewModel.local!.qrCodeMessage
             ),
             // security Message
             PageViewModel(
                 decoration: pageDecoration,
-                image: Lottie.asset(viewModel!.getChatAnimation()),
-                title: viewModel!.local!.chatTitle,
-                body: viewModel!.local!.chatMessage
+                image: Lottie.asset(viewModel.getChatAnimation()),
+                title: viewModel.local!.chatTitle,
+                body: viewModel.local!.chatMessage
             ),
             // security Message
             PageViewModel(
                 decoration: pageDecoration,
-                image: Lottie.asset(viewModel!.getKeyAnimation()),
-                title: viewModel!.local!.loginTitle,
-                body: viewModel!.local!.loginMessage
+                image: Lottie.asset(viewModel.getKeyAnimation()),
+                title: viewModel.local!.loginTitle,
+                body: viewModel.local!.loginMessage
             )
           ],
-          done: Text(viewModel!.local!.finish),
-          next: Text(viewModel!.local!.next),
-          back: Text(viewModel!.local!.back),
+          done: Text(viewModel.local!.finish),
+          next: Text(viewModel.local!.next),
+          back: Text(viewModel.local!.back),
           backStyle: ButtonStyle(
               textStyle: MaterialStateProperty.all( Theme.of(context).textTheme.titleMedium),
               foregroundColor: MaterialStateProperty.all(Theme.of(context).primaryColor)
@@ -116,14 +116,14 @@ class _IntroViewState extends BaseState<IntroView , IntroViewModel> implements I
             ),
           ),
           showBackButton: true,
-          onDone: viewModel!.onDonePress,
+          onDone: viewModel.onDonePress,
         ),
       ),
     );
   }
 
   @override
-  IntroViewModel? initViewModel() {
+  IntroViewModel initViewModel() {
     return IntroViewModel();
   }
 
