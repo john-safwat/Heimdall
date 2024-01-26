@@ -20,7 +20,7 @@ class _LocksViewState extends BaseState<LocksView , LocksViewModel> implements L
   }
 
   @override
-  LocksViewModel? initViewModel() {
+  LocksViewModel initViewModel() {
     return LocksViewModel();
   }
 }

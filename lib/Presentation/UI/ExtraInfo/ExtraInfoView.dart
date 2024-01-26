@@ -9,8 +9,6 @@ import 'package:heimdall/Domain/UseCase/UploadUserImageUseCase.dart';
 import 'package:heimdall/Presentation/UI/ExtraInfo/ExtraInfoNavigator.dart';
 import 'package:heimdall/Presentation/UI/ExtraInfo/ExtraInfoViewModel.dart';
 import 'package:heimdall/Presentation/UI/Login/LoginView.dart';
-import 'package:heimdall/Presentation/UI/Widgets/LanguageSwitch.dart';
-import 'package:heimdall/Presentation/UI/Widgets/ThemeSlider.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:provider/provider.dart';
 
@@ -29,14 +27,14 @@ class _ExtraInfoViewState extends BaseState<ExtraInfoView, ExtraInfoViewModel>
   @override
   void initState() {
     super.initState();
-    viewModel!.user = widget.user;
+    viewModel.user = widget.user;
   }
 
   @override
   Widget build(BuildContext context) {
     super.build(context);
     return ChangeNotifierProvider(
-      create: (context) => viewModel!,
+      create: (context) => viewModel,
       child: Consumer<ExtraInfoViewModel>(
         builder: (context, value, child) => Scaffold(
             appBar: AppBar(
@@ -104,7 +102,7 @@ class _ExtraInfoViewState extends BaseState<ExtraInfoView, ExtraInfoViewModel>
                               style: Theme.of(context).textTheme.bodyLarge,
                               controller: value.phoneController,
                               validator: (value) {
-                                return viewModel!.phoneValidation(value ?? "");
+                                return viewModel.phoneValidation(value ?? "");
                               },
                               autovalidateMode: AutovalidateMode.onUserInteraction,
                               cursorColor: Theme.of(context).primaryColor,
@@ -201,7 +199,7 @@ class _ExtraInfoViewState extends BaseState<ExtraInfoView, ExtraInfoViewModel>
   }
 
   @override
-  ExtraInfoViewModel? initViewModel() {
+  ExtraInfoViewModel initViewModel() {
     return ExtraInfoViewModel(
       updateUserDataUseCase: injectUpdateUserDataUseCase(),
       uploadUserImageUseCase: injectUploadUserImageUseCase()
@@ -210,7 +208,7 @@ class _ExtraInfoViewState extends BaseState<ExtraInfoView, ExtraInfoViewModel>
 
   @override
   showMyDatePicker() async{
-    viewModel!.changeDate(await showDatePicker(
+    viewModel.changeDate(await showDatePicker(
       context: context,
       firstDate: DateTime(1800),
       lastDate: DateTime.now(),

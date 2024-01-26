@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:heimdall/Core/Base/BaseState.dart';
 import 'package:heimdall/Domain/UseCase/ResetPasswordUseCase.dart';
 import 'package:heimdall/Presentation/UI/ForgetPassword/ForgetPasswordNavigator.dart';
 import 'package:heimdall/Presentation/UI/ForgetPassword/ForgetPasswordViewModel.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:lottie/lottie.dart';
-import 'package:provider/provider.dart';
 
 class ForgetPasswordView extends StatefulWidget {
 
@@ -23,7 +21,7 @@ class _ForgetPasswordViewState extends BaseState<ForgetPasswordView , ForgetPass
     super.build(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text(viewModel!.local!.forgetPasswordTitle),
+        title: Text(viewModel.local!.forgetPasswordTitle),
       ),
       body: Column(
         children: [
@@ -35,16 +33,16 @@ class _ForgetPasswordViewState extends BaseState<ForgetPasswordView , ForgetPass
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   const SizedBox(height: 20,),
-                  Lottie.asset(viewModel!.getImage() , fit: BoxFit.cover,),
+                  Lottie.asset(viewModel.getImage() , fit: BoxFit.cover,),
                   const SizedBox(height: 20,),
                   // the text from field for the email
                   Form(
-                    key: viewModel!.formKey,
+                    key: viewModel.formKey,
                     child: TextFormField(
                       style: Theme.of(context).textTheme.bodyLarge,
-                      controller: viewModel!.emailController,
+                      controller: viewModel.emailController,
                       validator: (value) {
-                        return viewModel!.emailValidation(value ?? "");
+                        return viewModel.emailValidation(value ?? "");
                       },
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       cursorColor: Theme.of(context).primaryColor,
@@ -55,16 +53,16 @@ class _ForgetPasswordViewState extends BaseState<ForgetPasswordView , ForgetPass
                           EvaIcons.email,
                           size: 30,
                         ),
-                        hintText: viewModel!.local!.email,
+                        hintText: viewModel.local!.email,
                       ),
                     ),
                   ),
                   const SizedBox(height: 20,),
                   ElevatedButton(
-                    onPressed: viewModel!.resetPassword,
+                    onPressed: viewModel.resetPassword,
                     child: Padding(
                       padding: const EdgeInsets.all(15.0),
-                      child: Text(viewModel!.local!.sendEmail),
+                      child: Text(viewModel.local!.sendEmail),
                     )
                   )
                 ],
@@ -77,7 +75,7 @@ class _ForgetPasswordViewState extends BaseState<ForgetPasswordView , ForgetPass
   }
 
   @override
-  ForgetPasswordViewModel? initViewModel() {
+  ForgetPasswordViewModel initViewModel() {
     return ForgetPasswordViewModel(
       resetPasswordUseCase: injectResetPasswordUseCase()
     );

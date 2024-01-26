@@ -24,18 +24,18 @@ class _ChatViewState extends BaseState<ChatView, ChatViewModel>
   @override
   void initState() {
     super.initState();
-    viewModel!.loadContacts();
+    viewModel.loadContacts();
   }
 
   @override
   Widget build(BuildContext context) {
     super.build(context);
     return ChangeNotifierProvider(
-      create: (context) => viewModel!,
+      create: (context) => viewModel,
       child: SafeArea(
         child: Scaffold(
           floatingActionButton: FloatingActionButton(
-            onPressed: () => viewModel!.showAddContactBottomSheet(),
+            onPressed: () => viewModel.showAddContactBottomSheet(),
             child: const Icon(
               BoxIcons.bx_chat,
               size: 32,
@@ -49,7 +49,7 @@ class _ChatViewState extends BaseState<ChatView, ChatViewModel>
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(viewModel!.local!.messages,
+                    Text(viewModel.local!.messages,
                         style: TextStyle(
                           fontSize: 36,
                           fontWeight: FontWeight.w600,
@@ -64,14 +64,14 @@ class _ChatViewState extends BaseState<ChatView, ChatViewModel>
                       cursorColor: Theme.of(context).primaryColor,
                       cursorHeight: 20,
                       onChanged: (value) {
-                        viewModel!.search(value);
+                        viewModel.search(value);
                       },
                       decoration: InputDecoration(
                         prefixIcon: const Icon(
                           EvaIcons.search,
                           size: 30,
                         ),
-                        hintText: viewModel!.local!.findContact,
+                        hintText: viewModel.local!.findContact,
                       ),
                     ),
                   ],
@@ -90,7 +90,7 @@ class _ChatViewState extends BaseState<ChatView, ChatViewModel>
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               const Row(),
-                              Lottie.asset("assets/animations/error.json" , width: viewModel!.mediaQuery!.width *0.5),
+                              Lottie.asset("assets/animations/error.json" , width: viewModel.mediaQuery!.width *0.5),
                               const SizedBox(height: 40),
                               Text(value.errorMessage! , style: Theme.of(context).textTheme.titleMedium,textAlign: TextAlign.center,)
                             ],
@@ -106,7 +106,7 @@ class _ChatViewState extends BaseState<ChatView, ChatViewModel>
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Lottie.asset(viewModel!.getNoChatAnimation()),
+                            Lottie.asset(viewModel.getNoChatAnimation()),
                             const SizedBox(height: 20),
                             Text(value.local!.youHaveNoContactsToChatWith , style: Theme.of(context).textTheme.titleMedium,textAlign: TextAlign.center,)
                           ],
@@ -133,7 +133,7 @@ class _ChatViewState extends BaseState<ChatView, ChatViewModel>
   }
 
   @override
-  ChatViewModel? initViewModel() {
+  ChatViewModel initViewModel() {
     return ChatViewModel(
         addContactUseCase: injectAddContactUseCase(),
         getContactsUseCase: injectGetContactsUseCase());
@@ -149,10 +149,10 @@ class _ChatViewState extends BaseState<ChatView, ChatViewModel>
     showModalBottomSheet(
         context: context,
         builder: (context) => BottomSheetWidget(
-              controller: viewModel!.contactController,
-              hintTitle: viewModel!.local!.enterEmail,
-              buttonTitle: viewModel!.local!.addContact,
-              addContactFunction: viewModel!.addContact,
+              controller: viewModel.contactController,
+              hintTitle: viewModel.local!.enterEmail,
+              buttonTitle: viewModel.local!.addContact,
+              addContactFunction: viewModel.addContact,
             ));
   }
 }

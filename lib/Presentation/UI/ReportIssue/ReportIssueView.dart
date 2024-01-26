@@ -19,28 +19,28 @@ class _ReportIssueViewState extends BaseState<ReportIssueView , ReportIssueViewM
   Widget build(BuildContext context) {
     super.build(context);
     return ChangeNotifierProvider(
-      create: (context) => viewModel!,
+      create: (context) => viewModel,
       child: Scaffold(
-        appBar: AppBar(title: Text(viewModel!.local!.report,),),
+        appBar: AppBar(title: Text(viewModel.local!.report,),),
         body: ListView(
           padding: const EdgeInsets.symmetric(horizontal: 20,),
           children: [
             const SizedBox(
               height: 20,
             ),
-            Text(viewModel!.local!.weAreHereToHelp,style: Theme.of(context).textTheme.titleLarge ,textAlign: TextAlign.center,),
+            Text(viewModel.local!.weAreHereToHelp,style: Theme.of(context).textTheme.titleLarge ,textAlign: TextAlign.center,),
             const SizedBox(
               height: 20,
             ),
-            Text(viewModel!.local!.reportBodyText,style: Theme.of(context).textTheme.bodyLarge,textAlign: TextAlign.center,),
+            Text(viewModel.local!.reportBodyText,style: Theme.of(context).textTheme.bodyLarge,textAlign: TextAlign.center,),
             const SizedBox(
               height: 20,
             ),
             TextFormField(
               maxLines: 5,
-              controller: viewModel!.controller,
+              controller: viewModel.controller,
               decoration: InputDecoration(
-                hintText: viewModel!.local!.yourReport,
+                hintText: viewModel.local!.yourReport,
                 labelStyle: TextStyle(
                   color: Theme.of(context).primaryColor,
                 ),
@@ -50,13 +50,13 @@ class _ReportIssueViewState extends BaseState<ReportIssueView , ReportIssueViewM
               height: 20,
             ),
             ElevatedButton(
-                onPressed: () => viewModel!.sendReport(),
+                onPressed: () => viewModel.sendReport(),
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(viewModel!.local!.sendYourReport),
+                      Text(viewModel.local!.sendYourReport),
                     ],
                   ),
                 ))
@@ -67,7 +67,7 @@ class _ReportIssueViewState extends BaseState<ReportIssueView , ReportIssueViewM
   }
 
   @override
-  ReportIssueViewModel? initViewModel() {
+  ReportIssueViewModel initViewModel() {
     return ReportIssueViewModel(
       sendReportUseCase: injectSendReportUseCase()
     );

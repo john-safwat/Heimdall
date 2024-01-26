@@ -18,27 +18,27 @@ class _SettingViewState extends BaseState<SettingView , SettingViewModel> implem
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    viewModel!.changeSelectedIndex();
+    viewModel.changeSelectedIndex();
     return ChangeNotifierProvider(
-      create: (context) => viewModel!,
+      create: (context) => viewModel,
       child: Scaffold(
-        appBar: AppBar(title: Text(viewModel!.local!.setting),),
+        appBar: AppBar(title: Text(viewModel.local!.setting),),
         body: SingleChildScrollView(
           child: Column(
             children: [
               const SizedBox(height: 20,),
               CarouselSlider(
                 options: CarouselOptions(
-                  initialPage: viewModel!.selectedIndex,
+                  initialPage: viewModel.selectedIndex,
                   height: 450.0,
                   scrollPhysics:const PageScrollPhysics(),
                   enlargeCenterPage: true,
                   enlargeFactor: 0.3,
                   enableInfiniteScroll: true,
                   viewportFraction: 0.7,
-                  onPageChanged: (index, reason) => viewModel!.changeTheme(index),
+                  onPageChanged: (index, reason) => viewModel.changeTheme(index),
                 ),
-                items: viewModel!.images.map((i) {
+                items: viewModel.images.map((i) {
                   return Builder(
                     builder: (BuildContext context) {
                       return Container(
@@ -64,7 +64,7 @@ class _SettingViewState extends BaseState<SettingView , SettingViewModel> implem
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                  Text(viewModel!.local!.language , style: Theme.of(context).textTheme.titleLarge,),
+                  Text(viewModel.local!.language , style: Theme.of(context).textTheme.titleLarge,),
                   const LanguageSwitch(),
                 ],),
               )
@@ -76,7 +76,7 @@ class _SettingViewState extends BaseState<SettingView , SettingViewModel> implem
   }
 
   @override
-  SettingViewModel? initViewModel() {
+  SettingViewModel initViewModel() {
     return SettingViewModel();
   }
 }

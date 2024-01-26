@@ -21,10 +21,10 @@ class _AboutUsViewState extends BaseState<AboutUsView, AboutUsViewModel>
   Widget build(BuildContext context) {
     super.build(context);
     return ChangeNotifierProvider(
-      create: (context) => viewModel!,
+      create: (context) => viewModel,
       child: Scaffold(
         appBar: AppBar(
-          title: Text(viewModel!.local!.aboutUs),
+          title: Text(viewModel.local!.aboutUs),
         ),
         body: ListView(
           padding: const EdgeInsets.all(20),
@@ -35,7 +35,7 @@ class _AboutUsViewState extends BaseState<AboutUsView, AboutUsViewModel>
                   color: Theme.of(context).primaryColor,
                   borderRadius: BorderRadius.circular(15)),
               child: Text(
-                viewModel!.local!.applicationVersion,
+                viewModel.local!.applicationVersion,
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.titleLarge!.copyWith(
                     fontWeight: FontWeight.bold,
@@ -43,24 +43,24 @@ class _AboutUsViewState extends BaseState<AboutUsView, AboutUsViewModel>
               ),
             ),
             const SizedBox(height: 20),
-            Text(viewModel!.local!.aboutUs1,
+            Text(viewModel.local!.aboutUs1,
                 style: Theme.of(context)
                     .textTheme
                     .titleLarge!
                     .copyWith(fontWeight: FontWeight.bold)),
             const SizedBox(height: 20),
-            Text(viewModel!.local!.aboutUs2,
+            Text(viewModel.local!.aboutUs2,
                 style: Theme.of(context).textTheme.bodyLarge),
             const SizedBox(height: 20),
-            TextCard(content: viewModel!.local!.aboutUs3),
+            TextCard(content: viewModel.local!.aboutUs3),
             const SizedBox(height: 20),
-            Text(viewModel!.local!.aboutUs4,
+            Text(viewModel.local!.aboutUs4,
                 style: Theme.of(context).textTheme.bodyLarge),
             const SizedBox(height: 30),
-            TextCard(content: viewModel!.local!.aboutUs5),
+            TextCard(content: viewModel.local!.aboutUs5),
             const SizedBox(height: 20),
             Text(
-              viewModel!.local!.aboutUs6,
+              viewModel.local!.aboutUs6,
               style: Theme.of(context)
                   .textTheme
                   .bodyLarge!
@@ -71,38 +71,38 @@ class _AboutUsViewState extends BaseState<AboutUsView, AboutUsViewModel>
               children: [
                 const SizedBox(width: 20),
                 Expanded(
-                    child: Text(viewModel!.local!.aboutUs7,
+                    child: Text(viewModel.local!.aboutUs7,
                         style: Theme.of(context).textTheme.bodyLarge)),
               ],
             ),
             const SizedBox(height: 20),
-            TextCard(content: viewModel!.local!.aboutUs8),
+            TextCard(content: viewModel.local!.aboutUs8),
             const SizedBox(height: 20),
-            Text(viewModel!.local!.aboutUs9,
+            Text(viewModel.local!.aboutUs9,
                 style: Theme.of(context).textTheme.bodyLarge),
             const SizedBox(height: 30),
-            TextCard(content: viewModel!.local!.developmentTeam),
+            TextCard(content: viewModel.local!.developmentTeam),
             const SizedBox(height: 10),
             ClipRRect(
               borderRadius: BorderRadius.circular(20),
               child: Image.asset("assets/images/team.png"),
             ),
             const SizedBox(height: 20),
-            TextCard(content: viewModel!.local!.supervisedByDrGoudaIsmail),
+            TextCard(content: viewModel.local!.supervisedByDrGoudaIsmail),
             const SizedBox(height: 8),
-            TextCard(content: viewModel!.local!.johnSafwat),
+            TextCard(content: viewModel.local!.johnSafwat),
             const SizedBox(height: 8),
-            TextCard(content: viewModel!.local!.abdelrahmanMosaad),
+            TextCard(content: viewModel.local!.abdelrahmanMosaad),
             const SizedBox(height: 8),
-            TextCard(content: viewModel!.local!.dawoudElsabah),
+            TextCard(content: viewModel.local!.dawoudElsabah),
             const SizedBox(height: 8),
-            TextCard(content: viewModel!.local!.sherifSayed),
+            TextCard(content: viewModel.local!.sherifSayed),
             const SizedBox(height: 8),
-            TextCard(content: viewModel!.local!.ahmedYassen),
+            TextCard(content: viewModel.local!.ahmedYassen),
             const SizedBox(height: 8),
-            TextCard(content: viewModel!.local!.mohamedMaher),
+            TextCard(content: viewModel.local!.mohamedMaher),
             const SizedBox(height: 8),
-            TextCard(content: viewModel!.local!.mohammedMahmoud),
+            TextCard(content: viewModel.local!.mohammedMahmoud),
           ],
         ),
       ),
@@ -110,7 +110,7 @@ class _AboutUsViewState extends BaseState<AboutUsView, AboutUsViewModel>
   }
 
   @override
-  AboutUsViewModel? initViewModel() {
+  AboutUsViewModel initViewModel() {
     return AboutUsViewModel();
   }
 }
