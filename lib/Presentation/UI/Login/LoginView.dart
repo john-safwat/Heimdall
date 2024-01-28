@@ -32,7 +32,7 @@ class _LoginViewState extends BaseState<LoginView, LoginViewModel>
   Widget build(BuildContext context) {
     super.build(context);
     return ChangeNotifierProvider(
-      create: (context) => viewModel!,
+      create: (context) => viewModel,
       child: Consumer<LoginViewModel>(
         builder: (context, value, child) => Scaffold(
           body: Column(
@@ -76,7 +76,7 @@ class _LoginViewState extends BaseState<LoginView, LoginViewModel>
                                 style: Theme.of(context).textTheme.bodyLarge,
                                 controller: value.emailController,
                                 validator: (value) {
-                                  return viewModel!
+                                  return viewModel
                                       .emailValidation(value ?? "");
                                 },
                                 autovalidateMode:
@@ -100,7 +100,7 @@ class _LoginViewState extends BaseState<LoginView, LoginViewModel>
                                 style: Theme.of(context).textTheme.bodyLarge,
                                 controller: value.passwordController,
                                 validator: (value) {
-                                  return viewModel!
+                                  return viewModel
                                       .passwordValidation(value ?? "");
                                 },
                                 autovalidateMode:
@@ -147,7 +147,7 @@ class _LoginViewState extends BaseState<LoginView, LoginViewModel>
                         ),
                         // login button
                         ElevatedButton(
-                            onPressed: viewModel!.signInWithEmailAndPassword,
+                            onPressed: viewModel.signInWithEmailAndPassword,
                             child: Padding(
                               padding: const EdgeInsets.all(12.0),
                               child: Row(
@@ -204,7 +204,7 @@ class _LoginViewState extends BaseState<LoginView, LoginViewModel>
                         ),
                         // login button
                         ElevatedButton(
-                            onPressed: viewModel!.loginWithGoogle,
+                            onPressed: viewModel.loginWithGoogle,
                             child: Padding(
                               padding: const EdgeInsets.all(12.0),
                               child: Row(
@@ -241,7 +241,7 @@ class _LoginViewState extends BaseState<LoginView, LoginViewModel>
   }
 
   @override
-  LoginViewModel? initViewModel() {
+  LoginViewModel initViewModel() {
     return LoginViewModel(
         checkIfUserExistUseCase: injectCheckIfUserExistUseCase(),
         signUserInWithEmailAndPasswordUseCase:

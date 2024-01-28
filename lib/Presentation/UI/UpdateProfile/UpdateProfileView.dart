@@ -1,4 +1,5 @@
 import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -26,17 +27,17 @@ class _UpdateProfileViewState
   @override
   void initState() {
     super.initState();
-    viewModel!.loadUserData();
+    viewModel.loadUserData();
   }
 
   @override
   Widget build(BuildContext context) {
     super.build(context);
     return ChangeNotifierProvider(
-      create: (context) => viewModel!,
+      create: (context) => viewModel,
       child: Scaffold(
         appBar: AppBar(
-          title: Text(viewModel!.local!.updateProfile),
+          title: Text(viewModel.local!.updateProfile),
         ),
         body:
             Consumer<UpdateProfileViewModel>(builder: (context, value, child) {
@@ -48,7 +49,7 @@ class _UpdateProfileViewState
                   children: [
                     const Row(),
                     Lottie.asset("assets/animations/error.json",
-                        width: viewModel!.mediaQuery!.width * 0.5),
+                        width: viewModel.mediaQuery!.width * 0.5),
                     const SizedBox(height: 40),
                     Text(
                       value.errorMessage!,
@@ -167,7 +168,7 @@ class _UpdateProfileViewState
                         style: Theme.of(context).textTheme.bodyLarge,
                         controller: value.nameController,
                         validator: (value) {
-                          return viewModel!.nameValidation(value ?? "");
+                          return viewModel.nameValidation(value ?? "");
                         },
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         cursorColor: Theme.of(context).primaryColor,
@@ -186,7 +187,7 @@ class _UpdateProfileViewState
                         style: Theme.of(context).textTheme.bodyLarge,
                         controller: value.phoneController,
                         validator: (value) {
-                          return viewModel!.phoneValidation(value ?? "");
+                          return viewModel.phoneValidation(value ?? "");
                         },
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         cursorColor: Theme.of(context).primaryColor,
@@ -275,7 +276,7 @@ class _UpdateProfileViewState
                       ),
                       const SizedBox(height: 20),
                       ElevatedButton(
-                          onPressed: viewModel!.updateUserData,
+                          onPressed: viewModel.updateUserData,
                           child: Padding(
                             padding: const EdgeInsets.all(15.0),
                             child: Row(
@@ -297,14 +298,15 @@ class _UpdateProfileViewState
   }
 
   @override
-  UpdateProfileViewModel? initViewModel() {
+  UpdateProfileViewModel initViewModel() {
     return UpdateProfileViewModel(
         getUserDataUseCase: injectGetUserDataUseCase(),
         updateUserDataUseCase: injectUpdateUserDataUseCase());
   }
+
   @override
   showMyDatePicker() async {
-    viewModel!.changeDate(await showDatePicker(
+    viewModel.changeDate(await showDatePicker(
       context: context,
       firstDate: DateTime(1800),
       lastDate: DateTime.now(),

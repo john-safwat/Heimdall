@@ -27,7 +27,7 @@ class _RegistrationViewState
   Widget build(BuildContext context) {
     super.build(context);
     return ChangeNotifierProvider(
-      create: (context) => viewModel!,
+      create: (context) => viewModel,
       child: Consumer<RegistrationViewModel>(
         builder: (context, value, child) => Scaffold(
           appBar: AppBar(
@@ -73,7 +73,7 @@ class _RegistrationViewState
                                 style: Theme.of(context).textTheme.bodyLarge,
                                 controller: value.nameController,
                                 validator: (value) {
-                                  return viewModel!.nameValidation(value ?? "");
+                                  return viewModel.nameValidation(value ?? "");
                                 },
                                 autovalidateMode:
                                     AutovalidateMode.onUserInteraction,
@@ -96,7 +96,7 @@ class _RegistrationViewState
                                 style: Theme.of(context).textTheme.bodyLarge,
                                 controller: value.emailController,
                                 validator: (value) {
-                                  return viewModel!
+                                  return viewModel
                                       .emailValidation(value ?? "");
                                 },
                                 autovalidateMode:
@@ -120,7 +120,7 @@ class _RegistrationViewState
                                 style: Theme.of(context).textTheme.bodyLarge,
                                 controller: value.passwordController,
                                 validator: (value) {
-                                  return viewModel!
+                                  return viewModel
                                       .passwordValidation(value ?? "");
                                 },
                                 autovalidateMode:
@@ -156,7 +156,7 @@ class _RegistrationViewState
                                 controller:
                                     value.passwordConfirmationController,
                                 validator: (value) {
-                                  return viewModel!
+                                  return viewModel
                                       .passwordConfirmationValidation(
                                           value ?? "");
                                 },
@@ -236,7 +236,7 @@ class _RegistrationViewState
   }
 
   @override
-  RegistrationViewModel? initViewModel() {
+  RegistrationViewModel initViewModel() {
     return RegistrationViewModel(
         createAccountUseCase: injectCreateAccountUseCase(),
         addUserUseCase: injectAddUserUseCase());

@@ -21,7 +21,7 @@ class _AlertViewState extends BaseState<AlertView , AlertViewModel> implements A
   }
 
   @override
-  AlertViewModel? initViewModel() {
+  AlertViewModel initViewModel() {
     return AlertViewModel();
   }
 }

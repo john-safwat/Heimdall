@@ -14,14 +14,14 @@ class HomeView extends StatefulWidget {
   State<HomeView> createState() => _HomeViewState();
 }
 
-class _HomeViewState extends BaseState<HomeView, HomeViewModel> with TickerProviderStateMixin
+class _HomeViewState extends BaseState<HomeView, HomeViewModel>
     implements HomeNavigator {
 
   @override
   Widget build(BuildContext context) {
     super.build(context);
     return ChangeNotifierProvider(
-      create: (context) => viewModel!,
+      create: (context) => viewModel,
       child: Consumer<HomeViewModel>(
         builder: (context, value, child) => Scaffold(
 
@@ -69,7 +69,7 @@ class _HomeViewState extends BaseState<HomeView, HomeViewModel> with TickerProvi
   }
 
   @override
-  HomeViewModel? initViewModel() {
+  HomeViewModel initViewModel() {
     return HomeViewModel();
   }
 

@@ -18,39 +18,38 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 abstract class BaseState<T extends StatefulWidget , VM extends BaseViewModel> extends State<T> implements  BaseNavigator{
 
-  VM? viewModel;
+  late VM viewModel;
 
   @override
   void initState() {
     super.initState();
     viewModel = initViewModel();
-    viewModel!.navigator = this;
-    viewModel!.appConfigProvider = Provider.of<AppConfigProvider>(context , listen: false);
-    viewModel!.firebaseLoginErrorHandler = injectFirebaseLoginErrorHandler();
-    viewModel!.firebaseAuthExceptionHandler = injectFirebaseAuthExceptionHandler();
-    viewModel!.firebaseFireStoreErrorHandler = injectFirebaseFireStoreErrorHandler();
-    viewModel!.firebaseImageDatabaseExceptionsHandler = injectFirebaseImageDatabaseExceptionsHandler();
+    viewModel.navigator = this;
+    viewModel.appConfigProvider = Provider.of<AppConfigProvider>(context , listen: false);
+    viewModel.firebaseLoginErrorHandler = injectFirebaseLoginErrorHandler();
+    viewModel.firebaseAuthExceptionHandler = injectFirebaseAuthExceptionHandler();
+    viewModel.firebaseFireStoreErrorHandler = injectFirebaseFireStoreErrorHandler();
+    viewModel.firebaseImageDatabaseExceptionsHandler = injectFirebaseImageDatabaseExceptionsHandler();
   }
 
   @override
   void dispose() {
     super.dispose();
-    viewModel!.navigator = null ;
-    viewModel!.appConfigProvider = null;
-    viewModel!.themeProvider = null ;
-    viewModel!.localProvider =null;
-    viewModel =null;
+    viewModel.navigator = null ;
+    viewModel.appConfigProvider = null;
+    viewModel.themeProvider = null ;
+    viewModel.localProvider =null;
   }
 
-  VM? initViewModel();
+  VM initViewModel();
 
   // override function Build to set the themeProvider , localProvider , local and mediaQuery in all screens auto
   @override
   Widget build(BuildContext context) {
-    viewModel!.themeProvider = Provider.of<ThemeProvider>(context);
-    viewModel!.localProvider = Provider.of<LocalProvider>(context);
-    viewModel!.local = AppLocalizations.of(context)!;
-    viewModel!.mediaQuery = MediaQuery.of(context).size;
+    viewModel.themeProvider = Provider.of<ThemeProvider>(context);
+    viewModel.localProvider = Provider.of<LocalProvider>(context);
+    viewModel.local = AppLocalizations.of(context)!;
+    viewModel.mediaQuery = MediaQuery.of(context).size;
     return const SizedBox();
   }
 
