@@ -131,6 +131,9 @@
   "updateProfile" : "تحديث الملف",
   "tabToPickImage" : "انقر لتختار صورة جديدة",
   "accountUpdated" : "تم تحديث الحساب",
-  "enterYourPhoneNumber" : "أدخل رقم هاتفك"
+  "enterYourPhoneNumber" : "أدخل رقم هاتفك",
+  "cantSendEmptyMessage": "الرجاء إدخال محتوى الرسالة",
+  "messageSent": "تم الارسال",
+  "errorSendingMessage": "حدث خطأ أثناء إرسال الرسالة، يرجى المحاولة مرة أخرى"
 
 }
