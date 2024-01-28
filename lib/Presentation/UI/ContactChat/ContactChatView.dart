@@ -203,7 +203,8 @@ class _ContactChatViewState
   }
 
   @override
-  ContactChatViewModel? initViewModel() {
+  ContactChatViewModel initViewModel() {
+
     return ContactChatViewModel(sendMessageUseCase: injectSendMessageUseCase(),getMessagesUseCase:injectGetMessagesUseCase());
   }
 }
