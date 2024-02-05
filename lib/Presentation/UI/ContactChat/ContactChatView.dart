@@ -1,9 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:heimdall/Core/Base/BaseState.dart';
+import 'package:heimdall/Core/Providers/AppConfigProvider.dart';
+import 'package:heimdall/Domain/Models/Chat/Chat.dart';
 import 'package:heimdall/Domain/Models/Contact/Contact.dart';
+import 'package:heimdall/Domain/UseCase/GetMessagesUseCase.dart';
+import 'package:heimdall/Domain/UseCase/SendMessageUseCase.dart';
 import 'package:heimdall/Presentation/UI/ContactChat/ContactChatNavigator.dart';
 import 'package:heimdall/Presentation/UI/ContactChat/ContactChatViewModel.dart';
+import 'package:heimdall/Presentation/UI/ContactChat/Widgets/MessagesWidget.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:provider/provider.dart';
 
@@ -20,17 +26,18 @@ class ContactChatView extends StatefulWidget {
 class _ContactChatViewState
     extends BaseState<ContactChatView, ContactChatViewModel>
     implements ContactChatNavigator {
+  var messageController = TextEditingController();
   @override
   void initState() {
     super.initState();
-    viewModel.contact = widget.contact!;
+    viewModel!.contact = widget.contact!;
   }
 
   @override
   Widget build(BuildContext context) {
     super.build(context);
     return ChangeNotifierProvider(
-      create: (context) => viewModel,
+      create: (context) => viewModel!,
       child: Consumer<ContactChatViewModel>(
         builder: (context, value, child) => Scaffold(
           appBar: AppBar(
@@ -83,10 +90,10 @@ class _ContactChatViewState
                           color: Theme.of(context).primaryColor, width: 2),
                       borderRadius: BorderRadius.circular(1000)),
                   child: CachedNetworkImage(
-                    imageUrl: viewModel.appConfigProvider!.user!.uid ==
-                            viewModel.contact.firstUserUID
-                        ? viewModel.contact.secondUserImage
-                        : viewModel.contact.firstUserImage,
+                    imageUrl: viewModel!.appConfigProvider!.user!.uid ==
+                            viewModel!.contact.firstUserUID
+                        ? viewModel!.contact.secondUserImage
+                        : viewModel!.contact.firstUserImage,
                     fit: BoxFit.cover,
                     imageBuilder: (context, imageProvider) => ClipRRect(
                       borderRadius: BorderRadius.circular(1000),
@@ -97,7 +104,7 @@ class _ContactChatViewState
                     ),
                     placeholder: (context, url) =>
                         const Center(child: CircularProgressIndicator()),
-                    errorWidget: (context, url, error) =>  Icon(
+                    errorWidget: (context, url, error) => Icon(
                       Icons.person,
                       size: 30,
                       color: Theme.of(context).primaryColor,
@@ -109,10 +116,10 @@ class _ContactChatViewState
                 ),
                 Expanded(
                   child: Text(
-                    viewModel.appConfigProvider!.user!.uid ==
-                        viewModel.contact.firstUserUID
-                        ? viewModel.contact.secondUserName
-                        : viewModel.contact.firstUserName,
+                    viewModel!.appConfigProvider!.user!.uid ==
+                            viewModel!.contact.firstUserUID
+                        ? viewModel!.contact.secondUserName
+                        : viewModel!.contact.firstUserName,
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                 ),
@@ -121,10 +128,26 @@ class _ContactChatViewState
           ),
           body: Column(
             children: [
-              const Expanded(
-                child: SizedBox(
-                  width: double.infinity,
-                ),
+               Expanded(
+                child: StreamBuilder(
+                  stream: viewModel!.loadChat(),
+                  builder: (context, snapshot) {
+                    if(snapshot.connectionState == ConnectionState.waiting){
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }else if (snapshot.hasError){
+                      return ErrorWidget(viewModel!.handleErrorMessage(snapshot.error! as Exception));
+                    } else {
+                      viewModel!.chat =  snapshot.data!.docs.map((e) => e.data().toDomain()).toList();
+                      return ListView.builder(
+                        reverse: false,
+                        itemBuilder: (context, index) => MessageWidget(message: viewModel!.chat[index]),
+                        itemCount: viewModel!.chat.length,
+                      );
+                    }
+                  },
+                )
               ),
               Padding(
                 padding:
@@ -133,11 +156,12 @@ class _ContactChatViewState
                   children: [
                     Expanded(
                       child: TextFormField(
+                        controller: viewModel!.controller,
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         cursorColor: Theme.of(context).primaryColor,
                         decoration: InputDecoration(
                           suffixIcon: InkWell(
-                            onTap: () => value.showModalBottomSheet(),
+                            onTap: () => viewModel!.sendMessage(),
                             child: Icon(
                               EvaIcons.paper_plane,
                               size: 25,
@@ -159,14 +183,15 @@ class _ContactChatViewState
                       width: 5,
                     ),
                     ElevatedButton(
-                        onPressed: () {},
-                        style: ButtonStyle(
-                            shape: MaterialStateProperty.all(
-                                const CircleBorder())),
-                        child: const Padding(
-                          padding: EdgeInsets.symmetric(vertical: 15.0),
-                          child: Icon(Icons.mic),
-                        )),
+                      onPressed: () {},
+                      style: ButtonStyle(
+                          shape:
+                              MaterialStateProperty.all(const CircleBorder())),
+                      child: const Padding(
+                        padding: EdgeInsets.symmetric(vertical: 15.0),
+                        child: Icon(Icons.mic),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -179,6 +204,7 @@ class _ContactChatViewState
 
   @override
   ContactChatViewModel initViewModel() {
-    return ContactChatViewModel();
+
+    return ContactChatViewModel(sendMessageUseCase: injectSendMessageUseCase(),getMessagesUseCase:injectGetMessagesUseCase());
   }
 }
