@@ -43,7 +43,7 @@ class _IntroViewState extends BaseState<IntroView , IntroViewModel> implements I
             // set language page
             PageViewModel(
               decoration: pageDecoration,
-              image: Lottie.asset("assets/animations/language.json"),
+              image: Lottie.asset(viewModel.getLocalAnimation()),
               title: viewModel.local!.yourLanguage,
               bodyWidget: const LanguageSwitch()
             ),
@@ -57,7 +57,7 @@ class _IntroViewState extends BaseState<IntroView , IntroViewModel> implements I
             // Welcome Message
             PageViewModel(
                 decoration: pageDecoration,
-                image: Lottie.asset("assets/animations/hello.json"),
+                image: Lottie.asset(viewModel.getHelloAnimation()),
                 title: viewModel.local!.welcome,
                 body: viewModel.local!.welcomeMessage
             ),

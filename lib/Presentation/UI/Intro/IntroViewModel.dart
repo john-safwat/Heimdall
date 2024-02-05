@@ -18,13 +18,36 @@ class IntroViewModel extends BaseViewModel<IntroNavigator> {
       navigator!.showFailMessage(message: local!.someThingWentWrong);
     }
 
+  }
 
+  String getLocalAnimation(){
+    if(themeProvider!.getTheme() == MyTheme.blackAndWhiteTheme){
+      return "assets/animations/localBlack.json";
+    }else if (themeProvider!.getTheme() == MyTheme.purpleAndWhiteTheme){
+      return "assets/animations/localPurple.json";
+    }else if (themeProvider!.getTheme() == MyTheme.darkPurpleTheme){
+      return "assets/animations/localDarkPurple.json";
+    }else {
+      return "assets/animations/localGold.json";
+    }
+  }
+
+  String getHelloAnimation(){
+    if(themeProvider!.getTheme() == MyTheme.blackAndWhiteTheme){
+      return "assets/animations/helloBlack.json";
+    }else if (themeProvider!.getTheme() == MyTheme.purpleAndWhiteTheme){
+      return "assets/animations/helloPurple.json";
+    }else if (themeProvider!.getTheme() == MyTheme.darkPurpleTheme){
+      return "assets/animations/helloDarkPurple.json";
+    }else {
+      return "assets/animations/helloGold.json";
+    }
   }
 
   // function to return animation suitable for current theme
   String getSecurityAnimation(){
     if(themeProvider!.getTheme() == MyTheme.blackAndWhiteTheme){
-      return "assets/animations/lock3.json";
+      return "assets/animations/emailBlack.json";
     }else if (themeProvider!.getTheme() == MyTheme.purpleAndWhiteTheme){
       return "assets/animations/lock3.json";
     }else if (themeProvider!.getTheme() == MyTheme.darkPurpleTheme){
@@ -39,9 +62,9 @@ class IntroViewModel extends BaseViewModel<IntroNavigator> {
     if(themeProvider!.getTheme() == MyTheme.blackAndWhiteTheme){
       return "assets/animations/qrLight.json";
     }else if (themeProvider!.getTheme() == MyTheme.purpleAndWhiteTheme){
-      return "assets/animations/qrBlue.json";
-    }else if (themeProvider!.getTheme() == MyTheme.darkPurpleTheme){
       return "assets/animations/qrPurple.json";
+    }else if (themeProvider!.getTheme() == MyTheme.darkPurpleTheme){
+      return "assets/animations/qrDarkPurple.json";
     }else {
       return "assets/animations/qrBlue.json";
     }
@@ -67,7 +90,7 @@ class IntroViewModel extends BaseViewModel<IntroNavigator> {
     }else if (themeProvider!.getTheme() == MyTheme.purpleAndWhiteTheme){
       return "assets/animations/ChatPurple.json";
     }else if (themeProvider!.getTheme() == MyTheme.darkPurpleTheme){
-      return "assets/animations/ChatPurple.json";
+      return "assets/animations/ChatDarkPurple.json";
     }else {
       return "assets/animations/ChatBlue.json";
     }
