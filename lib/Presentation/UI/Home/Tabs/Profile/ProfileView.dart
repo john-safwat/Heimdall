@@ -4,6 +4,7 @@ import 'package:heimdall/Core/Providers/AppConfigProvider.dart';
 import 'package:heimdall/Domain/UseCase/DeleteUserAccountUseCase.dart';
 import 'package:heimdall/Domain/UseCase/SignOutUserUseCase.dart';
 import 'package:heimdall/Presentation/UI/AboutUs/AboutUsView.dart';
+import 'package:heimdall/Presentation/UI/ChangePassword/ChangePasswordView.dart';
 import 'package:heimdall/Presentation/UI/Feedback/FeedbackVeiw.dart';
 import 'package:heimdall/Presentation/UI/Home/Tabs/Profile/ProfileNavigator.dart';
 import 'package:heimdall/Presentation/UI/Home/Tabs/Profile/ProfileViewModel.dart';
@@ -95,5 +96,10 @@ class _ProfileViewState extends BaseState<ProfileView, ProfileViewModel>
   @override
   goToUpdateProfileScreen() {
     Navigator.pushNamed(context, UpdateProfileView.routeName);
+  }
+
+  @override
+  goToChangePasswordScreen() {
+    Navigator.pushNamed(context, ChangePasswordView.routeName);
   }
 }
