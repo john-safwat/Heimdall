@@ -23,6 +23,12 @@ class ProfileViewModel extends BaseViewModel<ProfileNavigator> {
     buttonsData = [
       Button(
           id: 1,
+          icon: EvaIcons.lock,
+          title: local!.changePassword,
+          onClickListener: goToChangePasswordScreen,
+          color: const Color(0xffff9500)),
+      Button(
+          id: 1,
           icon: EvaIcons.settings,
           title: local!.setting,
           onClickListener: goToSettingScreen,
@@ -162,4 +168,9 @@ class ProfileViewModel extends BaseViewModel<ProfileNavigator> {
   goToLoginScreen() {
     navigator!.goToLoginScreen();
   }
+  // function to go to Change Password screen
+  goToChangePasswordScreen(){
+    navigator!.goToChangePasswordScreen();
+  }
+
 }

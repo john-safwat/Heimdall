@@ -134,6 +134,9 @@
   "enterYourPhoneNumber" : "أدخل رقم هاتفك",
   "cantSendEmptyMessage": "الرجاء إدخال محتوى الرسالة",
   "messageSent": "تم الارسال",
-  "errorSendingMessage": "حدث خطأ أثناء إرسال الرسالة، يرجى المحاولة مرة أخرى"
-
+  "errorSendingMessage": "حدث خطأ أثناء إرسال الرسالة، يرجى المحاولة مرة أخرى",
+  "changePassword" : "تغير كلمة المرور",
+  "newPassword" : "كلمة المرور الجديدة",
+  "newPasswordConfirmation" : "تاكيد كلمة المرور الجديدة",
+  "passwordUpdated" : "تم اعادة تعين كلمة المرور"
 }

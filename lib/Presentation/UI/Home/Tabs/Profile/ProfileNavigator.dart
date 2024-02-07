@@ -9,4 +9,5 @@ abstract class ProfileNavigator extends BaseNavigator {
   goToAboutUsScreen();
   goToLoginScreen();
   goToUpdateProfileScreen();
+  goToChangePasswordScreen();
 }

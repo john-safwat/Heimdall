@@ -119,4 +119,10 @@ class UserRepositoryImpl implements UserRepository {
     return response;
   }
 
+  @override
+  Future<User> changePassword({required String password, required String newPassword, required String email}) async{
+    var response = await authRemoteDataSource.changePassword(password: password, newPassword: newPassword, email: email);
+    return response;
+  }
+
 }

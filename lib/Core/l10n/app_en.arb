@@ -134,5 +134,9 @@
   "enterYourPhoneNumber" : "Enter Your Phone Number",
   "cantSendEmptyMessage": "Please Enter A Message Content",
   "messageSent" : "Message Sent",
-  "errorSendingMessage": "Error While Sending Message,Please Try Again"
+  "errorSendingMessage": "Error While Sending Message,Please Try Again",
+  "changePassword" : "Change Password",
+  "newPassword" : "New Password",
+  "newPasswordConfirmation" : "Confirm New Password",
+  "passwordUpdated" : "Password Updated Successfully"
 }
