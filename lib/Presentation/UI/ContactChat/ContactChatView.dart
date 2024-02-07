@@ -1,9 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:heimdall/Core/Base/BaseState.dart';
-import 'package:heimdall/Core/Providers/AppConfigProvider.dart';
-import 'package:heimdall/Domain/Models/Chat/Chat.dart';
 import 'package:heimdall/Domain/Models/Contact/Contact.dart';
 import 'package:heimdall/Domain/UseCase/GetMessagesUseCase.dart';
 import 'package:heimdall/Domain/UseCase/SendMessageUseCase.dart';

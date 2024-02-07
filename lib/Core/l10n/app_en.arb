@@ -138,5 +138,7 @@
   "changePassword" : "Change Password",
   "newPassword" : "New Password",
   "newPasswordConfirmation" : "Confirm New Password",
-  "passwordUpdated" : "Password Updated Successfully"
+  "passwordUpdated" : "Password Updated Successfully",
+  "weAreWatchingEveryThingForYou" : "We are Watching Every Thing For You",
+  "search" : "Searching For Specific Lock ?"
 }
