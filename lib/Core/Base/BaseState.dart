@@ -114,7 +114,7 @@ abstract class BaseState<T extends StatefulWidget , VM extends BaseViewModel> ex
       displayCloseButton: false,
       progressIndicatorBackground: Colors.transparent,
       showProgressIndicator: false,
-      width: viewModel!.mediaQuery!.width,
+      width: viewModel.mediaQuery!.width,
       radius: 15,
       height: 50,
     ).show(context);
@@ -130,7 +130,7 @@ abstract class BaseState<T extends StatefulWidget , VM extends BaseViewModel> ex
       displayCloseButton: false,
       progressIndicatorBackground: Colors.transparent,
       showProgressIndicator: false,
-      width: viewModel!.mediaQuery!.width,
+      width: viewModel.mediaQuery!.width,
       radius: 15,
       height: 50,
     ).show(context);
@@ -151,7 +151,7 @@ abstract class BaseState<T extends StatefulWidget , VM extends BaseViewModel> ex
       displayCloseButton: false,
       progressIndicatorBackground: Colors.transparent,
       showProgressIndicator: false,
-      width: viewModel!.mediaQuery!.width,
+      width: viewModel.mediaQuery!.width,
       radius: 15,
       height: height,
     ).show(context);
@@ -169,26 +169,26 @@ abstract class BaseState<T extends StatefulWidget , VM extends BaseViewModel> ex
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(viewModel!.local!.pickYourImagePickingMethod , style: Theme.of(context).textTheme.titleMedium,),
+            Text(viewModel.local!.pickYourImagePickingMethod , style: Theme.of(context).textTheme.titleMedium,),
             const SizedBox(height: 10,),
             Row(
               children: [
                 Expanded(
                   child: ElevatedButton(
-                      onPressed: viewModel!.pickImageFromCamera,
+                      onPressed: viewModel.pickImageFromCamera,
                       child: Padding(
                         padding: const EdgeInsets.all(10.0),
-                        child: Text(viewModel!.local!.camera),
+                        child: Text(viewModel.local!.camera),
                       )
                   ),
                 ),
                 const SizedBox(width: 10,),
                 Expanded(
                   child: ElevatedButton(
-                      onPressed: viewModel!.pickImageFromGallery,
+                      onPressed: viewModel.pickImageFromGallery,
                       child: Padding(
                         padding: const EdgeInsets.all(10.0),
-                        child: Text(viewModel!.local!.gallery),
+                        child: Text(viewModel.local!.gallery),
                       )
                   ),
                 )

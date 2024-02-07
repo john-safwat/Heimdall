@@ -138,5 +138,7 @@
   "changePassword" : "تغير كلمة المرور",
   "newPassword" : "كلمة المرور الجديدة",
   "newPasswordConfirmation" : "تاكيد كلمة المرور الجديدة",
-  "passwordUpdated" : "تم اعادة تعين كلمة المرور"
+  "passwordUpdated" : "تم اعادة تعين كلمة المرور",
+  "weAreWatchingEveryThingForYou" : "نحن نراقب كل شيء من أجلك",
+  "search" : "اي قفل تبحث عنة ؟"
 }
