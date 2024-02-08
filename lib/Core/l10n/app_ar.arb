@@ -140,5 +140,8 @@
   "newPasswordConfirmation" : "تاكيد كلمة المرور الجديدة",
   "passwordUpdated" : "تم اعادة تعين كلمة المرور",
   "weAreWatchingEveryThingForYou" : "نحن نراقب كل شيء من أجلك",
-  "search" : "اي قفل تبحث عنة ؟"
+  "search" : "اي قفل تبحث عنة ؟",
+  "scanYourLock" : "قم بمسح القفل الخاص بك",
+  "configureLockMessage1": "الآن هو الوقت المناسب للتأكد من سلامتك.\nدعونا نحرس هذا المكان عوضا عنك",
+  "configureLockMessage2": "قم بمسح رمز الاستجابة السريعة الموجود على حزمة القفل"
 }

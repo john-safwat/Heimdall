@@ -20,6 +20,9 @@ class DarkPurpleTheme {
           backgroundColor: Colors.transparent,
           foregroundColor: lightPurple,
           centerTitle: true,
+          titleTextStyle: TextStyle(fontSize: 20, color: lightPurple),
+          scrolledUnderElevation: 0,
+          surfaceTintColor: Colors.transparent,
           elevation: 0
       ),
       // set the scaffold background color with the color white

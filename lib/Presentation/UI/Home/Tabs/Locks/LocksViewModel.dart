@@ -7,4 +7,10 @@ class LocksViewModel extends BaseViewModel <LocksNavigator>{
   TextEditingController searchController = TextEditingController();
 
 
+  // navigation function
+  // function to go to configure lock screen
+  goToConfigureLocScreen(){
+    navigator!.goToConfigureLockScreen();
+  }
+
 }

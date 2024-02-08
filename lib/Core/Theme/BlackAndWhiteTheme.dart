@@ -15,6 +15,9 @@ class BlackAndWhiteTheme {
           backgroundColor: Colors.transparent,
           foregroundColor: black,
           centerTitle: true,
+          titleTextStyle: TextStyle(fontSize: 20, color: black),
+          scrolledUnderElevation: 0,
+          surfaceTintColor: Colors.transparent,
           elevation: 0
       ),
       // set the scaffold background color with the color white
