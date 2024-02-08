@@ -49,4 +49,29 @@ class ThemeProvider extends ChangeNotifier {
     }
   }
 
+
+  Color getPrimaryColor(){
+    if(_theme == MyTheme.blackAndWhiteTheme){
+      return MyTheme.blackAndWhiteTheme.primaryColor;
+    }else if(_theme == MyTheme.purpleAndWhiteTheme){
+      return MyTheme.purpleAndWhiteTheme.primaryColor;
+    }else if(_theme == MyTheme.darkPurpleTheme){
+      return MyTheme.darkPurpleTheme.primaryColor;
+    }else {
+      return MyTheme.darkBlueTheme.primaryColor;
+    }
+  }
+
+  Color getSecondaryColor(){
+    if(_theme == MyTheme.blackAndWhiteTheme){
+      return MyTheme.blackAndWhiteTheme.secondaryHeaderColor;
+    }else if(_theme == MyTheme.purpleAndWhiteTheme){
+      return MyTheme.purpleAndWhiteTheme.secondaryHeaderColor;
+    }else if(_theme == MyTheme.darkPurpleTheme){
+      return MyTheme.darkPurpleTheme.secondaryHeaderColor;
+    }else {
+      return MyTheme.darkBlueTheme.secondaryHeaderColor;
+    }
+  }
+
 }

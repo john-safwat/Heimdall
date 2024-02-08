@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:heimdall/Core/Base/BaseState.dart';
 import 'package:heimdall/Core/Theme/MyTheme.dart';
+import 'package:heimdall/Presentation/UI/ConfigureLock/ConfigureLockView.dart';
 import 'package:heimdall/Presentation/UI/Home/Tabs/Locks/LocksNavigator.dart';
 import 'package:heimdall/Presentation/UI/Home/Tabs/Locks/LocksViewModel.dart';
+import 'package:heimdall/Presentation/UI/Widgets/ThemeSlider.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:provider/provider.dart';
 
@@ -64,13 +66,13 @@ class _LocksViewState extends BaseState<LocksView, LocksViewModel>
               ),
               Expanded(
                 child: Container(
-                  color: MyTheme.darkBlue,
+                  child: Center(child: ThemeSwitch(),),
                 )
               )
             ],
           ),
           floatingActionButton: FloatingActionButton(
-            onPressed:(){},
+            onPressed:(){viewModel.goToConfigureLocScreen();},
             child: const Icon(Bootstrap.qr_code_scan),
           ),
         ),
@@ -81,5 +83,10 @@ class _LocksViewState extends BaseState<LocksView, LocksViewModel>
   @override
   LocksViewModel initViewModel() {
     return LocksViewModel();
+  }
+
+  @override
+  goToConfigureLockScreen() {
+    Navigator.pushNamed(context, ConfigureLockView.routeName);
   }
 }

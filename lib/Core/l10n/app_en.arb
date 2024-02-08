@@ -140,5 +140,8 @@
   "newPasswordConfirmation" : "Confirm New Password",
   "passwordUpdated" : "Password Updated Successfully",
   "weAreWatchingEveryThingForYou" : "We are Watching Every Thing For You",
-  "search" : "Searching For Specific Lock ?"
+  "search" : "Searching For Specific Lock ?",
+  "scanYourLock" : "Scan Your Lock",
+  "configureLockMessage1": "Now is the time to make sure you are safe. \nLet us guard this place for you",
+  "configureLockMessage2": "Scan The QR Code On The Lock Package"
 }
