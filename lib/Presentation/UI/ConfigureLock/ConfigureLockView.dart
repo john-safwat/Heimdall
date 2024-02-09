@@ -70,37 +70,65 @@ class _ConfigureLockViewState
                     ),
                   );
                 } else {
-                  return Padding(
+                  return SingleChildScrollView(
                     padding: const EdgeInsets.all(20.0),
                     child: Column(
                       children: [
-                        Expanded(
-                          child: Stack(
-                            children: [
-                              Container(
-                                width: viewModel.mediaQuery!.width - 40,
-                                decoration: BoxDecoration(
+                        Stack(
+                          children: [
+                            // background of the card
+                            Container(
+                              width: viewModel.mediaQuery!.width - 40,
+                              height: viewModel.mediaQuery!.height * 0.6,
+                              decoration: BoxDecoration(
                                   color: viewModel.cardColor,
-                                  borderRadius: BorderRadius.circular(20)
-                                ),
-                              ),
-                              Positioned(
+                                  borderRadius: BorderRadius.circular(20)),
+                            ),
+                            // the gradient with the lock name and image
+                            Positioned.fill(
                                 child: Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                    gradient: LinearGradient(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 30, vertical:30),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  gradient: LinearGradient(
                                       colors: [
                                         Theme.of(context).primaryColor,
                                         Colors.transparent
                                       ],
                                       begin: Alignment.topLeft,
-                                      end: Alignment.bottomRight
-                                    )
+                                      end: Alignment.bottomRight)),
+                              child: Column(
+                                children: [
+                                  // the lock name
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        flex: 2,
+                                        child: Text(
+                                          viewModel.nameController.text,
+                                          style: TextStyle(
+                                              fontSize: 36,
+                                              fontWeight: FontWeight.w900,
+                                              color: Theme.of(context)
+                                                  .scaffoldBackgroundColor),
+                                        ),
+                                      ),
+                                      const Expanded(child: SizedBox())
+                                    ],
                                   ),
-                                )
-                              )
-                            ],
-                          ),
+                                  // the lock avatar
+                                  Expanded(
+                                    child: Image.asset(
+                                      "assets/avatars/avatar${viewModel.lockAvatar}.png",
+                                      width: double.infinity,
+                                      fit: BoxFit.fitWidth,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ))
+                          ],
                         )
                       ],
                     ),
