@@ -143,5 +143,6 @@
   "search" : "Searching For Specific Lock ?",
   "scanYourLock" : "Scan Your Lock",
   "configureLockMessage1": "Now is the time to make sure you are safe. \nLet us guard this place for you",
-  "configureLockMessage2": "Scan The QR Code On The Lock Package"
+  "configureLockMessage2": "Scan The QR Code On The Lock Package",
+  "setLockName" : "Change Lock Name"
 }
