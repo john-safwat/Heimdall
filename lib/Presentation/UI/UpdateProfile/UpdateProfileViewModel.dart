@@ -5,6 +5,7 @@ import 'package:heimdall/Domain/Models/Users/User.dart';
 import 'package:heimdall/Domain/UseCase/GetUserDataUseCase.dart';
 import 'package:heimdall/Domain/UseCase/UpdateUserDataUseCase.dart';
 import 'package:heimdall/Presentation/UI/UpdateProfile/UpdateProfileNavigator.dart';
+import 'package:heimdall/Presentation/UI/Widgets/ImagePIckLocationModalBottomSheetWidget.dart';
 import 'package:intl/intl.dart';
 
 class UpdateProfileViewModel extends BaseViewModel<UpdateProfileNavigator> {
@@ -49,7 +50,14 @@ class UpdateProfileViewModel extends BaseViewModel<UpdateProfileNavigator> {
 
   // function to show modal bottom sheet of the image picker
   showModalBottomSheet() {
-    navigator!.showImagePickerModalBottomSheet();
+    navigator!.showCustomModalBottomSheet(
+        widget: ImagePickLocationModalBottomSheetWidget(
+            title: local!.pickYourImagePickingMethod,
+            cameraTitle: local!.camera,
+            galleryTitle: local!.gallery,
+            openCamera: pickImageFromCamera,
+            openGallery: pickImageFromGallery)
+    );
   }
 
   // function to return the logo by the theme

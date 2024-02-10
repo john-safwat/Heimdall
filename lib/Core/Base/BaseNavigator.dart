@@ -41,6 +41,6 @@ abstract class BaseNavigator {
     required double height
   });
 
-  showImagePickerModalBottomSheet();
+  showCustomModalBottomSheet({required Widget widget});
 
 }

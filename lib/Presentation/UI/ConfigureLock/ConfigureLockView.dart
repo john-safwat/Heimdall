@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:heimdall/Core/Base/BaseState.dart';
 import 'package:heimdall/Presentation/UI/ConfigureLock/ConfigureLockNavigator.dart';
 import 'package:heimdall/Presentation/UI/ConfigureLock/ConfigureLockViewModel.dart';
+import 'package:icons_plus/icons_plus.dart';
 import 'package:provider/provider.dart';
 import 'package:qr_mobile_vision/qr_camera.dart';
 
@@ -74,6 +76,7 @@ class _ConfigureLockViewState
                     padding: const EdgeInsets.all(20.0),
                     child: Column(
                       children: [
+                        // the lock card
                         Stack(
                           children: [
                             // background of the card
@@ -88,7 +91,7 @@ class _ConfigureLockViewState
                             Positioned.fill(
                                 child: Container(
                               padding: const EdgeInsets.symmetric(
-                                  horizontal: 30, vertical:30),
+                                  horizontal: 30, vertical: 30),
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(20),
                                   gradient: LinearGradient(
@@ -107,6 +110,8 @@ class _ConfigureLockViewState
                                         flex: 2,
                                         child: Text(
                                           viewModel.nameController.text,
+                                          maxLines: 3,
+                                          overflow: TextOverflow.ellipsis,
                                           style: TextStyle(
                                               fontSize: 36,
                                               fontWeight: FontWeight.w900,
@@ -129,6 +134,61 @@ class _ConfigureLockViewState
                               ),
                             ))
                           ],
+                        ),
+                        const SizedBox(height: 20),
+                        // the name text field
+                        TextFormField(
+                          style: Theme.of(context).textTheme.bodyLarge,
+                          controller: value.nameController,
+                          validator: (value) {
+                            return viewModel.nameValidation(value ?? "");
+                          },
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          cursorColor: Theme.of(context).primaryColor,
+                          keyboardType: TextInputType.name,
+                          cursorHeight: 20,
+                          decoration: InputDecoration(
+                            prefixIcon: const Icon(
+                              EvaIcons.lock,
+                              size: 30,
+                            ),
+                            hintText: value.local!.name,
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                        Row(
+                          children: [
+                            Expanded(
+                              flex: 5,
+                              child: ElevatedButton(
+                                  onPressed: () {
+                                    viewModel.showSelectImageBottomSheet();
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(12.0),
+                                    child: Text(
+                                      viewModel.local!.pickYourImage,
+                                      maxLines: 1,
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  )),
+                            ),
+                            const SizedBox(width: 20,),
+                            Expanded(
+                                flex : 3 ,
+                                child: InkWell(
+                                  onTap: (){
+                                    viewModel.onColorPickerClick();
+                                  },
+                                  child: Container(
+                                    height: 45,
+                                    decoration: BoxDecoration(
+                                      color: viewModel.cardColor,
+                                      borderRadius: BorderRadius.circular(10)
+                                    ),
+                                  ),
+                                ))
+                          ],
                         )
                       ],
                     ),
@@ -148,5 +208,26 @@ class _ConfigureLockViewState
   @override
   ConfigureLockViewModel initViewModel() {
     return ConfigureLockViewModel();
+  }
+
+  @override
+  showColorPickerDialog() {
+    showDialog(
+        context: context,
+        builder: (context) => Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children:[
+            AlertDialog(
+              titlePadding: const EdgeInsets.all(0),
+              contentPadding: const EdgeInsets.all(0),
+              content: ColorPicker(
+                pickerColor: viewModel.cardColor,
+                onColorChanged: (value) => viewModel.changeColor(value),
+
+              ),
+            ),
+          ]
+        ),
+    );
   }
 }

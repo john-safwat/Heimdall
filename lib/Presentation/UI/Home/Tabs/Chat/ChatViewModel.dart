@@ -5,6 +5,7 @@ import 'package:heimdall/Domain/Models/Contact/Contact.dart';
 import 'package:heimdall/Domain/UseCase/AddContactUseCase.dart';
 import 'package:heimdall/Domain/UseCase/GetContactsUseCase.dart';
 import 'package:heimdall/Presentation/UI/Home/Tabs/Chat/ChatNavigator.dart';
+import 'package:heimdall/Presentation/UI/Home/Tabs/Chat/Widgets/BottomSheetWidget.dart';
 
 class ChatViewModel extends BaseViewModel<ChatNavigator> {
   TextEditingController contactController = TextEditingController();
@@ -161,6 +162,11 @@ class ChatViewModel extends BaseViewModel<ChatNavigator> {
 
   // function to show modal bottom sheet to add new contact
   showAddContactBottomSheet() {
-    navigator!.showAddContactModalBottomSheet();
+    navigator!.showCustomModalBottomSheet(widget: BottomSheetWidget(
+      controller: contactController,
+      hintTitle: local!.enterEmail,
+      buttonTitle: local!.addContact,
+      addContactFunction: addContact,
+    ));
   }
 }
