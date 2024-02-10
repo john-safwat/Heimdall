@@ -1,0 +1,51 @@
+import 'package:flutter/material.dart';
+
+class AvatarImagesListWidget extends StatefulWidget {
+  List<String> images;
+
+  String selectedItem;
+  Function onSelectedItemPress;
+
+  AvatarImagesListWidget(
+      {required this.selectedItem,
+      required this.images,
+      required this.onSelectedItemPress,
+      super.key});
+
+  @override
+  State<AvatarImagesListWidget> createState() => _AvatarImagesListWidgetState();
+}
+
+class _AvatarImagesListWidgetState extends State<AvatarImagesListWidget> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 250,
+      padding: const EdgeInsets.symmetric(vertical: 25),
+      child: ListView.builder(
+        shrinkWrap: true,
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index) => InkWell(
+          overlayColor: MaterialStateProperty.all(Colors.transparent),
+          onTap: () {
+            widget.onSelectedItemPress("${index+1}");
+            setState(() {
+              widget.selectedItem = "${index+1}";
+            });
+          },
+          child: Container(
+            padding: const EdgeInsets.all(20),
+            margin: const EdgeInsets.symmetric(horizontal: 10),
+            decoration: BoxDecoration(
+              color: "${index+1}" == widget.selectedItem ? Theme.of(context).primaryColor : Colors.transparent,
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(width: 2, color: Theme.of(context).primaryColor)
+            ),
+            child: Image.asset("assets/avatars/avatar${widget.images[index]}.png"),
+          ),
+        ),
+        itemCount: widget.images.length,
+      ),
+    );
+  }
+}

@@ -8,6 +8,7 @@ import 'package:heimdall/Domain/Models/Users/User.dart';
 import 'package:heimdall/Domain/UseCase/UpdateUserDataUseCase.dart';
 import 'package:heimdall/Domain/UseCase/UploadUserImageUseCase.dart';
 import 'package:heimdall/Presentation/UI/ExtraInfo/ExtraInfoNavigator.dart';
+import 'package:heimdall/Presentation/UI/Widgets/ImagePIckLocationModalBottomSheetWidget.dart';
 import 'package:intl/intl.dart';
 
 class ExtraInfoViewModel extends BaseViewModel<ExtraInfoNavigator> {
@@ -71,7 +72,12 @@ class ExtraInfoViewModel extends BaseViewModel<ExtraInfoNavigator> {
 
   // function to show modal bottom sheet of the image picker
   showModalBottomSheet(){
-    navigator!.showImagePickerModalBottomSheet();
+    navigator!.showCustomModalBottomSheet(widget: ImagePickLocationModalBottomSheetWidget(
+        title: local!.pickYourImagePickingMethod,
+        cameraTitle: local!.camera,
+        galleryTitle: local!.gallery,
+        openCamera: pickImageFromCamera,
+        openGallery: pickImageFromGallery));
   }
 
   // function to show date picker

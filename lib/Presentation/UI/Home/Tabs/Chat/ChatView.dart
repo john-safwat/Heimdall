@@ -144,15 +144,4 @@ class _ChatViewState extends BaseState<ChatView, ChatViewModel>
     Navigator.push(context, MaterialPageRoute(builder: (context) => ContactChatView(contact: contact)));
   }
 
-  @override
-  showAddContactModalBottomSheet() {
-    showModalBottomSheet(
-        context: context,
-        builder: (context) => BottomSheetWidget(
-              controller: viewModel.contactController,
-              hintTitle: viewModel.local!.enterEmail,
-              buttonTitle: viewModel.local!.addContact,
-              addContactFunction: viewModel.addContact,
-            ));
-  }
 }

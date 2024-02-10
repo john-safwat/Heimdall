@@ -8,6 +8,7 @@ import 'package:heimdall/Domain/Models/Users/User.dart';
 import 'package:heimdall/Domain/UseCase/GetMessagesUseCase.dart';
 import 'package:heimdall/Domain/UseCase/SendMessageUseCase.dart';
 import 'package:heimdall/Presentation/UI/ContactChat/ContactChatNavigator.dart';
+import 'package:heimdall/Presentation/UI/Widgets/ImagePIckLocationModalBottomSheetWidget.dart';
 
 class ContactChatViewModel extends BaseViewModel<ContactChatNavigator> {
   SendMessageUseCase sendMessageUseCase;
@@ -56,6 +57,11 @@ class ContactChatViewModel extends BaseViewModel<ContactChatNavigator> {
 
   // navigation function
   showModalBottomSheet() {
-    navigator!.showImagePickerModalBottomSheet();
+    navigator!.showCustomModalBottomSheet(widget: ImagePickLocationModalBottomSheetWidget(
+        title: local!.pickYourImagePickingMethod,
+        cameraTitle: local!.camera,
+        galleryTitle: local!.gallery,
+        openCamera: pickImageFromCamera,
+        openGallery: pickImageFromGallery));
   }
 }
