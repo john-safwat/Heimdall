@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:heimdall/Core/Base/BaseState.dart';
+import 'package:heimdall/Domain/UseCase/AddLockCardUseCase.dart';
 import 'package:heimdall/Presentation/UI/ConfigureLock/ConfigureLockNavigator.dart';
 import 'package:heimdall/Presentation/UI/ConfigureLock/ConfigureLockViewModel.dart';
 import 'package:icons_plus/icons_plus.dart';
@@ -73,6 +74,7 @@ class _ConfigureLockViewState
                   );
                 } else {
                   return SingleChildScrollView(
+                    keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
                     padding: const EdgeInsets.all(20.0),
                     child: Column(
                       children: [
@@ -159,13 +161,13 @@ class _ConfigureLockViewState
                         Row(
                           children: [
                             Expanded(
-                              flex: 5,
+                              flex: 6,
                               child: ElevatedButton(
                                   onPressed: () {
                                     viewModel.showSelectImageBottomSheet();
                                   },
                                   child: Padding(
-                                    padding: const EdgeInsets.all(12.0),
+                                    padding: const EdgeInsets.all(15.0),
                                     child: Text(
                                       viewModel.local!.pickYourImage,
                                       maxLines: 1,
@@ -173,21 +175,78 @@ class _ConfigureLockViewState
                                     ),
                                   )),
                             ),
-                            const SizedBox(width: 20,),
+                            const SizedBox(
+                              width: 10,
+                            ),
                             Expanded(
-                                flex : 3 ,
+                                flex: 3,
                                 child: InkWell(
-                                  onTap: (){
+                                  onTap: () {
                                     viewModel.onColorPickerClick();
                                   },
                                   child: Container(
-                                    height: 45,
+                                    padding:const EdgeInsets.all(12),
+                                    alignment: Alignment.center,
                                     decoration: BoxDecoration(
-                                      color: viewModel.cardColor,
-                                      borderRadius: BorderRadius.circular(10)
+                                        color: viewModel.cardColor,
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
+                                    child: Text(
+                                      viewModel.local!.color,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleMedium!
+                                          .copyWith(color: Colors.white),
                                     ),
                                   ),
                                 ))
+                          ],
+                        ),
+                        const SizedBox(height: 20),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: ElevatedButton(
+                                  onPressed: () {
+                                    viewModel.saveCard();
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(15.0),
+                                    child: Text(
+                                      viewModel.local!.confirm,
+                                      maxLines: 1,
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  )),
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Expanded(
+                              child: ElevatedButton(
+                                  onPressed: () {
+                                    value.readLockId("");
+                                  },
+                                  style: ButtonStyle(
+                                    shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                                      side: BorderSide(
+                                        width: 2,
+                                        color: Theme.of(context).primaryColor
+                                      ),
+                                      borderRadius: BorderRadius.circular(10)
+                                    )),
+                                    backgroundColor: MaterialStateProperty.all(Colors.transparent),
+                                    foregroundColor: MaterialStateProperty.all(Theme.of(context).primaryColor),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(15.0),
+                                    child: Text(
+                                      viewModel.local!.reScan,
+                                      maxLines: 1,
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  )),
+                            )
                           ],
                         )
                       ],
@@ -201,33 +260,31 @@ class _ConfigureLockViewState
   }
 
   @override
-  bool isMounted() {
-    return mounted;
-  }
-
-  @override
   ConfigureLockViewModel initViewModel() {
-    return ConfigureLockViewModel();
+    return ConfigureLockViewModel(
+      addLockCardUseCase: injectAddLockCardUseCase()
+    );
   }
 
   @override
   showColorPickerDialog() {
     showDialog(
-        context: context,
-        builder: (context) => Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children:[
-            AlertDialog(
-              titlePadding: const EdgeInsets.all(0),
-              contentPadding: const EdgeInsets.all(0),
-              content: ColorPicker(
-                pickerColor: viewModel.cardColor,
-                onColorChanged: (value) => viewModel.changeColor(value),
-
-              ),
-            ),
-          ]
+      context: context,
+      builder: (context) =>
+          Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+        AlertDialog(
+          titlePadding: const EdgeInsets.all(0),
+          contentPadding: const EdgeInsets.all(0),
+          content: ColorPicker(
+            pickerColor: viewModel.cardColor,
+            onColorChanged: (value) => viewModel.changeColor(value),
+            displayThumbColor: true,
+            hexInputBar: false,
+            enableAlpha: false,
+            pickerAreaBorderRadius: BorderRadius.circular(20),
+          ),
         ),
+      ]),
     );
   }
 }
