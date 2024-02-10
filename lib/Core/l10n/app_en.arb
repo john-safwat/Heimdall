@@ -144,5 +144,9 @@
   "scanYourLock" : "Scan Your Lock",
   "configureLockMessage1": "Now is the time to make sure you are safe. \nLet us guard this place for you",
   "configureLockMessage2": "Scan The QR Code On The Lock Package",
-  "setLockName" : "Change Lock Name"
+  "setLockName" : "Change Lock Name",
+  "confirm" : "Confirm",
+  "reScan" : "Re-Scan",
+  "color" : "Color",
+  "lockAdded" : "Lock Added Successfully To Your List"
 }
