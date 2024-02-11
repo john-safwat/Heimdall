@@ -82,7 +82,6 @@ class ConfigureLockViewModel extends BaseViewModel<ConfigureLockNavigator> {
               name: nameController.text,
               color: cardColor.value,
               lockId: lockId,
-              cardId: "",
             ));
         navigator!.goBack();
         navigator!.showSuccessMessage(

@@ -18,7 +18,7 @@ class _KeysViewState extends BaseState<KeysView , KeysViewModel> implements Keys
   Widget build(BuildContext context) {
     super.build(context);
     return Center(
-      child: LanguageSwitch(),
+      child: ThemeSwitch(),
     );
   }
 

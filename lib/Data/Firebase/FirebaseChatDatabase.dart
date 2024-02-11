@@ -1,11 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:heimdall/Core/Base/BaseDatabase.dart';
 import 'package:heimdall/Data/Models/Chat/ChatDTO.dart';
 
 FirebaseChatDatabase injectFirebaseChatDatabase(){
   return FirebaseChatDatabase.getInstance();
 }
 
-class FirebaseChatDatabase {
+class FirebaseChatDatabase extends BaseDatabase{
 
   // singleton pattern
   FirebaseChatDatabase._();
@@ -17,7 +18,7 @@ class FirebaseChatDatabase {
 
   // get collection Messages collection references
    CollectionReference<ChatDTO> getCollectionReference(String contactId){
-    return FirebaseFirestore.instance.collection("Contacts").doc(contactId).collection(ChatDTO.collectionName).withConverter(
+    return FirebaseFirestore.instance.collection(constants.contactsCollection).doc(contactId).collection(ChatDTO.collectionName).withConverter(
       fromFirestore: (snapshot, options) => ChatDTO.fromFireStore(snapshot.data()!),
       toFirestore: (value, options) => value.toFireStore(),
     );

@@ -18,5 +18,11 @@ class CardsRepositoryImpl implements CardsRepository {
     await remoteDataSource.addLock(uid: uid, lockCard: lockCard.toDataSource());
   }
 
+  @override
+  Future<List<LockCard>> getCardsList({required String uid}) async{
+    var response = await remoteDataSource.getCardsList(uid: uid);
+    return response;
+  }
+
 
 }

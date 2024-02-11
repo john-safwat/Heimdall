@@ -1,11 +1,13 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:heimdall/Core/Base/BaseState.dart';
-import 'package:heimdall/Core/Theme/MyTheme.dart';
+import 'package:heimdall/Domain/UseCase/GetLocksCarsUseCase.dart';
 import 'package:heimdall/Presentation/UI/ConfigureLock/ConfigureLockView.dart';
 import 'package:heimdall/Presentation/UI/Home/Tabs/Locks/LocksNavigator.dart';
 import 'package:heimdall/Presentation/UI/Home/Tabs/Locks/LocksViewModel.dart';
-import 'package:heimdall/Presentation/UI/Widgets/ThemeSlider.dart';
+import 'package:heimdall/Presentation/UI/Widgets/LockCardWidget.dart';
 import 'package:icons_plus/icons_plus.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
 class LocksView extends StatefulWidget {
@@ -17,6 +19,12 @@ class LocksView extends StatefulWidget {
 
 class _LocksViewState extends BaseState<LocksView, LocksViewModel>
     implements LocksNavigator {
+  @override
+  void initState() {
+    super.initState();
+    viewModel.loadCardsData();
+  }
+
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -34,8 +42,8 @@ class _LocksViewState extends BaseState<LocksView, LocksViewModel>
                     const SizedBox(height: 20),
                     Text(
                       "${viewModel.local!.welcomeBack} "
-                          "${viewModel.appConfigProvider?.user?.displayName?.split(" ").first}"
-                          " 😊",
+                      "${viewModel.appConfigProvider?.user?.displayName?.split(" ").first}"
+                      " 😊",
                       style: Theme.of(context)
                           .textTheme
                           .titleLarge!
@@ -64,15 +72,68 @@ class _LocksViewState extends BaseState<LocksView, LocksViewModel>
                   ],
                 ),
               ),
-              Expanded(
-                child: Container(
-                  child: Center(child: ThemeSwitch(),),
-                )
-              )
+              Expanded(child: Consumer<LocksViewModel>(
+                builder: (context, value, child) {
+                  if (value.errorMessage != null) {
+                    return Column(
+                      children: [
+                        const Row(),
+                        Text(
+                          viewModel.errorMessage!,
+                          style: Theme.of(context).textTheme.bodyLarge,
+                          textAlign: TextAlign.center,
+                        ),
+                        ElevatedButton(
+                            onPressed: () {
+                              viewModel.loadCardsData();
+                            },
+                            child: Text(viewModel.local!.tryAgain))
+                      ],
+                    );
+                  } else if (viewModel.loading) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else if (viewModel.lockCardsList.isEmpty) {
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          viewModel.local!.empty,
+                          style: Theme.of(context).textTheme.bodyLarge,
+                        ),
+                        Lottie.asset(viewModel.getAnimation()),
+                      ],
+                    );
+                  } else {
+                    return Container(
+                      padding:const EdgeInsets.only(bottom: 50),
+                      child: CarouselSlider(
+                        options:CarouselOptions(
+                            animateToClosest: false,
+                            height: viewModel.mediaQuery!.height -350,
+                            viewportFraction: 0.9,
+                            initialPage: 0,
+                            enableInfiniteScroll: true,
+                            enlargeCenterPage: true,
+                            enlargeStrategy: CenterPageEnlargeStrategy.height
+                        ),
+                        items: viewModel.lockCardsList
+                            .map((e) => LockCardWidget(
+                                card: e,
+                                onCardClick: viewModel.onLockCardPress))
+                            .toList(),
+                      ),
+                    );
+                  }
+                },
+              ))
             ],
           ),
           floatingActionButton: FloatingActionButton(
-            onPressed:(){viewModel.goToConfigureLocScreen();},
+            onPressed: () {
+              viewModel.goToConfigureLocScreen();
+            },
             child: const Icon(Bootstrap.qr_code_scan),
           ),
         ),
@@ -82,7 +143,7 @@ class _LocksViewState extends BaseState<LocksView, LocksViewModel>
 
   @override
   LocksViewModel initViewModel() {
-    return LocksViewModel();
+    return LocksViewModel(getLocksCarsUseCase: injectGetLocksCarsUseCase());
   }
 
   @override
