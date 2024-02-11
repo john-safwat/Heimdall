@@ -1,11 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:heimdall/Core/Base/BaseDatabase.dart';
 import 'package:heimdall/Data/Models/Report/ReportDTO.dart';
 
 FirebaseReportDataBase injectFirebaseReportDataBase() {
   return FirebaseReportDataBase.getInstance();
 }
 
-class FirebaseReportDataBase {
+class FirebaseReportDataBase extends BaseDatabase{
   // singleton pattern
   FirebaseReportDataBase._();
 
@@ -17,7 +18,7 @@ class FirebaseReportDataBase {
 
   // function to get collection references
   CollectionReference<ReportDTO> getCollectionReference() {
-    return FirebaseFirestore.instance.collection("Reports").withConverter(
+    return FirebaseFirestore.instance.collection(constants.reportsCollection).withConverter(
       fromFirestore: (snapshot, options) => ReportDTO.fromFireStore(snapshot.data()!),
       toFirestore: (value, options) => value.toFireStore(),
     );

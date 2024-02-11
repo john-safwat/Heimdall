@@ -1,12 +1,13 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:heimdall/Core/Base/BaseDatabase.dart';
 import 'package:heimdall/Data/Models/Feedback/FeedbackDTO.dart';
 
 FirebaseFeedbackDatabase injectFirebaseFeedbackDatabase(){
   return FirebaseFeedbackDatabase.getInstance();
 }
 
-class FirebaseFeedbackDatabase {
+class FirebaseFeedbackDatabase extends BaseDatabase{
 
   // singleton pattern
   FirebaseFeedbackDatabase._();
@@ -18,7 +19,7 @@ class FirebaseFeedbackDatabase {
 
   // get collection Feedback collection references
   CollectionReference<FeedbackDTO> getCollectionReference(){
-    return FirebaseFirestore.instance.collection("Feedbacks").withConverter(
+    return FirebaseFirestore.instance.collection(constants.feedbacksCollection).withConverter(
       fromFirestore: (snapshot, options) => FeedbackDTO.fromFireStore(snapshot.data()!),
       toFirestore: (value, options) => value.toFireStore(),
     );

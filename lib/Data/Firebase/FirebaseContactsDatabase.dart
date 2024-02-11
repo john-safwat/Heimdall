@@ -1,11 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:heimdall/Core/Base/BaseDatabase.dart';
 import 'package:heimdall/Data/Models/Contact/ContactDTO.dart';
 
 FirebaseContactsDatabase injectFirebaseContactsDatabase() {
   return FirebaseContactsDatabase.getInstance();
 }
 
-class FirebaseContactsDatabase {
+class FirebaseContactsDatabase extends BaseDatabase{
   // singleton pattern
   FirebaseContactsDatabase._();
   static FirebaseContactsDatabase? _instance;
@@ -16,7 +17,7 @@ class FirebaseContactsDatabase {
 
   // function to get Collection Reference
   CollectionReference<ContactDTO> getCollectionReference() {
-    return FirebaseFirestore.instance.collection("Contacts").withConverter(
+    return FirebaseFirestore.instance.collection(constants.contactsCollection).withConverter(
           fromFirestore: (snapshot, options) =>
               ContactDTO.fromFireStore(snapshot.data()!),
           toFirestore: (value, options) => value.toFireStore(),

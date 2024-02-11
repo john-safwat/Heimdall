@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:heimdall/Core/Base/BaseDatabase.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:randomstring_dart/randomstring_dart.dart';
 
@@ -9,7 +10,7 @@ FirebaseImagesDatabase injectFirebaseImagesDatabase(){
 }
 
 // the object
-class FirebaseImagesDatabase {
+class FirebaseImagesDatabase extends BaseDatabase{
 
   FirebaseImagesDatabase._();
   static FirebaseImagesDatabase? instance;
