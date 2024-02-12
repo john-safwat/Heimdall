@@ -149,5 +149,6 @@
   "reScan" : "Re-Scan",
   "color" : "Color",
   "lockAdded" : "Lock Added Successfully To Your List",
-  "empty" : "it's empty in here"
+  "empty" : "it's empty in here",
+  "lockDetails" : "Lock Details"
 }
