@@ -64,7 +64,7 @@ class LocksViewModel extends BaseViewModel <LocksNavigator>{
   }
 
   onLockCardPress(LockCard card){
-
+    navigator!.goToLockDetailsScreen(card);
   }
 
 }
