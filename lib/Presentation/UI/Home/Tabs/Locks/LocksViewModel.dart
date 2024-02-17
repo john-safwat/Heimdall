@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:heimdall/Core/Base/BaseViewModel.dart';
 import 'package:heimdall/Core/Theme/MyTheme.dart';
 import 'package:heimdall/Domain/Models/Card/LockCard.dart';
@@ -10,7 +11,7 @@ class LocksViewModel extends BaseViewModel <LocksNavigator>{
   LocksViewModel({required this.getLocksCarsUseCase});
 
   TextEditingController searchController = TextEditingController();
-
+  final GlobalKey<RefreshIndicatorState> refreshIndicatorKey = GlobalKey<RefreshIndicatorState>();
   List<LockCard> lockCardsList = [];
   List<LockCard> realLocksCardList = [];
   bool loading = true;

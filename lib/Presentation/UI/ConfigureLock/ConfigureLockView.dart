@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:heimdall/Core/Base/BaseState.dart';
 import 'package:heimdall/Domain/UseCase/AddLockCardUseCase.dart';
+import 'package:heimdall/Domain/UseCase/GetUserDataUseCase.dart';
 import 'package:heimdall/Presentation/UI/ConfigureLock/ConfigureLockNavigator.dart';
 import 'package:heimdall/Presentation/UI/ConfigureLock/ConfigureLockViewModel.dart';
 import 'package:icons_plus/icons_plus.dart';
@@ -262,7 +263,8 @@ class _ConfigureLockViewState
   @override
   ConfigureLockViewModel initViewModel() {
     return ConfigureLockViewModel(
-      addLockCardUseCase: injectAddLockCardUseCase()
+      addLockCardUseCase: injectAddLockCardUseCase(),
+      getUserDataUseCase: injectGetUserDataUseCase(),
     );
   }
 

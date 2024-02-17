@@ -2,13 +2,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:heimdall/Core/Base/BaseViewModel.dart';
 import 'package:heimdall/Domain/Models/Card/LockCard.dart';
 import 'package:heimdall/Domain/UseCase/AddLockCardUseCase.dart';
+import 'package:heimdall/Domain/UseCase/GetUserDataUseCase.dart';
 import 'package:heimdall/Presentation/UI/ConfigureLock/ConfigureLockNavigator.dart';
 import 'package:heimdall/Presentation/UI/Widgets/AvatarImagesListWidget.dart';
 
 class ConfigureLockViewModel extends BaseViewModel<ConfigureLockNavigator> {
   AddLockCardUseCase addLockCardUseCase;
+  GetUserDataUseCase getUserDataUseCase;
 
-  ConfigureLockViewModel({required this.addLockCardUseCase});
+  ConfigureLockViewModel(
+      {required this.addLockCardUseCase, required this.getUserDataUseCase});
 
   String lockId = '';
   late String lockAvatar = avatars.first;
@@ -29,7 +32,7 @@ class ConfigureLockViewModel extends BaseViewModel<ConfigureLockNavigator> {
     "14"
   ];
   late TextEditingController nameController =
-  TextEditingController(text: local!.setLockName);
+      TextEditingController(text: local!.setLockName);
   late Color cardColor = themeProvider!.getSecondaryColor();
 
   void readLockId(String? lockId) {
@@ -51,10 +54,10 @@ class ConfigureLockViewModel extends BaseViewModel<ConfigureLockNavigator> {
   showSelectImageBottomSheet() {
     navigator!.showCustomModalBottomSheet(
         widget: AvatarImagesListWidget(
-          selectedItem: lockAvatar,
-          onSelectedItemPress: changeSelectedImage,
-          images: avatars,
-        ));
+      selectedItem: lockAvatar,
+      onSelectedItemPress: changeSelectedImage,
+      images: avatars,
+    ));
   }
 
   changeSelectedImage(String newAvatar) {
@@ -75,6 +78,7 @@ class ConfigureLockViewModel extends BaseViewModel<ConfigureLockNavigator> {
     if (nameController.text.isNotEmpty) {
       try {
         navigator!.showLoading(message: local!.loading);
+        var response = await getUserDataUseCase.invoke(uid: appConfigProvider!.user!.uid);
         await addLockCardUseCase.invoke(
             uid: appConfigProvider!.user!.uid,
             lockCard: LockCard(
@@ -82,7 +86,7 @@ class ConfigureLockViewModel extends BaseViewModel<ConfigureLockNavigator> {
               name: nameController.text,
               color: cardColor.value,
               lockId: lockId,
-            ));
+            ) , user: response);
         navigator!.goBack();
         navigator!.showSuccessMessage(
             message: local!.lockAdded,
@@ -92,7 +96,8 @@ class ConfigureLockViewModel extends BaseViewModel<ConfigureLockNavigator> {
             posActionTitle: local!.ok);
       } catch (e) {
         navigator!.goBack();
-        navigator!.showFailMessage(message: handleErrorMessage(e as Exception),
+        navigator!.showFailMessage(
+          message: handleErrorMessage(e as Exception),
           posActionTitle: local!.tryAgain,
         );
       }
