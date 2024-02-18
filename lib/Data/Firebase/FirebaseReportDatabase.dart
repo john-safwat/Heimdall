@@ -2,18 +2,18 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:heimdall/Core/Base/BaseDatabase.dart';
 import 'package:heimdall/Data/Models/Report/ReportDTO.dart';
 
-FirebaseReportDataBase injectFirebaseReportDataBase() {
-  return FirebaseReportDataBase.getInstance();
+FirebaseReportDatabase injectFirebaseReportDataBase() {
+  return FirebaseReportDatabase.getInstance();
 }
 
-class FirebaseReportDataBase extends BaseDatabase{
+class FirebaseReportDatabase extends BaseDatabase{
   // singleton pattern
-  FirebaseReportDataBase._();
+  FirebaseReportDatabase._();
 
-  static FirebaseReportDataBase? _instance;
+  static FirebaseReportDatabase? _instance;
 
-  static FirebaseReportDataBase getInstance() {
-    return _instance ??= FirebaseReportDataBase._();
+  static FirebaseReportDatabase getInstance() {
+    return _instance ??= FirebaseReportDatabase._();
   }
 
   // function to get collection references

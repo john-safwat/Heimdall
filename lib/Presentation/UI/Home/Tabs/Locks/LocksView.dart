@@ -66,30 +66,38 @@ class _LocksViewState extends BaseState<LocksView, LocksViewModel>
                         child: CircularProgressIndicator(),
                       );
                     } else if (viewModel.lockCardsList.isEmpty) {
-                      return Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            Expanded(child: Lottie.asset(viewModel.getAnimation())),
-                            Container(
-                              padding: const EdgeInsets.all(20),
-                              decoration: BoxDecoration(
-                                color: Theme.of(context).primaryColor,
-                                borderRadius: BorderRadius.circular(20)
+                      return RefreshIndicator(
+                        backgroundColor: Theme.of(context).primaryColor,
+                        key: viewModel.refreshIndicatorKey,
+                        color: Theme.of(context).scaffoldBackgroundColor,
+                        onRefresh: () async {
+                          return viewModel.loadCardsData();
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              Expanded(child: Lottie.asset(viewModel.getAnimation())),
+                              Container(
+                                padding: const EdgeInsets.all(20),
+                                decoration: BoxDecoration(
+                                  color: Theme.of(context).primaryColor,
+                                  borderRadius: BorderRadius.circular(20)
+                                ),
+                                child: Text(
+                                  viewModel.local!.empty,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleLarge!
+                                      .copyWith(
+                                          color: Theme.of(context)
+                                              .scaffoldBackgroundColor),
+                                  textAlign: TextAlign.center,
+                                ),
                               ),
-                              child: Text(
-                                viewModel.local!.empty,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleLarge!
-                                    .copyWith(
-                                        color: Theme.of(context)
-                                            .scaffoldBackgroundColor),
-                                textAlign: TextAlign.center,
-                              ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       );
                     } else {

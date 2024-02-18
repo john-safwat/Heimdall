@@ -11,6 +11,6 @@ class Constants {
   final String imagesFolderName = "images";
   final String feedbacksCollection = "Feedbacks";
   final String contactsCollection = "Contacts";
-  final String locksCardCollection = "Locks";
+  final String locksCollection = "Locks";
 
 }
