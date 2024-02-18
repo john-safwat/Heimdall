@@ -21,7 +21,7 @@ class FirebaseCardsDatabase extends BaseDatabase {
     return FirebaseFirestore.instance
         .collection(constants.userCollection)
         .doc(uid)
-        .collection(constants.locksCardCollection)
+        .collection(constants.locksCollection)
         .withConverter(
           fromFirestore: (snapshot, options) =>
               LockCardDTO.fromFireStore(snapshot.data()!),

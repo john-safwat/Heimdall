@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:heimdall/Data/Firebase/FirebaseReportDataBase.dart';
+import 'package:heimdall/Data/Firebase/FirebaseReportDatabase.dart';
 import 'package:heimdall/Data/Models/Report/ReportDTO.dart';
 import 'package:heimdall/Domain/DataSource/FirebaseReportRemoteDataSource.dart';
 import 'package:heimdall/Domain/Exceptions/FirebaseDatabaseException.dart';
@@ -17,13 +17,13 @@ FirebaseReportRemoteDataSource injectFirebaseReportRemoteDataSource(){
 
 class FirebaseReportRemoteDataSourceImpl implements FirebaseReportRemoteDataSource {
 
-  FirebaseReportDataBase dataBase;
+  FirebaseReportDatabase dataBase;
   FirebaseReportRemoteDataSourceImpl({required this.dataBase});
 
   @override
   Future<Report> sendReport({required ReportDTO report}) async{
     try{
-      var response = await dataBase.sendReport(report: report);
+      var response = await dataBase.sendReport(report: report).timeout(const Duration(seconds: 60));
       return response.toDomain();
     } on FirebaseException catch (e) {
       throw FirebaseDatabaseException(errorMessage: e.code);

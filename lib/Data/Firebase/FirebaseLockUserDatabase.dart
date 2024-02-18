@@ -8,7 +8,6 @@ FirebaseLockUsersDatabase injectFirebaseLockUsersDatabase(){
 
 class FirebaseLockUsersDatabase extends BaseDatabase {
 
-  final FirebaseFirestore _firebaseFireStore = FirebaseFirestore.instance;
 
   FirebaseLockUsersDatabase._();
 
@@ -20,7 +19,7 @@ class FirebaseLockUsersDatabase extends BaseDatabase {
 
   CollectionReference<UserDTO> getCollectionReference(
       {required String lockId}) {
-    return _firebaseFireStore.collection(constants.locksCardCollection).doc(
+    return FirebaseFirestore.instance.collection(constants.locksCollection).doc(
         lockId).collection(constants.userCollection).withConverter(
         fromFirestore: (snapshot, options) => UserDTO.fromFireStore(snapshot.data()!),
         toFirestore: (value, options) => value.toFireStore(),

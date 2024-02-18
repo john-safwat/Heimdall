@@ -62,10 +62,13 @@ class LockCardWidget extends StatelessWidget {
                       ),
                       // the lock avatar
                       Expanded(
-                        child: Image.asset(
-                          card.image,
-                          width: double.infinity,
-                          fit: BoxFit.fitHeight,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Image.asset(
+                            card.image,
+                            width: double.infinity,
+                            fit: BoxFit.fitHeight,
+                          ),
                         ),
                       )
                     ],
