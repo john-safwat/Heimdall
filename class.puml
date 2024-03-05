@@ -1,0 +1,2036 @@
+@startuml
+set namespaceSeparator ::
+
+class "heimdall::Core::Base::BaseDatabase.dart::BaseDatabase" {
+  +Constants constants
+}
+
+"heimdall::Core::Base::BaseDatabase.dart::BaseDatabase" o-- "heimdall::Core::Constants::Constants.dart::Constants"
+
+abstract class "heimdall::Core::Base::BaseNavigator.dart::BaseNavigator" {
+  +dynamic showLoading()
+  +dynamic showFailMessage()
+  +dynamic showSuccessMessage()
+  +dynamic showQuestionMessage()
+  +dynamic goBack()
+  +dynamic showErrorNotification()
+  +dynamic showSuccessNotification()
+  +dynamic showCustomNotification()
+  +dynamic showCustomModalBottomSheet()
+}
+
+abstract class "heimdall::Core::Base::BaseState.dart::BaseState" {
+  +VM viewModel
+  +void initState()
+  +void dispose()
+  +VM initViewModel()
+  +Widget build()
+  +dynamic goBack()
+  +dynamic showFailMessage()
+  +dynamic showLoading()
+  +dynamic showQuestionMessage()
+  +dynamic showSuccessMessage()
+  +dynamic showSuccessNotification()
+  +dynamic showErrorNotification()
+  +dynamic showCustomNotification()
+  +dynamic showCustomModalBottomSheet()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "heimdall::Core::Base::BaseState.dart::BaseState"
+"heimdall::Core::Base::BaseNavigator.dart::BaseNavigator" <|-- "heimdall::Core::Base::BaseState.dart::BaseState"
+
+abstract class "heimdall::Core::Base::BaseViewModel.dart::BaseViewModel" {
+  +N? navigator
+  +ThemeProvider? themeProvider
+  +LocalProvider? localProvider
+  +AppConfigProvider? appConfigProvider
+  +AppLocalizations? local
+  +Size? mediaQuery
+  +FirebaseAuthExceptionHandler firebaseAuthExceptionHandler
+  +FirebaseFireStoreErrorHandler firebaseFireStoreErrorHandler
+  +FirebaseImageDatabaseExceptionsHandler firebaseImageDatabaseExceptionsHandler
+  +FirebaseLoginErrorHandler firebaseLoginErrorHandler
+  +XFile? image
+  +dynamic pickImageFromCamera()
+  +dynamic pickImageFromGallery()
+  +String handleErrorMessage()
+}
+
+"heimdall::Core::Base::BaseViewModel.dart::BaseViewModel" o-- "heimdall::Core::Providers::ThemeProvider.dart::ThemeProvider"
+"heimdall::Core::Base::BaseViewModel.dart::BaseViewModel" o-- "heimdall::Core::Providers::LocalProvider.dart::LocalProvider"
+"heimdall::Core::Base::BaseViewModel.dart::BaseViewModel" o-- "heimdall::Core::Providers::AppConfigProvider.dart::AppConfigProvider"
+"heimdall::Core::Base::BaseViewModel.dart::BaseViewModel" o-- "flutter_gen::gen_l10n::app_localizations.dart::AppLocalizations"
+"heimdall::Core::Base::BaseViewModel.dart::BaseViewModel" o-- "dart::ui::Size"
+"heimdall::Core::Base::BaseViewModel.dart::BaseViewModel" o-- "heimdall::Core::Errors::FirebaseAuthExceptionHandler.dart::FirebaseAuthExceptionHandler"
+"heimdall::Core::Base::BaseViewModel.dart::BaseViewModel" o-- "heimdall::Core::Errors::FirebaseFireStoreErrorHandler.dart::FirebaseFireStoreErrorHandler"
+"heimdall::Core::Base::BaseViewModel.dart::BaseViewModel" o-- "heimdall::Core::Errors::FirebaseImageDatabaseExceptionsHandler.dart::FirebaseImageDatabaseExceptionsHandler"
+"heimdall::Core::Base::BaseViewModel.dart::BaseViewModel" o-- "heimdall::Core::Errors::FirebaseLoginErrorHandler.dart::FirebaseLoginErrorHandler"
+"heimdall::Core::Base::BaseViewModel.dart::BaseViewModel" o-- "cross_file::src::types::interface.dart::XFile"
+"flutter::src::foundation::change_notifier.dart::ChangeNotifier" <|-- "heimdall::Core::Base::BaseViewModel.dart::BaseViewModel"
+
+class "heimdall::Core::Constants::Constants.dart::Constants" {
+  {static} +Constants? instance
+  +String userCollection
+  +String reportsCollection
+  +String imagesFolderName
+  +String feedbacksCollection
+  +String contactsCollection
+  +String locksCollection
+  {static} +dynamic getInstance()
+}
+
+"heimdall::Core::Constants::Constants.dart::Constants" o-- "heimdall::Core::Constants::Constants.dart::Constants"
+
+class "heimdall::Core::Errors::FirebaseAuthExceptionHandler.dart::FirebaseAuthExceptionHandler" {
+  {static} +FirebaseAuthExceptionHandler? instance
+  {static} +dynamic getInstance()
+  +String handleFirebaseAuthExceptionEnglish()
+  +String handleFirebaseAuthExceptionArabic()
+}
+
+"heimdall::Core::Errors::FirebaseAuthExceptionHandler.dart::FirebaseAuthExceptionHandler" o-- "heimdall::Core::Errors::FirebaseAuthExceptionHandler.dart::FirebaseAuthExceptionHandler"
+
+class "heimdall::Core::Errors::FirebaseFireStoreErrorHandler.dart::FirebaseFireStoreErrorHandler" {
+  {static} +FirebaseFireStoreErrorHandler? instance
+  {static} +dynamic getInstance()
+  +String handleFirebaseFireStoreErrorEnglish()
+  +String handleFirebaseFireStoreErrorArabic()
+}
+
+"heimdall::Core::Errors::FirebaseFireStoreErrorHandler.dart::FirebaseFireStoreErrorHandler" o-- "heimdall::Core::Errors::FirebaseFireStoreErrorHandler.dart::FirebaseFireStoreErrorHandler"
+
+class "heimdall::Core::Errors::FirebaseImageDatabaseExceptionsHandler.dart::FirebaseImageDatabaseExceptionsHandler" {
+  {static} +FirebaseImageDatabaseExceptionsHandler? instance
+  {static} +dynamic getInstance()
+  +String handleFirebaseImageDatabaseExceptionsEnglish()
+  +String handleFirebaseImageDatabaseExceptionsArabic()
+}
+
+"heimdall::Core::Errors::FirebaseImageDatabaseExceptionsHandler.dart::FirebaseImageDatabaseExceptionsHandler" o-- "heimdall::Core::Errors::FirebaseImageDatabaseExceptionsHandler.dart::FirebaseImageDatabaseExceptionsHandler"
+
+class "heimdall::Core::Errors::FirebaseLoginErrorHandler.dart::FirebaseLoginErrorHandler" {
+  {static} +FirebaseLoginErrorHandler? instance
+  {static} +dynamic getInstance()
+  +String handleLoginErrorEnglish()
+  +String handleLoginErrorArabic()
+}
+
+"heimdall::Core::Errors::FirebaseLoginErrorHandler.dart::FirebaseLoginErrorHandler" o-- "heimdall::Core::Errors::FirebaseLoginErrorHandler.dart::FirebaseLoginErrorHandler"
+
+class "heimdall::Core::Providers::AppConfigProvider.dart::AppConfigProvider" {
+  +User? user
+  +void updateUser()
+  +User? getUser()
+}
+
+"heimdall::Core::Providers::AppConfigProvider.dart::AppConfigProvider" o-- "firebase_auth::firebase_auth.dart::User"
+"flutter::src::foundation::change_notifier.dart::ChangeNotifier" <|-- "heimdall::Core::Providers::AppConfigProvider.dart::AppConfigProvider"
+
+class "heimdall::Core::Providers::LocalProvider.dart::LocalProvider" {
+  -String _currentLocal
+  +dynamic changeLocal()
+  +bool isEn()
+  +String getLocal()
+}
+
+"flutter::src::foundation::change_notifier.dart::ChangeNotifier" <|-- "heimdall::Core::Providers::LocalProvider.dart::LocalProvider"
+
+class "heimdall::Core::Providers::ThemeProvider.dart::ThemeProvider" {
+  -ThemeData _theme
+  +dynamic changeTheme()
+  +ThemeData getTheme()
+  +String getSplashLogo()
+  +Color getPrimaryColor()
+  +Color getSecondaryColor()
+}
+
+"heimdall::Core::Providers::ThemeProvider.dart::ThemeProvider" o-- "flutter::src::material::theme_data.dart::ThemeData"
+"flutter::src::foundation::change_notifier.dart::ChangeNotifier" <|-- "heimdall::Core::Providers::ThemeProvider.dart::ThemeProvider"
+
+class "heimdall::Core::Theme::BlackAndWhiteTheme.dart::BlackAndWhiteTheme" {
+  {static} +Color white
+  {static} +Color gray
+  {static} +Color black
+  {static} +Color red
+  {static} +ThemeData blackAndWhiteTheme
+}
+
+"heimdall::Core::Theme::BlackAndWhiteTheme.dart::BlackAndWhiteTheme" o-- "dart::ui::Color"
+"heimdall::Core::Theme::BlackAndWhiteTheme.dart::BlackAndWhiteTheme" o-- "flutter::src::material::theme_data.dart::ThemeData"
+
+class "heimdall::Core::Theme::DarkBlueTheme.dart::DarkBlueTheme" {
+  {static} +Color white
+  {static} +Color gray
+  {static} +Color black
+  {static} +Color darkBlue
+  {static} +Color lightBlue
+  {static} +Color lightGold
+  {static} +Color red
+  {static} +ThemeData darkBlueTheme
+}
+
+"heimdall::Core::Theme::DarkBlueTheme.dart::DarkBlueTheme" o-- "dart::ui::Color"
+"heimdall::Core::Theme::DarkBlueTheme.dart::DarkBlueTheme" o-- "flutter::src::material::theme_data.dart::ThemeData"
+
+class "heimdall::Core::Theme::DarkPurpleTheme.dart::DarkPurpleTheme" {
+  {static} +Color white
+  {static} +Color gray
+  {static} +Color black
+  {static} +Color darkPurple
+  {static} +Color lightPurple
+  {static} +Color red
+  {static} +ThemeData darkPurpleTheme
+}
+
+"heimdall::Core::Theme::DarkPurpleTheme.dart::DarkPurpleTheme" o-- "dart::ui::Color"
+"heimdall::Core::Theme::DarkPurpleTheme.dart::DarkPurpleTheme" o-- "flutter::src::material::theme_data.dart::ThemeData"
+
+class "heimdall::Core::Theme::MyTheme.dart::MyTheme" {
+  {static} +Color white
+  {static} +Color gray
+  {static} +Color black
+  {static} +Color darkPurple
+  {static} +Color lightPurple
+  {static} +Color darkBlue
+  {static} +Color lightBlue
+  {static} +Color lightGold
+  {static} +Color green
+  {static} +Color yellow
+  {static} +Color red
+  {static} +ThemeData blackAndWhiteTheme
+  {static} +ThemeData purpleAndWhiteTheme
+  {static} +ThemeData darkPurpleTheme
+  {static} +ThemeData darkBlueTheme
+}
+
+"heimdall::Core::Theme::MyTheme.dart::MyTheme" o-- "dart::ui::Color"
+"heimdall::Core::Theme::MyTheme.dart::MyTheme" o-- "flutter::src::material::theme_data.dart::ThemeData"
+
+class "heimdall::Core::Theme::PurpleAndWhiteTheme.dart::PurpleAndWhiteTheme" {
+  {static} +Color white
+  {static} +Color gray
+  {static} +Color black
+  {static} +Color lightPurple
+  {static} +Color red
+  {static} +ThemeData purpleAndWhiteTheme
+}
+
+"heimdall::Core::Theme::PurpleAndWhiteTheme.dart::PurpleAndWhiteTheme" o-- "dart::ui::Color"
+"heimdall::Core::Theme::PurpleAndWhiteTheme.dart::PurpleAndWhiteTheme" o-- "flutter::src::material::theme_data.dart::ThemeData"
+
+class "heimdall::Core::Utils::DialogUtils.dart::MyDialogUtils" {
+  {static} +dynamic showLoadingDialog()
+  {static} +dynamic hideDialog()
+  {static} +dynamic showFailMessage()
+  {static} +dynamic showSuccessMessage()
+  {static} +dynamic showQuestionMessage()
+}
+
+class "heimdall::Core::Utils::NegativeActionButton.dart::NegativeActionButton" {
+  +void Function()? negativeAction
+  +String negativeActionTitle
+  +Widget build()
+}
+
+"heimdall::Core::Utils::NegativeActionButton.dart::NegativeActionButton" o-- "dart::ui::void Function()"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "heimdall::Core::Utils::NegativeActionButton.dart::NegativeActionButton"
+
+class "heimdall::Core::Utils::PosActionButton.dart::PosActionButton" {
+  +void Function()? posAction
+  +String posActionTitle
+  +Widget build()
+}
+
+"heimdall::Core::Utils::PosActionButton.dart::PosActionButton" o-- "dart::ui::void Function()"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "heimdall::Core::Utils::PosActionButton.dart::PosActionButton"
+
+class "heimdall::Data::DataSource::FirebaseAuthRemoteDataSourceImpl.dart::FirebaseAuthRemoteDataSourceImpl" {
+  +FirebaseAuthUserDatabase authDatabase
+  +dynamic createUser()
+  +dynamic updateUserImage()
+  +dynamic resetPassword()
+  +dynamic signInWithEmailAndPassword()
+  +dynamic signInWithGoogle()
+  +dynamic deleteAccount()
+  +dynamic signOut()
+  +dynamic updateUserDisplayName()
+  +dynamic changePassword()
+}
+
+"heimdall::Data::DataSource::FirebaseAuthRemoteDataSourceImpl.dart::FirebaseAuthRemoteDataSourceImpl" o-- "heimdall::Data::Firebase::FirebaseAuthUserDatabase.dart::FirebaseAuthUserDatabase"
+"heimdall::Domain::DataSource::FirebaseAuthRemoteDataSource.dart::FirebaseAuthRemoteDataSource" <|-- "heimdall::Data::DataSource::FirebaseAuthRemoteDataSourceImpl.dart::FirebaseAuthRemoteDataSourceImpl"
+
+class "heimdall::Data::DataSource::FirebaseChatRemoteDataSourceImpl.dart::FirebaseChatRemoteDataSourceImpl" {
+  +FirebaseChatDatabase database
+  +dynamic sendMessage()
+  +Stream<QuerySnapshot<ChatDTO>> getMessages()
+}
+
+"heimdall::Data::DataSource::FirebaseChatRemoteDataSourceImpl.dart::FirebaseChatRemoteDataSourceImpl" o-- "heimdall::Data::Firebase::FirebaseChatDatabase.dart::FirebaseChatDatabase"
+"heimdall::Domain::DataSource::FirebaseChatRemoteDataSource.dart::FirebaseChatRemoteDataSource" <|-- "heimdall::Data::DataSource::FirebaseChatRemoteDataSourceImpl.dart::FirebaseChatRemoteDataSourceImpl"
+
+class "heimdall::Data::DataSource::FirebaseContactsRemoteDataSourceImpl.dart::FirebaseContactsRemoteDataSourceImpl" {
+  +FirebaseContactsDatabase database
+  +dynamic contactExist()
+  +dynamic createNewContact()
+  +dynamic getFirstUserContact()
+  +dynamic getSecondUserContact()
+  +dynamic deleteUserContacts()
+}
+
+"heimdall::Data::DataSource::FirebaseContactsRemoteDataSourceImpl.dart::FirebaseContactsRemoteDataSourceImpl" o-- "heimdall::Data::Firebase::FirebaseContactsDatabase.dart::FirebaseContactsDatabase"
+"heimdall::Domain::DataSource::FirebaseContactsRemoteDataSource.dart::FirebaseContactsRemoteDataSource" <|-- "heimdall::Data::DataSource::FirebaseContactsRemoteDataSourceImpl.dart::FirebaseContactsRemoteDataSourceImpl"
+
+class "heimdall::Data::DataSource::FirebaseFeedbackRemoteDataSourceImpl.dart::FirebaseFeedbackRemoteDataSourceImpl" {
+  +FirebaseFeedbackDatabase database
+  +dynamic sendFeedback()
+  +dynamic deleteUserFeedbacks()
+}
+
+"heimdall::Data::DataSource::FirebaseFeedbackRemoteDataSourceImpl.dart::FirebaseFeedbackRemoteDataSourceImpl" o-- "heimdall::Data::Firebase::FirebaseFeedbackDatabase.dart::FirebaseFeedbackDatabase"
+"heimdall::Domain::DataSource::FirebaseFeedbackRemoteDataSource.dart::FirebaseFeedbackRemoteDataSource" <|-- "heimdall::Data::DataSource::FirebaseFeedbackRemoteDataSourceImpl.dart::FirebaseFeedbackRemoteDataSourceImpl"
+
+class "heimdall::Data::DataSource::FirebaseImagesRemoteDatasourceImpl.dart::FirebaseImagesRemoteDatasourceImpl" {
+  +FirebaseImagesDatabase database
+  +dynamic uploadImage()
+  +dynamic updateImage()
+}
+
+"heimdall::Data::DataSource::FirebaseImagesRemoteDatasourceImpl.dart::FirebaseImagesRemoteDatasourceImpl" o-- "heimdall::Data::Firebase::FirebaseImagesDatabase.dart::FirebaseImagesDatabase"
+"heimdall::Domain::DataSource::FirebaseImagesRemoteDatasource.dart::FirebaseImagesRemoteDatasource" <|-- "heimdall::Data::DataSource::FirebaseImagesRemoteDatasourceImpl.dart::FirebaseImagesRemoteDatasourceImpl"
+
+class "heimdall::Data::DataSource::FirebaseLockCardRemoteDataSourceImpl.dart::FirebaseLockCardRemoteDataSourceImpl" {
+  +FirebaseCardsDatabase database
+  +dynamic addLock()
+  +dynamic getCardsList()
+}
+
+"heimdall::Data::DataSource::FirebaseLockCardRemoteDataSourceImpl.dart::FirebaseLockCardRemoteDataSourceImpl" o-- "heimdall::Data::Firebase::FirebaseCardsDatabase.dart::FirebaseCardsDatabase"
+"heimdall::Domain::DataSource::FirebaseLockCardRemoteDataSource.dart::FirebaseLockCardRemoteDataSource" <|-- "heimdall::Data::DataSource::FirebaseLockCardRemoteDataSourceImpl.dart::FirebaseLockCardRemoteDataSourceImpl"
+
+class "heimdall::Data::DataSource::FirebaseLockRemoteDataSourceImpl.dart::FirebaseLockRemoteDataSourceImpl" {
+  +FirebaseLockDatabase database
+  +dynamic getLockData()
+  +dynamic updateLock()
+}
+
+"heimdall::Data::DataSource::FirebaseLockRemoteDataSourceImpl.dart::FirebaseLockRemoteDataSourceImpl" o-- "heimdall::Data::Firebase::FirebaseLockDatabase.dart::FirebaseLockDatabase"
+"heimdall::Domain::DataSource::FirebaseLockRemoteDataSource.dart::FirebaseLockRemoteDataSource" <|-- "heimdall::Data::DataSource::FirebaseLockRemoteDataSourceImpl.dart::FirebaseLockRemoteDataSourceImpl"
+
+class "heimdall::Data::DataSource::FirebaseLockUsersRemoteDataSourceImpl.dart::FirebaseLockUsersRemoteDataSourceImpl" {
+  +FirebaseLockUsersDatabase database
+  +dynamic addLockUser()
+}
+
+"heimdall::Data::DataSource::FirebaseLockUsersRemoteDataSourceImpl.dart::FirebaseLockUsersRemoteDataSourceImpl" o-- "heimdall::Data::Firebase::FirebaseLockUserDatabase.dart::FirebaseLockUsersDatabase"
+"heimdall::Domain::DataSource::FirebaseLockUsersRemoteDataSource.dart::FirebaseLockUsersRemoteDataSource" <|-- "heimdall::Data::DataSource::FirebaseLockUsersRemoteDataSourceImpl.dart::FirebaseLockUsersRemoteDataSourceImpl"
+
+class "heimdall::Data::DataSource::FirebaseReportRemoteDataSourceImpl.dart::FirebaseReportRemoteDataSourceImpl" {
+  +FirebaseReportDatabase dataBase
+  +dynamic sendReport()
+}
+
+"heimdall::Data::DataSource::FirebaseReportRemoteDataSourceImpl.dart::FirebaseReportRemoteDataSourceImpl" o-- "heimdall::Data::Firebase::FirebaseReportDatabase.dart::FirebaseReportDatabase"
+"heimdall::Domain::DataSource::FirebaseReportRemoteDataSource.dart::FirebaseReportRemoteDataSource" <|-- "heimdall::Data::DataSource::FirebaseReportRemoteDataSourceImpl.dart::FirebaseReportRemoteDataSourceImpl"
+
+class "heimdall::Data::DataSource::FirebaseUserDatabaseRemoteDataSourceImpl.dart::FirebaseUserDatabaseRemoteDataSourceImpl" {
+  +FirebaseUserDatabase userDatabase
+  +dynamic createUserFirebaseDatabase()
+  +dynamic updateUserProfile()
+  +dynamic checkIfUserExist()
+  +dynamic getUserDataByEmail()
+  +dynamic deleteAccount()
+  +dynamic getUserData()
+}
+
+"heimdall::Data::DataSource::FirebaseUserDatabaseRemoteDataSourceImpl.dart::FirebaseUserDatabaseRemoteDataSourceImpl" o-- "heimdall::Data::Firebase::FirebaseUserDatabase.dart::FirebaseUserDatabase"
+"heimdall::Domain::DataSource::FirebaseUserDatabaseRemoteDataSource.dart::FirebaseUserDatabaseRemoteDataSource" <|-- "heimdall::Data::DataSource::FirebaseUserDatabaseRemoteDataSourceImpl.dart::FirebaseUserDatabaseRemoteDataSourc"
+
+class "heimdall::Data::Firebase::FirebaseAuthUserDatabase.dart::FirebaseAuthUserDatabase" {
+  {static} -FirebaseAuthUserDatabase? _instance
+  -FirebaseAuth _firebase
+  {static} +FirebaseAuthUserDatabase getInstance()
+  +dynamic createUser()
+  +dynamic updateUserPhoto()
+  +dynamic updateUserDisplayName()
+  +dynamic signInUserWithEmailAndPassword()
+  +dynamic resetPassword()
+  +dynamic signInWithGoogle()
+  +dynamic deleteAccount()
+  +dynamic signOut()
+  +dynamic changePassword()
+}
+
+"heimdall::Data::Firebase::FirebaseAuthUserDatabase.dart::FirebaseAuthUserDatabase" o-- "heimdall::Data::Firebase::FirebaseAuthUserDatabase.dart::FirebaseAuthUserDatabase"
+"heimdall::Data::Firebase::FirebaseAuthUserDatabase.dart::FirebaseAuthUserDatabase" o-- "firebase_auth::firebase_auth.dart::FirebaseAuth"
+"heimdall::Core::Base::BaseDatabase.dart::BaseDatabase" <|-- "heimdall::Data::Firebase::FirebaseAuthUserDatabase.dart::FirebaseAuthUserDatabase"
+
+class "heimdall::Data::Firebase::FirebaseCardsDatabase.dart::FirebaseCardsDatabase" {
+  {static} -FirebaseCardsDatabase? _instance
+  {static} +FirebaseCardsDatabase getInstance()
+  +CollectionReference<LockCardDTO> getCollectionReference()
+  +dynamic addLockCard()
+  +dynamic getCardsList()
+}
+
+"heimdall::Data::Firebase::FirebaseCardsDatabase.dart::FirebaseCardsDatabase" o-- "heimdall::Data::Firebase::FirebaseCardsDatabase.dart::FirebaseCardsDatabase"
+"heimdall::Core::Base::BaseDatabase.dart::BaseDatabase" <|-- "heimdall::Data::Firebase::FirebaseCardsDatabase.dart::FirebaseCardsDatabase"
+
+class "heimdall::Data::Firebase::FirebaseChatDatabase.dart::FirebaseChatDatabase" {
+  {static} -FirebaseChatDatabase? _instance
+  {static} +FirebaseChatDatabase getInstance()
+  +CollectionReference<ChatDTO> getCollectionReference()
+  +dynamic sendMessage()
+  +Stream<QuerySnapshot<ChatDTO>> getMessagesStream()
+}
+
+"heimdall::Data::Firebase::FirebaseChatDatabase.dart::FirebaseChatDatabase" o-- "heimdall::Data::Firebase::FirebaseChatDatabase.dart::FirebaseChatDatabase"
+"heimdall::Core::Base::BaseDatabase.dart::BaseDatabase" <|-- "heimdall::Data::Firebase::FirebaseChatDatabase.dart::FirebaseChatDatabase"
+
+class "heimdall::Data::Firebase::FirebaseContactsDatabase.dart::FirebaseContactsDatabase" {
+  {static} -FirebaseContactsDatabase? _instance
+  {static} +FirebaseContactsDatabase getInstance()
+  +CollectionReference<ContactDTO> getCollectionReference()
+  +dynamic contactExist()
+  +dynamic createContact()
+  +dynamic getFirstUserContact()
+  +dynamic getSecondUserContact()
+  +dynamic deleteUserContact()
+}
+
+"heimdall::Data::Firebase::FirebaseContactsDatabase.dart::FirebaseContactsDatabase" o-- "heimdall::Data::Firebase::FirebaseContactsDatabase.dart::FirebaseContactsDatabase"
+"heimdall::Core::Base::BaseDatabase.dart::BaseDatabase" <|-- "heimdall::Data::Firebase::FirebaseContactsDatabase.dart::FirebaseContactsDatabase"
+
+class "heimdall::Data::Firebase::FirebaseFeedbackDatabase.dart::FirebaseFeedbackDatabase" {
+  {static} -FirebaseFeedbackDatabase? _instance
+  {static} +FirebaseFeedbackDatabase getInstance()
+  +CollectionReference<FeedbackDTO> getCollectionReference()
+  +dynamic addFeedback()
+  +dynamic deleteUserFeedbacks()
+}
+
+"heimdall::Data::Firebase::FirebaseFeedbackDatabase.dart::FirebaseFeedbackDatabase" o-- "heimdall::Data::Firebase::FirebaseFeedbackDatabase.dart::FirebaseFeedbackDatabase"
+"heimdall::Core::Base::BaseDatabase.dart::BaseDatabase" <|-- "heimdall::Data::Firebase::FirebaseFeedbackDatabase.dart::FirebaseFeedbackDatabase"
+
+class "heimdall::Data::Firebase::FirebaseImagesDatabase.dart::FirebaseImagesDatabase" {
+  {static} +FirebaseImagesDatabase? instance
+  -FirebaseStorage _firebaseStorage
+  {static} +dynamic getInstance()
+  +dynamic uploadImage()
+  +dynamic updateImage()
+  +String generateName()
+}
+
+"heimdall::Data::Firebase::FirebaseImagesDatabase.dart::FirebaseImagesDatabase" o-- "heimdall::Data::Firebase::FirebaseImagesDatabase.dart::FirebaseImagesDatabase"
+"heimdall::Data::Firebase::FirebaseImagesDatabase.dart::FirebaseImagesDatabase" o-- "firebase_storage::firebase_storage.dart::FirebaseStorage"
+"heimdall::Core::Base::BaseDatabase.dart::BaseDatabase" <|-- "heimdall::Data::Firebase::FirebaseImagesDatabase.dart::FirebaseImagesDatabase"
+
+class "heimdall::Data::Firebase::FirebaseLockDatabase.dart::FirebaseLockDatabase" {
+  {static} -FirebaseLockDatabase? _instance
+  {static} +FirebaseLockDatabase getInstance()
+  +CollectionReference<LockDTO> getCollectionReference()
+  +dynamic getLockData()
+  +dynamic updateLock()
+}
+
+"heimdall::Data::Firebase::FirebaseLockDatabase.dart::FirebaseLockDatabase" o-- "heimdall::Data::Firebase::FirebaseLockDatabase.dart::FirebaseLockDatabase"
+"heimdall::Core::Base::BaseDatabase.dart::BaseDatabase" <|-- "heimdall::Data::Firebase::FirebaseLockDatabase.dart::FirebaseLockDatabase"
+
+class "heimdall::Data::Firebase::FirebaseLockUserDatabase.dart::FirebaseLockUsersDatabase" {
+  {static} -FirebaseLockUsersDatabase? _instance
+  {static} +FirebaseLockUsersDatabase getInstance()
+  +CollectionReference<UserDTO> getCollectionReference()
+  +dynamic addLockUser()
+}
+
+"heimdall::Data::Firebase::FirebaseLockUserDatabase.dart::FirebaseLockUsersDatabase" o-- "heimdall::Data::Firebase::FirebaseLockUserDatabase.dart::FirebaseLockUsersDatabase"
+"heimdall::Core::Base::BaseDatabase.dart::BaseDatabase" <|-- "heimdall::Data::Firebase::FirebaseLockUserDatabase.dart::FirebaseLockUsersDatabase"
+
+class "heimdall::Data::Firebase::FirebaseReportDatabase.dart::FirebaseReportDatabase" {
+  {static} -FirebaseReportDatabase? _instance
+  {static} +FirebaseReportDatabase getInstance()
+  +CollectionReference<ReportDTO> getCollectionReference()
+  +dynamic sendReport()
+}
+
+"heimdall::Data::Firebase::FirebaseReportDatabase.dart::FirebaseReportDatabase" o-- "heimdall::Data::Firebase::FirebaseReportDatabase.dart::FirebaseReportDatabase"
+"heimdall::Core::Base::BaseDatabase.dart::BaseDatabase" <|-- "heimdall::Data::Firebase::FirebaseReportDatabase.dart::FirebaseReportDatabase"
+
+class "heimdall::Data::Firebase::FirebaseUserDatabase.dart::FirebaseUserDatabase" {
+  {static} -FirebaseUserDatabase? _instance
+  {static} +FirebaseUserDatabase getInstance()
+  +CollectionReference<UserDTO> getCollectionReference()
+  +dynamic createUser()
+  +dynamic updateUserData()
+  +dynamic userExist()
+  +dynamic getUserData()
+  +dynamic getUserDataByEmail()
+  +dynamic deleteUserData()
+}
+
+"heimdall::Data::Firebase::FirebaseUserDatabase.dart::FirebaseUserDatabase" o-- "heimdall::Data::Firebase::FirebaseUserDatabase.dart::FirebaseUserDatabase"
+
+class "heimdall::Data::Models::Card::LockCardDTO.dart::LockCardDTO" {
+  +String lockId
+  +int color
+  +String name
+  +String image
+  +Map<String, dynamic> toFireStore()
+  +LockCard toDomain()
+}
+
+class "heimdall::Data::Models::Chat::ChatDTO.dart::ChatDTO" {
+  {static} +String collectionName
+  +String messageID
+  +String senderID
+  +int dateTime
+  +String messageContent
+  +Map<String, dynamic> toFireStore()
+  +Chat toDomain()
+}
+
+class "heimdall::Data::Models::Contact::ContactDTO.dart::ContactDTO" {
+  +String contactId
+  +String firstUserUID
+  +String secondUserUID
+  +String firstUserName
+  +String secondUserName
+  +String firstUserImage
+  +String secondUserImage
+  +String lastMessage
+  +int lastMessageTime
+  +bool lastMessageReadied
+  +bool firstUserSentLastMessage
+  +bool secondUserSentLastMessage
+  +bool isBlockedByFirstUser
+  +bool isBlockedBySecondUser
+  +bool isRemovedFromFirstUser
+  +bool isRemovedFromSecondUser
+  +Map<String, dynamic> toFireStore()
+  +Contact toDomain()
+}
+
+class "heimdall::Data::Models::Feedback::FeedbackDTO.dart::FeedbackDTO" {
+  +String id
+  +String uid
+  +String message
+  +double rating
+  +String userName
+  +String userEmail
+  +String image
+  +Map<String, dynamic> toFireStore()
+}
+
+class "heimdall::Data::Models::Lock::LockDTO.dart::LockDTO" {
+  +String id
+  +String email
+  +String password
+  +String firstOwner
+  +int createdAt
+  +String model
+  +List<String> images
+  +Map<String, dynamic> toJson()
+  +Lock toDomain()
+}
+
+class "heimdall::Data::Models::Report::ReportDTO.dart::ReportDTO" {
+  +String id
+  +String message
+  +String uid
+  +String email
+  +DateTime dateTime
+  +Map<String, dynamic> toFireStore()
+  +Report toDomain()
+}
+
+class "heimdall::Data::Models::Users::UserDTO.dart::UserDTO" {
+  +String uid
+  +String name
+  +String email
+  +String password
+  +String image
+  +String phoneNumber
+  +String birthDate
+  +String gender
+  +Map<String, dynamic> toFireStore()
+  +MyUser toDomain()
+}
+
+class "heimdall::Data::Repository::CardsRepositoryImpl.dart::CardsRepositoryImpl" {
+  +FirebaseLockCardRemoteDataSource remoteDataSource
+  +dynamic addLock()
+  +dynamic getCardsList()
+}
+
+"heimdall::Data::Repository::CardsRepositoryImpl.dart::CardsRepositoryImpl" o-- "heimdall::Domain::DataSource::FirebaseLockCardRemoteDataSource.dart::FirebaseLockCardRemoteDataSource"
+"heimdall::Domain::Repository::CardsRepository.dart::CardsRepository" <|-- "heimdall::Data::Repository::CardsRepositoryImpl.dart::CardsRepositoryImpl"
+
+class "heimdall::Data::Repository::ChatRepositoryImpl.dart::ChatRepositoryImpl" {
+  +FirebaseChatRemoteDataSource remoteDataSource
+  +dynamic sendMessage()
+  +Stream<QuerySnapshot<ChatDTO>> getMessages()
+}
+
+"heimdall::Data::Repository::ChatRepositoryImpl.dart::ChatRepositoryImpl" o-- "heimdall::Domain::DataSource::FirebaseChatRemoteDataSource.dart::FirebaseChatRemoteDataSource"
+"heimdall::Domain::Repository::ChatRepository.dart::ChatRepository" <|-- "heimdall::Data::Repository::ChatRepositoryImpl.dart::ChatRepositoryImpl"
+
+class "heimdall::Data::Repository::ContactsRepositoryImpl.dart::ContactsRepositoryImpl" {
+  +FirebaseContactsRemoteDataSource contactsRemoteDataSource
+  +dynamic contactExist()
+  +dynamic createNewContact()
+  +dynamic getFirstUserContact()
+  +dynamic getSecondUserContact()
+  +dynamic deleteUserContacts()
+}
+
+"heimdall::Data::Repository::ContactsRepositoryImpl.dart::ContactsRepositoryImpl" o-- "heimdall::Domain::DataSource::FirebaseContactsRemoteDataSource.dart::FirebaseContactsRemoteDataSource"
+"heimdall::Domain::Repository::ContactsRepository.dart::ContactsRepository" <|-- "heimdall::Data::Repository::ContactsRepositoryImpl.dart::ContactsRepositoryImpl"
+
+class "heimdall::Data::Repository::FeedbackRepositoryImpl.dart::FeedbackRepositoryImpl" {
+  +FirebaseFeedbackRemoteDataSource remoteDataSource
+  +dynamic sendFeedback()
+  +dynamic deleteUserFeedbacks()
+}
+
+"heimdall::Data::Repository::FeedbackRepositoryImpl.dart::FeedbackRepositoryImpl" o-- "heimdall::Domain::DataSource::FirebaseFeedbackRemoteDataSource.dart::FirebaseFeedbackRemoteDataSource"
+"heimdall::Domain::Repository::FeedbackRepository.dart::FeedbackRepository" <|-- "heimdall::Data::Repository::FeedbackRepositoryImpl.dart::FeedbackRepositoryImpl"
+
+class "heimdall::Data::Repository::LockRepositoryImpl.dart::LockRepositoryImpl" {
+  +FirebaseLockRemoteDataSource lockRemoteDataSource
+  +dynamic getLockData()
+  +dynamic updateLock()
+}
+
+"heimdall::Data::Repository::LockRepositoryImpl.dart::LockRepositoryImpl" o-- "heimdall::Domain::DataSource::FirebaseLockRemoteDataSource.dart::FirebaseLockRemoteDataSource"
+"heimdall::Domain::Repository::LockRepository.dart::LockRepository" <|-- "heimdall::Data::Repository::LockRepositoryImpl.dart::LockRepositoryImpl"
+
+class "heimdall::Data::Repository::ReportRepositoryImpl.dart::ReportRepositoryImpl" {
+  +FirebaseReportRemoteDataSource remoteDataSource
+  +dynamic sendReport()
+}
+
+"heimdall::Data::Repository::ReportRepositoryImpl.dart::ReportRepositoryImpl" o-- "heimdall::Domain::DataSource::FirebaseReportRemoteDataSource.dart::FirebaseReportRemoteDataSource"
+"heimdall::Domain::Repository::ReportRepository.dart::ReportRepository" <|-- "heimdall::Data::Repository::ReportRepositoryImpl.dart::ReportRepositoryImpl"
+
+class "heimdall::Data::Repository::UserLockRepositoryImpl.dart::UserLockRepositoryImpl" {
+  +FirebaseLockUsersRemoteDataSource remoteDataSource
+  +dynamic addLockUser()
+}
+
+"heimdall::Data::Repository::UserLockRepositoryImpl.dart::UserLockRepositoryImpl" o-- "heimdall::Domain::DataSource::FirebaseLockUsersRemoteDataSource.dart::FirebaseLockUsersRemoteDataSource"
+"heimdall::Domain::Repository::UserLockRepository.dart::UserLockRepository" <|-- "heimdall::Data::Repository::UserLockRepositoryImpl.dart::UserLockRepositoryImpl"
+
+class "heimdall::Data::Repository::UserRepositoryImpl.dart::UserRepositoryImpl" {
+  +FirebaseAuthRemoteDataSource authRemoteDataSource
+  +FirebaseImagesRemoteDatasource imagesRemoteDatasource
+  +FirebaseUserDatabaseRemoteDataSource userDatabaseRemoteDataSource
+  +dynamic createUserFirebaseAuth()
+  +dynamic createUserFirebaseDatabase()
+  +dynamic updateUserImageInUserCredential()
+  +dynamic uploadUserImageToDatabase()
+  +dynamic updateUser()
+  +dynamic resetPassword()
+  +dynamic signInWithEmailAndPassword()
+  +dynamic checkIfUserExist()
+  +dynamic signInWithGoogle()
+  +dynamic getUserDataByEmail()
+  +dynamic deleteAccount()
+  +dynamic signOut()
+  +dynamic getUserData()
+  +dynamic updateUserDisplayName()
+  +dynamic updateUserImageToDatabase()
+  +dynamic changePassword()
+}
+
+"heimdall::Data::Repository::UserRepositoryImpl.dart::UserRepositoryImpl" o-- "heimdall::Domain::DataSource::FirebaseAuthRemoteDataSource.dart::FirebaseAuthRemoteDataSource"
+"heimdall::Data::Repository::UserRepositoryImpl.dart::UserRepositoryImpl" o-- "heimdall::Domain::DataSource::FirebaseImagesRemoteDatasource.dart::FirebaseImagesRemoteDatasource"
+"heimdall::Data::Repository::UserRepositoryImpl.dart::UserRepositoryImpl" o-- "heimdall::Domain::DataSource::FirebaseUserDatabaseRemoteDataSource.dart::FirebaseUserDatabaseRemoteDataSource"
+"heimdall::Domain::Repository::UserRepository.dart::UserRepository" <|-- "heimdall::Data::Repository::UserRepositoryImpl.dart::UserRepositoryImpl"
+
+abstract class "heimdall::Domain::DataSource::FirebaseAuthRemoteDataSource.dart::FirebaseAuthRemoteDataSource" {
+  +dynamic createUser()
+  +dynamic updateUserImage()
+  +dynamic updateUserDisplayName()
+  +dynamic resetPassword()
+  +dynamic signInWithEmailAndPassword()
+  +dynamic signInWithGoogle()
+  +dynamic deleteAccount()
+  +dynamic signOut()
+  +dynamic changePassword()
+}
+
+abstract class "heimdall::Domain::DataSource::FirebaseChatRemoteDataSource.dart::FirebaseChatRemoteDataSource" {
+  +dynamic sendMessage()
+  +Stream<QuerySnapshot<ChatDTO>> getMessages()
+}
+
+abstract class "heimdall::Domain::DataSource::FirebaseContactsRemoteDataSource.dart::FirebaseContactsRemoteDataSource" {
+  +dynamic contactExist()
+  +dynamic createNewContact()
+  +dynamic getFirstUserContact()
+  +dynamic getSecondUserContact()
+  +dynamic deleteUserContacts()
+}
+
+abstract class "heimdall::Domain::DataSource::FirebaseFeedbackRemoteDataSource.dart::FirebaseFeedbackRemoteDataSource" {
+  +dynamic sendFeedback()
+  +dynamic deleteUserFeedbacks()
+}
+
+abstract class "heimdall::Domain::DataSource::FirebaseImagesRemoteDatasource.dart::FirebaseImagesRemoteDatasource" {
+  +dynamic uploadImage()
+  +dynamic updateImage()
+}
+
+abstract class "heimdall::Domain::DataSource::FirebaseLockCardRemoteDataSource.dart::FirebaseLockCardRemoteDataSource" {
+  +dynamic addLock()
+  +dynamic getCardsList()
+}
+
+abstract class "heimdall::Domain::DataSource::FirebaseLockRemoteDataSource.dart::FirebaseLockRemoteDataSource" {
+  +dynamic getLockData()
+  +dynamic updateLock()
+}
+
+abstract class "heimdall::Domain::DataSource::FirebaseLockUsersRemoteDataSource.dart::FirebaseLockUsersRemoteDataSource" {
+  +dynamic addLockUser()
+}
+
+abstract class "heimdall::Domain::DataSource::FirebaseReportRemoteDataSource.dart::FirebaseReportRemoteDataSource" {
+  +dynamic sendReport()
+}
+
+abstract class "heimdall::Domain::DataSource::FirebaseUserDatabaseRemoteDataSource.dart::FirebaseUserDatabaseRemoteDataSource" {
+  +dynamic createUserFirebaseDatabase()
+  +dynamic updateUserProfile()
+  +dynamic checkIfUserExist()
+  +dynamic getUserDataByEmail()
+  +dynamic deleteAccount()
+  +dynamic getUserData()
+}
+
+class "heimdall::Domain::Exceptions::ContactExistException.dart::ContactExistException" {
+}
+
+"dart::core::Exception" <|-- "heimdall::Domain::Exceptions::ContactExistException.dart::ContactExistException"
+
+class "heimdall::Domain::Exceptions::FirebaseDatabaseException.dart::FirebaseDatabaseException" {
+  +String errorMessage
+}
+
+"dart::core::Exception" <|-- "heimdall::Domain::Exceptions::FirebaseDatabaseException.dart::FirebaseDatabaseException"
+
+class "heimdall::Domain::Exceptions::FirebaseImagesException.dart::FirebaseImagesException" {
+  +String errorMessage
+}
+
+"dart::core::Exception" <|-- "heimdall::Domain::Exceptions::FirebaseImagesException.dart::FirebaseImagesException"
+
+class "heimdall::Domain::Exceptions::FirebaseLoginException.dart::FirebaseLoginException" {
+  +String errorMessage
+}
+
+"dart::core::Exception" <|-- "heimdall::Domain::Exceptions::FirebaseLoginException.dart::FirebaseLoginException"
+
+class "heimdall::Domain::Exceptions::FirebaseUserAuthException.dart::FirebaseUserAuthException" {
+  +String errorMessage
+}
+
+"dart::core::Exception" <|-- "heimdall::Domain::Exceptions::FirebaseUserAuthException.dart::FirebaseUserAuthException"
+
+class "heimdall::Domain::Exceptions::InternetConnectionException.dart::InternetConnectionException" {
+  +String errorMessage
+}
+
+"dart::core::Exception" <|-- "heimdall::Domain::Exceptions::InternetConnectionException.dart::InternetConnectionException"
+
+class "heimdall::Domain::Exceptions::PermissionDeniedException.dart::PermissionDeniedException" {
+  +String errorMessage
+}
+
+"dart::core::Exception" <|-- "heimdall::Domain::Exceptions::PermissionDeniedException.dart::PermissionDeniedException"
+
+class "heimdall::Domain::Exceptions::RecursiveChatUnAvailableException.dart::RecursiveChatUnAvailableException" {
+}
+
+"dart::core::Exception" <|-- "heimdall::Domain::Exceptions::RecursiveChatUnAvailableException.dart::RecursiveChatUnAvailableException"
+
+class "heimdall::Domain::Exceptions::TimeOutOperationsException.dart::TimeOutOperationsException" {
+  +String errorMessage
+}
+
+"dart::core::Exception" <|-- "heimdall::Domain::Exceptions::TimeOutOperationsException.dart::TimeOutOperationsException"
+
+class "heimdall::Domain::Exceptions::UnknownException.dart::UnknownException" {
+  +String errorMessage
+}
+
+"dart::core::Exception" <|-- "heimdall::Domain::Exceptions::UnknownException.dart::UnknownException"
+
+class "heimdall::Domain::Exceptions::UserNotExistException.dart::UserNotExistException" {
+}
+
+"dart::core::Exception" <|-- "heimdall::Domain::Exceptions::UserNotExistException.dart::UserNotExistException"
+
+class "heimdall::Domain::Models::Card::LockCard.dart::LockCard" {
+  +String lockId
+  +int color
+  +String name
+  +String image
+  +LockCardDTO toDataSource()
+}
+
+class "heimdall::Domain::Models::Chat::Chat.dart::Chat" {
+  +String messageID
+  +String senderID
+  +int dateTime
+  +String messageContent
+  +ChatDTO toDataSource()
+}
+
+class "heimdall::Domain::Models::Contact::Contact.dart::Contact" {
+  +String contactId
+  +String firstUserUID
+  +String secondUserUID
+  +String firstUserName
+  +String secondUserName
+  +String firstUserImage
+  +String secondUserImage
+  +String lastMessage
+  +int lastMessageTime
+  +bool lastMessageReadied
+  +bool firstUserSentLastMessage
+  +bool secondUserSentLastMessage
+  +bool isBlockedByFirstUser
+  +bool isBlockedBySecondUser
+  +bool isRemovedFromFirstUser
+  +bool isRemovedFromSecondUser
+  +ContactDTO toDataSource()
+}
+
+class "heimdall::Domain::Models::Feedback::Feedback.dart::Feedback" {
+  +String id
+  +String uid
+  +String message
+  +double rating
+  +String userName
+  +String userEmail
+  +String image
+  +FeedbackDTO toDataSource()
+}
+
+class "heimdall::Domain::Models::Lock::Lock.dart::Lock" {
+  +String id
+  +String email
+  +String password
+  +String firstOwner
+  +int createdAt
+  +String model
+  +List<String> images
+  +LockDTO toDataSource()
+}
+
+class "heimdall::Domain::Models::Report::Report.dart::Report" {
+  +String id
+  +String message
+  +String uid
+  +String email
+  +DateTime dateTime
+  +ReportDTO toDataSource()
+}
+
+class "heimdall::Domain::Models::Users::User.dart::MyUser" {
+  +String uid
+  +String name
+  +String email
+  +String password
+  +String image
+  +String phoneNumber
+  +String birthDate
+  +String gender
+  +UserDTO toDataSource()
+}
+
+abstract class "heimdall::Domain::Repository::CardsRepository.dart::CardsRepository" {
+  +dynamic addLock()
+  +dynamic getCardsList()
+}
+
+abstract class "heimdall::Domain::Repository::ChatRepository.dart::ChatRepository" {
+  +dynamic sendMessage()
+  +Stream<QuerySnapshot<ChatDTO>> getMessages()
+}
+
+abstract class "heimdall::Domain::Repository::ContactsRepository.dart::ContactsRepository" {
+  +dynamic contactExist()
+  +dynamic createNewContact()
+  +dynamic getFirstUserContact()
+  +dynamic getSecondUserContact()
+  +dynamic deleteUserContacts()
+}
+
+abstract class "heimdall::Domain::Repository::FeedbackRepository.dart::FeedbackRepository" {
+  +dynamic sendFeedback()
+  +dynamic deleteUserFeedbacks()
+}
+
+abstract class "heimdall::Domain::Repository::LockRepository.dart::LockRepository" {
+  +dynamic getLockData()
+  +dynamic updateLock()
+}
+
+abstract class "heimdall::Domain::Repository::ReportRepository.dart::ReportRepository" {
+  +dynamic sendReport()
+}
+
+abstract class "heimdall::Domain::Repository::UserLockRepository.dart::UserLockRepository" {
+  +dynamic addLockUser()
+}
+
+abstract class "heimdall::Domain::Repository::UserRepository.dart::UserRepository" {
+  +dynamic createUserFirebaseAuth()
+  +dynamic createUserFirebaseDatabase()
+  +dynamic uploadUserImageToDatabase()
+  +dynamic updateUserImageToDatabase()
+  +dynamic updateUserImageInUserCredential()
+  +dynamic updateUserDisplayName()
+  +dynamic updateUser()
+  +dynamic resetPassword()
+  +dynamic signInWithEmailAndPassword()
+  +dynamic checkIfUserExist()
+  +dynamic signInWithGoogle()
+  +dynamic getUserDataByEmail()
+  +dynamic deleteAccount()
+  +dynamic signOut()
+  +dynamic getUserData()
+  +dynamic changePassword()
+}
+
+class "heimdall::Domain::UseCase::AddContactUseCase.dart::AddContactUseCase" {
+  +UserRepository userRepository
+  +ContactsRepository contactsRepository
+  +dynamic invoke()
+}
+
+"heimdall::Domain::UseCase::AddContactUseCase.dart::AddContactUseCase" o-- "heimdall::Domain::Repository::UserRepository.dart::UserRepository"
+"heimdall::Domain::UseCase::AddContactUseCase.dart::AddContactUseCase" o-- "heimdall::Domain::Repository::ContactsRepository.dart::ContactsRepository"
+
+class "heimdall::Domain::UseCase::AddLockCardUseCase.dart::AddLockCardUseCase" {
+  +CardsRepository cardsRepository
+  +LockRepository lockRepository
+  +UserLockRepository userLockRepository
+  +dynamic invoke()
+}
+
+"heimdall::Domain::UseCase::AddLockCardUseCase.dart::AddLockCardUseCase" o-- "heimdall::Domain::Repository::CardsRepository.dart::CardsRepository"
+"heimdall::Domain::UseCase::AddLockCardUseCase.dart::AddLockCardUseCase" o-- "heimdall::Domain::Repository::LockRepository.dart::LockRepository"
+"heimdall::Domain::UseCase::AddLockCardUseCase.dart::AddLockCardUseCase" o-- "heimdall::Domain::Repository::UserLockRepository.dart::UserLockRepository"
+
+class "heimdall::Domain::UseCase::AddUserUseCase.dart::AddUserUseCase" {
+  +UserRepository repository
+  +dynamic invoke()
+}
+
+"heimdall::Domain::UseCase::AddUserUseCase.dart::AddUserUseCase" o-- "heimdall::Domain::Repository::UserRepository.dart::UserRepository"
+
+class "heimdall::Domain::UseCase::ChangePasswordUseCase.dart::ChangePasswordUseCase" {
+  +UserRepository repository
+  +dynamic invoke()
+}
+
+"heimdall::Domain::UseCase::ChangePasswordUseCase.dart::ChangePasswordUseCase" o-- "heimdall::Domain::Repository::UserRepository.dart::UserRepository"
+
+class "heimdall::Domain::UseCase::CheckIfUserExistUseCase.dart::CheckIfUserExistUseCase" {
+  +UserRepository repository
+  +dynamic invoke()
+}
+
+"heimdall::Domain::UseCase::CheckIfUserExistUseCase.dart::CheckIfUserExistUseCase" o-- "heimdall::Domain::Repository::UserRepository.dart::UserRepository"
+
+class "heimdall::Domain::UseCase::CreateAccountUseCase.dart::CreateAccountUseCase" {
+  +UserRepository userRepository
+  +dynamic invoke()
+}
+
+"heimdall::Domain::UseCase::CreateAccountUseCase.dart::CreateAccountUseCase" o-- "heimdall::Domain::Repository::UserRepository.dart::UserRepository"
+
+class "heimdall::Domain::UseCase::DeleteUserAccountUseCase.dart::DeleteUserAccountUseCase" {
+  +UserRepository userRepository
+  +ContactsRepository contactsRepository
+  +FeedbackRepository feedbackRepository
+  +dynamic invoke()
+}
+
+"heimdall::Domain::UseCase::DeleteUserAccountUseCase.dart::DeleteUserAccountUseCase" o-- "heimdall::Domain::Repository::UserRepository.dart::UserRepository"
+"heimdall::Domain::UseCase::DeleteUserAccountUseCase.dart::DeleteUserAccountUseCase" o-- "heimdall::Domain::Repository::ContactsRepository.dart::ContactsRepository"
+"heimdall::Domain::UseCase::DeleteUserAccountUseCase.dart::DeleteUserAccountUseCase" o-- "heimdall::Domain::Repository::FeedbackRepository.dart::FeedbackRepository"
+
+class "heimdall::Domain::UseCase::GetContactsUseCase.dart::GetContactsUseCase" {
+  +ContactsRepository repository
+  +dynamic invoke()
+  +List<Contact> appendLists()
+  +List<Contact> sortByLastMessageTime()
+}
+
+"heimdall::Domain::UseCase::GetContactsUseCase.dart::GetContactsUseCase" o-- "heimdall::Domain::Repository::ContactsRepository.dart::ContactsRepository"
+
+class "heimdall::Domain::UseCase::GetLocksCarsUseCase.dart::GetLocksCarsUseCase" {
+  +CardsRepository repository
+  +dynamic invoke()
+}
+
+"heimdall::Domain::UseCase::GetLocksCarsUseCase.dart::GetLocksCarsUseCase" o-- "heimdall::Domain::Repository::CardsRepository.dart::CardsRepository"
+
+class "heimdall::Domain::UseCase::GetMessagesUseCase.dart::GetMessagesUseCase" {
+  +ChatRepository repository
+  +Stream<QuerySnapshot<ChatDTO>> invoke()
+}
+
+"heimdall::Domain::UseCase::GetMessagesUseCase.dart::GetMessagesUseCase" o-- "heimdall::Domain::Repository::ChatRepository.dart::ChatRepository"
+
+class "heimdall::Domain::UseCase::GetUserDataUseCase.dart::GetUserDataUseCase" {
+  +UserRepository repository
+  +dynamic invoke()
+}
+
+"heimdall::Domain::UseCase::GetUserDataUseCase.dart::GetUserDataUseCase" o-- "heimdall::Domain::Repository::UserRepository.dart::UserRepository"
+
+class "heimdall::Domain::UseCase::ResetPasswordUseCase.dart::ResetPasswordUseCase" {
+  +UserRepository repository
+  +dynamic invoke()
+}
+
+"heimdall::Domain::UseCase::ResetPasswordUseCase.dart::ResetPasswordUseCase" o-- "heimdall::Domain::Repository::UserRepository.dart::UserRepository"
+
+class "heimdall::Domain::UseCase::SendFeedBackUseCase.dart::SendFeedBackUseCase" {
+  +FeedbackRepository repository
+  +dynamic invoke()
+}
+
+"heimdall::Domain::UseCase::SendFeedBackUseCase.dart::SendFeedBackUseCase" o-- "heimdall::Domain::Repository::FeedbackRepository.dart::FeedbackRepository"
+
+class "heimdall::Domain::UseCase::SendMessageUseCase.dart::SendMessageUseCase" {
+  +ChatRepository repository
+  +dynamic invoke()
+}
+
+"heimdall::Domain::UseCase::SendMessageUseCase.dart::SendMessageUseCase" o-- "heimdall::Domain::Repository::ChatRepository.dart::ChatRepository"
+
+class "heimdall::Domain::UseCase::SendReportUseCase.dart::SendReportUseCase" {
+  +ReportRepository repository
+  +dynamic invoke()
+}
+
+"heimdall::Domain::UseCase::SendReportUseCase.dart::SendReportUseCase" o-- "heimdall::Domain::Repository::ReportRepository.dart::ReportRepository"
+
+class "heimdall::Domain::UseCase::SignInWithGoogleUseCase.dart::SignInWithGoogleUseCase" {
+  +UserRepository repository
+  +dynamic invoke()
+}
+
+"heimdall::Domain::UseCase::SignInWithGoogleUseCase.dart::SignInWithGoogleUseCase" o-- "heimdall::Domain::Repository::UserRepository.dart::UserRepository"
+
+class "heimdall::Domain::UseCase::SignOutUserUseCase.dart::SignOutUserUseCase" {
+  +UserRepository repository
+  +dynamic invoke()
+}
+
+"heimdall::Domain::UseCase::SignOutUserUseCase.dart::SignOutUserUseCase" o-- "heimdall::Domain::Repository::UserRepository.dart::UserRepository"
+
+class "heimdall::Domain::UseCase::SignUserInWithEmailAndPasswordUseCase.dart::SignUserInWithEmailAndPasswordUseCase" {
+  +UserRepository repository
+  +dynamic invoke()
+}
+
+"heimdall::Domain::UseCase::SignUserInWithEmailAndPasswordUseCase.dart::SignUserInWithEmailAndPasswordUseCase" o-- "heimdall::Domain::Repository::UserRepository.dart::UserRepository"
+
+class "heimdall::Domain::UseCase::UpdateUserDataUseCase.dart::UpdateUserDataUseCase" {
+  +UserRepository repository
+  +dynamic invoke()
+}
+
+"heimdall::Domain::UseCase::UpdateUserDataUseCase.dart::UpdateUserDataUseCase" o-- "heimdall::Domain::Repository::UserRepository.dart::UserRepository"
+
+class "heimdall::Domain::UseCase::UploadUserImageUseCase.dart::UploadUserImageUseCase" {
+  +UserRepository repository
+  +dynamic invoke()
+}
+
+"heimdall::Domain::UseCase::UploadUserImageUseCase.dart::UploadUserImageUseCase" o-- "heimdall::Domain::Repository::UserRepository.dart::UserRepository"
+
+class "heimdall::firebase_options.dart::DefaultFirebaseOptions" {
+  {static} +FirebaseOptions web
+  {static} +FirebaseOptions android
+  {static} +FirebaseOptions ios
+  {static} +FirebaseOptions macos
+  {static} +FirebaseOptions currentPlatform
+}
+
+"heimdall::firebase_options.dart::DefaultFirebaseOptions" o-- "firebase_core_platform_interface::firebase_core_platform_interface.dart::FirebaseOptions"
+
+class "heimdall::main.dart::MyApp" {
+  +bool? firstTime
+  +bool? loggedIn
+  +User? user
+  +ThemeProvider themeProvider
+  +LocalProvider localProvider
+  +Widget build()
+  +dynamic setTheme()
+  +dynamic setLocal()
+}
+
+"heimdall::main.dart::MyApp" o-- "firebase_auth::firebase_auth.dart::User"
+"heimdall::main.dart::MyApp" o-- "heimdall::Core::Providers::ThemeProvider.dart::ThemeProvider"
+"heimdall::main.dart::MyApp" o-- "heimdall::Core::Providers::LocalProvider.dart::LocalProvider"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "heimdall::main.dart::MyApp"
+
+class "heimdall::Presentation::Models::Button::Button.dart::Button" {
+  +int id
+  +IconData icon
+  +String title
+  +Function onClickListener
+  +Color color
+}
+
+"heimdall::Presentation::Models::Button::Button.dart::Button" o-- "flutter::src::widgets::icon_data.dart::IconData"
+"heimdall::Presentation::Models::Button::Button.dart::Button" o-- "dart::ui::Color"
+
+abstract class "heimdall::Presentation::UI::AboutUs::AboutUsNavigator.dart::AboutUsNavigator" {
+}
+
+"heimdall::Core::Base::BaseNavigator.dart::BaseNavigator" <|-- "heimdall::Presentation::UI::AboutUs::AboutUsNavigator.dart::AboutUsNavigator"
+
+class "heimdall::Presentation::UI::AboutUs::AboutUsView.dart::AboutUsView" {
+  {static} +String routeName
+  +State<AboutUsView> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "heimdall::Presentation::UI::AboutUs::AboutUsView.dart::AboutUsView"
+
+class "heimdall::Presentation::UI::AboutUs::AboutUsView.dart::_AboutUsViewState" {
+  +Widget build()
+  +AboutUsViewModel initViewModel()
+}
+
+"heimdall::Core::Base::BaseState.dart::BaseState" <|-- "heimdall::Presentation::UI::AboutUs::AboutUsView.dart::_AboutUsViewState"
+"heimdall::Presentation::UI::AboutUs::AboutUsNavigator.dart::AboutUsNavigator" <|-- "heimdall::Presentation::UI::AboutUs::AboutUsView.dart::_AboutUsViewState"
+
+class "heimdall::Presentation::UI::AboutUs::AboutUsViewModel.dart::AboutUsViewModel" {
+}
+
+"heimdall::Core::Base::BaseViewModel.dart::BaseViewModel" <|-- "heimdall::Presentation::UI::AboutUs::AboutUsViewModel.dart::AboutUsViewModel"
+
+class "heimdall::Presentation::UI::AboutUs::Widgets::TextCard.dart::TextCard" {
+  +String content
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "heimdall::Presentation::UI::AboutUs::Widgets::TextCard.dart::TextCard"
+
+abstract class "heimdall::Presentation::UI::ChangePassword::ChangePasswordNavigator.dart::ChangePasswordNavigator" {
+}
+
+"heimdall::Core::Base::BaseNavigator.dart::BaseNavigator" <|-- "heimdall::Presentation::UI::ChangePassword::ChangePasswordNavigator.dart::ChangePasswordNavigator"
+
+class "heimdall::Presentation::UI::ChangePassword::ChangePasswordView.dart::ChangePasswordView" {
+  {static} +String routeName
+  +State<ChangePasswordView> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "heimdall::Presentation::UI::ChangePassword::ChangePasswordView.dart::ChangePasswordView"
+
+class "heimdall::Presentation::UI::ChangePassword::ChangePasswordView.dart::_ChangePasswordViewState" {
+  +Widget build()
+  +ChangePasswordViewModel initViewModel()
+}
+
+"heimdall::Core::Base::BaseState.dart::BaseState" <|-- "heimdall::Presentation::UI::ChangePassword::ChangePasswordView.dart::_ChangePasswordViewState"
+"heimdall::Presentation::UI::ChangePassword::ChangePasswordNavigator.dart::ChangePasswordNavigator" <|-- "heimdall::Presentation::UI::ChangePassword::ChangePasswordView.dart::_ChangePasswordViewState"
+
+class "heimdall::Presentation::UI::ChangePassword::ChangePasswordViewModel.dart::ChangePasswordViewModel" {
+  +ChangePasswordUseCase changePasswordUseCase
+  +bool passwordVisible
+  +bool newPasswordVisible
+  +bool newPasswordConfirmationVisible
+  +GlobalKey<FormState> formKey
+  +TextEditingController passwordController
+  +TextEditingController newPasswordController
+  +TextEditingController newPasswordConfirmationController
+  +dynamic updatePassword()
+  +String getResetPasswordAnimations()
+  +String? passwordValidation()
+  +String? passwordConfirmationValidation()
+  +void changePasswordVisibility()
+  +void changeNewPasswordVisibility()
+  +void changeNewPasswordConfirmationVisibility()
+}
+
+"heimdall::Presentation::UI::ChangePassword::ChangePasswordViewModel.dart::ChangePasswordViewModel" o-- "heimdall::Domain::UseCase::ChangePasswordUseCase.dart::ChangePasswordUseCase"
+"heimdall::Presentation::UI::ChangePassword::ChangePasswordViewModel.dart::ChangePasswordViewModel" o-- "flutter::src::widgets::framework.dart::GlobalKey<FormState>"
+"heimdall::Presentation::UI::ChangePassword::ChangePasswordViewModel.dart::ChangePasswordViewModel" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"heimdall::Core::Base::BaseViewModel.dart::BaseViewModel" <|-- "heimdall::Presentation::UI::ChangePassword::ChangePasswordViewModel.dart::ChangePasswordViewModel"
+
+abstract class "heimdall::Presentation::UI::ConfigureLock::ConfigureLockNavigator.dart::ConfigureLockNavigator" {
+  +dynamic showColorPickerDialog()
+}
+
+"heimdall::Core::Base::BaseNavigator.dart::BaseNavigator" <|-- "heimdall::Presentation::UI::ConfigureLock::ConfigureLockNavigator.dart::ConfigureLockNavigator"
+
+class "heimdall::Presentation::UI::ConfigureLock::ConfigureLockView.dart::ConfigureLockView" {
+  {static} +String routeName
+  +State<ConfigureLockView> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "heimdall::Presentation::UI::ConfigureLock::ConfigureLockView.dart::ConfigureLockView"
+
+class "heimdall::Presentation::UI::ConfigureLock::ConfigureLockView.dart::_ConfigureLockViewState" {
+  +Widget build()
+  +ConfigureLockViewModel initViewModel()
+  +dynamic showColorPickerDialog()
+}
+
+"heimdall::Core::Base::BaseState.dart::BaseState" <|-- "heimdall::Presentation::UI::ConfigureLock::ConfigureLockView.dart::_ConfigureLockViewState"
+"heimdall::Presentation::UI::ConfigureLock::ConfigureLockNavigator.dart::ConfigureLockNavigator" <|-- "heimdall::Presentation::UI::ConfigureLock::ConfigureLockView.dart::_ConfigureLockViewState"
+
+class "heimdall::Presentation::UI::ConfigureLock::ConfigureLockViewModel.dart::ConfigureLockViewModel" {
+  +AddLockCardUseCase addLockCardUseCase
+  +GetUserDataUseCase getUserDataUseCase
+  +String lockId
+  +String lockAvatar
+  +List<String> avatars
+  +TextEditingController nameController
+  +Color cardColor
+  +void readLockId()
+  +String? nameValidation()
+  +dynamic showSelectImageBottomSheet()
+  +dynamic changeSelectedImage()
+  +dynamic onColorPickerClick()
+  +dynamic changeColor()
+  +dynamic saveCard()
+  +void goBack()
+}
+
+"heimdall::Presentation::UI::ConfigureLock::ConfigureLockViewModel.dart::ConfigureLockViewModel" o-- "heimdall::Domain::UseCase::AddLockCardUseCase.dart::AddLockCardUseCase"
+"heimdall::Presentation::UI::ConfigureLock::ConfigureLockViewModel.dart::ConfigureLockViewModel" o-- "heimdall::Domain::UseCase::GetUserDataUseCase.dart::GetUserDataUseCase"
+"heimdall::Presentation::UI::ConfigureLock::ConfigureLockViewModel.dart::ConfigureLockViewModel" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"heimdall::Presentation::UI::ConfigureLock::ConfigureLockViewModel.dart::ConfigureLockViewModel" o-- "dart::ui::Color"
+"heimdall::Core::Base::BaseViewModel.dart::BaseViewModel" <|-- "heimdall::Presentation::UI::ConfigureLock::ConfigureLockViewModel.dart::ConfigureLockViewModel"
+
+abstract class "heimdall::Presentation::UI::ContactChat::ContactChatNavigator.dart::ContactChatNavigator" {
+}
+
+"heimdall::Core::Base::BaseNavigator.dart::BaseNavigator" <|-- "heimdall::Presentation::UI::ContactChat::ContactChatNavigator.dart::ContactChatNavigator"
+
+class "heimdall::Presentation::UI::ContactChat::ContactChatView.dart::ContactChatView" {
+  {static} +String routeName
+  +Contact? contact
+  +State<ContactChatView> createState()
+}
+
+"heimdall::Presentation::UI::ContactChat::ContactChatView.dart::ContactChatView" o-- "heimdall::Domain::Models::Contact::Contact.dart::Contact"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "heimdall::Presentation::UI::ContactChat::ContactChatView.dart::ContactChatView"
+
+class "heimdall::Presentation::UI::ContactChat::ContactChatView.dart::_ContactChatViewState" {
+  +TextEditingController messageController
+  +void initState()
+  +Widget build()
+  +ContactChatViewModel initViewModel()
+}
+
+"heimdall::Presentation::UI::ContactChat::ContactChatView.dart::_ContactChatViewState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"heimdall::Core::Base::BaseState.dart::BaseState" <|-- "heimdall::Presentation::UI::ContactChat::ContactChatView.dart::_ContactChatViewState"
+"heimdall::Presentation::UI::ContactChat::ContactChatNavigator.dart::ContactChatNavigator" <|-- "heimdall::Presentation::UI::ContactChat::ContactChatView.dart::_ContactChatViewState"
+
+class "heimdall::Presentation::UI::ContactChat::ContactChatViewModel.dart::ContactChatViewModel" {
+  +SendMessageUseCase sendMessageUseCase
+  +GetMessagesUseCase getMessagesUseCase
+  +List<Chat> chat
+  +TextEditingController controller
+  +Contact contact
+  +String? errorMessage
+  +Stream<QuerySnapshot<ChatDTO>> loadChat()
+  +dynamic sendMessage()
+  +dynamic blockContact()
+  +dynamic removeContact()
+  +dynamic showModalBottomSheet()
+}
+
+"heimdall::Presentation::UI::ContactChat::ContactChatViewModel.dart::ContactChatViewModel" o-- "heimdall::Domain::UseCase::SendMessageUseCase.dart::SendMessageUseCase"
+"heimdall::Presentation::UI::ContactChat::ContactChatViewModel.dart::ContactChatViewModel" o-- "heimdall::Domain::UseCase::GetMessagesUseCase.dart::GetMessagesUseCase"
+"heimdall::Presentation::UI::ContactChat::ContactChatViewModel.dart::ContactChatViewModel" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"heimdall::Presentation::UI::ContactChat::ContactChatViewModel.dart::ContactChatViewModel" o-- "heimdall::Domain::Models::Contact::Contact.dart::Contact"
+"heimdall::Core::Base::BaseViewModel.dart::BaseViewModel" <|-- "heimdall::Presentation::UI::ContactChat::ContactChatViewModel.dart::ContactChatViewModel"
+
+class "heimdall::Presentation::UI::ContactChat::Widgets::MessagesWidget.dart::MessageWidget" {
+  +Chat message
+  +Widget build()
+}
+
+"heimdall::Presentation::UI::ContactChat::Widgets::MessagesWidget.dart::MessageWidget" o-- "heimdall::Domain::Models::Chat::Chat.dart::Chat"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "heimdall::Presentation::UI::ContactChat::Widgets::MessagesWidget.dart::MessageWidget"
+
+abstract class "heimdall::Presentation::UI::ExtraInfo::ExtraInfoNavigator.dart::ExtraInfoNavigator" {
+  +dynamic showMyDatePicker()
+  +dynamic goToLoginScreen()
+}
+
+"heimdall::Core::Base::BaseNavigator.dart::BaseNavigator" <|-- "heimdall::Presentation::UI::ExtraInfo::ExtraInfoNavigator.dart::ExtraInfoNavigator"
+
+class "heimdall::Presentation::UI::ExtraInfo::ExtraInfoView.dart::ExtraInfoView" {
+  {static} +String routeName
+  +MyUser user
+  +State<ExtraInfoView> createState()
+}
+
+"heimdall::Presentation::UI::ExtraInfo::ExtraInfoView.dart::ExtraInfoView" o-- "heimdall::Domain::Models::Users::User.dart::MyUser"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "heimdall::Presentation::UI::ExtraInfo::ExtraInfoView.dart::ExtraInfoView"
+
+class "heimdall::Presentation::UI::ExtraInfo::ExtraInfoView.dart::_ExtraInfoViewState" {
+  +void initState()
+  +Widget build()
+  +ExtraInfoViewModel initViewModel()
+  +dynamic showMyDatePicker()
+  +dynamic goToLoginScreen()
+}
+
+"heimdall::Core::Base::BaseState.dart::BaseState" <|-- "heimdall::Presentation::UI::ExtraInfo::ExtraInfoView.dart::_ExtraInfoViewState"
+"heimdall::Presentation::UI::ExtraInfo::ExtraInfoNavigator.dart::ExtraInfoNavigator" <|-- "heimdall::Presentation::UI::ExtraInfo::ExtraInfoView.dart::_ExtraInfoViewState"
+
+class "heimdall::Presentation::UI::ExtraInfo::ExtraInfoViewModel.dart::ExtraInfoViewModel" {
+  +UploadUserImageUseCase uploadUserImageUseCase
+  +UpdateUserDataUseCase updateUserDataUseCase
+  +MyUser user
+  +GlobalKey<FormState> formKey
+  +TextEditingController phoneController
+  +List<String> genders
+  +String selectedGender
+  +DateTime birthDate
+  +String selectedDate
+  +String getLogo()
+  +String? phoneValidation()
+  +dynamic changeDate()
+  +dynamic changeSelectedGender()
+  +dynamic showModalBottomSheet()
+  +dynamic showDatePicker()
+  +dynamic goToLoginScreen()
+  +dynamic updateAccount()
+}
+
+"heimdall::Presentation::UI::ExtraInfo::ExtraInfoViewModel.dart::ExtraInfoViewModel" o-- "heimdall::Domain::UseCase::UploadUserImageUseCase.dart::UploadUserImageUseCase"
+"heimdall::Presentation::UI::ExtraInfo::ExtraInfoViewModel.dart::ExtraInfoViewModel" o-- "heimdall::Domain::UseCase::UpdateUserDataUseCase.dart::UpdateUserDataUseCase"
+"heimdall::Presentation::UI::ExtraInfo::ExtraInfoViewModel.dart::ExtraInfoViewModel" o-- "heimdall::Domain::Models::Users::User.dart::MyUser"
+"heimdall::Presentation::UI::ExtraInfo::ExtraInfoViewModel.dart::ExtraInfoViewModel" o-- "flutter::src::widgets::framework.dart::GlobalKey<FormState>"
+"heimdall::Presentation::UI::ExtraInfo::ExtraInfoViewModel.dart::ExtraInfoViewModel" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"heimdall::Core::Base::BaseViewModel.dart::BaseViewModel" <|-- "heimdall::Presentation::UI::ExtraInfo::ExtraInfoViewModel.dart::ExtraInfoViewModel"
+
+abstract class "heimdall::Presentation::UI::Feedback::FeedbackNavigator.dart::FeedbackNavigator" {
+}
+
+"heimdall::Core::Base::BaseNavigator.dart::BaseNavigator" <|-- "heimdall::Presentation::UI::Feedback::FeedbackNavigator.dart::FeedbackNavigator"
+
+class "heimdall::Presentation::UI::Feedback::FeedbackVeiw.dart::FeedbackView" {
+  {static} +String routeName
+  +State<FeedbackView> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "heimdall::Presentation::UI::Feedback::FeedbackVeiw.dart::FeedbackView"
+
+class "heimdall::Presentation::UI::Feedback::FeedbackVeiw.dart::_FeedbackViewState" {
+  +Widget build()
+  +FeedbackViewModel initViewModel()
+}
+
+"heimdall::Core::Base::BaseState.dart::BaseState" <|-- "heimdall::Presentation::UI::Feedback::FeedbackVeiw.dart::_FeedbackViewState"
+"heimdall::Presentation::UI::Feedback::FeedbackNavigator.dart::FeedbackNavigator" <|-- "heimdall::Presentation::UI::Feedback::FeedbackVeiw.dart::_FeedbackViewState"
+
+class "heimdall::Presentation::UI::Feedback::FeedbackViewModel.dart::FeedbackViewModel" {
+  +SendFeedBackUseCase useCase
+  +TextEditingController controller
+  +double rating
+  +void changeRating()
+  +String? feedbackValidation()
+  +dynamic sendFeedback()
+}
+
+"heimdall::Presentation::UI::Feedback::FeedbackViewModel.dart::FeedbackViewModel" o-- "heimdall::Domain::UseCase::SendFeedBackUseCase.dart::SendFeedBackUseCase"
+"heimdall::Presentation::UI::Feedback::FeedbackViewModel.dart::FeedbackViewModel" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"heimdall::Core::Base::BaseViewModel.dart::BaseViewModel" <|-- "heimdall::Presentation::UI::Feedback::FeedbackViewModel.dart::FeedbackViewModel"
+
+abstract class "heimdall::Presentation::UI::ForgetPassword::ForgetPasswordNavigator.dart::ForgetPasswordNavigator" {
+}
+
+"heimdall::Core::Base::BaseNavigator.dart::BaseNavigator" <|-- "heimdall::Presentation::UI::ForgetPassword::ForgetPasswordNavigator.dart::ForgetPasswordNavigator"
+
+class "heimdall::Presentation::UI::ForgetPassword::ForgetPasswordView.dart::ForgetPasswordView" {
+  {static} +String routeName
+  +State<ForgetPasswordView> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "heimdall::Presentation::UI::ForgetPassword::ForgetPasswordView.dart::ForgetPasswordView"
+
+class "heimdall::Presentation::UI::ForgetPassword::ForgetPasswordView.dart::_ForgetPasswordViewState" {
+  +Widget build()
+  +ForgetPasswordViewModel initViewModel()
+}
+
+"heimdall::Core::Base::BaseState.dart::BaseState" <|-- "heimdall::Presentation::UI::ForgetPassword::ForgetPasswordView.dart::_ForgetPasswordViewState"
+"heimdall::Presentation::UI::ForgetPassword::ForgetPasswordNavigator.dart::ForgetPasswordNavigator" <|-- "heimdall::Presentation::UI::ForgetPassword::ForgetPasswordView.dart::_ForgetPasswordViewState"
+
+class "heimdall::Presentation::UI::ForgetPassword::ForgetPasswordViewModel.dart::ForgetPasswordViewModel" {
+  +ResetPasswordUseCase resetPasswordUseCase
+  +GlobalKey<FormState> formKey
+  +TextEditingController emailController
+  +String getImage()
+  +String? emailValidation()
+  +dynamic resetPassword()
+}
+
+"heimdall::Presentation::UI::ForgetPassword::ForgetPasswordViewModel.dart::ForgetPasswordViewModel" o-- "heimdall::Domain::UseCase::ResetPasswordUseCase.dart::ResetPasswordUseCase"
+"heimdall::Presentation::UI::ForgetPassword::ForgetPasswordViewModel.dart::ForgetPasswordViewModel" o-- "flutter::src::widgets::framework.dart::GlobalKey<FormState>"
+"heimdall::Presentation::UI::ForgetPassword::ForgetPasswordViewModel.dart::ForgetPasswordViewModel" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"heimdall::Core::Base::BaseViewModel.dart::BaseViewModel" <|-- "heimdall::Presentation::UI::ForgetPassword::ForgetPasswordViewModel.dart::ForgetPasswordViewModel"
+
+abstract class "heimdall::Presentation::UI::Home::HomeNavigator.dart::HomeNavigator" {
+}
+
+"heimdall::Core::Base::BaseNavigator.dart::BaseNavigator" <|-- "heimdall::Presentation::UI::Home::HomeNavigator.dart::HomeNavigator"
+
+class "heimdall::Presentation::UI::Home::HomeView.dart::HomeView" {
+  {static} +String routeName
+  +State<HomeView> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "heimdall::Presentation::UI::Home::HomeView.dart::HomeView"
+
+class "heimdall::Presentation::UI::Home::HomeView.dart::_HomeViewState" {
+  +Widget build()
+  +HomeViewModel initViewModel()
+}
+
+"heimdall::Core::Base::BaseState.dart::BaseState" <|-- "heimdall::Presentation::UI::Home::HomeView.dart::_HomeViewState"
+"heimdall::Presentation::UI::Home::HomeNavigator.dart::HomeNavigator" <|-- "heimdall::Presentation::UI::Home::HomeView.dart::_HomeViewState"
+
+class "heimdall::Presentation::UI::Home::HomeViewModel.dart::HomeViewModel" {
+  +int selectedIndex
+  +List<Widget> tabs
+  +dynamic changeIndex()
+}
+
+"heimdall::Core::Base::BaseViewModel.dart::BaseViewModel" <|-- "heimdall::Presentation::UI::Home::HomeViewModel.dart::HomeViewModel"
+
+abstract class "heimdall::Presentation::UI::Home::Tabs::Alert::AlertNavigator.dart::AlertNavigator" {
+}
+
+"heimdall::Core::Base::BaseNavigator.dart::BaseNavigator" <|-- "heimdall::Presentation::UI::Home::Tabs::Alert::AlertNavigator.dart::AlertNavigator"
+
+class "heimdall::Presentation::UI::Home::Tabs::Alert::AlertView.dart::AlertView" {
+  +State<AlertView> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "heimdall::Presentation::UI::Home::Tabs::Alert::AlertView.dart::AlertView"
+
+class "heimdall::Presentation::UI::Home::Tabs::Alert::AlertView.dart::_AlertViewState" {
+  +Widget build()
+  +AlertViewModel initViewModel()
+}
+
+"heimdall::Core::Base::BaseState.dart::BaseState" <|-- "heimdall::Presentation::UI::Home::Tabs::Alert::AlertView.dart::_AlertViewState"
+"heimdall::Presentation::UI::Home::Tabs::Alert::AlertNavigator.dart::AlertNavigator" <|-- "heimdall::Presentation::UI::Home::Tabs::Alert::AlertView.dart::_AlertViewState"
+
+class "heimdall::Presentation::UI::Home::Tabs::Alert::AlertViewModel.dart::AlertViewModel" {
+}
+
+"heimdall::Core::Base::BaseViewModel.dart::BaseViewModel" <|-- "heimdall::Presentation::UI::Home::Tabs::Alert::AlertViewModel.dart::AlertViewModel"
+
+abstract class "heimdall::Presentation::UI::Home::Tabs::Chat::ChatNavigator.dart::ChatNavigator" {
+  +dynamic goToContactChatScreen()
+}
+
+"heimdall::Core::Base::BaseNavigator.dart::BaseNavigator" <|-- "heimdall::Presentation::UI::Home::Tabs::Chat::ChatNavigator.dart::ChatNavigator"
+
+class "heimdall::Presentation::UI::Home::Tabs::Chat::ChatView.dart::ChatView" {
+  +State<ChatView> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "heimdall::Presentation::UI::Home::Tabs::Chat::ChatView.dart::ChatView"
+
+class "heimdall::Presentation::UI::Home::Tabs::Chat::ChatView.dart::_ChatViewState" {
+  +void initState()
+  +Widget build()
+  +ChatViewModel initViewModel()
+  +dynamic goToContactChatScreen()
+}
+
+"heimdall::Core::Base::BaseState.dart::BaseState" <|-- "heimdall::Presentation::UI::Home::Tabs::Chat::ChatView.dart::_ChatViewState"
+"heimdall::Presentation::UI::Home::Tabs::Chat::ChatNavigator.dart::ChatNavigator" <|-- "heimdall::Presentation::UI::Home::Tabs::Chat::ChatView.dart::_ChatViewState"
+
+class "heimdall::Presentation::UI::Home::Tabs::Chat::ChatViewModel.dart::ChatViewModel" {
+  +TextEditingController contactController
+  +AddContactUseCase addContactUseCase
+  +GetContactsUseCase getContactsUseCase
+  +List<Contact> allContacts
+  +List<Contact> contacts
+  +bool loading
+  +String? errorMessage
+  +dynamic loadContacts()
+  +List<Contact> copyList()
+  +dynamic search()
+  +List<Contact> sortByLastMessageTime()
+  +String getNoChatAnimation()
+  +dynamic addContact()
+  +String? emailValidation()
+  +dynamic goToContactChatScreen()
+  +dynamic showAddContactBottomSheet()
+}
+
+"heimdall::Presentation::UI::Home::Tabs::Chat::ChatViewModel.dart::ChatViewModel" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"heimdall::Presentation::UI::Home::Tabs::Chat::ChatViewModel.dart::ChatViewModel" o-- "heimdall::Domain::UseCase::AddContactUseCase.dart::AddContactUseCase"
+"heimdall::Presentation::UI::Home::Tabs::Chat::ChatViewModel.dart::ChatViewModel" o-- "heimdall::Domain::UseCase::GetContactsUseCase.dart::GetContactsUseCase"
+"heimdall::Core::Base::BaseViewModel.dart::BaseViewModel" <|-- "heimdall::Presentation::UI::Home::Tabs::Chat::ChatViewModel.dart::ChatViewModel"
+
+class "heimdall::Presentation::UI::Home::Tabs::Chat::Widgets::BottomSheetWidget.dart::BottomSheetWidget" {
+  +TextEditingController controller
+  +String hintTitle
+  +String buttonTitle
+  +Function addContactFunction
+  +Widget build()
+}
+
+"heimdall::Presentation::UI::Home::Tabs::Chat::Widgets::BottomSheetWidget.dart::BottomSheetWidget" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "heimdall::Presentation::UI::Home::Tabs::Chat::Widgets::BottomSheetWidget.dart::BottomSheetWidget"
+
+class "heimdall::Presentation::UI::Home::Tabs::Chat::Widgets::ChatContactWidget.dart::ChatContactWidget" {
+  +Contact contact
+  +String uid
+  +Function navigationFunction
+  +Widget build()
+}
+
+"heimdall::Presentation::UI::Home::Tabs::Chat::Widgets::ChatContactWidget.dart::ChatContactWidget" o-- "heimdall::Domain::Models::Contact::Contact.dart::Contact"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "heimdall::Presentation::UI::Home::Tabs::Chat::Widgets::ChatContactWidget.dart::ChatContactWidget"
+
+abstract class "heimdall::Presentation::UI::Home::Tabs::Keys::KeysNavigator.dart::KeysNavigator" {
+}
+
+"heimdall::Core::Base::BaseNavigator.dart::BaseNavigator" <|-- "heimdall::Presentation::UI::Home::Tabs::Keys::KeysNavigator.dart::KeysNavigator"
+
+class "heimdall::Presentation::UI::Home::Tabs::Keys::KeysView.dart::KeysView" {
+  +State<KeysView> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "heimdall::Presentation::UI::Home::Tabs::Keys::KeysView.dart::KeysView"
+
+class "heimdall::Presentation::UI::Home::Tabs::Keys::KeysView.dart::_KeysViewState" {
+  +Widget build()
+  +KeysViewModel initViewModel()
+}
+
+"heimdall::Core::Base::BaseState.dart::BaseState" <|-- "heimdall::Presentation::UI::Home::Tabs::Keys::KeysView.dart::_KeysViewState"
+"heimdall::Presentation::UI::Home::Tabs::Keys::KeysNavigator.dart::KeysNavigator" <|-- "heimdall::Presentation::UI::Home::Tabs::Keys::KeysView.dart::_KeysViewState"
+
+class "heimdall::Presentation::UI::Home::Tabs::Keys::KeysViewModel.dart::KeysViewModel" {
+}
+
+"heimdall::Core::Base::BaseViewModel.dart::BaseViewModel" <|-- "heimdall::Presentation::UI::Home::Tabs::Keys::KeysViewModel.dart::KeysViewModel"
+
+abstract class "heimdall::Presentation::UI::Home::Tabs::Locks::LocksNavigator.dart::LocksNavigator" {
+  +dynamic goToConfigureLockScreen()
+  +dynamic goToLockDetailsScreen()
+}
+
+"heimdall::Core::Base::BaseNavigator.dart::BaseNavigator" <|-- "heimdall::Presentation::UI::Home::Tabs::Locks::LocksNavigator.dart::LocksNavigator"
+
+class "heimdall::Presentation::UI::Home::Tabs::Locks::LocksView.dart::LocksView" {
+  +State<LocksView> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "heimdall::Presentation::UI::Home::Tabs::Locks::LocksView.dart::LocksView"
+
+class "heimdall::Presentation::UI::Home::Tabs::Locks::LocksView.dart::_LocksViewState" {
+  +void initState()
+  +Widget build()
+  +LocksViewModel initViewModel()
+  +dynamic goToConfigureLockScreen()
+  +dynamic goToLockDetailsScreen()
+}
+
+"heimdall::Core::Base::BaseState.dart::BaseState" <|-- "heimdall::Presentation::UI::Home::Tabs::Locks::LocksView.dart::_LocksViewState"
+"heimdall::Presentation::UI::Home::Tabs::Locks::LocksNavigator.dart::LocksNavigator" <|-- "heimdall::Presentation::UI::Home::Tabs::Locks::LocksView.dart::_LocksViewState"
+
+class "heimdall::Presentation::UI::Home::Tabs::Locks::LocksViewModel.dart::LocksViewModel" {
+  +GetLocksCarsUseCase getLocksCarsUseCase
+  +TextEditingController searchController
+  +GlobalKey<RefreshIndicatorState> refreshIndicatorKey
+  +List<LockCard> lockCardsList
+  +List<LockCard> realLocksCardList
+  +bool loading
+  +String? errorMessage
+  +dynamic loadCardsData()
+  +List<LockCard> copyList()
+  +dynamic goToConfigureLocScreen()
+  +String getAnimation()
+  +dynamic onLockCardPress()
+}
+
+"heimdall::Presentation::UI::Home::Tabs::Locks::LocksViewModel.dart::LocksViewModel" o-- "heimdall::Domain::UseCase::GetLocksCarsUseCase.dart::GetLocksCarsUseCase"
+"heimdall::Presentation::UI::Home::Tabs::Locks::LocksViewModel.dart::LocksViewModel" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"heimdall::Presentation::UI::Home::Tabs::Locks::LocksViewModel.dart::LocksViewModel" o-- "flutter::src::widgets::framework.dart::GlobalKey<RefreshIndicatorState>"
+"heimdall::Core::Base::BaseViewModel.dart::BaseViewModel" <|-- "heimdall::Presentation::UI::Home::Tabs::Locks::LocksViewModel.dart::LocksViewModel"
+
+abstract class "heimdall::Presentation::UI::Home::Tabs::Profile::ProfileNavigator.dart::ProfileNavigator" {
+  +dynamic goToSettingScreen()
+  +dynamic goToLockManagementScreen()
+  +dynamic goToFeedbackScreen()
+  +dynamic goToReportIssueScreen()
+  +dynamic goToAboutUsScreen()
+  +dynamic goToLoginScreen()
+  +dynamic goToUpdateProfileScreen()
+  +dynamic goToChangePasswordScreen()
+}
+
+"heimdall::Core::Base::BaseNavigator.dart::BaseNavigator" <|-- "heimdall::Presentation::UI::Home::Tabs::Profile::ProfileNavigator.dart::ProfileNavigator"
+
+class "heimdall::Presentation::UI::Home::Tabs::Profile::ProfileView.dart::ProfileView" {
+  +State<ProfileView> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "heimdall::Presentation::UI::Home::Tabs::Profile::ProfileView.dart::ProfileView"
+
+class "heimdall::Presentation::UI::Home::Tabs::Profile::ProfileView.dart::_ProfileViewState" {
+  +Widget build()
+  +ProfileViewModel initViewModel()
+  +dynamic goToSettingScreen()
+  +dynamic goToFeedbackScreen()
+  +dynamic goToReportIssueScreen()
+  +dynamic goToAboutUsScreen()
+  +dynamic goToLockManagementScreen()
+  +dynamic goToLoginScreen()
+  +dynamic goToUpdateProfileScreen()
+  +dynamic goToChangePasswordScreen()
+}
+
+"heimdall::Core::Base::BaseState.dart::BaseState" <|-- "heimdall::Presentation::UI::Home::Tabs::Profile::ProfileView.dart::_ProfileViewState"
+"heimdall::Presentation::UI::Home::Tabs::Profile::ProfileNavigator.dart::ProfileNavigator" <|-- "heimdall::Presentation::UI::Home::Tabs::Profile::ProfileView.dart::_ProfileViewState"
+
+class "heimdall::Presentation::UI::Home::Tabs::Profile::ProfileViewModel.dart::ProfileViewModel" {
+  +SignOutUserUseCase signOutUserUseCase
+  +DeleteUserAccountUseCase deleteUserAccountUseCase
+  +List<Button> buttonsData
+  +dynamic setButtonsData()
+  +dynamic onSignOutPress()
+  +dynamic signOut()
+  +dynamic onDeleteAccountPress()
+  +dynamic deleteAccount()
+  +String getIcon()
+  +dynamic goToUpdateProfileScreen()
+  +dynamic goToSettingScreen()
+  +dynamic goToFeedbackScreen()
+  +dynamic goToReportIssueScreen()
+  +dynamic goToAboutUsScreen()
+  +dynamic goToLockManagementScreen()
+  +dynamic goToLoginScreen()
+  +dynamic goToChangePasswordScreen()
+}
+
+"heimdall::Presentation::UI::Home::Tabs::Profile::ProfileViewModel.dart::ProfileViewModel" o-- "heimdall::Domain::UseCase::SignOutUserUseCase.dart::SignOutUserUseCase"
+"heimdall::Presentation::UI::Home::Tabs::Profile::ProfileViewModel.dart::ProfileViewModel" o-- "heimdall::Domain::UseCase::DeleteUserAccountUseCase.dart::DeleteUserAccountUseCase"
+"heimdall::Core::Base::BaseViewModel.dart::BaseViewModel" <|-- "heimdall::Presentation::UI::Home::Tabs::Profile::ProfileViewModel.dart::ProfileViewModel"
+
+class "heimdall::Presentation::UI::Home::Tabs::Profile::Widgets::CustomButton.dart::CustomButton" {
+  +Button button
+  +Widget build()
+}
+
+"heimdall::Presentation::UI::Home::Tabs::Profile::Widgets::CustomButton.dart::CustomButton" o-- "heimdall::Presentation::Models::Button::Button.dart::Button"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "heimdall::Presentation::UI::Home::Tabs::Profile::Widgets::CustomButton.dart::CustomButton"
+
+class "heimdall::Presentation::UI::Home::Tabs::Profile::Widgets::UserProfileDataWidget.dart::UserProfileDataWidget" {
+  +bool isEn
+  +User user
+  +String buttonTitle
+  +Function getIcon
+  +Function buttonAction
+  +Widget build()
+}
+
+"heimdall::Presentation::UI::Home::Tabs::Profile::Widgets::UserProfileDataWidget.dart::UserProfileDataWidget" o-- "firebase_auth::firebase_auth.dart::User"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "heimdall::Presentation::UI::Home::Tabs::Profile::Widgets::UserProfileDataWidget.dart::UserProfileDataWidget"
+
+abstract class "heimdall::Presentation::UI::Intro::IntroNavigator.dart::IntroNavigator" {
+  +dynamic goToLoginScreen()
+}
+
+"heimdall::Core::Base::BaseNavigator.dart::BaseNavigator" <|-- "heimdall::Presentation::UI::Intro::IntroNavigator.dart::IntroNavigator"
+
+class "heimdall::Presentation::UI::Intro::IntroView.dart::IntroView" {
+  {static} +String routeName
+  +State<IntroView> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "heimdall::Presentation::UI::Intro::IntroView.dart::IntroView"
+
+class "heimdall::Presentation::UI::Intro::IntroView.dart::_IntroViewState" {
+  +Widget build()
+  +IntroViewModel initViewModel()
+  +dynamic goToLoginScreen()
+}
+
+"heimdall::Core::Base::BaseState.dart::BaseState" <|-- "heimdall::Presentation::UI::Intro::IntroView.dart::_IntroViewState"
+"heimdall::Presentation::UI::Intro::IntroNavigator.dart::IntroNavigator" <|-- "heimdall::Presentation::UI::Intro::IntroView.dart::_IntroViewState"
+
+class "heimdall::Presentation::UI::Intro::IntroViewModel.dart::IntroViewModel" {
+  +dynamic onDonePress()
+  +String getLocalAnimation()
+  +String getHelloAnimation()
+  +String getSecurityAnimation()
+  +String getQRAnimation()
+  +String getKeyAnimation()
+  +String getChatAnimation()
+}
+
+"heimdall::Core::Base::BaseViewModel.dart::BaseViewModel" <|-- "heimdall::Presentation::UI::Intro::IntroViewModel.dart::IntroViewModel"
+
+abstract class "heimdall::Presentation::UI::LockDetails::LockDetailsNavigator.dart::LockDetailsNavigator" {
+}
+
+"heimdall::Core::Base::BaseNavigator.dart::BaseNavigator" <|-- "heimdall::Presentation::UI::LockDetails::LockDetailsNavigator.dart::LockDetailsNavigator"
+
+class "heimdall::Presentation::UI::LockDetails::LockDetailsView.dart::LockDetailsView" {
+  {static} +String routeName
+  +LockCard? lockCard
+  +State<LockDetailsView> createState()
+}
+
+"heimdall::Presentation::UI::LockDetails::LockDetailsView.dart::LockDetailsView" o-- "heimdall::Domain::Models::Card::LockCard.dart::LockCard"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "heimdall::Presentation::UI::LockDetails::LockDetailsView.dart::LockDetailsView"
+
+class "heimdall::Presentation::UI::LockDetails::LockDetailsView.dart::_LockDetailsViewState" {
+  +Widget build()
+  +LockDetailsViewModel initViewModel()
+}
+
+"heimdall::Core::Base::BaseState.dart::BaseState" <|-- "heimdall::Presentation::UI::LockDetails::LockDetailsView.dart::_LockDetailsViewState"
+"heimdall::Presentation::UI::LockDetails::LockDetailsNavigator.dart::LockDetailsNavigator" <|-- "heimdall::Presentation::UI::LockDetails::LockDetailsView.dart::_LockDetailsViewState"
+
+class "heimdall::Presentation::UI::LockDetails::LockDetailsViewModel.dart::LockDetailsViewModel" {
+  +LockCard lockCard
+}
+
+"heimdall::Presentation::UI::LockDetails::LockDetailsViewModel.dart::LockDetailsViewModel" o-- "heimdall::Domain::Models::Card::LockCard.dart::LockCard"
+"heimdall::Core::Base::BaseViewModel.dart::BaseViewModel" <|-- "heimdall::Presentation::UI::LockDetails::LockDetailsViewModel.dart::LockDetailsViewModel"
+
+abstract class "heimdall::Presentation::UI::LockManagement::LockManagementNavigator.dart::LockManagementNavigator" {
+}
+
+"heimdall::Core::Base::BaseNavigator.dart::BaseNavigator" <|-- "heimdall::Presentation::UI::LockManagement::LockManagementNavigator.dart::LockManagementNavigator"
+
+class "heimdall::Presentation::UI::LockManagement::LockManagementView.dart::LockManagementView" {
+  {static} +String routeName
+  +State<LockManagementView> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "heimdall::Presentation::UI::LockManagement::LockManagementView.dart::LockManagementView"
+
+class "heimdall::Presentation::UI::LockManagement::LockManagementView.dart::_LockManagementViewState" {
+  +Widget build()
+  +LockManagementViewModel initViewModel()
+}
+
+"heimdall::Core::Base::BaseState.dart::BaseState" <|-- "heimdall::Presentation::UI::LockManagement::LockManagementView.dart::_LockManagementViewState"
+"heimdall::Presentation::UI::LockManagement::LockManagementNavigator.dart::LockManagementNavigator" <|-- "heimdall::Presentation::UI::LockManagement::LockManagementView.dart::_LockManagementViewState"
+
+class "heimdall::Presentation::UI::LockManagement::LockManagementViewModel.dart::LockManagementViewModel" {
+}
+
+"heimdall::Core::Base::BaseViewModel.dart::BaseViewModel" <|-- "heimdall::Presentation::UI::LockManagement::LockManagementViewModel.dart::LockManagementViewModel"
+
+abstract class "heimdall::Presentation::UI::Login::LoginNavigator.dart::LoginNavigator" {
+  +dynamic goToRegistrationScreen()
+  +dynamic goToForgetPasswordScreen()
+  +dynamic goToHomeScreen()
+  +dynamic goToExtraInfoScreen()
+}
+
+"heimdall::Core::Base::BaseNavigator.dart::BaseNavigator" <|-- "heimdall::Presentation::UI::Login::LoginNavigator.dart::LoginNavigator"
+
+class "heimdall::Presentation::UI::Login::LoginView.dart::LoginView" {
+  {static} +String routeName
+  +State<LoginView> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "heimdall::Presentation::UI::Login::LoginView.dart::LoginView"
+
+class "heimdall::Presentation::UI::Login::LoginView.dart::_LoginViewState" {
+  +Widget build()
+  +LoginViewModel initViewModel()
+  +dynamic goToRegistrationScreen()
+  +dynamic goToForgetPasswordScreen()
+  +dynamic goToHomeScreen()
+  +dynamic goToExtraInfoScreen()
+}
+
+"heimdall::Core::Base::BaseState.dart::BaseState" <|-- "heimdall::Presentation::UI::Login::LoginView.dart::_LoginViewState"
+"heimdall::Presentation::UI::Login::LoginNavigator.dart::LoginNavigator" <|-- "heimdall::Presentation::UI::Login::LoginView.dart::_LoginViewState"
+
+class "heimdall::Presentation::UI::Login::LoginViewModel.dart::LoginViewModel" {
+  +SignUserInWithEmailAndPasswordUseCase signUserInWithEmailAndPasswordUseCase
+  +CheckIfUserExistUseCase checkIfUserExistUseCase
+  +AddUserUseCase addUserUseCase
+  +SignInWithGoogleUseCase signInWithGoogleUseCase
+  +GlobalKey<FormState> formKey
+  +TextEditingController emailController
+  +TextEditingController passwordController
+  +bool visible
+  +String getLogo()
+  +dynamic changeTheme()
+  +String? emailValidation()
+  +String? passwordValidation()
+  +dynamic changePasswordVisibility()
+  +dynamic goToRegisterScreen()
+  +dynamic goToForgetPasswordScreen()
+  +dynamic signInWithEmailAndPassword()
+  +void loginWithGoogle()
+  +dynamic goToHomeScreen()
+  +dynamic sendVerificationMail()
+  +dynamic goToExtraInfoScreen()
+}
+
+"heimdall::Presentation::UI::Login::LoginViewModel.dart::LoginViewModel" o-- "heimdall::Domain::UseCase::SignUserInWithEmailAndPasswordUseCase.dart::SignUserInWithEmailAndPasswordUseCase"
+"heimdall::Presentation::UI::Login::LoginViewModel.dart::LoginViewModel" o-- "heimdall::Domain::UseCase::CheckIfUserExistUseCase.dart::CheckIfUserExistUseCase"
+"heimdall::Presentation::UI::Login::LoginViewModel.dart::LoginViewModel" o-- "heimdall::Domain::UseCase::AddUserUseCase.dart::AddUserUseCase"
+"heimdall::Presentation::UI::Login::LoginViewModel.dart::LoginViewModel" o-- "heimdall::Domain::UseCase::SignInWithGoogleUseCase.dart::SignInWithGoogleUseCase"
+"heimdall::Presentation::UI::Login::LoginViewModel.dart::LoginViewModel" o-- "flutter::src::widgets::framework.dart::GlobalKey<FormState>"
+"heimdall::Presentation::UI::Login::LoginViewModel.dart::LoginViewModel" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"heimdall::Core::Base::BaseViewModel.dart::BaseViewModel" <|-- "heimdall::Presentation::UI::Login::LoginViewModel.dart::LoginViewModel"
+
+abstract class "heimdall::Presentation::UI::Registration::RegistrationNavigator.dart::RegistrationNavigator" {
+  +dynamic goToExtraInfoScreen()
+  +dynamic goToLoginScreen()
+}
+
+"heimdall::Core::Base::BaseNavigator.dart::BaseNavigator" <|-- "heimdall::Presentation::UI::Registration::RegistrationNavigator.dart::RegistrationNavigator"
+
+class "heimdall::Presentation::UI::Registration::RegistrationView.dart::RegistrationView" {
+  {static} +String routeName
+  +State<RegistrationView> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "heimdall::Presentation::UI::Registration::RegistrationView.dart::RegistrationView"
+
+class "heimdall::Presentation::UI::Registration::RegistrationView.dart::_RegistrationViewState" {
+  +Widget build()
+  +RegistrationViewModel initViewModel()
+  +dynamic goToExtraInfoScreen()
+  +dynamic goToLoginScreen()
+}
+
+"heimdall::Core::Base::BaseState.dart::BaseState" <|-- "heimdall::Presentation::UI::Registration::RegistrationView.dart::_RegistrationViewState"
+"heimdall::Presentation::UI::Registration::RegistrationNavigator.dart::RegistrationNavigator" <|-- "heimdall::Presentation::UI::Registration::RegistrationView.dart::_RegistrationViewState"
+
+class "heimdall::Presentation::UI::Registration::RegistrationViewModel.dart::RegistrationViewModel" {
+  +CreateAccountUseCase createAccountUseCase
+  +AddUserUseCase addUserUseCase
+  +GlobalKey<FormState> formKey
+  +TextEditingController nameController
+  +TextEditingController emailController
+  +TextEditingController passwordController
+  +TextEditingController passwordConfirmationController
+  +bool passwordVisible
+  +bool passwordConfineVisible
+  +String? nameValidation()
+  +String? emailValidation()
+  +String? passwordValidation()
+  +String? passwordConfirmationValidation()
+  +String getLogo()
+  +dynamic changeTheme()
+  +dynamic createAccount()
+  +dynamic changePasswordVisibility()
+  +dynamic changePasswordConfirmVisibility()
+  +dynamic goToLoginScreen()
+  +dynamic goToExtraInfoScreen()
+}
+
+"heimdall::Presentation::UI::Registration::RegistrationViewModel.dart::RegistrationViewModel" o-- "heimdall::Domain::UseCase::CreateAccountUseCase.dart::CreateAccountUseCase"
+"heimdall::Presentation::UI::Registration::RegistrationViewModel.dart::RegistrationViewModel" o-- "heimdall::Domain::UseCase::AddUserUseCase.dart::AddUserUseCase"
+"heimdall::Presentation::UI::Registration::RegistrationViewModel.dart::RegistrationViewModel" o-- "flutter::src::widgets::framework.dart::GlobalKey<FormState>"
+"heimdall::Presentation::UI::Registration::RegistrationViewModel.dart::RegistrationViewModel" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"heimdall::Core::Base::BaseViewModel.dart::BaseViewModel" <|-- "heimdall::Presentation::UI::Registration::RegistrationViewModel.dart::RegistrationViewModel"
+
+abstract class "heimdall::Presentation::UI::ReportIssue::ReportIssueNavigator.dart::ReportIssueNavigator" {
+}
+
+"heimdall::Core::Base::BaseNavigator.dart::BaseNavigator" <|-- "heimdall::Presentation::UI::ReportIssue::ReportIssueNavigator.dart::ReportIssueNavigator"
+
+class "heimdall::Presentation::UI::ReportIssue::ReportIssueView.dart::ReportIssueView" {
+  {static} +String routeName
+  +State<ReportIssueView> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "heimdall::Presentation::UI::ReportIssue::ReportIssueView.dart::ReportIssueView"
+
+class "heimdall::Presentation::UI::ReportIssue::ReportIssueView.dart::_ReportIssueViewState" {
+  +Widget build()
+  +ReportIssueViewModel initViewModel()
+}
+
+"heimdall::Core::Base::BaseState.dart::BaseState" <|-- "heimdall::Presentation::UI::ReportIssue::ReportIssueView.dart::_ReportIssueViewState"
+"heimdall::Presentation::UI::ReportIssue::ReportIssueNavigator.dart::ReportIssueNavigator" <|-- "heimdall::Presentation::UI::ReportIssue::ReportIssueView.dart::_ReportIssueViewState"
+
+class "heimdall::Presentation::UI::ReportIssue::ReportIssueViewModel.dart::ReportIssueViewModel" {
+  +SendReportUseCase sendReportUseCase
+  +TextEditingController controller
+  +dynamic sendReport()
+}
+
+"heimdall::Presentation::UI::ReportIssue::ReportIssueViewModel.dart::ReportIssueViewModel" o-- "heimdall::Domain::UseCase::SendReportUseCase.dart::SendReportUseCase"
+"heimdall::Presentation::UI::ReportIssue::ReportIssueViewModel.dart::ReportIssueViewModel" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"heimdall::Core::Base::BaseViewModel.dart::BaseViewModel" <|-- "heimdall::Presentation::UI::ReportIssue::ReportIssueViewModel.dart::ReportIssueViewModel"
+
+abstract class "heimdall::Presentation::UI::Setting::SettingNavigator.dart::SettingNavigator" {
+}
+
+"heimdall::Core::Base::BaseNavigator.dart::BaseNavigator" <|-- "heimdall::Presentation::UI::Setting::SettingNavigator.dart::SettingNavigator"
+
+class "heimdall::Presentation::UI::Setting::SettingView.dart::SettingView" {
+  {static} +String routeName
+  +State<SettingView> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "heimdall::Presentation::UI::Setting::SettingView.dart::SettingView"
+
+class "heimdall::Presentation::UI::Setting::SettingView.dart::_SettingViewState" {
+  +Widget build()
+  +SettingViewModel initViewModel()
+}
+
+"heimdall::Core::Base::BaseState.dart::BaseState" <|-- "heimdall::Presentation::UI::Setting::SettingView.dart::_SettingViewState"
+"heimdall::Presentation::UI::Setting::SettingNavigator.dart::SettingNavigator" <|-- "heimdall::Presentation::UI::Setting::SettingView.dart::_SettingViewState"
+
+class "heimdall::Presentation::UI::Setting::SettingViewModel.dart::SettingViewModel" {
+  +int selectedIndex
+  +List<String> images
+  +void changeSelectedIndex()
+  +void changeTheme()
+}
+
+"heimdall::Core::Base::BaseViewModel.dart::BaseViewModel" <|-- "heimdall::Presentation::UI::Setting::SettingViewModel.dart::SettingViewModel"
+
+class "heimdall::Presentation::UI::Splash::SplashScreen.dart::SplashScreen" {
+  {static} +String routeName
+  +bool firstTime
+  +bool loggedIn
+  +User? user
+  +Widget build()
+}
+
+"heimdall::Presentation::UI::Splash::SplashScreen.dart::SplashScreen" o-- "firebase_auth::firebase_auth.dart::User"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "heimdall::Presentation::UI::Splash::SplashScreen.dart::SplashScreen"
+
+abstract class "heimdall::Presentation::UI::UpdateProfile::UpdateProfileNavigator.dart::UpdateProfileNavigator" {
+  +dynamic showMyDatePicker()
+}
+
+"heimdall::Core::Base::BaseNavigator.dart::BaseNavigator" <|-- "heimdall::Presentation::UI::UpdateProfile::UpdateProfileNavigator.dart::UpdateProfileNavigator"
+
+class "heimdall::Presentation::UI::UpdateProfile::UpdateProfileView.dart::UpdateProfileView" {
+  {static} +String routeName
+  +State<UpdateProfileView> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "heimdall::Presentation::UI::UpdateProfile::UpdateProfileView.dart::UpdateProfileView"
+
+class "heimdall::Presentation::UI::UpdateProfile::UpdateProfileView.dart::_UpdateProfileViewState" {
+  +void initState()
+  +Widget build()
+  +UpdateProfileViewModel initViewModel()
+  +dynamic showMyDatePicker()
+}
+
+"heimdall::Core::Base::BaseState.dart::BaseState" <|-- "heimdall::Presentation::UI::UpdateProfile::UpdateProfileView.dart::_UpdateProfileViewState"
+"heimdall::Presentation::UI::UpdateProfile::UpdateProfileNavigator.dart::UpdateProfileNavigator" <|-- "heimdall::Presentation::UI::UpdateProfile::UpdateProfileView.dart::_UpdateProfileViewState"
+
+class "heimdall::Presentation::UI::UpdateProfile::UpdateProfileViewModel.dart::UpdateProfileViewModel" {
+  +GetUserDataUseCase getUserDataUseCase
+  +UpdateUserDataUseCase updateUserDataUseCase
+  +GlobalKey<FormState> formKey
+  +TextEditingController nameController
+  +TextEditingController phoneController
+  +List<String> genders
+  +String selectedGender
+  +DateTime birthDate
+  +String selectedDate
+  +MyUser? user
+  +String? errorMessage
+  +dynamic loadUserData()
+  +dynamic showModalBottomSheet()
+  +String getLogo()
+  +String? nameValidation()
+  +String? phoneValidation()
+  +dynamic changeDate()
+  +dynamic changeSelectedGender()
+  +dynamic showDatePicker()
+  +dynamic updateUserData()
+}
+
+"heimdall::Presentation::UI::UpdateProfile::UpdateProfileViewModel.dart::UpdateProfileViewModel" o-- "heimdall::Domain::UseCase::GetUserDataUseCase.dart::GetUserDataUseCase"
+"heimdall::Presentation::UI::UpdateProfile::UpdateProfileViewModel.dart::UpdateProfileViewModel" o-- "heimdall::Domain::UseCase::UpdateUserDataUseCase.dart::UpdateUserDataUseCase"
+"heimdall::Presentation::UI::UpdateProfile::UpdateProfileViewModel.dart::UpdateProfileViewModel" o-- "flutter::src::widgets::framework.dart::GlobalKey<FormState>"
+"heimdall::Presentation::UI::UpdateProfile::UpdateProfileViewModel.dart::UpdateProfileViewModel" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"heimdall::Presentation::UI::UpdateProfile::UpdateProfileViewModel.dart::UpdateProfileViewModel" o-- "heimdall::Domain::Models::Users::User.dart::MyUser"
+"heimdall::Core::Base::BaseViewModel.dart::BaseViewModel" <|-- "heimdall::Presentation::UI::UpdateProfile::UpdateProfileViewModel.dart::UpdateProfileViewModel"
+
+class "heimdall::Presentation::UI::Widgets::AvatarImagesListWidget.dart::AvatarImagesListWidget" {
+  +List<String> images
+  +String selectedItem
+  +Function onSelectedItemPress
+  +State<AvatarImagesListWidget> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "heimdall::Presentation::UI::Widgets::AvatarImagesListWidget.dart::AvatarImagesListWidget"
+
+class "heimdall::Presentation::UI::Widgets::AvatarImagesListWidget.dart::_AvatarImagesListWidgetState" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "heimdall::Presentation::UI::Widgets::AvatarImagesListWidget.dart::_AvatarImagesListWidgetState"
+
+class "heimdall::Presentation::UI::Widgets::ImagePIckLocationModalBottomSheetWidget.dart::ImagePickLocationModalBottomSheetWidget" {
+  +String title
+  +String cameraTitle
+  +String galleryTitle
+  +Function openCamera
+  +Function openGallery
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "heimdall::Presentation::UI::Widgets::ImagePIckLocationModalBottomSheetWidget.dart::ImagePickLocationModalBottomSheetWidget"
+
+class "heimdall::Presentation::UI::Widgets::LanguageSwitch.dart::LanguageSwitch" {
+  +State<LanguageSwitch> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "heimdall::Presentation::UI::Widgets::LanguageSwitch.dart::LanguageSwitch"
+
+class "heimdall::Presentation::UI::Widgets::LanguageSwitch.dart::_LanguageSwitchState" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "heimdall::Presentation::UI::Widgets::LanguageSwitch.dart::_LanguageSwitchState"
+
+class "heimdall::Presentation::UI::Widgets::LockCardWidget.dart::LockCardWidget" {
+  +LockCard card
+  +Function onCardClick
+  +Widget build()
+}
+
+"heimdall::Presentation::UI::Widgets::LockCardWidget.dart::LockCardWidget" o-- "heimdall::Domain::Models::Card::LockCard.dart::LockCard"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "heimdall::Presentation::UI::Widgets::LockCardWidget.dart::LockCardWidget"
+
+class "heimdall::Presentation::UI::Widgets::ThemeSlider.dart::ThemeSwitch" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "heimdall::Presentation::UI::Widgets::ThemeSlider.dart::ThemeSwitch"
+
+
+@enduml
