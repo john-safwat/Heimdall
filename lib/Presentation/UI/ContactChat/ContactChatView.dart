@@ -92,11 +92,14 @@ class _ContactChatViewState
                         ? viewModel.contact.secondUserImage
                         : viewModel.contact.firstUserImage,
                     fit: BoxFit.cover,
-                    imageBuilder: (context, imageProvider) => ClipRRect(
-                      borderRadius: BorderRadius.circular(1000),
-                      child: Image(
-                        image: imageProvider,
-                        fit: BoxFit.cover,
+                    imageBuilder: (context, imageProvider) => Hero(
+                      tag: viewModel.constants.userImageTag,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(1000),
+                        child: Image(
+                          image: imageProvider,
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                     placeholder: (context, url) =>

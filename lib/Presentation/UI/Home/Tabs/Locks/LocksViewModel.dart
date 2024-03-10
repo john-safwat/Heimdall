@@ -9,11 +9,9 @@ class LocksViewModel extends BaseViewModel <LocksNavigator>{
 
   GetLocksCarsUseCase getLocksCarsUseCase;
   LocksViewModel({required this.getLocksCarsUseCase});
-
   TextEditingController searchController = TextEditingController();
-  final GlobalKey<RefreshIndicatorState> refreshIndicatorKey = GlobalKey<RefreshIndicatorState>();
   List<LockCard> lockCardsList = [];
-  List<LockCard> realLocksCardList = [];
+  List<LockCard> allLocksCardList = [];
   bool loading = true;
   String? errorMessage;
 
@@ -21,12 +19,12 @@ class LocksViewModel extends BaseViewModel <LocksNavigator>{
   loadCardsData()async{
     errorMessage = null;
     lockCardsList = [];
-    realLocksCardList = [];
+    allLocksCardList = [];
     loading = true;
     notifyListeners();
     try{
-      realLocksCardList = await getLocksCarsUseCase.invoke(uid: appConfigProvider!.user!.uid);
-      lockCardsList = copyList(realLocksCardList);
+      allLocksCardList = await getLocksCarsUseCase.invoke(uid: appConfigProvider!.user!.uid);
+      lockCardsList = copyList(allLocksCardList);
       loading = false;
       notifyListeners();
     }catch (e){
@@ -66,6 +64,21 @@ class LocksViewModel extends BaseViewModel <LocksNavigator>{
 
   onLockCardPress(LockCard card){
     navigator!.goToLockDetailsScreen(card);
+  }
+
+  // function to search in locks
+  void search(){
+    lockCardsList = allLocksCardList.where((element) => element.name.contains(searchController.text)).toList();
+    if (lockCardsList.isEmpty){
+      lockCardsList = allLocksCardList.where((element) => element.name.toLowerCase().contains(searchController.text.toLowerCase())).toList();
+    }
+    if (lockCardsList.isEmpty){
+      lockCardsList = allLocksCardList.where((element) => element.name.toUpperCase().contains(searchController.text.toUpperCase())).toList();
+    }
+    if (searchController.text.isEmpty){
+      lockCardsList = copyList(allLocksCardList);
+    }
+    notifyListeners();
   }
 
 }

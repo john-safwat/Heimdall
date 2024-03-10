@@ -20,31 +20,46 @@ class _AvatarImagesListWidgetState extends State<AvatarImagesListWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 250,
+      height: 300,
       padding: const EdgeInsets.symmetric(vertical: 25),
-      child: ListView.builder(
-        shrinkWrap: true,
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) => InkWell(
-          overlayColor: MaterialStateProperty.all(Colors.transparent),
-          onTap: () {
-            widget.onSelectedItemPress("${index+1}");
-            setState(() {
-              widget.selectedItem = "${index+1}";
-            });
-          },
-          child: Container(
-            padding: const EdgeInsets.all(20),
-            margin: const EdgeInsets.symmetric(horizontal: 10),
+      child: Column(
+        children: [
+          Container(
+            width: 100,
+            padding: const EdgeInsets.all(3),
             decoration: BoxDecoration(
-              color: "${index+1}" == widget.selectedItem ? Theme.of(context).primaryColor : Colors.transparent,
-              borderRadius: BorderRadius.circular(20),
-              border: Border.all(width: 2, color: Theme.of(context).primaryColor)
+              color: Theme.of(context).primaryColor,
+              borderRadius: BorderRadius.circular(200)
             ),
-            child: Image.asset("assets/avatars/avatar${widget.images[index]}.png"),
           ),
-        ),
-        itemCount: widget.images.length,
+          const SizedBox(height: 25,),
+          Expanded(
+            child: ListView.builder(
+              shrinkWrap: true,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) => InkWell(
+                overlayColor: MaterialStateProperty.all(Colors.transparent),
+                onTap: () {
+                  widget.onSelectedItemPress("${index+1}");
+                  setState(() {
+                    widget.selectedItem = "${index+1}";
+                  });
+                },
+                child: Container(
+                  padding: const EdgeInsets.all(20),
+                  margin: const EdgeInsets.symmetric(horizontal: 10),
+                  decoration: BoxDecoration(
+                    color: "${index+1}" == widget.selectedItem ? Theme.of(context).primaryColor : Colors.transparent,
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(width: 2, color: Theme.of(context).primaryColor)
+                  ),
+                  child: Image.asset("assets/avatars/avatar${widget.images[index]}.png"),
+                ),
+              ),
+              itemCount: widget.images.length,
+            ),
+          ),
+        ],
       ),
     );
   }

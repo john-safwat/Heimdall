@@ -150,5 +150,6 @@
   "color" : "Color",
   "lockAdded" : "Lock Added Successfully To Your List",
   "empty" : "It's Empty in Here",
-  "lockDetails" : "Lock Details"
+  "lockDetails" : "Lock Details",
+  "imagePreview" : "Image Preview"
 }

@@ -85,7 +85,7 @@ class _ConfigureLockViewState
                             // background of the card
                             Container(
                               width: viewModel.mediaQuery!.width - 40,
-                              height: viewModel.mediaQuery!.height * 0.6,
+                              height: 500,
                               decoration: BoxDecoration(
                                   color: viewModel.cardColor,
                                   borderRadius: BorderRadius.circular(20)),
