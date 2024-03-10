@@ -7,12 +7,13 @@ import 'package:intl/intl.dart';
 class ChatContactWidget extends StatelessWidget {
   Contact contact;
   String uid;
+  String tag;
   Function navigationFunction;
-
   ChatContactWidget(
       {required this.contact,
       required this.uid,
       required this.navigationFunction,
+      required this.tag,
       super.key});
   @override
   Widget build(BuildContext context) {
@@ -37,9 +38,12 @@ class ChatContactWidget extends StatelessWidget {
                 fit: BoxFit.cover,
                 imageBuilder: (context, imageProvider) => ClipRRect(
                   borderRadius: BorderRadius.circular(1000),
-                  child: Image(
-                    image: imageProvider,
-                    fit: BoxFit.cover,
+                  child: Hero(
+                    tag: tag,
+                    child: Image(
+                      image: imageProvider,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
                 placeholder: (context, url) =>

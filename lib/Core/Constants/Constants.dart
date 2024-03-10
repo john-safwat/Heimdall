@@ -12,5 +12,7 @@ class Constants {
   final String feedbacksCollection = "Feedbacks";
   final String contactsCollection = "Contacts";
   final String locksCollection = "Locks";
+  final String notificationsCollection = "Notifications";
+  final String userImageTag = "UserImageTag";
 
 }

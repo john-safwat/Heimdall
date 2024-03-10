@@ -60,6 +60,8 @@ dependencies:
   qr_mobile_vision: ^5.0.0
   flutter_colorpicker: ^1.0.3
   device_preview: ^1.1.0
+  shimmer: ^3.0.0
+  zoom_pinch_overlay: ^1.4.3
 
 
 dev_dependencies:

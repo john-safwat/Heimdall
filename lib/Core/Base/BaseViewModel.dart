@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:heimdall/Core/Base/BaseNavigator.dart';
+import 'package:heimdall/Core/Constants/Constants.dart';
 import 'package:heimdall/Core/Errors/FirebaseAuthExceptionHandler.dart';
 import 'package:heimdall/Core/Errors/FirebaseFireStoreErrorHandler.dart';
 import 'package:heimdall/Core/Errors/FirebaseImageDatabaseExceptionsHandler.dart';
@@ -28,6 +29,7 @@ abstract class BaseViewModel<N extends BaseNavigator> extends ChangeNotifier {
   AppConfigProvider? appConfigProvider;
   AppLocalizations? local;
   Size? mediaQuery;
+  Constants constants = Constants.getInstance();
   late FirebaseAuthExceptionHandler firebaseAuthExceptionHandler;
   late FirebaseFireStoreErrorHandler firebaseFireStoreErrorHandler;
   late FirebaseImageDatabaseExceptionsHandler

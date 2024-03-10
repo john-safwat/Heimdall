@@ -6,7 +6,6 @@ import 'package:heimdall/Domain/UseCase/GetContactsUseCase.dart';
 import 'package:heimdall/Presentation/UI/ContactChat/ContactChatView.dart';
 import 'package:heimdall/Presentation/UI/Home/Tabs/Chat/ChatNavigator.dart';
 import 'package:heimdall/Presentation/UI/Home/Tabs/Chat/ChatViewModel.dart';
-import 'package:heimdall/Presentation/UI/Home/Tabs/Chat/Widgets/BottomSheetWidget.dart';
 import 'package:heimdall/Presentation/UI/Home/Tabs/Chat/Widgets/ChatContactWidget.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:lottie/lottie.dart';
@@ -118,6 +117,7 @@ class _ChatViewState extends BaseState<ChatView, ChatViewModel>
                           contact: value.contacts[index],
                           uid: value.appConfigProvider!.user!.uid,
                           navigationFunction: value.goToContactChatScreen,
+                          tag: viewModel.constants.userImageTag,
                         ),
                         itemCount: value.contacts.length,
                       );
