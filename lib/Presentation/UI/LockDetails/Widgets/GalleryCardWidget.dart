@@ -4,9 +4,9 @@ import 'package:heimdall/Presentation/UI/LockDetails/Widgets/ImageWidget.dart';
 class GalleryCardWidget extends StatelessWidget {
   List<String> images;
   Function onImageClick;
-
+  Function onMoreImagesPress;
   GalleryCardWidget(
-      {required this.images, required this.onImageClick, super.key});
+      {required this.images, required this.onImageClick ,required this.onMoreImagesPress, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -187,10 +187,32 @@ class GalleryCardWidget extends StatelessWidget {
                                 tag: "3")),
                         const SizedBox(height: 10),
                         Expanded(
-                            child: ImageWidget(
-                                onImageClick: onImageClick,
-                                image: images[4],
-                                tag: "4")),
+                            child: Stack(
+                              children: [
+                                ImageWidget(
+                                    onImageClick: onImageClick,
+                                    image: images[4],
+                                    tag: "4"),
+                                Positioned.fill(
+                                    child: InkWell(
+                                      overlayColor: MaterialStateProperty.all(Colors.transparent),
+                                      onTap: () => onMoreImagesPress(),
+                                      child: Container(
+                                        padding: const EdgeInsets.all(10),
+                                        decoration: BoxDecoration(
+                                          color: Theme.of(context).primaryColor.withOpacity(0.5),
+                                          borderRadius: BorderRadius.circular(10)
+                                        ),
+                                        child: FittedBox(
+                                          child: Text(
+                                            "+${images.length-4}"
+                                          ),
+                                        ),
+                                      ),
+                                    )
+                                )
+                              ],
+                            )),
                       ],
                     ),
                   ),
