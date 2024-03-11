@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:heimdall/Core/Providers/AppConfigProvider.dart';
 import 'package:heimdall/Core/Providers/LocalProvider.dart';
+import 'package:heimdall/Core/Providers/LocksProvider.dart';
 import 'package:heimdall/Core/Providers/ThemeProvider.dart';
 import 'package:heimdall/Core/Theme/MyTheme.dart';
 import 'package:heimdall/Presentation/UI/AboutUs/AboutUsView.dart';
@@ -49,7 +50,8 @@ void main()async{
       providers: [
         ChangeNotifierProvider(create: (context) => ThemeProvider(),),
         ChangeNotifierProvider(create: (context) => LocalProvider(),),
-        ChangeNotifierProvider(create: (context) => AppConfigProvider(user: user),)
+        ChangeNotifierProvider(create: (context) => AppConfigProvider(user: user),),
+        ChangeNotifierProvider(create: (context) => LocksProvider.getInstance(),)
       ],
       child: MyApp(firstTime: firstTime, loggedIn: loggedIn, user: user,)
     )

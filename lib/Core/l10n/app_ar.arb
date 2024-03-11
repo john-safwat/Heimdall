@@ -151,5 +151,10 @@
   "lockAdded" : "تمت اضافة القفل اللي مجمعتك من الاقفال بنجاح",
   "empty" : "انها فارغة هنا",
   "lockDetails" : "تفاصيل القفل",
-  "imagePreview" : "الصورة"
+  "imagePreview" : "الصورة",
+  "time" : "الوقت",
+  "doYouWantToSave" : "هل تريد حفظ هذه الصورة",
+  "imageSavedSuccessfully" : "تم حفظ الصورة بنجاح",
+  "opened" : "القفل مفتوح",
+  "closed" : "القفل مغلق"
 }
