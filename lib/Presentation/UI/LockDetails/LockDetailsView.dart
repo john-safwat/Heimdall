@@ -5,6 +5,7 @@ import 'package:heimdall/Domain/Models/Card/LockCard.dart';
 import 'package:heimdall/Domain/UseCase/ChangeLockStateUseCase.dart';
 import 'package:heimdall/Domain/UseCase/GetLockImagesListUseCase.dart';
 import 'package:heimdall/Domain/UseCase/SetLockRealTimeDatabaseListenerUseCase.dart';
+import 'package:heimdall/Presentation/UI/Gallery/GalleryView.dart';
 import 'package:heimdall/Presentation/UI/ImagePreview/ImagePreviewView.dart';
 import 'package:heimdall/Presentation/UI/LockDetails/LockDetailsNavigator.dart';
 import 'package:heimdall/Presentation/UI/LockDetails/LockDetailsViewModel.dart';
@@ -73,6 +74,7 @@ class _LockDetailsViewState
                   return GalleryCardWidget(
                     images: value.images,
                     onImageClick: value.goToImagePreviewScreen,
+                    onMoreImagesPress: value.goToGalleryScreen,
                   );
                 }
               }),
@@ -157,6 +159,16 @@ class _LockDetailsViewState
         MaterialPageRoute(
           builder: (context) =>
               ImagePreviewView(tag: tag, image: image, images: images),
+        ));
+  }
+
+  @override
+  goToGalleryScreen({required List<String> images}) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) =>
+              GalleryView(images: images,),
         ));
   }
 }

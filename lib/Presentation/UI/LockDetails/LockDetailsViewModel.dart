@@ -85,4 +85,8 @@ class LockDetailsViewModel extends BaseViewModel<LockDetailsNavigator> {
       return "assets/animations/CameraGold.json";
     }
   }
+
+  goToGalleryScreen() {
+    navigator!.goToGalleryScreen(images: images);
+  }
 }

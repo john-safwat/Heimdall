@@ -1,8 +1,6 @@
 import 'package:heimdall/Core/Base/BaseNavigator.dart';
 
-abstract class LockDetailsNavigator extends BaseNavigator{
-
+abstract class GalleryNavigator extends BaseNavigator {
   goToImagePreviewScreen({required String image , required String tag , required List<String> images});
-  goToGalleryScreen({required List<String> images});
 
 }
