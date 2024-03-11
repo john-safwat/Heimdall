@@ -156,5 +156,6 @@
   "doYouWantToSave" : "هل تريد حفظ هذه الصورة",
   "imageSavedSuccessfully" : "تم حفظ الصورة بنجاح",
   "opened" : "القفل مفتوح",
-  "closed" : "القفل مغلق"
+  "closed" : "القفل مغلق",
+  "notifications" :"الاشعارات"
 }

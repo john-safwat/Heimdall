@@ -14,5 +14,6 @@ class Constants {
   final String locksCollection = "Locks";
   final String notificationsCollection = "Notifications";
   final String userImageTag = "UserImageTag";
+  final String logCollection = "Log";
 
 }

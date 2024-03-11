@@ -18,4 +18,9 @@ class NotificationsRepositoryImpl implements NotificationsRepository{
     return response;
   }
 
+  @override
+  Future<void> addNotification({required Notification notification}) async{
+    await remoteDataSource.addNotification(notification: notification.toDataSource());
+  }
+
 }

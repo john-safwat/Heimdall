@@ -156,5 +156,6 @@
   "doYouWantToSave" : "Do You Want To Save This Image",
   "imageSavedSuccessfully" : "Image Saved Successfully",
   "opened" : "Opened",
-  "closed" : "Closed"
+  "closed" : "Closed",
+  "notifications" :"Notifications"
 }

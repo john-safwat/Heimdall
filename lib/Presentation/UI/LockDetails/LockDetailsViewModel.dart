@@ -2,6 +2,8 @@ import 'package:heimdall/Core/Base/BaseViewModel.dart';
 import 'package:heimdall/Core/Providers/LocksProvider.dart';
 import 'package:heimdall/Core/Theme/MyTheme.dart';
 import 'package:heimdall/Domain/Models/Card/LockCard.dart';
+import 'package:heimdall/Domain/Models/Log/Log.dart';
+import 'package:heimdall/Domain/Models/Notification/Notification.dart';
 import 'package:heimdall/Domain/UseCase/ChangeLockStateUseCase.dart';
 import 'package:heimdall/Domain/UseCase/GetLockImagesListUseCase.dart';
 import 'package:heimdall/Domain/UseCase/SetLockRealTimeDatabaseListenerUseCase.dart';
@@ -16,12 +18,10 @@ class LockDetailsViewModel extends BaseViewModel<LockDetailsNavigator> {
 
   late LocksProvider locksProvider;
 
-  LockDetailsViewModel({
-    required this.lockCard,
+  LockDetailsViewModel({required this.lockCard,
     required this.getLockImagesListUseCase,
     required this.setLockRealTimeDatabaseListenerUseCase,
-    required this.changeLockStateUseCase
-  });
+    required this.changeLockStateUseCase});
 
   List<String> images = [];
   String? imagesErrorMessage;
@@ -50,7 +50,8 @@ class LockDetailsViewModel extends BaseViewModel<LockDetailsNavigator> {
     lockLoading = true;
     notifyListeners();
     try {
-      await setLockRealTimeDatabaseListenerUseCase.invoke(lockId: lockCard.lockId);
+      await setLockRealTimeDatabaseListenerUseCase.invoke(
+          lockId: lockCard.lockId);
       lockLoading = false;
       notifyListeners();
     } catch (e) {
@@ -64,10 +65,26 @@ class LockDetailsViewModel extends BaseViewModel<LockDetailsNavigator> {
     navigator!.goToImagePreviewScreen(image: image, tag: tag, images: images);
   }
 
-  changeLockState()async{
+  changeLockState() async {
     try {
       var data = locksProvider.value;
-      await changeLockStateUseCase.invoke(lockState: !data["opened"]);
+      await changeLockStateUseCase.invoke(
+          lockState: !data["opened"],
+          log: Log(
+              eventType: !data["opened"] ? "UnLock" : "Closed",
+              id: "id",
+              method: "Mobile",
+              timeOpened: DateTime.now(),
+              uid: appConfigProvider!.user!.uid,
+              userName: appConfigProvider!.user!.displayName ?? "UnKnown"),
+          notification: Notification(
+              id: "",
+              body: !data["opened"]
+                  ? "This Lock Is Opened Using Mobile App Successfully"
+                  : "This Lock Is Closed Using Mobile App Successfully",
+              priority: "low",
+              time: DateTime.now(),
+              urls: []));
       notifyListeners();
     } catch (e) {
       notifyListeners();
