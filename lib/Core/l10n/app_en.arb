@@ -151,5 +151,10 @@
   "lockAdded" : "Lock Added Successfully To Your List",
   "empty" : "It's Empty in Here",
   "lockDetails" : "Lock Details",
-  "imagePreview" : "Image Preview"
+  "imagePreview" : "Image Preview",
+  "time" : "Time",
+  "doYouWantToSave" : "Do You Want To Save This Image",
+  "imageSavedSuccessfully" : "Image Saved Successfully",
+  "opened" : "Opened",
+  "closed" : "Closed"
 }

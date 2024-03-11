@@ -18,7 +18,7 @@ class ImageWidget extends StatelessWidget {
         height: double.infinity,
         width: double.infinity,
         imageBuilder: (context, imageProvider) => ClipRRect(
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(10),
           child: Hero(
             tag: tag,
             child: Image(

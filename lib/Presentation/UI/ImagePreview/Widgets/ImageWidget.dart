@@ -1,11 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:heimdall/Core/Theme/MyTheme.dart';
 
 class ImageWidget extends StatelessWidget {
   String image ;
-  String tag;
   Function onImageClick;
-  ImageWidget({required this.image,required this.tag,required this.onImageClick , super.key});
+  bool isSelected;
+  ImageWidget({required this.image,required this.onImageClick ,required this.isSelected, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,12 +16,15 @@ class ImageWidget extends StatelessWidget {
       child: CachedNetworkImage(
         imageUrl: image,
         fit: BoxFit.cover,
-        height: double.infinity,
-        width: double.infinity,
-        imageBuilder: (context, imageProvider) => ClipRRect(
-          borderRadius: BorderRadius.circular(20),
-          child: Hero(
-            tag: tag,
+        height: 50,
+        width: 130,
+        imageBuilder: (context, imageProvider) => Container(
+          decoration: BoxDecoration(
+              border: Border.all(width: isSelected?2:0 , color:isSelected? Theme.of(context).primaryColor:Colors.transparent),
+              borderRadius: BorderRadius.circular(22),
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(20),
             child: Image(
               image: imageProvider,
               fit: BoxFit.cover,
