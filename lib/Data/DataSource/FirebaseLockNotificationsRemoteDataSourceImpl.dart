@@ -24,7 +24,7 @@ class FirebaseLockNotificationsRemoteDataSourceImpl
   FirebaseLockNotificationsRemoteDataSourceImpl({required this.database});
 
   @override
-  Future<List<Notification>> getNotificationsList(
+  Future<List<MyNotification>> getNotificationsList(
       {required String lockId}) async {
     try {
       var response = await database
@@ -48,6 +48,24 @@ class FirebaseLockNotificationsRemoteDataSourceImpl
       await database
           .addNotification(notification: notification)
           .timeout(const Duration(seconds: 60));
+    } on FirebaseException catch (e) {
+      throw FirebaseDatabaseException(errorMessage: e.code);
+    } on IOException {
+      throw InternetConnectionException(errorMessage: "I/O Exception");
+    } on TimeoutException catch (e) {
+      throw TimeOutOperationsException(errorMessage: "User Auth Timed Out");
+    } catch (e) {
+      throw UnknownException(errorMessage: "Unknown Error");
+    }
+  }
+
+  @override
+  Future<List<MyNotification>> getAllNotificationsList()async {
+    try {
+      var response = await database
+          .getAllNotificationsList()
+          .timeout(const Duration(seconds: 60));
+      return response.map((e) => e.toDomain()).toList();
     } on FirebaseException catch (e) {
       throw FirebaseDatabaseException(errorMessage: e.code);
     } on IOException {

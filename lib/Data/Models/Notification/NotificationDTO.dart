@@ -37,8 +37,8 @@ class NotificationDTO {
     };
   }
 
-  Notification toDomain() {
-    return Notification(
+  MyNotification toDomain() {
+    return MyNotification(
         id: id!, body: body!, priority: priority!, time: time!.toDate(), urls: urls??[]);
   }
 }

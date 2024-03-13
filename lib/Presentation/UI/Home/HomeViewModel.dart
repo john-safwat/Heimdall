@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:heimdall/Core/Base/BaseViewModel.dart';
 import 'package:heimdall/Presentation/UI/Home/HomeNavigator.dart';
-import 'package:heimdall/Presentation/UI/Home/Tabs/Alert/AlertView.dart';
+import 'package:heimdall/Presentation/UI/Home/Tabs/Alert/NotificationsView.dart';
 import 'package:heimdall/Presentation/UI/Home/Tabs/Chat/ChatView.dart';
 import 'package:heimdall/Presentation/UI/Home/Tabs/Keys/KeysView.dart';
 import 'package:heimdall/Presentation/UI/Home/Tabs/Locks/LocksView.dart';
@@ -13,7 +13,7 @@ class HomeViewModel extends BaseViewModel<HomeNavigator> {
     LocksView(),
     KeysView(),
     ChatView(),
-    AlertView(),
+    NotificationsView(),
     ProfileView()
   ];
 

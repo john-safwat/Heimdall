@@ -26,9 +26,7 @@ class FirebaseLogDatabase extends BaseDatabase{
 
 
   Future<void> addLog({required LogDTO log})async {
-    var doc =  getCollectionReference().doc();
-    log.id = doc.id;
-    await doc.set(log);
+    await getCollectionReference().doc().set(log);
   }
 
 }

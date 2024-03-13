@@ -13,14 +13,20 @@ class NotificationsRepositoryImpl implements NotificationsRepository{
   NotificationsRepositoryImpl({required this.remoteDataSource});
 
   @override
-  Future<List<Notification>> getNotificationsList({required String lockId}) async{
+  Future<List<MyNotification>> getNotificationsList({required String lockId}) async{
     var response = await remoteDataSource.getNotificationsList(lockId: lockId);
     return response;
   }
 
   @override
-  Future<void> addNotification({required Notification notification}) async{
+  Future<void> addNotification({required MyNotification notification}) async{
     await remoteDataSource.addNotification(notification: notification.toDataSource());
+  }
+
+  @override
+  Future<List<MyNotification>> getAllNotificationsList() async {
+    var response = await remoteDataSource.getAllNotificationsList();
+    return response;
   }
 
 }

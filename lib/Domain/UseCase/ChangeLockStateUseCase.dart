@@ -28,7 +28,7 @@ class ChangeLockStateUseCase {
   Future<void> invoke(
       {required bool lockState,
       required Log log,
-      required Notification notification}) async {
+      required MyNotification notification}) async {
     await lockRepository.changeLockState(lockState: lockState);
     await logRepository.addLog(log: log);
     await notificationsRepository.addNotification(notification: notification);
