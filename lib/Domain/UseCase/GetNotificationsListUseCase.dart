@@ -1,7 +1,10 @@
 
+import 'package:flutter/material.dart';
+import 'package:heimdall/Core/Theme/MyTheme.dart';
 import 'package:heimdall/Data/Repository/NotificationsRepositoryImpl.dart';
 import 'package:heimdall/Domain/Models/Notification/Notification.dart';
 import 'package:heimdall/Domain/Repository/NotificationsRepository.dart';
+import 'package:icons_plus/icons_plus.dart';
 
 GetNotificationsListUseCase injectGetNotificationsListUseCase(){
   return GetNotificationsListUseCase(notificationsRepository: injectNotificationsRepository());

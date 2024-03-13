@@ -79,6 +79,7 @@ class LockDetailsViewModel extends BaseViewModel<LockDetailsNavigator> {
               userName: appConfigProvider!.user!.displayName ?? "UnKnown"),
           notification: MyNotification(
               id: lockCard.lockId,
+              code: !data["opened"]? 101:102,
               body: !data["opened"]
                   ? "This Lock Is Opened Using Mobile App Successfully"
                   : "This Lock Is Closed Using Mobile App Successfully",
