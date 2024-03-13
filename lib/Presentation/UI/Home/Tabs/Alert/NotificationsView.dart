@@ -67,9 +67,6 @@ class _NotificationsViewState extends BaseState<NotificationsView , Notification
                       itemBuilder: (context, index) => NotificationWidget(
                           notification: viewModel.notifications[index],
                           onNotificationClick: viewModel.goToNotificationDetailsScreen,
-                        getBackgroundColor: viewModel.getBackgroundColor,
-                        getIconColor: viewModel.getIconColor,
-                        getIcon: viewModel.getIcon,
                       ),
                       itemCount: viewModel.notifications.length,
                     )
