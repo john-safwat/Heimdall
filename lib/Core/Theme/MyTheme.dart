@@ -19,6 +19,15 @@ class MyTheme {
   static const Color yellow = Color(0xFFF9A541);
   static const Color red = Color(0xFFF73645);
 
+  static const Color orange = Color(0xFFD68D00);
+  static const Color orangeBackground = Color(0xFFFFD38A);
+  static const Color darkRed = Color(0xFFD84049);
+  static const Color darkRedBackground = Color(0xFFF6A7A3);
+  static const Color blue = Color(0xFF026C7E);
+  static const Color blueBackground = Color(0xFF5CD3E9);
+  static const Color darkGreen = Color(0xFF017E35);
+  static const Color darkGreenBackground = Color(0xFFA8F1C6);
+
   // define the themes of the app
 
   // the black & white theme

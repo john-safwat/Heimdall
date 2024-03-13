@@ -72,13 +72,13 @@ class LockDetailsViewModel extends BaseViewModel<LockDetailsNavigator> {
           lockState: !data["opened"],
           log: Log(
               eventType: !data["opened"] ? "UnLock" : "Closed",
-              id: "id",
+              id: lockCard.lockId,
               method: "Mobile",
               timeOpened: DateTime.now(),
               uid: appConfigProvider!.user!.uid,
               userName: appConfigProvider!.user!.displayName ?? "UnKnown"),
-          notification: Notification(
-              id: "",
+          notification: MyNotification(
+              id: lockCard.lockId,
               body: !data["opened"]
                   ? "This Lock Is Opened Using Mobile App Successfully"
                   : "This Lock Is Closed Using Mobile App Successfully",

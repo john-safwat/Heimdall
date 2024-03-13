@@ -3,6 +3,7 @@ import 'package:heimdall/Domain/Models/Notification/Notification.dart';
 
 abstract class FirebaseLockNotificationsRemoteDataSource {
 
-  Future<List<Notification>> getNotificationsList({required String lockId});
+  Future<List<MyNotification>> getNotificationsList({required String lockId});
   Future<void> addNotification({required NotificationDTO notification});
+  Future<List<MyNotification>> getAllNotificationsList();
 }

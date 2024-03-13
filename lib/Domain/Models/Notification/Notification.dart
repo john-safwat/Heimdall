@@ -1,14 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:heimdall/Data/Models/Notification/NotificationDTO.dart';
 
-class Notification {
+class MyNotification {
   String id;
   String body;
   List<String> urls;
   String priority;
   DateTime time;
 
-  Notification(
+  MyNotification(
       {required this.id,
       required this.body,
       required this.priority,

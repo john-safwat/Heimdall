@@ -27,9 +27,9 @@ class GetLockImagesListUseCase {
   }
 
   // Helper function to sort notifications by time
-  List<Notification> sortNotificationsByTime(List<Notification> notifications) {
+  List<MyNotification> sortNotificationsByTime(List<MyNotification> notifications) {
     // Create a copy to avoid modifying the original list
-    List<Notification> sortedNotifications = List.from(notifications);
+    List<MyNotification> sortedNotifications = List.from(notifications);
 
     // Sort using the 'time' property of Notification objects
     sortedNotifications.sort((a, b) => a.time.compareTo(b.time));
@@ -38,7 +38,7 @@ class GetLockImagesListUseCase {
   }
 
   // Helper function to extract image URLs from notifications
-  List<String> getNotificationsImagesList(List<Notification> notifications) {
+  List<String> getNotificationsImagesList(List<MyNotification> notifications) {
     List<String> images = [];
 
     // Iterate through notifications in reverse order

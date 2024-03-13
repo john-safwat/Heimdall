@@ -30,10 +30,14 @@ class FirebaseLockNotificationsDatabase extends BaseDatabase {
     return response.docs.map((e) => e.data()).toList();
   }
 
+  // function to get the notifications form Lock using the lock id
+  Future<List<NotificationDTO>> getAllNotificationsList()async{
+    var response = await getCollectionReference().get();
+    return response.docs.map((e) => e.data()).toList();
+  }
+
   Future<void> addNotification({required NotificationDTO notification})async {
-    var doc =  getCollectionReference().doc();
-    notification.id = doc.id;
-    await doc.set(notification);
+    await getCollectionReference().doc().set(notification);
   }
   
 }
