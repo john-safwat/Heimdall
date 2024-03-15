@@ -39,7 +39,7 @@ class _FeedbackViewState extends BaseState<FeedbackView, FeedbackViewModel>
                     const SizedBox(height: 20,),
                     Text(
                       viewModel.local!.feedbackBodyText,
-                      textAlign: TextAlign.center,
+                      textAlign: TextAlign.justify,
                       style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                         fontWeight: FontWeight.w500,
                       ),

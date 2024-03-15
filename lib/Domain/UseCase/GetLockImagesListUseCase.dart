@@ -34,7 +34,7 @@ class GetLockImagesListUseCase {
     // Sort using the 'time' property of Notification objects
     sortedNotifications.sort((a, b) => a.time.compareTo(b.time));
 
-    return sortedNotifications;
+    return sortedNotifications.reversed.toList();
   }
 
   // Helper function to extract image URLs from notifications

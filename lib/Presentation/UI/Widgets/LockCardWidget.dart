@@ -12,8 +12,8 @@ class LockCardWidget extends StatelessWidget {
     return InkWell(
       overlayColor: MaterialStateProperty.all(Colors.transparent),
       onTap: () => onCardClick(card),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
+      child: SizedBox(
+        height: 500,
         child: Stack(
           children: [
             // background of the card

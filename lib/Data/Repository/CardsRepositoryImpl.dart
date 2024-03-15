@@ -24,5 +24,11 @@ class CardsRepositoryImpl implements CardsRepository {
     return response;
   }
 
+  @override
+  Future<LockCard> getCard({required String uid, required String lockId}) async{
+    var response = await remoteDataSource.getCard(uid: uid, lockId: lockId);
+    return response;
+  }
+
 
 }

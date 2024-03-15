@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:heimdall/Core/Base/BaseViewModel.dart';
+import 'package:heimdall/Core/Extension/DateOnlyExtinsion.dart';
 import 'package:heimdall/Core/Theme/MyTheme.dart';
 import 'package:heimdall/Domain/Models/Notification/Notification.dart';
 import 'package:heimdall/Domain/UseCase/GetNotificationsListUseCase.dart';
@@ -14,24 +15,40 @@ class NotificationsViewModel extends BaseViewModel<NotificationsNavigator> {
   NotificationsViewModel({required this.getNotificationsListUseCase});
 
   String? errorMessage;
-  List<MyNotification> notifications = [];
+  List<MyNotification> allNotifications = [];
+  List<MyNotification> todayNotifications = [];
+  List<MyNotification> previousNotifications = [];
+  List<Object> displayedData =[];
   bool loading = true;
 
   loadNotifications() async {
     errorMessage = null;
-    notifications = [];
+    allNotifications = [];
+    todayNotifications = [];
+    previousNotifications = [];
+    displayedData =[];
     loading = true;
     notifyListeners();
     try {
-      notifications = await getNotificationsListUseCase.invoke(
-          lockId: "n197o0uVQ1WLANpSG5yH1VnxSKn1");
-      notifications = notifications.map((e) {
+      allNotifications = await getNotificationsListUseCase.invoke(
+          uid: appConfigProvider!.user!.uid);
+      allNotifications = allNotifications.map((e) {
         e.backgroundColor = getBackgroundColor(e.priority);
         e.icon = getIcon(e.priority);
         e.iconColor = getIconColor(e.priority);
         e = getTitle(e);
         return e;
       }).toList();
+      todayNotifications =
+          allNotifications.where((element) => element.time.dateOnly(
+              element.time) == DateTime.now().dateOnly(DateTime.now())).toList();
+      previousNotifications =
+          allNotifications.where((element) => element.time.dateOnly(
+              element.time) != DateTime.now().dateOnly(DateTime.now())).toList();
+      displayedData.add(local!.today);
+      displayedData.addAll(todayNotifications);
+      displayedData.add(local!.previous);
+      displayedData.addAll(previousNotifications);
       loading = false;
       notifyListeners();
     } catch (e) {
@@ -82,49 +99,52 @@ class NotificationsViewModel extends BaseViewModel<NotificationsNavigator> {
     if (priority == "low") {
       return EvaIcons.checkmark_circle;
     } else if (priority == "average") {
-      return EvaIcons.alert_triangle;
+      return EvaIcons.alert_triangle_outline;
     } else if (priority == "high") {
-      return EvaIcons.alert_circle;
+      return EvaIcons.alert_circle_outline;
     } else {
-      return EvaIcons.info;}
+      return EvaIcons.info_outline;
+    }
   }
 
   MyNotification getTitle(MyNotification notification) {
-    if(notification.code == 101){
+    if (notification.code == 101) {
       notification.title = local!.code101;
       notification.body = local!.body101;
-    }else if(notification.code == 102){
+    } else if (notification.code == 102) {
       notification.title = local!.code102;
       notification.body = local!.body102;
-    }else if(notification.code == 103){
+    } else if (notification.code == 103) {
       notification.title = local!.code103;
       notification.body = local!.body103;
-    }else if(notification.code == 104){
+    } else if (notification.code == 104) {
       notification.title = local!.code104;
       notification.body = local!.body104;
-    }else if(notification.code == 105){
+    } else if (notification.code == 105) {
       notification.title = local!.code105;
       notification.body = local!.body105;
-    }else if(notification.code == 106){
+    } else if (notification.code == 106) {
       notification.title = local!.code106;
       notification.body = local!.body106;
-    }else if(notification.code == 201){
+    } else if (notification.code == 201) {
       notification.title = local!.code201;
       notification.body = local!.body201;
-    }else if(notification.code == 202){
+    } else if (notification.code == 202) {
       notification.title = local!.code202;
       notification.body = local!.body202;
-    }else if(notification.code == 301){
+    } else if (notification.code == 301) {
       notification.title = local!.code301;
       notification.body = local!.body301;
-    }else if(notification.code == 302){
+    } else if (notification.code == 302) {
       notification.title = local!.code302;
       notification.body = local!.body302;
     }
     return notification;
   }
 
-  goToNotificationDetailsScreen(MyNotification notification) {}
+  goToNotificationDetailsScreen(MyNotification notification) {
+    navigator!.goToNotificationDetailsScreen(notification);
+  }
 
 
 }

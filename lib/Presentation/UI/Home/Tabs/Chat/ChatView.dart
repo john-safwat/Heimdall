@@ -7,6 +7,7 @@ import 'package:heimdall/Presentation/UI/ContactChat/ContactChatView.dart';
 import 'package:heimdall/Presentation/UI/Home/Tabs/Chat/ChatNavigator.dart';
 import 'package:heimdall/Presentation/UI/Home/Tabs/Chat/ChatViewModel.dart';
 import 'package:heimdall/Presentation/UI/Home/Tabs/Chat/Widgets/ChatContactWidget.dart';
+import 'package:heimdall/Presentation/UI/Widgets/ErrorMessageWidget.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
@@ -87,17 +88,12 @@ class _ChatViewState extends BaseState<ChatView, ChatViewModel>
                   child: Consumer<ChatViewModel>(
                     builder: (context, value, child) {
                       if (value.errorMessage != null) {
-                        return Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                const Row(),
-                                Lottie.asset("assets/animations/error.json" , width: viewModel.mediaQuery!.width *0.5),
-                                const SizedBox(height: 40),
-                                Text(value.errorMessage! , style: Theme.of(context).textTheme.titleMedium,textAlign: TextAlign.center,)
-                              ],
-                            )
+                        return SingleChildScrollView(
+                          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+                          child: ErrorMessageWidget(
+                              errorMessage: value.errorMessage!,
+                              fixErrorFunction: value.loadContacts
+                          ),
                         );
                       } else if (value.loading) {
                         return const Center(
@@ -117,6 +113,7 @@ class _ChatViewState extends BaseState<ChatView, ChatViewModel>
                         );
                       } else {
                         return ListView.builder(
+                          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
                           itemBuilder: (context, index) => ChatContactWidget(
                             contact: value.contacts[index],
                             uid: value.appConfigProvider!.user!.uid,

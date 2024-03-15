@@ -177,5 +177,12 @@
   "body201" : "Movement was captured without facial recognition, please be careful",
   "body202" : "Someone is trying to use an electronic key at the wrong time",
   "body301" : "We've captured pictures of someone approaching your door. You should pay attention",
-  "body302" : "Someone fell into a Tripwire trap and we have pictures of him"
+  "body302" : "Someone fell into a Tripwire trap and we have pictures of him",
+  "code401" : "You Know?",
+  "body401" : "There is Something He Have to Tell You",
+  "today" : "Today",
+  "previous" : "Previous",
+  "notificationMessage" :"If you receive a notification and the situation appears to be under control, you do not need to take any further action. However, if the notification indicates a serious threat to life or safety, please contact your country's emergency services immediately.",
+  "callEmergency" : "Call Emergency",
+  "lockName" : "Lock Name"
 }

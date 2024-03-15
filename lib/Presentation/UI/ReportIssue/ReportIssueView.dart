@@ -32,7 +32,7 @@ class _ReportIssueViewState extends BaseState<ReportIssueView , ReportIssueViewM
             const SizedBox(
               height: 20,
             ),
-            Text(viewModel.local!.reportBodyText,style: Theme.of(context).textTheme.bodyLarge,textAlign: TextAlign.center,),
+            Text(viewModel.local!.reportBodyText,style: Theme.of(context).textTheme.bodyLarge,textAlign: TextAlign.justify,),
             const SizedBox(
               height: 20,
             ),

@@ -8,6 +8,7 @@ import 'package:heimdall/Domain/UseCase/GetUserDataUseCase.dart';
 import 'package:heimdall/Domain/UseCase/UpdateUserDataUseCase.dart';
 import 'package:heimdall/Presentation/UI/UpdateProfile/UpdateProfileNavigator.dart';
 import 'package:heimdall/Presentation/UI/UpdateProfile/UpdateProfileViewModel.dart';
+import 'package:heimdall/Presentation/UI/Widgets/ErrorMessageWidget.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
@@ -42,22 +43,13 @@ class _UpdateProfileViewState
         body:
             Consumer<UpdateProfileViewModel>(builder: (context, value, child) {
           if (value.errorMessage != null) {
-            return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Row(),
-                    Lottie.asset("assets/animations/error.json",
-                        width: viewModel.mediaQuery!.width * 0.5),
-                    const SizedBox(height: 40),
-                    Text(
-                      value.errorMessage!,
-                      style: Theme.of(context).textTheme.titleMedium,
-                      textAlign: TextAlign.center,
-                    )
-                  ],
-                ));
+            return SingleChildScrollView(
+              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+              child: ErrorMessageWidget(
+                  errorMessage: value.errorMessage!,
+                  fixErrorFunction: value.loadUserData
+              ),
+            );
           } else if (value.user == null) {
             return const Center(
               child: CircularProgressIndicator(),

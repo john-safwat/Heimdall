@@ -10,6 +10,7 @@ import 'package:heimdall/Presentation/UI/ImagePreview/ImagePreviewView.dart';
 import 'package:heimdall/Presentation/UI/LockDetails/LockDetailsNavigator.dart';
 import 'package:heimdall/Presentation/UI/LockDetails/LockDetailsViewModel.dart';
 import 'package:heimdall/Presentation/UI/LockDetails/Widgets/GalleryCardWidget.dart';
+import 'package:heimdall/Presentation/UI/Widgets/ErrorMessageWidget.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
@@ -51,9 +52,9 @@ class _LockDetailsViewState
             children: [
               Consumer<LockDetailsViewModel>(builder: (context, value, child) {
                 if (value.imagesErrorMessage != null) {
-                  return Text(
-                    value.imagesErrorMessage!,
-                    style: Theme.of(context).textTheme.bodyMedium,
+                  return ErrorMessageWidget(
+                      errorMessage: value.imagesErrorMessage!,
+                      fixErrorFunction: value.loadImagesList
                   );
                 } else if (value.imagesLoading) {
                   return const Padding(

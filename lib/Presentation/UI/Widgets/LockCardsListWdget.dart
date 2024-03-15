@@ -24,9 +24,12 @@ class LockCardsListWidget extends StatelessWidget {
             enlargeStrategy:
             CenterPageEnlargeStrategy.height),
         items: lockCardsList
-            .map((e) => LockCardWidget(
-            card: e,
-            onCardClick: onLockCardPress))
+            .map((e) => Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: LockCardWidget(
+              card: e,
+              onCardClick: onLockCardPress),
+            ))
             .toList(),
       ),
     );
