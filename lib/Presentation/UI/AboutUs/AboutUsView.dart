@@ -44,23 +44,27 @@ class _AboutUsViewState extends BaseState<AboutUsView, AboutUsViewModel>
             ),
             const SizedBox(height: 20),
             Text(viewModel.local!.aboutUs1,
+                textAlign: TextAlign.justify,
                 style: Theme.of(context)
                     .textTheme
                     .titleLarge!
                     .copyWith(fontWeight: FontWeight.bold)),
             const SizedBox(height: 20),
             Text(viewModel.local!.aboutUs2,
+                textAlign: TextAlign.justify,
                 style: Theme.of(context).textTheme.bodyLarge),
             const SizedBox(height: 20),
             TextCard(content: viewModel.local!.aboutUs3),
             const SizedBox(height: 20),
             Text(viewModel.local!.aboutUs4,
+                textAlign: TextAlign.justify,
                 style: Theme.of(context).textTheme.bodyLarge),
             const SizedBox(height: 30),
             TextCard(content: viewModel.local!.aboutUs5),
             const SizedBox(height: 20),
             Text(
               viewModel.local!.aboutUs6,
+              textAlign: TextAlign.justify,
               style: Theme.of(context)
                   .textTheme
                   .bodyLarge!
@@ -72,6 +76,7 @@ class _AboutUsViewState extends BaseState<AboutUsView, AboutUsViewModel>
                 const SizedBox(width: 20),
                 Expanded(
                     child: Text(viewModel.local!.aboutUs7,
+                        textAlign: TextAlign.justify,
                         style: Theme.of(context).textTheme.bodyLarge)),
               ],
             ),
@@ -79,6 +84,7 @@ class _AboutUsViewState extends BaseState<AboutUsView, AboutUsViewModel>
             TextCard(content: viewModel.local!.aboutUs8),
             const SizedBox(height: 20),
             Text(viewModel.local!.aboutUs9,
+                textAlign: TextAlign.justify,
                 style: Theme.of(context).textTheme.bodyLarge),
             const SizedBox(height: 30),
             TextCard(content: viewModel.local!.developmentTeam),

@@ -40,4 +40,9 @@ class FirebaseCardsDatabase extends BaseDatabase {
         .then((value) => value.docs.map((e) => e.data()).toList());
     return response;
   }
+
+  Future<LockCardDTO> getCard({required String uid , required String lockId})async{
+    var response = await getCollectionReference(uid: uid).doc(lockId).get();
+    return response.data()!;
+  }
 }

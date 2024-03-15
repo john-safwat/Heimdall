@@ -74,7 +74,7 @@ class LockDetailsViewModel extends BaseViewModel<LockDetailsNavigator> {
               eventType: !data["opened"] ? "UnLock" : "Closed",
               id: lockCard.lockId,
               method: "Mobile",
-              timeOpened: DateTime.now(),
+              timeOpened: DateTime.now().toUtc(),
               uid: appConfigProvider!.user!.uid,
               userName: appConfigProvider!.user!.displayName ?? "UnKnown"),
           notification: MyNotification(
@@ -84,7 +84,7 @@ class LockDetailsViewModel extends BaseViewModel<LockDetailsNavigator> {
                   ? "This Lock Is Opened Using Mobile App Successfully"
                   : "This Lock Is Closed Using Mobile App Successfully",
               priority: "low",
-              time: DateTime.now(),
+              time: DateTime.now().toUtc(),
               urls: []));
       notifyListeners();
     } catch (e) {

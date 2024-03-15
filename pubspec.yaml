@@ -67,6 +67,8 @@ dependencies:
   path_provider: ^2.1.2
   http: ^1.2.0
   firebase_database: ^10.4.9
+  firebase_messaging: ^14.7.19
+  url_launcher: ^6.2.5
 
 
 dev_dependencies:

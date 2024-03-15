@@ -43,6 +43,7 @@ class _ProfileViewState extends BaseState<ProfileView, ProfileViewModel>
             buttonAction: viewModel.goToUpdateProfileScreen),
         Expanded(
           child: ListView.separated(
+            padding:const EdgeInsets.symmetric(vertical: 10),
             itemBuilder: (context, index) => CustomButton(button: viewModel.buttonsData[index]),
             itemCount: viewModel.buttonsData.length,
             separatorBuilder: (context, index) => const Padding(

@@ -6,6 +6,7 @@ import 'package:heimdall/Core/Providers/LocalProvider.dart';
 import 'package:heimdall/Core/Providers/LocksProvider.dart';
 import 'package:heimdall/Core/Providers/ThemeProvider.dart';
 import 'package:heimdall/Core/Theme/MyTheme.dart';
+import 'package:heimdall/Data/Firebase/FirebaseMessagingDatabase.dart';
 import 'package:heimdall/Presentation/UI/AboutUs/AboutUsView.dart';
 import 'package:heimdall/Presentation/UI/ChangePassword/ChangePasswordView.dart';
 import 'package:heimdall/Presentation/UI/ConfigureLock/ConfigureLockView.dart';
@@ -19,6 +20,7 @@ import 'package:heimdall/Presentation/UI/Intro/IntroView.dart';
 import 'package:heimdall/Presentation/UI/LockDetails/LockDetailsView.dart';
 import 'package:heimdall/Presentation/UI/LockManagement/LockManagementView.dart';
 import 'package:heimdall/Presentation/UI/Login/LoginView.dart';
+import 'package:heimdall/Presentation/UI/NotificationDetails/NotificationDetailsView.dart';
 import 'package:heimdall/Presentation/UI/Registration/RegistrationView.dart';
 import 'package:heimdall/Presentation/UI/ReportIssue/ReportIssueView.dart';
 import 'package:heimdall/Presentation/UI/Setting/SettingView.dart';
@@ -43,7 +45,7 @@ void main()async{
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
+  await FirebaseMessagingDatabase.initFirebaseMessaging();
   User? user = FirebaseAuth.instance.currentUser;
 
   runApp(
@@ -114,7 +116,8 @@ class MyApp extends StatelessWidget {
         ConfigureLockView.routeName : (context) => const ConfigureLockView(),
         LockDetailsView.routeName : (context) => LockDetailsView(),
         ImagePreviewView.routeName : (context) => ImagePreviewView(),
-        GalleryView.routeName : (context) => GalleryView()
+        GalleryView.routeName : (context) => GalleryView(),
+        NotificationDetailsView.routeName : (context) => NotificationDetailsView()
       },
       // the initial route to start the program from
       home: SplashScreen(firstTime:firstTime??true , loggedIn: loggedIn??false,user: user ),
