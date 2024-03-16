@@ -66,29 +66,36 @@ class LockDetailsViewModel extends BaseViewModel<LockDetailsNavigator> {
   }
 
   changeLockState() async {
-    try {
-      var data = locksProvider.value;
-      await changeLockStateUseCase.invoke(
-          lockState: !data["opened"],
-          log: Log(
-              eventType: !data["opened"] ? "UnLock" : "Closed",
-              id: lockCard.lockId,
-              method: "Mobile",
-              timeOpened: DateTime.now().toUtc(),
-              uid: appConfigProvider!.user!.uid,
-              userName: appConfigProvider!.user!.displayName ?? "UnKnown"),
-          notification: MyNotification(
-              id: lockCard.lockId,
-              code: !data["opened"]? 101:102,
-              body: !data["opened"]
-                  ? "This Lock Is Opened Using Mobile App Successfully"
-                  : "This Lock Is Closed Using Mobile App Successfully",
-              priority: "low",
-              time: DateTime.now().toUtc(),
-              urls: []));
-      notifyListeners();
-    } catch (e) {
-      notifyListeners();
+    if(authenticated){
+      try {
+        var data = locksProvider.value;
+        await changeLockStateUseCase.invoke(
+            lockState: !data["opened"],
+            log: Log(
+                eventType: !data["opened"] ? "UnLock" : "Closed",
+                id: lockCard.lockId,
+                method: "Mobile",
+                timeOpened: DateTime.now().toUtc(),
+                uid: appConfigProvider!.user!.uid,
+                userName: appConfigProvider!.user!.displayName ?? "UnKnown"),
+            notification: MyNotification(
+                id: lockCard.lockId,
+                code: !data["opened"]? 101:102,
+                body: !data["opened"]
+                    ? "This Lock Is Opened Using Mobile App Successfully"
+                    : "This Lock Is Closed Using Mobile App Successfully",
+                priority: "low",
+                time: DateTime.now().toUtc(),
+                urls: []));
+        notifyListeners();
+      } catch (e) {
+        notifyListeners();
+      }
+    }else {
+      await authenticateUser();
+      if(authenticated){
+        changeLockState();
+      }
     }
   }
 

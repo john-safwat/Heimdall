@@ -184,5 +184,7 @@
   "previous" : "Previous",
   "notificationMessage" :"If you receive a notification and the situation appears to be under control, you do not need to take any further action. However, if the notification indicates a serious threat to life or safety, please contact your country's emergency services immediately.",
   "callEmergency" : "Call Emergency",
-  "lockName" : "Lock Name"
+  "lockName" : "Lock Name",
+  "cantCheckBiometric" : "It appears that your device cannot verify biometrics",
+  "authMessage": "We apologize for interrupting you. Please authenticate for your safety. This is our priority"
 }
