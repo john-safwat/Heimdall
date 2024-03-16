@@ -7,6 +7,7 @@ import 'package:heimdall/Core/Errors/FirebaseAuthExceptionHandler.dart';
 import 'package:heimdall/Core/Errors/FirebaseFireStoreErrorHandler.dart';
 import 'package:heimdall/Core/Errors/FirebaseImageDatabaseExceptionsHandler.dart';
 import 'package:heimdall/Core/Errors/FirebaseLoginErrorHandler.dart';
+import 'package:heimdall/Core/Errors/LocalAuthExceptionHandler.dart';
 import 'package:heimdall/Core/Providers/AppConfigProvider.dart';
 import 'package:heimdall/Core/Providers/LocalProvider.dart';
 import 'package:heimdall/Core/Providers/ThemeProvider.dart';
@@ -30,6 +31,7 @@ abstract class BaseState<T extends StatefulWidget , VM extends BaseViewModel> ex
     viewModel.firebaseAuthExceptionHandler = injectFirebaseAuthExceptionHandler();
     viewModel.firebaseFireStoreErrorHandler = injectFirebaseFireStoreErrorHandler();
     viewModel.firebaseImageDatabaseExceptionsHandler = injectFirebaseImageDatabaseExceptionsHandler();
+    viewModel.localAuthExceptionHandler = injectLocalAuthExceptionHandler();
   }
 
   @override

@@ -198,14 +198,15 @@ class GalleryCardWidget extends StatelessWidget {
                                       overlayColor: MaterialStateProperty.all(Colors.transparent),
                                       onTap: () => onMoreImagesPress(),
                                       child: Container(
-                                        padding: const EdgeInsets.all(10),
+                                        padding: const EdgeInsets.all(15),
                                         decoration: BoxDecoration(
-                                          color: Theme.of(context).primaryColor.withOpacity(0.5),
+                                          color: Theme.of(context).primaryColor.withOpacity(0.7),
                                           borderRadius: BorderRadius.circular(10)
                                         ),
                                         child: FittedBox(
                                           child: Text(
-                                            "+${images.length-4}"
+                                            "+${images.length-4}",
+                                            style: Theme.of(context).textTheme.titleLarge!.copyWith(color: Theme.of(context).scaffoldBackgroundColor),
                                           ),
                                         ),
                                       ),

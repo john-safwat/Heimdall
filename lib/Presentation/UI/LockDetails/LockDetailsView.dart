@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:heimdall/Core/Base/BaseState.dart';
 import 'package:heimdall/Core/Providers/LocksProvider.dart';
+import 'package:heimdall/Core/Theme/MyTheme.dart';
 import 'package:heimdall/Domain/Models/Card/LockCard.dart';
 import 'package:heimdall/Domain/UseCase/ChangeLockStateUseCase.dart';
 import 'package:heimdall/Domain/UseCase/GetLockImagesListUseCase.dart';
@@ -94,6 +95,13 @@ class _LockDetailsViewState
                   return Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(
+                              viewModel.locksProvider
+                                  .value["opened"] !=
+                                  null && viewModel.locksProvider.value["opened"]?MyTheme.green: MyTheme.red
+                          )
+                        ),
                         onPressed: () {
                           viewModel.changeLockState();
                         },

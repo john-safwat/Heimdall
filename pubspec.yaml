@@ -69,6 +69,7 @@ dependencies:
   firebase_database: ^10.4.9
   firebase_messaging: ^14.7.19
   url_launcher: ^6.2.5
+  local_auth: ^2.2.0
 
 
 dev_dependencies:
