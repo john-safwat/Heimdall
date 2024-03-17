@@ -12,6 +12,7 @@ import 'package:heimdall/Presentation/UI/LockDetails/LockDetailsNavigator.dart';
 import 'package:heimdall/Presentation/UI/LockDetails/LockDetailsViewModel.dart';
 import 'package:heimdall/Presentation/UI/LockDetails/Widgets/GalleryCardWidget.dart';
 import 'package:heimdall/Presentation/UI/Widgets/ErrorMessageWidget.dart';
+import 'package:heimdall/Presentation/UI/Widgets/LanguageSwitch.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
@@ -50,6 +51,7 @@ class _LockDetailsViewState
             title: Text(viewModel.local!.lockDetails),
           ),
           body: ListView(
+            padding: const EdgeInsets.all(16),
             children: [
               Consumer<LockDetailsViewModel>(builder: (context, value, child) {
                 if (value.imagesErrorMessage != null) {
@@ -64,7 +66,6 @@ class _LockDetailsViewState
                   );
                 } else if (value.images.isEmpty) {
                   return Container(
-                    margin: const EdgeInsets.all(10),
                     height: 220,
                     width: double.infinity,
                     decoration: BoxDecoration(
@@ -80,6 +81,7 @@ class _LockDetailsViewState
                   );
                 }
               }),
+              const SizedBox(height: 15,),
               Consumer<LockDetailsViewModel>(builder: (context, value, child) {
                 if (value.lockErrorMessage != null) {
                   return Text(
@@ -92,55 +94,59 @@ class _LockDetailsViewState
                     child: Center(child: CircularProgressIndicator()),
                   );
                 } else {
-                  return Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: ElevatedButton(
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(
+                  return ElevatedButton(
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(
+                            viewModel.locksProvider
+                                .value["opened"] !=
+                                null && viewModel.locksProvider.value["opened"]?MyTheme.green: MyTheme.red
+                        )
+                      ),
+                      onPressed: () {
+                        viewModel.changeLockState();
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 0.0, vertical: 8),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
                               viewModel.locksProvider
                                   .value["opened"] !=
-                                  null && viewModel.locksProvider.value["opened"]?MyTheme.green: MyTheme.red
-                          )
+                                  null && viewModel.locksProvider.value["opened"]
+                                  ? viewModel.local!.opened
+                                  : viewModel.local!.closed,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleMedium!
+                                  .copyWith(
+                                      color: MyTheme.white),
+                            ),
+                            Switch(
+                              activeColor:MyTheme.white,
+                              inactiveThumbColor: MyTheme.black,
+                              inactiveTrackColor: MyTheme.white,
+                              value:
+                                  viewModel.locksProvider.value["opened"] ??
+                                      false,
+                              onChanged: (value) => () {
+                                viewModel.changeLockState();
+                              },
+                            )
+                          ],
                         ),
-                        onPressed: () {
-                          viewModel.changeLockState();
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 5.0, vertical: 15),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                viewModel.locksProvider
-                                    .value["opened"] !=
-                                    null && viewModel.locksProvider.value["opened"]
-
-                                    ? viewModel.local!.opened
-                                    : viewModel.local!.closed,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleLarge!
-                                    .copyWith(
-                                        color: Theme.of(context)
-                                            .scaffoldBackgroundColor),
-                              ),
-                              Switch(
-                                activeColor:
-                                    Theme.of(context).scaffoldBackgroundColor,
-                                value:
-                                    viewModel.locksProvider.value["opened"] ??
-                                        false,
-                                onChanged: (value) => () {
-                                  viewModel.changeLockState();
-                                },
-                              )
-                            ],
-                          ),
-                        )),
-                  );
+                      ));
                 }
               }),
+              const SizedBox(height: 15,),
+              ElevatedButton(
+                onPressed: (){},
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Text(viewModel.local!.createKey),
+                )
+              ),
             ],
           ),
         ),
