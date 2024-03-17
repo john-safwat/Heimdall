@@ -186,5 +186,6 @@
   "callEmergency" : "Call Emergency",
   "lockName" : "Lock Name",
   "cantCheckBiometric" : "It appears that your device cannot verify biometrics",
-  "authMessage": "We apologize for interrupting you. Please authenticate for your safety. This is our priority"
+  "authMessage": "We apologize for interrupting you. Please authenticate for your safety. This is our priority",
+  "createKey" : "Create Key"
 }
