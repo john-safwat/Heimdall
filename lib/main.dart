@@ -119,7 +119,7 @@ class MyApp extends StatelessWidget {
         ImagePreviewView.routeName : (context) => ImagePreviewView(),
         GalleryView.routeName : (context) => GalleryView(),
         NotificationDetailsView.routeName : (context) => NotificationDetailsView(),
-        CreateKeyView.routeName : (context) => const CreateKeyView()
+        CreateKeyView.routeName : (context) => CreateKeyView()
       },
       // the initial route to start the program from
       home: SplashScreen(firstTime:firstTime??true , loggedIn: loggedIn??false,user: user ),

@@ -187,5 +187,17 @@
   "lockName" : "Lock Name",
   "cantCheckBiometric" : "It appears that your device cannot verify biometrics",
   "authMessage": "We apologize for interrupting you. Please authenticate for your safety. This is our priority",
-  "createKey" : "Create Key"
+  "createKey" : "Create Key",
+  "createKeyMessage" : "E-key access: Grant access to loved ones and employees. Fill this form to proceed.",
+  "createKeyWarningMessage" : "Handle this electronic key with care, as unauthorized access could jeopardize your security.",
+  "validIn" : "Valid in",
+  "once" : "Once",
+  "repeated" : "Repeated",
+  "date" : "Date",
+  "start": "Start",
+  "end" : "End",
+  "from" : "From",
+  "to" : "To",
+  "youAreTheOwner" : "You are The Owner You Don't Need Keys",
+  "keyCreated" : "Key Created Successfully"
 }

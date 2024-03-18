@@ -114,4 +114,8 @@ class LockDetailsViewModel extends BaseViewModel<LockDetailsNavigator> {
   goToGalleryScreen() {
     navigator!.goToGalleryScreen(images: images);
   }
+
+  goToCreateKeyScreen(){
+    navigator!.goToCreateKeyScreen(lockCard: lockCard);
+  }
 }
