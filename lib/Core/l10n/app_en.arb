@@ -199,5 +199,8 @@
   "from" : "From",
   "to" : "To",
   "youAreTheOwner" : "You are The Owner You Don't Need Keys",
-  "keyCreated" : "Key Created Successfully"
+  "keyCreated" : "Key Created Successfully",
+  "keyDetails" : "Key Details",
+  "youCanUseThisKey" : "You Can Use This Key To open the door",
+  "by" : "By"
 }

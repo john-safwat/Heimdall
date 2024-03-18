@@ -18,6 +18,7 @@ import 'package:heimdall/Presentation/UI/Gallery/GalleryView.dart';
 import 'package:heimdall/Presentation/UI/Home/HomeView.dart';
 import 'package:heimdall/Presentation/UI/ImagePreview/ImagePreviewView.dart';
 import 'package:heimdall/Presentation/UI/Intro/IntroView.dart';
+import 'package:heimdall/Presentation/UI/KeyDetails/KeyDetailsView.dart';
 import 'package:heimdall/Presentation/UI/LockDetails/LockDetailsView.dart';
 import 'package:heimdall/Presentation/UI/LockManagement/LockManagementView.dart';
 import 'package:heimdall/Presentation/UI/Login/LoginView.dart';
@@ -119,7 +120,8 @@ class MyApp extends StatelessWidget {
         ImagePreviewView.routeName : (context) => ImagePreviewView(),
         GalleryView.routeName : (context) => GalleryView(),
         NotificationDetailsView.routeName : (context) => NotificationDetailsView(),
-        CreateKeyView.routeName : (context) => CreateKeyView()
+        CreateKeyView.routeName : (context) => CreateKeyView(),
+        KeyDetailsView.routeName : (context) => KeyDetailsView()
       },
       // the initial route to start the program from
       home: SplashScreen(firstTime:firstTime??true , loggedIn: loggedIn??false,user: user ),

@@ -74,4 +74,8 @@ class KeysViewModel extends BaseViewModel<KeysNavigator>{
   }
 
 
+  onCardClick(MyKey key){
+    navigator!.goToKeyDetailsScreen(key);
+  }
+
 }
