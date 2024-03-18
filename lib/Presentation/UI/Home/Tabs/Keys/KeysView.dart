@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:heimdall/Core/Base/BaseState.dart';
+import 'package:heimdall/Domain/Models/Key/Key.dart';
 import 'package:heimdall/Domain/UseCase/GetKeysUseCase.dart';
 import 'package:heimdall/Presentation/UI/Home/Tabs/Keys/KeysNavigator.dart';
 import 'package:heimdall/Presentation/UI/Home/Tabs/Keys/KeysViewModel.dart';
+import 'package:heimdall/Presentation/UI/KeyDetails/KeyDetailsView.dart';
 import 'package:heimdall/Presentation/UI/Widgets/ErrorMessageWidget.dart';
 import 'package:heimdall/Presentation/UI/Widgets/KeyCardWidget.dart';
 import 'package:heimdall/Presentation/UI/Widgets/LanguageSwitch.dart';
@@ -56,21 +58,27 @@ class _KeysViewState extends BaseState<KeysView, KeysViewModel>
                   return ErrorMessageWidget(
                       errorMessage: value.errorMessage!,
                       fixErrorFunction: value.loadKeysData);
-                }else if (value.loading){
-                  return const Center(child: CircularProgressIndicator(),);
-                } else if (value.keysList.isEmpty){
+                } else if (value.loading) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else if (value.keysList.isEmpty) {
                   return Lottie.asset(viewModel.getAnimation());
                 } else {
                   return Expanded(
                     child: GridView.builder(
                       padding: EdgeInsets.symmetric(vertical: 20),
-                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        mainAxisSpacing: 20,
-                        crossAxisSpacing: 20,
-                        childAspectRatio: 0.8
-                     ),
-                      itemBuilder: (context, index) => KeyCardWidget(myKey: viewModel.keysList[index]),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              mainAxisSpacing: 20,
+                              crossAxisSpacing: 20,
+                              childAspectRatio: 0.8),
+                      itemBuilder: (context, index) =>
+                          KeyCardWidget(
+                            myKey: viewModel.keysList[index],
+                            onClick: viewModel.onCardClick,
+                          ),
                       itemCount: viewModel.keysList.length,
                     ),
                   );
@@ -86,5 +94,14 @@ class _KeysViewState extends BaseState<KeysView, KeysViewModel>
   @override
   KeysViewModel initViewModel() {
     return KeysViewModel(getKeysUseCase: injectGetKeysUseCase());
+  }
+
+  @override
+  goToKeyDetailsScreen(MyKey key) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => KeyDetailsView(myKey: key),
+        ));
   }
 }
