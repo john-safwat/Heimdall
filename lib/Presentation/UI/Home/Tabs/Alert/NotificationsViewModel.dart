@@ -45,9 +45,13 @@ class NotificationsViewModel extends BaseViewModel<NotificationsNavigator> {
       previousNotifications =
           allNotifications.where((element) => element.time.dateOnly(
               element.time) != DateTime.now().dateOnly(DateTime.now())).toList();
-      displayedData.add(local!.today);
+      if(todayNotifications.isNotEmpty){
+        displayedData.add(local!.today);
+      }
       displayedData.addAll(todayNotifications);
-      displayedData.add(local!.previous);
+      if(previousNotifications.isNotEmpty){
+        displayedData.add(local!.previous);
+      }
       displayedData.addAll(previousNotifications);
       loading = false;
       notifyListeners();

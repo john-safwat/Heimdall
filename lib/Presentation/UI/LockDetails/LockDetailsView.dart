@@ -6,6 +6,7 @@ import 'package:heimdall/Domain/Models/Card/LockCard.dart';
 import 'package:heimdall/Domain/UseCase/ChangeLockStateUseCase.dart';
 import 'package:heimdall/Domain/UseCase/GetLockImagesListUseCase.dart';
 import 'package:heimdall/Domain/UseCase/SetLockRealTimeDatabaseListenerUseCase.dart';
+import 'package:heimdall/Presentation/UI/CreateKey/CreateKeyView.dart';
 import 'package:heimdall/Presentation/UI/Gallery/GalleryView.dart';
 import 'package:heimdall/Presentation/UI/ImagePreview/ImagePreviewView.dart';
 import 'package:heimdall/Presentation/UI/LockDetails/LockDetailsNavigator.dart';
@@ -57,8 +58,7 @@ class _LockDetailsViewState
                 if (value.imagesErrorMessage != null) {
                   return ErrorMessageWidget(
                       errorMessage: value.imagesErrorMessage!,
-                      fixErrorFunction: value.loadImagesList
-                  );
+                      fixErrorFunction: value.loadImagesList);
                 } else if (value.imagesLoading) {
                   return const Padding(
                     padding: EdgeInsets.all(30.0),
@@ -81,7 +81,9 @@ class _LockDetailsViewState
                   );
                 }
               }),
-              const SizedBox(height: 15,),
+              const SizedBox(
+                height: 15,
+              ),
               Consumer<LockDetailsViewModel>(builder: (context, value, child) {
                 if (value.lockErrorMessage != null) {
                   return Text(
@@ -96,12 +98,11 @@ class _LockDetailsViewState
                 } else {
                   return ElevatedButton(
                       style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(
-                            viewModel.locksProvider
-                                .value["opened"] !=
-                                null && viewModel.locksProvider.value["opened"]?MyTheme.green: MyTheme.red
-                        )
-                      ),
+                          backgroundColor: MaterialStateProperty.all(
+                              viewModel.locksProvider.value["opened"] != null &&
+                                      viewModel.locksProvider.value["opened"]
+                                  ? MyTheme.green
+                                  : MyTheme.red)),
                       onPressed: () {
                         viewModel.changeLockState();
                       },
@@ -112,24 +113,21 @@ class _LockDetailsViewState
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              viewModel.locksProvider
-                                  .value["opened"] !=
-                                  null && viewModel.locksProvider.value["opened"]
+                              viewModel.locksProvider.value["opened"] != null &&
+                                      viewModel.locksProvider.value["opened"]
                                   ? viewModel.local!.opened
                                   : viewModel.local!.closed,
                               style: Theme.of(context)
                                   .textTheme
                                   .titleMedium!
-                                  .copyWith(
-                                      color: MyTheme.white),
+                                  .copyWith(color: MyTheme.white),
                             ),
                             Switch(
-                              activeColor:MyTheme.white,
+                              activeColor: MyTheme.white,
                               inactiveThumbColor: MyTheme.black,
                               inactiveTrackColor: MyTheme.white,
-                              value:
-                                  viewModel.locksProvider.value["opened"] ??
-                                      false,
+                              value: viewModel.locksProvider.value["opened"] ??
+                                  false,
                               onChanged: (value) => () {
                                 viewModel.changeLockState();
                               },
@@ -139,14 +137,15 @@ class _LockDetailsViewState
                       ));
                 }
               }),
-              const SizedBox(height: 15,),
-              ElevatedButton(
-                onPressed: (){},
-                child: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Text(viewModel.local!.createKey),
-                )
+              const SizedBox(
+                height: 15,
               ),
+              ElevatedButton(
+                  onPressed: () => viewModel.goToCreateKeyScreen(),
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Text(viewModel.local!.createKey),
+                  )),
             ],
           ),
         ),
@@ -182,8 +181,18 @@ class _LockDetailsViewState
     Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) =>
-              GalleryView(images: images,),
+          builder: (context) => GalleryView(
+            images: images,
+          ),
+        ));
+  }
+
+  @override
+  goToCreateKeyScreen({required LockCard lockCard}) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => CreateKeyView(lockCard: lockCard,)
         ));
   }
 }
