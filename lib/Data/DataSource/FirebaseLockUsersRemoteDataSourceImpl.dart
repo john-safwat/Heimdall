@@ -34,4 +34,20 @@ class FirebaseLockUsersRemoteDataSourceImpl implements FirebaseLockUsersRemoteDa
     }
   }
 
+  @override
+  Future<bool> userExist({required String lockId, required String uid}) async{
+    try{
+      var response = await database.userExist(lockId: lockId , uid: uid).timeout(const Duration(seconds: 60));
+      return response;
+    } on FirebaseException catch (e) {
+      throw FirebaseDatabaseException(errorMessage: e.code);
+    } on IOException {
+      throw InternetConnectionException(errorMessage: "I/O Exception");
+    } on TimeoutException catch (e) {
+      throw TimeOutOperationsException(errorMessage: "User Auth Timed Out");
+    } catch (e) {
+      throw UnknownException(errorMessage: "Unknown Error");
+    }
+  }
+
 }

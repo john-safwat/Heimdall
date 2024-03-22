@@ -5,6 +5,7 @@ import 'package:heimdall/Presentation/UI/ImagePreview/ImagePreviewNavigator.dart
 import 'package:heimdall/Presentation/UI/ImagePreview/ImagePreviewViewModel.dart';
 import 'package:heimdall/Presentation/UI/ImagePreview/Widgets/ImageWidget.dart';
 import 'package:icons_plus/icons_plus.dart';
+import 'package:indexed_list_view/indexed_list_view.dart';
 import 'package:provider/provider.dart';
 import 'package:zoom_pinch_overlay/zoom_pinch_overlay.dart';
 
@@ -29,6 +30,10 @@ class _ImagePreviewViewModelState
     viewModel.tag = widget.tag!;
     viewModel.capturedImage = widget.image!;
     viewModel.images = widget.images!;
+    viewModel.controller = IndexedScrollController(
+      initialIndex: viewModel.images.indexOf(viewModel.capturedImage),
+      keepScrollOffset: true,
+    );
   }
 
   @override
@@ -58,37 +63,47 @@ class _ImagePreviewViewModelState
                 orientation == Orientation.portrait
                     ? const Spacer()
                     : const SizedBox(),
-                ZoomOverlay(
-                  modalBarrierColor: Colors.black12,
-                  minScale: 0.5,
-                  maxScale: 4.0,
-                  animationCurve: Curves.fastOutSlowIn,
-                  animationDuration: const Duration(milliseconds: 300),
-                  twoTouchOnly: true,
-                  // Defaults to false
-                  child: CachedNetworkImage(
-                    imageUrl: viewModel.capturedImage,
-                    fit: BoxFit.cover,
-                    width: orientation == Orientation.portrait
-                        ? double.infinity
-                        : null,
-                    imageBuilder: (context, imageProvider) => Hero(
-                      tag: viewModel.tag,
-                      child: Image(
-                        image: imageProvider,
+                SizedBox(
+                  height: 230,
+                  child: IndexedListView.builder(
+                    minItemCount: 1,
+                    maxItemCount: viewModel.images.length,
+                    controller: viewModel.controller,
+                    scrollDirection: Axis.horizontal,
+                    physics: const PageScrollPhysics(),
+                    itemBuilder: (context, index) => ZoomOverlay(
+                      modalBarrierColor: Colors.black12,
+                      minScale: 0.5,
+                      maxScale: 4.0,
+                      animationCurve: Curves.fastOutSlowIn,
+                      animationDuration: const Duration(milliseconds: 300),
+                      twoTouchOnly: true,
+                      // Defaults to false
+                      child: CachedNetworkImage(
+                        imageUrl: viewModel.images[index],
                         fit: BoxFit.cover,
-                      ),
-                    ),
-                    placeholder: (context, url) =>
+                        width: orientation == Orientation.portrait
+                            ? viewModel.mediaQuery!.width
+                            : null,
+                        imageBuilder: (context, imageProvider) => Hero(
+                          tag: "$index",
+                          child: Image(
+                            image: imageProvider,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        placeholder: (context, url) =>
                         const Center(child: CircularProgressIndicator()),
-                    errorWidget: (context, url, error) => Container(
-                      decoration: BoxDecoration(
-                          color: Theme.of(context).primaryColor,
-                          borderRadius: BorderRadius.circular(20)),
-                      child: Icon(
-                        Icons.image,
-                        size: 45,
-                        color: Theme.of(context).scaffoldBackgroundColor,
+                        errorWidget: (context, url, error) => Container(
+                          decoration: BoxDecoration(
+                              color: Theme.of(context).primaryColor,
+                              borderRadius: BorderRadius.circular(20)),
+                          child: Icon(
+                            Icons.image,
+                            size: 45,
+                            color: Theme.of(context).scaffoldBackgroundColor,
+                          ),
+                        ),
                       ),
                     ),
                   ),
@@ -96,21 +111,20 @@ class _ImagePreviewViewModelState
                 orientation == Orientation.portrait
                     ? const Spacer()
                     : const SizedBox(),
-                orientation == Orientation.portrait
-                    ? Column(
+                if (orientation == Orientation.portrait) Column(
                         children: [
                           SizedBox(
-                            height: 100,
-                            child: ListView.separated(
+                            height: 70,
+                            child: IndexedListView.separated(
+                              minItemCount: 1,
+                              maxItemCount: viewModel.images.length,
+                              separatorBuilder: (context, index) => const SizedBox(width: 10,),
+                              controller: viewModel.controller,
                               cacheExtent: viewModel.images
                                   .indexOf(viewModel.capturedImage)
                                   .toDouble(),
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 10),
-                              separatorBuilder: (context, index) =>
-                                  const SizedBox(
-                                width: 10,
-                              ),
                               scrollDirection: Axis.horizontal,
                               itemBuilder: (context, index) => ImageWidget(
                                   image: viewModel.images[index],
@@ -118,15 +132,13 @@ class _ImagePreviewViewModelState
                                       viewModel.images
                                           .indexOf(viewModel.capturedImage),
                                   onImageClick: viewModel.onImageChange),
-                              itemCount: viewModel.images.length,
                             ),
                           ),
                           const SizedBox(
                             height: 15,
                           )
                         ],
-                      )
-                    : const SizedBox()
+                      ) else const SizedBox()
               ],
             ),
           ),

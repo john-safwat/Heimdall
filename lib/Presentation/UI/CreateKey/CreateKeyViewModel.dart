@@ -84,7 +84,7 @@ class CreateKeyViewModel extends BaseViewModel<CreateKeyNavigator> {
       try {
         await createKeyUseCase.invoke(
             email: emailController.text,
-            key: MyKey(
+            key: EKey(
                 keyId: "",
                 lockId: lockCard.lockId,
                 userId: "",

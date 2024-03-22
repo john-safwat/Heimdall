@@ -16,15 +16,14 @@ class ImageWidget extends StatelessWidget {
       child: CachedNetworkImage(
         imageUrl: image,
         fit: BoxFit.cover,
-        height: 50,
-        width: 130,
+        width: 80,
         imageBuilder: (context, imageProvider) => Container(
           decoration: BoxDecoration(
               border: Border.all(width: isSelected?2:0 , color:isSelected? Theme.of(context).primaryColor:Colors.transparent),
-              borderRadius: BorderRadius.circular(22),
+              borderRadius: BorderRadius.circular(12),
           ),
           child: ClipRRect(
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(10),
             child: Image(
               image: imageProvider,
               fit: BoxFit.cover,

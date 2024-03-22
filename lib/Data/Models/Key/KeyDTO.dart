@@ -73,8 +73,8 @@ class KeyDTO {
     };
   }
 
-  MyKey toDomain() {
-    return MyKey(keyId: keyId,
+  EKey toDomain() {
+    return EKey(keyId: keyId,
         lockId: lockId,
         userId: userId,
         ownerId: ownerId,

@@ -15,7 +15,7 @@ import 'package:provider/provider.dart';
 
 class KeyDetailsView extends StatefulWidget {
   static const String routeName = "KeyDetails";
-  MyKey? myKey;
+  EKey? myKey;
 
   KeyDetailsView({this.myKey, super.key});
 

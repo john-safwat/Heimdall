@@ -202,5 +202,6 @@
   "keyCreated" : "Key Created Successfully",
   "keyDetails" : "Key Details",
   "youCanUseThisKey" : "You Can Use This Key To open the door",
-  "by" : "By"
+  "by" : "By",
+  "userIsOwner" : "The person you are trying to give the key to is one of the owners."
 }

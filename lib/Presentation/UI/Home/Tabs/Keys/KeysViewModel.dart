@@ -12,8 +12,8 @@ class KeysViewModel extends BaseViewModel<KeysNavigator>{
 
 
   TextEditingController searchController = TextEditingController();
-  List<MyKey> keysList = [];
-  List<MyKey> allKeysList = [];
+  List<EKey> keysList = [];
+  List<EKey> allKeysList = [];
   bool loading = true;
   String? errorMessage;
 
@@ -37,8 +37,8 @@ class KeysViewModel extends BaseViewModel<KeysNavigator>{
   }
 
   // function to copy message
-  List<MyKey> copyList(List<MyKey> cards){
-    List<MyKey> newCardsList = [];
+  List<EKey> copyList(List<EKey> cards){
+    List<EKey> newCardsList = [];
     for (int i = 0 ; i < cards.length ; i++){
       newCardsList.add(cards[i]);
     }
@@ -74,7 +74,7 @@ class KeysViewModel extends BaseViewModel<KeysNavigator>{
   }
 
 
-  onCardClick(MyKey key){
+  onCardClick(EKey key){
     navigator!.goToKeyDetailsScreen(key);
   }
 

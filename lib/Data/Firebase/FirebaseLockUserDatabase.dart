@@ -30,4 +30,10 @@ class FirebaseLockUsersDatabase extends BaseDatabase {
     await getCollectionReference(lockId: lockId).doc(userDTO.uid).set(userDTO);
   }
 
+  // function to check if user Exist in database
+  Future<bool> userExist({required String lockId , required String uid})async{
+    var doc  = await getCollectionReference(lockId: lockId).doc(uid).get();
+    return doc.exists;
+  }
+
 }

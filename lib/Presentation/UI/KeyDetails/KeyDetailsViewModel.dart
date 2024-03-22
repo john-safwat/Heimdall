@@ -12,7 +12,7 @@ import 'package:heimdall/Presentation/UI/KeyDetails/KeyDetailsNavigator.dart';
 import 'package:intl/intl.dart';
 
 class KeyDetailsViewModel extends BaseViewModel<KeyDetailsNavigator> {
-  MyKey key;
+  EKey key;
   SetLockRealTimeDatabaseListenerUseCase setLockRealTimeDatabaseListenerUseCase;
   ChangeLockStateUseCase changeLockStateUseCase;
 

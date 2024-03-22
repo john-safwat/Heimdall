@@ -34,6 +34,7 @@ class _CreateKeyViewState extends BaseState<CreateKeyView, CreateKeyViewModel>
             title: Text(viewModel.local!.createKey),
           ),
           body: ListView(
+            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
             padding: const EdgeInsets.all(15),
             children: [
               Text(

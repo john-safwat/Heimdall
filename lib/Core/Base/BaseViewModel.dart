@@ -21,6 +21,7 @@ import 'package:heimdall/Domain/Exceptions/PermissionDeniedException.dart';
 import 'package:heimdall/Domain/Exceptions/RecursiveChatUnAvailableException.dart';
 import 'package:heimdall/Domain/Exceptions/TimeOutOperationsException.dart';
 import 'package:heimdall/Domain/Exceptions/UnknownException.dart';
+import 'package:heimdall/Domain/Exceptions/UserIsOwnerException.dart';
 import 'package:heimdall/Domain/Exceptions/UserNotExistException.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:local_auth/local_auth.dart';
@@ -105,7 +106,9 @@ abstract class BaseViewModel<N extends BaseNavigator> extends ChangeNotifier {
       return local!.contactAlreadyExist;
     } else if (e is RecursiveChatUnAvailableException) {
       return local!.recursiveChatUnAvailable;
-    } else {
+    } else if (e is UserIsOwnerException){
+      return local!.userIsOwner;
+    }else {
       return local!.unknownError;
     }
   }

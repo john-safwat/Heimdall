@@ -12,68 +12,50 @@ class LockCardWidget extends StatelessWidget {
     return InkWell(
       overlayColor: MaterialStateProperty.all(Colors.transparent),
       onTap: () => onCardClick(card),
-      child: SizedBox(
+      child: Container(
+        width: MediaQuery.sizeOf(context).width,
         height: 500,
-        child: Stack(
+        decoration: BoxDecoration(
+            gradient: LinearGradient(colors: [
+              Theme.of(context).primaryColor,
+              Color(card.color),
+            ], begin: Alignment.topLeft, end: Alignment.bottomRight),
+            borderRadius: BorderRadius.circular(20)),
+        child:Column(
           children: [
-            // background of the card
-            Container(
-              width: MediaQuery.sizeOf(context).width,
-              height: double.infinity,
-              decoration: BoxDecoration(
-                  color: Color(card.color),
-                  borderRadius: BorderRadius.circular(20)),
-            ),
-            // the gradient with the lock name and image
-            Positioned.fill(
-                child: Container(
-              padding: const EdgeInsets.fromLTRB(10, 0, 10, 20),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  gradient: LinearGradient(colors: [
-                    Theme.of(context).primaryColor,
-                    Colors.transparent
-                  ], begin: Alignment.topLeft, end: Alignment.bottomRight)),
-              child: Column(
+            // the lock name
+            Padding(
+              padding: const EdgeInsets.all(30.0),
+              child: Row(
                 children: [
-                  // the lock name
-                  Padding(
-                    padding: const EdgeInsets.all(30.0),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          flex: 3,
-                          child: Text(
-                            card.name,
-                            maxLines: 3,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                                fontSize: 36,
-                                fontWeight: FontWeight.w900,
-                                color:
-                                    Theme.of(context).scaffoldBackgroundColor),
-                          ),
-                        ),
-                        const Expanded(child: SizedBox())
-                      ],
+                  Expanded(
+                    flex: 3,
+                    child: Text(
+                      card.name,
+                      maxLines: 3,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                          fontSize: 36,
+                          fontWeight: FontWeight.w900,
+                          color:
+                          Theme.of(context).scaffoldBackgroundColor),
                     ),
                   ),
-                  // the lock avatar
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Image.asset(
-                        card.image,
-                        width: double.infinity,
-                        fit: BoxFit.fitWidth,
-                      ),
-                    ),
-                  )
+                  const Expanded(child: SizedBox())
                 ],
               ),
-            ))
+            ),
+            // the lock avatar
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Image.asset(
+                  card.image,
+                ),
+              ),
+            )
           ],
-        ),
+        ) ,
       ),
     );
   }

@@ -3,9 +3,9 @@ import 'dart:io';
 
 import 'package:flutter_file_dialog/flutter_file_dialog.dart';
 import 'package:http/http.dart' as http;
-import 'package:flutter/material.dart';
 import 'package:heimdall/Core/Base/BaseViewModel.dart';
 import 'package:heimdall/Presentation/UI/ImagePreview/ImagePreviewNavigator.dart';
+import 'package:indexed_list_view/indexed_list_view.dart';
 import 'package:path_provider/path_provider.dart';
 
 class ImagePreviewViewModel extends BaseViewModel<ImagePreviewNavigator> {
@@ -14,10 +14,13 @@ class ImagePreviewViewModel extends BaseViewModel<ImagePreviewNavigator> {
   late String tag;
   late List<String> images;
 
+  late IndexedScrollController controller;
+
   void onImageChange(String image){
      if(capturedImage == image){
        return;
      }
+     controller.jumpToIndex(images.indexOf(image));
      capturedImage = images[images.indexOf(image)];
      notifyListeners();
   }

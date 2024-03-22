@@ -3,6 +3,6 @@ import 'package:heimdall/Domain/Models/Key/Key.dart';
 
 abstract class FirebaseKeysRemoteDataSource {
 
-  Future<void> createKey({required KeyDTO key});
-  Future<List<MyKey>> getKeys({required String uid});
+  Future<String> createKey({required KeyDTO key});
+  Future<List<EKey>> getKeys({required String uid});
 }
