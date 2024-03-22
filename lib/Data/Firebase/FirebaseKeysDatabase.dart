@@ -31,10 +31,11 @@ class FirebaseKeysDatabase extends BaseDatabase {
     );
   }
 
-  Future<void> createKey({required KeyDTO key}) async {
-    var doc = getCollectionReference(uid: key.userId!);
-    key.keyId = doc.doc().id;
-    await doc.doc().set(key);
+  Future<String> createKey({required KeyDTO key}) async {
+    var doc = getCollectionReference(uid: key.userId!).doc();
+    key.keyId = doc.id;
+    await doc.set(key);
+    return doc.id;
   }
 
   Future<List<KeyDTO>> getKeys({required String uid})async {

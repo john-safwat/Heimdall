@@ -7,7 +7,7 @@ import 'package:heimdall/Domain/Models/Key/Key.dart';
 import 'package:provider/provider.dart';
 
 class KeyCardWidget extends StatelessWidget {
-  MyKey myKey;
+  EKey myKey;
   Function onClick;
   KeyCardWidget({required this.myKey , required this.onClick, super.key});
 
@@ -94,7 +94,7 @@ class KeyCardWidget extends StatelessWidget {
                 .titleMedium!
                 .copyWith(color: Theme
                 .of(context)
-                .scaffoldBackgroundColor),)
+                .scaffoldBackgroundColor), maxLines: 3 ,overflow: TextOverflow.ellipsis,)
           ],
         ),
       ),

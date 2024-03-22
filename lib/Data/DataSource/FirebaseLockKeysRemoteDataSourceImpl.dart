@@ -2,30 +2,28 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:heimdall/Data/Firebase/FirebaseKeysDatabase.dart';
+import 'package:heimdall/Data/Firebase/FirebaseLockKeysDatabase.dart';
 import 'package:heimdall/Data/Models/Key/KeyDTO.dart';
-import 'package:heimdall/Domain/DataSource/FirebaseKeysRemoteDataSource.dart';
+import 'package:heimdall/Domain/DataSource/FirebaseLockKeysRemoteDataSource.dart';
 import 'package:heimdall/Domain/Exceptions/FirebaseDatabaseException.dart';
 import 'package:heimdall/Domain/Exceptions/InternetConnectionException.dart';
 import 'package:heimdall/Domain/Exceptions/TimeOutOperationsException.dart';
 import 'package:heimdall/Domain/Exceptions/UnknownException.dart';
 import 'package:heimdall/Domain/Models/Key/Key.dart';
 
-
-FirebaseKeysRemoteDataSource injectFirebaseKeysRemoteDataSource(){
-  return FirebaseKeysRemoteDataSourceImpl(database: injectFirebaseKeysDatabase());
+FirebaseLockKeysRemoteDataSource injectFirebaseLockKeysRemoteDataSource(){
+  return FirebaseLockKeysRemoteDataSourceImpl(database: injectFirebaseLockKeysDatabase());
 }
 
-class FirebaseKeysRemoteDataSourceImpl implements FirebaseKeysRemoteDataSource{
+class FirebaseLockKeysRemoteDataSourceImpl implements FirebaseLockKeysRemoteDataSource{
 
-  FirebaseKeysDatabase database;
-  FirebaseKeysRemoteDataSourceImpl({required this.database});
+  FirebaseLockKeysDatabase database;
+  FirebaseLockKeysRemoteDataSourceImpl({required this.database});
 
   @override
-  Future<String> createKey({required KeyDTO key}) async{
+  Future<void> createKey({required KeyDTO key}) async{
     try {
-      var response = await database.createKey(key: key).timeout(const Duration(seconds: 60));
-      return response;
+      await database.createKey(key: key).timeout(const Duration(seconds: 60));
     }on FirebaseException catch (e) { // handle firebase exception in en of ar
       throw FirebaseDatabaseException(errorMessage: e.code);
     }on IOException {
@@ -38,9 +36,9 @@ class FirebaseKeysRemoteDataSourceImpl implements FirebaseKeysRemoteDataSource{
   }
 
   @override
-  Future<List<EKey>> getKeys({required String uid}) async{
+  Future<List<EKey>> getKeys({required String lockId}) async{
     try {
-      var response = await database.getKeys(uid: uid).timeout(const Duration(seconds: 60));
+      var response = await database.getKeys(lockId: lockId).timeout(const Duration(seconds: 60));
       return response.map((e) => e.toDomain()).toList();
     }on FirebaseException catch (e) { // handle firebase exception in en of ar
       throw FirebaseDatabaseException(errorMessage: e.code);

@@ -9,8 +9,6 @@ class AppConfigProvider extends ChangeNotifier {
 
   void updateUser({required User user}){
     this.user = user;
-    print("From app config provider");
-    print(this.user!.displayName);
     notifyListeners();
   }
 

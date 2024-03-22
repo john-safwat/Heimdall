@@ -2,10 +2,12 @@ import 'package:heimdall/Core/Base/BaseViewModel.dart';
 import 'package:heimdall/Core/Providers/LocksProvider.dart';
 import 'package:heimdall/Core/Theme/MyTheme.dart';
 import 'package:heimdall/Domain/Models/Card/LockCard.dart';
+import 'package:heimdall/Domain/Models/Key/Key.dart';
 import 'package:heimdall/Domain/Models/Log/Log.dart';
 import 'package:heimdall/Domain/Models/Notification/Notification.dart';
 import 'package:heimdall/Domain/UseCase/ChangeLockStateUseCase.dart';
 import 'package:heimdall/Domain/UseCase/GetLockImagesListUseCase.dart';
+import 'package:heimdall/Domain/UseCase/GetLockKeysUseCase.dart';
 import 'package:heimdall/Domain/UseCase/SetLockRealTimeDatabaseListenerUseCase.dart';
 import 'package:heimdall/Presentation/UI/LockDetails/LockDetailsNavigator.dart';
 
@@ -15,19 +17,25 @@ class LockDetailsViewModel extends BaseViewModel<LockDetailsNavigator> {
   GetLockImagesListUseCase getLockImagesListUseCase;
   SetLockRealTimeDatabaseListenerUseCase setLockRealTimeDatabaseListenerUseCase;
   ChangeLockStateUseCase changeLockStateUseCase;
+  GetLockKeysUseCase getLockKeysUseCase;
 
   late LocksProvider locksProvider;
 
-  LockDetailsViewModel({required this.lockCard,
-    required this.getLockImagesListUseCase,
-    required this.setLockRealTimeDatabaseListenerUseCase,
-    required this.changeLockStateUseCase});
+  LockDetailsViewModel(
+      {required this.lockCard,
+      required this.getLockImagesListUseCase,
+      required this.setLockRealTimeDatabaseListenerUseCase,
+      required this.changeLockStateUseCase,
+      required this.getLockKeysUseCase});
 
   List<String> images = [];
+  List<EKey> keys = [];
   String? imagesErrorMessage;
+  String? lockErrorMessage;
+  String? keysErrorMessage;
   bool imagesLoading = true;
   bool lockLoading = true;
-  String? lockErrorMessage;
+  bool keysLoading = true;
 
   loadImagesList() async {
     images = [];
@@ -41,6 +49,21 @@ class LockDetailsViewModel extends BaseViewModel<LockDetailsNavigator> {
     } catch (e) {
       imagesErrorMessage = handleErrorMessage(e as Exception);
       imagesLoading = false;
+      notifyListeners();
+    }
+  }
+
+  loadKeys()async{
+    keys = [];
+    keysErrorMessage = null;
+    keysLoading = true;
+    try {
+      keys = await getLockKeysUseCase.invoke(lockId: lockCard.lockId);
+      keysLoading = false;
+      notifyListeners();
+    } catch (e) {
+      keysErrorMessage = handleErrorMessage(e as Exception);
+      keysLoading = false;
       notifyListeners();
     }
   }
@@ -66,7 +89,7 @@ class LockDetailsViewModel extends BaseViewModel<LockDetailsNavigator> {
   }
 
   changeLockState() async {
-    if(authenticated){
+    if (authenticated) {
       try {
         var data = locksProvider.value;
         await changeLockStateUseCase.invoke(
@@ -80,7 +103,7 @@ class LockDetailsViewModel extends BaseViewModel<LockDetailsNavigator> {
                 userName: appConfigProvider!.user!.displayName ?? "UnKnown"),
             notification: MyNotification(
                 id: lockCard.lockId,
-                code: !data["opened"]? 101:102,
+                code: !data["opened"] ? 101 : 102,
                 body: !data["opened"]
                     ? "This Lock Is Opened Using Mobile App Successfully"
                     : "This Lock Is Closed Using Mobile App Successfully",
@@ -91,9 +114,9 @@ class LockDetailsViewModel extends BaseViewModel<LockDetailsNavigator> {
       } catch (e) {
         notifyListeners();
       }
-    }else {
+    } else {
       await authenticateUser();
-      if(authenticated){
+      if (authenticated) {
         changeLockState();
       }
     }
@@ -115,7 +138,7 @@ class LockDetailsViewModel extends BaseViewModel<LockDetailsNavigator> {
     navigator!.goToGalleryScreen(images: images);
   }
 
-  goToCreateKeyScreen(){
+  goToCreateKeyScreen() {
     navigator!.goToCreateKeyScreen(lockCard: lockCard);
   }
 }

@@ -59,15 +59,17 @@ class _KeysViewState extends BaseState<KeysView, KeysViewModel>
                       errorMessage: value.errorMessage!,
                       fixErrorFunction: value.loadKeysData);
                 } else if (value.loading) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
+                  return const Expanded(
+                    child: Center(
+                      child: CircularProgressIndicator(),
+                    ),
                   );
                 } else if (value.keysList.isEmpty) {
                   return Lottie.asset(viewModel.getAnimation());
                 } else {
                   return Expanded(
                     child: GridView.builder(
-                      padding: EdgeInsets.symmetric(vertical: 20),
+                      padding:const EdgeInsets.symmetric(vertical: 20),
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 2,
@@ -97,7 +99,7 @@ class _KeysViewState extends BaseState<KeysView, KeysViewModel>
   }
 
   @override
-  goToKeyDetailsScreen(MyKey key) {
+  goToKeyDetailsScreen(EKey key) {
     Navigator.push(
         context,
         MaterialPageRoute(

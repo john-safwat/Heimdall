@@ -5,6 +5,7 @@ import 'package:heimdall/Core/Theme/MyTheme.dart';
 import 'package:heimdall/Domain/Models/Card/LockCard.dart';
 import 'package:heimdall/Domain/UseCase/ChangeLockStateUseCase.dart';
 import 'package:heimdall/Domain/UseCase/GetLockImagesListUseCase.dart';
+import 'package:heimdall/Domain/UseCase/GetLockKeysUseCase.dart';
 import 'package:heimdall/Domain/UseCase/SetLockRealTimeDatabaseListenerUseCase.dart';
 import 'package:heimdall/Presentation/UI/CreateKey/CreateKeyView.dart';
 import 'package:heimdall/Presentation/UI/Gallery/GalleryView.dart';
@@ -38,6 +39,7 @@ class _LockDetailsViewState
     viewModel.locksProvider.lockId = viewModel.lockCard.lockId;
     viewModel.loadImagesList();
     viewModel.setDatabaseListener();
+    viewModel.loadKeys();
   }
 
   @override
@@ -160,7 +162,9 @@ class _LockDetailsViewState
         getLockImagesListUseCase: injectGetLockImagesListUseCase(),
         setLockRealTimeDatabaseListenerUseCase:
             injectSetLockRealTimeDatabaseListenerUseCase(),
-        changeLockStateUseCase: injectChangeLockStateUseCase());
+        changeLockStateUseCase: injectChangeLockStateUseCase(),
+        getLockKeysUseCase: injectGetLockKeysUseCase()
+    );
   }
 
   @override

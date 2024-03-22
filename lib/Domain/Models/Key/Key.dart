@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:heimdall/Data/Models/Key/KeyDTO.dart';
 import 'package:intl/intl.dart';
 
-class MyKey {
+class EKey {
   String? keyId;
   String? lockId;
   String? userId;
@@ -17,7 +17,7 @@ class MyKey {
   TimeOfDay? endTime;
   List<String>? days;
 
-  MyKey({
+  EKey({
     required this.keyId,
     required this.lockId,
     required this.userId,

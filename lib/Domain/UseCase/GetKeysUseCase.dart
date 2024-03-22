@@ -10,8 +10,8 @@ class GetKeysUseCase {
   KeysRepository repository;
   GetKeysUseCase({required this.repository});
 
-  Future<List<MyKey>> invoke({required String uid})async {
-    var response = await repository.getKeys(uid: uid);
+  Future<List<EKey>> invoke({required String uid})async {
+    var response = await repository.getUserKeys(uid: uid);
     return response;
   }
 

@@ -17,4 +17,10 @@ class UserLockRepositoryImpl implements UserLockRepository {
     await remoteDataSource.addLockUser(lockId: lockId, userDTO: user.toDataSource());
   }
 
+  @override
+  Future<bool> userExist({required String lockId, required String uid}) async{
+    var response = await remoteDataSource.userExist(lockId: lockId, uid: uid);
+    return response;
+  }
+
 }
