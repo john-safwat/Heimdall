@@ -3,13 +3,13 @@ import 'package:heimdall/Core/Base/BaseViewModel.dart';
 import 'package:heimdall/Domain/Models/Card/LockCard.dart';
 import 'package:heimdall/Domain/Models/Key/Key.dart';
 import 'package:heimdall/Domain/UseCase/CreateKeyUseCase.dart';
-import 'package:heimdall/Presentation/UI/CreateKey/CreateKeyNavigator.dart';
+import 'package:heimdall/Presentation/UI/CreateKey/ManageKeyNavigator.dart';
 import 'package:time_range_picker/time_range_picker.dart';
 
-class CreateKeyViewModel extends BaseViewModel<CreateKeyNavigator> {
+class ManageKeyViewModel extends BaseViewModel<ManageKeyNavigator> {
   CreateKeyUseCase createKeyUseCase;
 
-  CreateKeyViewModel({required this.createKeyUseCase, required this.lockCard});
+  ManageKeyViewModel({required this.createKeyUseCase, required this.lockCard});
 
   TextEditingController emailController = TextEditingController();
 

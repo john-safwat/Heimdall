@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:heimdall/Presentation/UI/CreateKey/CreateKeyViewModel.dart';
+import 'package:heimdall/Presentation/UI/CreateKey/ManageKeyViewModel.dart';
 import 'package:provider/provider.dart';
 
 class WeekDaysPicker extends StatelessWidget {
@@ -7,7 +7,7 @@ class WeekDaysPicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    CreateKeyViewModel provider = Provider.of<CreateKeyViewModel>(context);
+    ManageKeyViewModel provider = Provider.of<ManageKeyViewModel>(context);
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: provider.days.map((e) => InkWell(
