@@ -7,13 +7,14 @@ import 'package:heimdall/Domain/UseCase/ChangeLockStateUseCase.dart';
 import 'package:heimdall/Domain/UseCase/GetLockImagesListUseCase.dart';
 import 'package:heimdall/Domain/UseCase/GetLockKeysUseCase.dart';
 import 'package:heimdall/Domain/UseCase/SetLockRealTimeDatabaseListenerUseCase.dart';
-import 'package:heimdall/Presentation/UI/CreateKey/CreateKeyView.dart';
+import 'package:heimdall/Presentation/UI/CreateKey/ManageKeyView.dart';
 import 'package:heimdall/Presentation/UI/Gallery/GalleryView.dart';
 import 'package:heimdall/Presentation/UI/ImagePreview/ImagePreviewView.dart';
 import 'package:heimdall/Presentation/UI/LockDetails/LockDetailsNavigator.dart';
 import 'package:heimdall/Presentation/UI/LockDetails/LockDetailsViewModel.dart';
 import 'package:heimdall/Presentation/UI/LockDetails/Widgets/GalleryCardWidget.dart';
 import 'package:heimdall/Presentation/UI/Widgets/ErrorMessageWidget.dart';
+import 'package:heimdall/Presentation/UI/Widgets/KeyCardWidget.dart';
 import 'package:heimdall/Presentation/UI/Widgets/LanguageSwitch.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
@@ -148,6 +149,41 @@ class _LockDetailsViewState
                     padding: const EdgeInsets.all(20.0),
                     child: Text(viewModel.local!.createKey),
                   )),
+              const SizedBox(
+                height: 20,
+              ),
+              Text(viewModel.local!.keysList , style: Theme.of(context).textTheme.titleMedium,),
+              Consumer<LockDetailsViewModel>(builder: (context, value, child) {
+                if (value.imagesErrorMessage != null) {
+                  return ErrorMessageWidget(
+                      errorMessage: value.imagesErrorMessage!,
+                      fixErrorFunction: value.loadImagesList);
+                } else if (value.imagesLoading) {
+                  return const Padding(
+                    padding: EdgeInsets.all(30.0),
+                    child: Center(child: CircularProgressIndicator()),
+                  );
+                } else {
+                  return GridView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    padding:const EdgeInsets.symmetric(vertical: 10),
+                    gridDelegate:
+                    const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 20,
+                        crossAxisSpacing: 20,
+                        childAspectRatio: 0.8),
+                    itemBuilder: (context, index) =>
+                        KeyCardWidget(
+                          myKey: viewModel.keys[index],
+                          onClick: viewModel.onCardClick,
+                        ),
+                    itemCount: viewModel.keys.length,
+                  );
+                }
+              }),
+
             ],
           ),
         ),
@@ -196,7 +232,7 @@ class _LockDetailsViewState
     Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => CreateKeyView(lockCard: lockCard,)
+          builder: (context) => ManageKeyView(lockCard: lockCard,)
         ));
   }
 }

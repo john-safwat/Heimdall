@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:heimdall/Presentation/UI/CreateKey/CreateKeyViewModel.dart';
+import 'package:heimdall/Presentation/UI/CreateKey/ManageKeyViewModel.dart';
 import 'package:heimdall/Presentation/UI/CreateKey/Widgets/WeekDaysPicker.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -9,7 +9,7 @@ class DateWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    CreateKeyViewModel provider = Provider.of<CreateKeyViewModel>(context);
+    ManageKeyViewModel provider = Provider.of<ManageKeyViewModel>(context);
     if (provider.validOnce) {
       return Container(
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),

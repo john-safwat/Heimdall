@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:heimdall/Core/Base/BaseState.dart';
 import 'package:heimdall/Domain/Models/Card/LockCard.dart';
+import 'package:heimdall/Domain/Models/Key/Key.dart';
 import 'package:heimdall/Domain/UseCase/CreateKeyUseCase.dart';
-import 'package:heimdall/Presentation/UI/CreateKey/CreateKeyNavigator.dart';
-import 'package:heimdall/Presentation/UI/CreateKey/CreateKeyViewModel.dart';
+import 'package:heimdall/Presentation/UI/CreateKey/ManageKeyNavigator.dart';
+import 'package:heimdall/Presentation/UI/CreateKey/ManageKeyViewModel.dart';
 import 'package:heimdall/Presentation/UI/CreateKey/Widgets/DateWidget.dart';
 import 'package:heimdall/Presentation/UI/CreateKey/Widgets/TimeWidget.dart';
 import 'package:heimdall/Presentation/UI/CreateKey/Widgets/TypeButtonWidget.dart';
@@ -11,24 +12,24 @@ import 'package:icons_plus/icons_plus.dart';
 import 'package:provider/provider.dart';
 import 'package:time_range_picker/time_range_picker.dart';
 
-class CreateKeyView extends StatefulWidget {
+class ManageKeyView extends StatefulWidget {
   static const String routeName = "CreateKy";
   LockCard? lockCard;
-
-  CreateKeyView({this.lockCard, super.key});
+  EKey? eKey;
+  ManageKeyView({this.lockCard, this.eKey, super.key});
 
   @override
-  State<CreateKeyView> createState() => _CreateKeyViewState();
+  State<ManageKeyView> createState() => _ManageKeyViewState();
 }
 
-class _CreateKeyViewState extends BaseState<CreateKeyView, CreateKeyViewModel>
-    implements CreateKeyNavigator {
+class _ManageKeyViewState extends BaseState<ManageKeyView, ManageKeyViewModel>
+    implements ManageKeyNavigator {
   @override
   Widget build(BuildContext context) {
     super.build(context);
     return ChangeNotifierProvider(
       create: (context) => viewModel,
-      child: Consumer<CreateKeyViewModel>(
+      child: Consumer<ManageKeyViewModel>(
         builder: (context, value, child) => Scaffold(
           appBar: AppBar(
             title: Text(viewModel.local!.createKey),
@@ -139,8 +140,8 @@ class _CreateKeyViewState extends BaseState<CreateKeyView, CreateKeyViewModel>
   }
 
   @override
-  CreateKeyViewModel initViewModel() {
-    return CreateKeyViewModel(
+  ManageKeyViewModel initViewModel() {
+    return ManageKeyViewModel(
       createKeyUseCase: injectCreateKeyUseCase(),
       lockCard: widget.lockCard!
     );

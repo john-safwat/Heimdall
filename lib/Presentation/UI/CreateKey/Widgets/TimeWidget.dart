@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:heimdall/Presentation/UI/CreateKey/CreateKeyViewModel.dart';
+import 'package:heimdall/Presentation/UI/CreateKey/ManageKeyViewModel.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
@@ -8,7 +8,7 @@ class TimeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    CreateKeyViewModel provider = Provider.of<CreateKeyViewModel>(context);
+    ManageKeyViewModel provider = Provider.of<ManageKeyViewModel>(context);
     return InkWell(
       onTap: () => provider.showRangeTimePicker(),
       child: Container(

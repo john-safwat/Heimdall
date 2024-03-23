@@ -141,4 +141,8 @@ class LockDetailsViewModel extends BaseViewModel<LockDetailsNavigator> {
   goToCreateKeyScreen() {
     navigator!.goToCreateKeyScreen(lockCard: lockCard);
   }
+
+  onCardClick(EKey key){
+
+  }
 }
