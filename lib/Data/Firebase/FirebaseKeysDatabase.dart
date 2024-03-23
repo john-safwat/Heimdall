@@ -38,6 +38,14 @@ class FirebaseKeysDatabase extends BaseDatabase {
     return doc.id;
   }
 
+  Future<void> updateKey({required KeyDTO key}) async {
+    await getCollectionReference(uid: key.userId!).doc(key.keyId).update(key.toFireStore());
+  }
+
+  Future<void> deleteKey({required KeyDTO key}) async {
+    await getCollectionReference(uid: key.userId!).doc(key.keyId).delete();
+  }
+
   Future<List<KeyDTO>> getKeys({required String uid})async {
     var response = await getCollectionReference(uid: uid).get();
     return response.docs.map((e) => e.data()).toList();

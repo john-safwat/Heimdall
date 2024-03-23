@@ -5,5 +5,6 @@ abstract class FirebaseLockKeysRemoteDataSource {
 
   Future<void> createKey({required KeyDTO key});
   Future<List<EKey>> getKeys({required String lockId});
-
+  Future<void> updateKey({required KeyDTO key});
+  Future<void> deleteKey({required KeyDTO key});
 }

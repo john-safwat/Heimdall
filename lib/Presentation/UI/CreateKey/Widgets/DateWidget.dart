@@ -30,7 +30,7 @@ class DateWidget extends StatelessWidget {
             ),
             Expanded(
                 child: InkWell(
-              onTap: () => provider.showRangeDatePicker(),
+              onTap: () => provider.showDatePicker(),
               child: Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(

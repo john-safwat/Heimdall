@@ -16,6 +16,7 @@ class EKey {
   TimeOfDay? startTime;
   TimeOfDay? endTime;
   List<String>? days;
+  bool expired = false;
 
   EKey({
     required this.keyId,

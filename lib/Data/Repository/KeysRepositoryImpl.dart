@@ -36,4 +36,16 @@ class KeysRepositoryImpl implements KeysRepository {
     var response = await lockKeysRemoteDataSource.getKeys(lockId: lockId);
     return response;
   }
+
+  @override
+  Future<void> updateKey({required EKey key}) async{
+    await remoteDataSource.updateKey(key: key.toDataSource());
+    await lockKeysRemoteDataSource.updateKey(key: key.toDataSource());
+  }
+
+  @override
+  Future<void> deleteKey({required EKey key}) async{
+    await remoteDataSource.deleteKey(key: key.toDataSource());
+    await lockKeysRemoteDataSource.deleteKey(key: key.toDataSource());
+  }
 }

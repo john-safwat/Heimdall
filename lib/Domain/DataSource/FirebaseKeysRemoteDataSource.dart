@@ -5,4 +5,6 @@ abstract class FirebaseKeysRemoteDataSource {
 
   Future<String> createKey({required KeyDTO key});
   Future<List<EKey>> getKeys({required String uid});
+  Future<void> updateKey({required KeyDTO key});
+  Future<void> deleteKey({required KeyDTO key});
 }
