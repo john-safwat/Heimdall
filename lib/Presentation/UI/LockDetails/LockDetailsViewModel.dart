@@ -37,6 +37,12 @@ class LockDetailsViewModel extends BaseViewModel<LockDetailsNavigator> {
   bool lockLoading = true;
   bool keysLoading = true;
 
+  loadData(){
+    loadImagesList();
+    setDatabaseListener();
+    loadKeys();
+  }
+
   loadImagesList() async {
     images = [];
     imagesErrorMessage = null;
@@ -143,6 +149,6 @@ class LockDetailsViewModel extends BaseViewModel<LockDetailsNavigator> {
   }
 
   onCardClick(EKey key){
-
+    navigator!.goToManageKeyScreen(lockCard: lockCard, eKey: key);
   }
 }

@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:heimdall/Core/Base/BaseViewModel.dart';
+import 'package:heimdall/Core/Extension/DateOnlyExtinsion.dart';
 import 'package:heimdall/Core/Providers/LocksProvider.dart';
 import 'package:heimdall/Core/Theme/MyTheme.dart';
 import 'package:heimdall/Domain/Models/Key/Key.dart';
 import 'package:heimdall/Domain/Models/Log/Log.dart';
 import 'package:heimdall/Domain/Models/Notification/Notification.dart';
+import 'package:heimdall/Domain/Models/Users/User.dart';
 import 'package:heimdall/Domain/UseCase/ChangeLockStateUseCase.dart';
 import 'package:heimdall/Domain/UseCase/GetLockImagesListUseCase.dart';
+import 'package:heimdall/Domain/UseCase/GetUserDataUseCase.dart';
 import 'package:heimdall/Domain/UseCase/SetLockRealTimeDatabaseListenerUseCase.dart';
 import 'package:heimdall/Presentation/UI/KeyDetails/KeyDetailsNavigator.dart';
 import 'package:intl/intl.dart';
@@ -15,13 +18,15 @@ class KeyDetailsViewModel extends BaseViewModel<KeyDetailsNavigator> {
   EKey key;
   SetLockRealTimeDatabaseListenerUseCase setLockRealTimeDatabaseListenerUseCase;
   ChangeLockStateUseCase changeLockStateUseCase;
+  GetUserDataUseCase getUserDataUseCase;
 
   late LocksProvider locksProvider;
 
   KeyDetailsViewModel(
       {required this.key,
       required this.setLockRealTimeDatabaseListenerUseCase,
-      required this.changeLockStateUseCase});
+      required this.changeLockStateUseCase,
+      required this.getUserDataUseCase});
 
   List<String> days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
@@ -30,6 +35,25 @@ class KeyDetailsViewModel extends BaseViewModel<KeyDetailsNavigator> {
   bool imagesLoading = true;
   bool lockLoading = true;
   String? lockErrorMessage;
+
+  MyUser? user;
+  String? errorMessage;
+
+  // function to update user
+  loadUserData() async {
+    user = null;
+    errorMessage = null;
+    notifyListeners();
+
+    try {
+      user = await getUserDataUseCase.invoke(uid: key.ownerId!);
+      notifyListeners();
+    } catch (e) {
+      errorMessage = handleErrorMessage(e as Exception);
+      notifyListeners();
+    }
+  }
+
 
   setDatabaseListener() async {
     lockErrorMessage = null;
@@ -57,7 +81,7 @@ class KeyDetailsViewModel extends BaseViewModel<KeyDetailsNavigator> {
               log: Log(
                   eventType: !data["opened"] ? "UnLock" : "Closed",
                   id: key.lockId!,
-                  method: "Mobile",
+                  method: "EKey",
                   timeOpened: DateTime.now().toUtc(),
                   uid: appConfigProvider!.user!.uid,
                   userName: appConfigProvider!.user!.displayName ?? "UnKnown"),
@@ -80,24 +104,37 @@ class KeyDetailsViewModel extends BaseViewModel<KeyDetailsNavigator> {
           changeLockState();
         }
       }
+    }else {
+      navigator!.showErrorNotification(message: local!.invalidKeyCredentials);
     }
   }
 
   bool validate(){
-    DateTime date = DateTime.now();
+    DateTime date = DateTime.now().dateOnly(DateTime.now());
     TimeOfDay time = TimeOfDay.now();
-    if(date.compareTo(key.startDate!) < 0){
-      return false ;
-    }else if (date.compareTo(key.endDate!) > 0 && !key.validOnce!){
-      return false ;
-    }else if(time.hour < key.startTime!.hour && time.minute < key.startTime!.minute){
+    key.startDate = key.startDate!.dateOnly(key.startDate!);
+    key.endDate = key.endDate!.dateOnly(key.endDate!);
+
+    if (date.compareTo(key.startDate!) < 0) {
       return false;
-    }else if(time.hour > key.endTime!.hour && time.minute > key.endTime!.minute) {
+    } else if (date.compareTo(key.endDate!) > 0) {
       return false;
-    }else if(!key.days!.contains(DateFormat("E").format(date)) && key.days!.isNotEmpty){
+    } else if (time.hour < key.startTime!.hour ||
+        (time.hour == key.startTime!.hour &&
+            time.minute < key.startTime!.minute) &&
+            time.period == key.startTime!.period) {
       return false;
+    } else if (time.hour > key.endTime!.hour ||
+        (time.hour == key.endTime!.hour &&
+            time.minute > key.endTime!.minute) &&
+            time.period == key.endTime!.period) {
+      return false;
+    } else if (!key.days!.contains(DateFormat("E").format(date)) &&
+        key.days!.isNotEmpty) {
+      return false;
+    } else {
+      return true;
     }
-    return true;
   }
 
   // function to return the icon of the app

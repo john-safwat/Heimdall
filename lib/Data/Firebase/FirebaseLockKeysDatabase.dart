@@ -35,6 +35,14 @@ class FirebaseLockKeysDatabase extends BaseDatabase {
     await getCollectionReference(lockId: key.lockId!).doc(key.keyId).set(key);
   }
 
+  Future<void> updateKey({required KeyDTO key}) async {
+    await getCollectionReference(lockId: key.lockId!).doc(key.keyId).update(key.toFireStore());
+  }
+
+  Future<void> deleteKey({required KeyDTO key}) async {
+    await getCollectionReference(lockId: key.lockId!).doc(key.keyId).delete();
+  }
+
   Future<List<KeyDTO>> getKeys({required String lockId})async {
     var response = await getCollectionReference(lockId: lockId).get();
     return response.docs.map((e) => e.data()).toList();

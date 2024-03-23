@@ -112,8 +112,6 @@ class DateWidget extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(height: 20),
-          const WeekDaysPicker(),
         ],
       );
     }

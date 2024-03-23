@@ -2,20 +2,34 @@ import 'package:flutter/material.dart';
 import 'package:heimdall/Core/Base/BaseViewModel.dart';
 import 'package:heimdall/Domain/Models/Card/LockCard.dart';
 import 'package:heimdall/Domain/Models/Key/Key.dart';
+import 'package:heimdall/Domain/Models/Users/User.dart';
 import 'package:heimdall/Domain/UseCase/CreateKeyUseCase.dart';
+import 'package:heimdall/Domain/UseCase/DeleteKeyUseCase.dart';
+import 'package:heimdall/Domain/UseCase/GetUserDataUseCase.dart';
+import 'package:heimdall/Domain/UseCase/UpdateKeyUseCase.dart';
 import 'package:heimdall/Presentation/UI/CreateKey/ManageKeyNavigator.dart';
 import 'package:time_range_picker/time_range_picker.dart';
 
 class ManageKeyViewModel extends BaseViewModel<ManageKeyNavigator> {
   CreateKeyUseCase createKeyUseCase;
+  GetUserDataUseCase getUserDataUseCase;
+  UpdateKeyUseCase updateKeyUseCase;
+  DeleteKeyUseCase deleteKeyUseCase;
 
-  ManageKeyViewModel({required this.createKeyUseCase, required this.lockCard});
+  ManageKeyViewModel(
+      {required this.createKeyUseCase,
+      required this.getUserDataUseCase,
+      required this.updateKeyUseCase,
+      required this.deleteKeyUseCase,
+      required this.lockCard});
 
   TextEditingController emailController = TextEditingController();
 
   LockCard lockCard;
 
   bool validOnce = true;
+
+  EKey? key;
 
   DateTime singleDate = DateTime.now();
   DateTimeRange rangeDate =
@@ -25,6 +39,24 @@ class ManageKeyViewModel extends BaseViewModel<ManageKeyNavigator> {
 
   List<String> days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
   List<String> selectedDays = [];
+
+  MyUser? user;
+  String? errorMessage;
+
+  // function to update user
+  loadUserData() async {
+    user = null;
+    errorMessage = null;
+    notifyListeners();
+
+    try {
+      user = await getUserDataUseCase.invoke(uid: key!.userId!);
+      notifyListeners();
+    } catch (e) {
+      errorMessage = handleErrorMessage(e as Exception);
+      notifyListeners();
+    }
+  }
 
   onTypeButtonPress(int id) {
     if (id == 1 && validOnce) {
@@ -99,11 +131,69 @@ class ManageKeyViewModel extends BaseViewModel<ManageKeyNavigator> {
                 lockName: lockCard.name,
                 days: selectedDays));
         navigator!.goBack();
-        navigator!.showSuccessMessage(message: local!.keyCreated , posActionTitle: local!.ok);
+        navigator!.showSuccessMessage(
+            message: local!.keyCreated, posActionTitle: local!.ok);
       } catch (e) {
         navigator!.goBack();
-        navigator!.showFailMessage(message: handleErrorMessage(e as Exception), posActionTitle: local!.ok);
+        navigator!.showFailMessage(
+            message: handleErrorMessage(e as Exception),
+            posActionTitle: local!.ok);
       }
+    }
+  }
+
+  updateKey() async {
+    navigator!.showLoading(message: local!.loading);
+    try {
+      key!.validOnce = validOnce;
+      key!.startDate = validOnce ? singleDate : rangeDate.start;
+      key!.endDate = validOnce ? singleDate : rangeDate.end;
+      key!.startTime = rangeTime.startTime;
+      key!.endTime = rangeTime.endTime;
+      key!.days = selectedDays;
+
+      await updateKeyUseCase.invoke(key: key!);
+      navigator!.goBack();
+      navigator!.showSuccessMessage(
+          message: local!.keyUpdated, posActionTitle: local!.ok);
+    } catch (e) {
+      navigator!.goBack();
+      navigator!.showFailMessage(
+          message: handleErrorMessage(e as Exception),
+          posActionTitle: local!.ok);
+    }
+  }
+
+  onDeleteButtonPress() {
+    if(authenticated){
+      navigator!.showQuestionMessage(
+          message: local!.doYouWantToDeleteKey,
+          posActionTitle: local!.ok,
+          posAction: deleteKey,
+          negativeActionTitle: local!.cancel);
+    }else {
+      authenticateUser();
+      if(authenticated){
+        navigator!.showQuestionMessage(
+            message: local!.doYouWantToDeleteKey,
+            posActionTitle: local!.ok,
+            posAction: deleteKey,
+            negativeActionTitle: local!.cancel);
+      }
+    }
+  }
+
+  deleteKey() async{
+    navigator!.showLoading(message: local!.loading);
+    try{
+      await deleteKeyUseCase.invoke(key: key!);
+      navigator!.goBack();
+      navigator!.showSuccessMessage(message: local!.keyDeleted , posActionTitle: local!.ok);
+    }catch(e){
+      navigator!.goBack();
+      navigator!.showFailMessage(
+          message: handleErrorMessage(e as Exception),
+          posActionTitle: local!.ok);
     }
   }
 }

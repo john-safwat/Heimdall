@@ -49,7 +49,36 @@ class FirebaseKeysRemoteDataSourceImpl implements FirebaseKeysRemoteDataSource{
     } on TimeoutException {// handle timeout exception
       throw TimeOutOperationsException(errorMessage: "Timeout");
     } catch (e){ // handle unknown exceptions
-      print(e);
+      throw UnknownException(errorMessage: e.toString());
+    }
+  }
+
+  @override
+  Future<void> updateKey({required KeyDTO key}) async{
+    try {
+      await database.updateKey(key: key).timeout(const Duration(seconds: 60));
+    }on FirebaseException catch (e) { // handle firebase exception in en of ar
+      throw FirebaseDatabaseException(errorMessage: e.code);
+    }on IOException {
+      throw InternetConnectionException(errorMessage: "I/O Exception");
+    } on TimeoutException {// handle timeout exception
+      throw TimeOutOperationsException(errorMessage: "Timeout");
+    } catch (e){ // handle unknown exceptions
+      throw UnknownException(errorMessage: e.toString());
+    }
+  }
+
+  @override
+  Future<void> deleteKey({required KeyDTO key}) async{
+    try {
+      await database.deleteKey(key: key).timeout(const Duration(seconds: 60));
+    }on FirebaseException catch (e) { // handle firebase exception in en of ar
+      throw FirebaseDatabaseException(errorMessage: e.code);
+    }on IOException {
+      throw InternetConnectionException(errorMessage: "I/O Exception");
+    } on TimeoutException {// handle timeout exception
+      throw TimeOutOperationsException(errorMessage: "Timeout");
+    } catch (e){ // handle unknown exceptions
       throw UnknownException(errorMessage: e.toString());
     }
   }

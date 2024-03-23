@@ -1,10 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:card_banner/card_banner.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:heimdall/Core/Providers/ThemeProvider.dart';
 import 'package:heimdall/Core/Theme/MyTheme.dart';
 import 'package:heimdall/Domain/Models/Key/Key.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class KeyCardWidget extends StatelessWidget {
   EKey myKey;
@@ -16,86 +18,94 @@ class KeyCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     themeProvider = Provider.of<ThemeProvider>(context);
+    var local = AppLocalizations.of(context)!;
     return InkWell(
       onTap: () => onClick(myKey),
-      child: Container(
-        padding: const EdgeInsets.all(10),
-        decoration: BoxDecoration(
-          color: Theme
-              .of(context)
-              .primaryColor,
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Column(
-          children: [
-            Expanded(child: Stack(
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                      color: Theme
-                          .of(context)
-                          .scaffoldBackgroundColor,
-                      borderRadius: BorderRadius.circular(10)
+      child: CardBanner(
+        text: myKey.expired?local.expired : local.valid,
+        color: myKey.expired?MyTheme.red : MyTheme.green,
+        padding: 5,
+        edgeColor: Colors.transparent,
+        position: CardBannerPosition.TOPRIGHT,
+        child: Container(
+          padding: const EdgeInsets.all(10),
+          decoration: BoxDecoration(
+            color: Theme
+                .of(context)
+                .primaryColor,
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Column(
+            children: [
+              Expanded(child: Stack(
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                        color: Theme
+                            .of(context)
+                            .scaffoldBackgroundColor,
+                        borderRadius: BorderRadius.circular(10)
+                    ),
+                    width: double.infinity,
+                    height: double.infinity,
+                    child: SvgPicture.asset("assets/SVG/pattern.svg", color: Theme
+                        .of(context)
+                        .primaryColor,),
                   ),
-                  width: double.infinity,
-                  height: double.infinity,
-                  child: SvgPicture.asset("assets/SVG/pattern.svg", color: Theme
-                      .of(context)
-                      .primaryColor,),
-                ),
-                Positioned(child: Center(child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(2000),
-                    border: Border.all(width: 5 , color: Theme.of(context).primaryColor)
-                  ),
-                  child: CircleAvatar(
-                    radius:30,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(1000),
-                        child: CachedNetworkImage(
-                          imageUrl: myKey.ownerImage ?? "",
-                          imageBuilder: (context, imageProvider) =>
-                              Image(
-                                image: imageProvider,
-                                fit: BoxFit.cover,
-                                width: 125,
-                                height: 125,
-                              ),
-                          errorWidget: (context, url, error) =>
-                              Image.asset(
-                                getIcon(),
-                                fit: BoxFit.cover,
-                                width: 125,
-                                height: 125,
-                              ),
-                          placeholder: (context, url) =>
-                              Container(
-                                width: 125,
-                                height: 125,
-                                decoration: BoxDecoration(
-                                    color: Theme
-                                        .of(context)
-                                        .scaffoldBackgroundColor,
-                                    borderRadius: BorderRadius.circular(15)),
-                                child: const Center(
-                                  child: CircularProgressIndicator(),
+                  Positioned(child: Center(child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(2000),
+                      border: Border.all(width: 5 , color: Theme.of(context).primaryColor)
+                    ),
+                    child: CircleAvatar(
+                      radius:30,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(1000),
+                          child: CachedNetworkImage(
+                            imageUrl: myKey.ownerImage ?? "",
+                            imageBuilder: (context, imageProvider) =>
+                                Image(
+                                  image: imageProvider,
+                                  fit: BoxFit.cover,
+                                  width: 125,
+                                  height: 125,
                                 ),
-                              ),
+                            errorWidget: (context, url, error) =>
+                                Image.asset(
+                                  getIcon(),
+                                  fit: BoxFit.cover,
+                                  width: 125,
+                                  height: 125,
+                                ),
+                            placeholder: (context, url) =>
+                                Container(
+                                  width: 125,
+                                  height: 125,
+                                  decoration: BoxDecoration(
+                                      color: Theme
+                                          .of(context)
+                                          .scaffoldBackgroundColor,
+                                      borderRadius: BorderRadius.circular(15)),
+                                  child: const Center(
+                                    child: CircularProgressIndicator(),
+                                  ),
+                                ),
+                          ),
                         ),
-                      ),
-                  ),
-                ),))
-              ],
-            )),
-            const SizedBox(height: 10,),
-            Text(myKey.lockName, style: Theme
-                .of(context)
-                .textTheme
-                .titleMedium!
-                .copyWith(color: Theme
-                .of(context)
-                .scaffoldBackgroundColor), maxLines: 3 ,overflow: TextOverflow.ellipsis,)
-          ],
+                    ),
+                  ),))
+                ],
+              )),
+              const SizedBox(height: 10,),
+              Text(myKey.lockName, style: Theme
+                  .of(context)
+                  .textTheme
+                  .titleMedium!
+                  .copyWith(color: Theme
+                  .of(context)
+                  .scaffoldBackgroundColor), maxLines: 3 ,overflow: TextOverflow.ellipsis,)
+            ],
+          ),
         ),
       ),
     );

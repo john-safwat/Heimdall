@@ -33,61 +33,68 @@ class _KeysViewState extends BaseState<KeysView, KeysViewModel>
     super.build(context);
     return ChangeNotifierProvider(
       create: (context) => viewModel,
-      child: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          children: [
-            TextFormField(
-              controller: viewModel.searchController,
-              style: Theme.of(context).textTheme.bodyLarge,
-              onChanged: (value) => viewModel.search(),
-              cursorColor: Theme.of(context).primaryColor,
-              keyboardType: TextInputType.text,
-              cursorHeight: 20,
-              decoration: InputDecoration(
-                prefixIcon: const Icon(
-                  EvaIcons.search,
-                  size: 30,
+      child: RefreshIndicator(
+        backgroundColor: Theme.of(context).primaryColor,
+        color: Theme.of(context).scaffoldBackgroundColor,
+        onRefresh: () async {
+          return viewModel.loadKeysData();
+        },
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            children: [
+              TextFormField(
+                controller: viewModel.searchController,
+                style: Theme.of(context).textTheme.bodyLarge,
+                onChanged: (value) => viewModel.search(),
+                cursorColor: Theme.of(context).primaryColor,
+                keyboardType: TextInputType.text,
+                cursorHeight: 20,
+                decoration: InputDecoration(
+                  prefixIcon: const Icon(
+                    EvaIcons.search,
+                    size: 30,
+                  ),
+                  hintText: viewModel.local!.search,
                 ),
-                hintText: viewModel.local!.search,
               ),
-            ),
-            Consumer<KeysViewModel>(
-              builder: (context, value, child) {
-                if (value.errorMessage != null) {
-                  return ErrorMessageWidget(
-                      errorMessage: value.errorMessage!,
-                      fixErrorFunction: value.loadKeysData);
-                } else if (value.loading) {
-                  return const Expanded(
-                    child: Center(
-                      child: CircularProgressIndicator(),
-                    ),
-                  );
-                } else if (value.keysList.isEmpty) {
-                  return Lottie.asset(viewModel.getAnimation());
-                } else {
-                  return Expanded(
-                    child: GridView.builder(
-                      padding:const EdgeInsets.symmetric(vertical: 20),
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2,
-                              mainAxisSpacing: 20,
-                              crossAxisSpacing: 20,
-                              childAspectRatio: 0.8),
-                      itemBuilder: (context, index) =>
-                          KeyCardWidget(
-                            myKey: viewModel.keysList[index],
-                            onClick: viewModel.onCardClick,
-                          ),
-                      itemCount: viewModel.keysList.length,
-                    ),
-                  );
-                }
-              },
-            ),
-          ],
+              Consumer<KeysViewModel>(
+                builder: (context, value, child) {
+                  if (value.errorMessage != null) {
+                    return ErrorMessageWidget(
+                        errorMessage: value.errorMessage!,
+                        fixErrorFunction: value.loadKeysData);
+                  } else if (value.loading) {
+                    return const Expanded(
+                      child: Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                    );
+                  } else if (value.keysList.isEmpty) {
+                    return Lottie.asset(viewModel.getAnimation());
+                  } else {
+                    return Expanded(
+                      child: GridView.builder(
+                        padding:const EdgeInsets.symmetric(vertical: 20),
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                mainAxisSpacing: 20,
+                                crossAxisSpacing: 20,
+                                childAspectRatio: 0.8),
+                        itemBuilder: (context, index) =>
+                            KeyCardWidget(
+                              myKey: viewModel.keysList[index],
+                              onClick: viewModel.onCardClick,
+                            ),
+                        itemCount: viewModel.keysList.length,
+                      ),
+                    );
+                  }
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
