@@ -22,8 +22,8 @@ class KeyCardWidget extends StatelessWidget {
     return InkWell(
       onTap: () => onClick(myKey),
       child: CardBanner(
-        text: myKey.expired?local.expired : local.valid,
-        color: myKey.expired?MyTheme.red : MyTheme.green,
+        text: myKey.valid?local.invalid : local.valid,
+        color: myKey.valid?MyTheme.red : MyTheme.green,
         padding: 5,
         edgeColor: Colors.transparent,
         position: CardBannerPosition.TOPRIGHT,

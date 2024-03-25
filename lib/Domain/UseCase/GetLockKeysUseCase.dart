@@ -27,21 +27,21 @@ class GetLockKeysUseCase {
       keys[i].endDate = keys[i].endDate!.dateOnly(keys[i].endDate!);
 
       if (date.compareTo(keys[i].startDate!) < 0) {
-        keys[i].expired = true;
+        keys[i].valid = true;
       } else if (date.compareTo(keys[i].endDate!) > 0) {
-        keys[i].expired = true;
+        keys[i].valid = true;
       } else if (time.hour < keys[i].startTime!.hour ||
           (time.hour == keys[i].startTime!.hour &&
                   time.minute < keys[i].startTime!.minute) &&
               time.period == keys[i].startTime!.period) {
-        keys[i].expired = true;
+        keys[i].valid = true;
       } else if (time.hour > keys[i].endTime!.hour ||
           (time.hour == keys[i].endTime!.hour &&
                   time.minute > keys[i].endTime!.minute) &&
               time.period == keys[i].endTime!.period) {
-        keys[i].expired = true;
+        keys[i].valid = true;
       } else {
-        keys[i].expired = false;
+        keys[i].valid = false;
       }
     }
     return keys;
