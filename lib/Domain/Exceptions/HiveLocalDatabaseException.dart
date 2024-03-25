@@ -1,0 +1,1 @@
+class HiveLocalDatabaseException implements Exception {}

@@ -211,7 +211,8 @@
   "keyUpdated" : "تم تحديث المفتاح بنجاح",
   "doYouWantToDeleteKey": "هل أنت متأكد أنك تريد حذف هذا المفتاح",
   "keyDeleted" :"تم حذف المفتاح بنجاح",
-  "expired" : "منتهي",
+  "invalid" : "غير صالح",
   "valid" : "صالح",
-  "invalidKeyCredentials" : "بيانات اعتماد المفتاح غير صالحة حاول مرة أخرى"
+  "invalidKeyCredentials" : "بيانات اعتماد المفتاح غير صالحة حاول مرة أخرى",
+  "errorLoadingCachedData" : "حدث خطأ أثناء تحميل البيانات المخزنة مؤقتًا"
 }

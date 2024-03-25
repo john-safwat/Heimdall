@@ -211,7 +211,8 @@
   "keyUpdated" : "Key Updated Successfully",
   "doYouWantToDeleteKey": "Are You Sure You Want to Delete this Key",
   "keyDeleted" :"Key Deleted Successfully",
-  "expired" : "Expired",
+  "invalid" : "Invalid",
   "valid" : "Valid",
-  "invalidKeyCredentials" : "Invalid Key Credentials Try Another Time"
+  "invalidKeyCredentials" : "Invalid Key Credentials Try Another Time",
+  "errorLoadingCachedData" : "Error Loading Cached Data"
 }

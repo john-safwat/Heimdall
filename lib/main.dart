@@ -7,6 +7,7 @@ import 'package:heimdall/Core/Providers/LocksProvider.dart';
 import 'package:heimdall/Core/Providers/ThemeProvider.dart';
 import 'package:heimdall/Core/Theme/MyTheme.dart';
 import 'package:heimdall/Data/Firebase/FirebaseMessagingDatabase.dart';
+import 'package:heimdall/Data/Hive/HiveLocksDatabase.dart';
 import 'package:heimdall/Presentation/UI/AboutUs/AboutUsView.dart';
 import 'package:heimdall/Presentation/UI/ChangePassword/ChangePasswordView.dart';
 import 'package:heimdall/Presentation/UI/ConfigureLock/ConfigureLockView.dart';
@@ -28,6 +29,7 @@ import 'package:heimdall/Presentation/UI/ReportIssue/ReportIssueView.dart';
 import 'package:heimdall/Presentation/UI/Setting/SettingView.dart';
 import 'package:heimdall/Presentation/UI/Splash/SplashScreen.dart';
 import 'package:heimdall/Presentation/UI/UpdateProfile/UpdateProfileView.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -39,6 +41,11 @@ void main()async{
   // block the code building for the loading of data
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
+  
+  // await on hive init 
+  await Hive.initFlutter();
+  HiveLocksDatabase locksDatabase = injectHiveLocksDatabase();
+  await locksDatabase.initDatabase();
   // call shared pref to get some value
   SharedPreferences prefs = await SharedPreferences.getInstance();
   var firstTime = prefs.getBool("firstTime");

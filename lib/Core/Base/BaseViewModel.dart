@@ -16,6 +16,7 @@ import 'package:heimdall/Domain/Exceptions/FirebaseDatabaseException.dart';
 import 'package:heimdall/Domain/Exceptions/FirebaseImagesException.dart';
 import 'package:heimdall/Domain/Exceptions/FirebaseLoginException.dart';
 import 'package:heimdall/Domain/Exceptions/FirebaseUserAuthException.dart';
+import 'package:heimdall/Domain/Exceptions/HiveLocalDatabaseException.dart';
 import 'package:heimdall/Domain/Exceptions/InternetConnectionException.dart';
 import 'package:heimdall/Domain/Exceptions/PermissionDeniedException.dart';
 import 'package:heimdall/Domain/Exceptions/RecursiveChatUnAvailableException.dart';
@@ -108,7 +109,9 @@ abstract class BaseViewModel<N extends BaseNavigator> extends ChangeNotifier {
       return local!.recursiveChatUnAvailable;
     } else if (e is UserIsOwnerException){
       return local!.userIsOwner;
-    }else {
+    } else if (e is HiveLocalDatabaseException){
+      return local!.errorLoadingCachedData;
+    } else {
       return local!.unknownError;
     }
   }
