@@ -3,6 +3,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class LocalProvider extends ChangeNotifier {
 
+  LocalProvider._();
+  static LocalProvider? instance;
+  static LocalProvider getInstance(){
+    return instance??= LocalProvider._();
+  }
+
   // set the default local
   String _currentLocal = "en";
 

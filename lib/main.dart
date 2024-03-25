@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:heimdall/Core/Notifications/NotificationsManager.dart';
 import 'package:heimdall/Core/Providers/AppConfigProvider.dart';
 import 'package:heimdall/Core/Providers/LocalProvider.dart';
 import 'package:heimdall/Core/Providers/LocksProvider.dart';
@@ -41,7 +42,9 @@ void main()async{
   // block the code building for the loading of data
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
-  
+
+  NotificationsManager manager = injectNotificationsManager();
+  await manager.initMessaging();
   // await on hive init 
   await Hive.initFlutter();
   HiveLocksDatabase locksDatabase = injectHiveLocksDatabase();
@@ -61,7 +64,7 @@ void main()async{
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => ThemeProvider(),),
-        ChangeNotifierProvider(create: (context) => LocalProvider(),),
+        ChangeNotifierProvider(create: (context) => LocalProvider.getInstance(),),
         ChangeNotifierProvider(create: (context) => AppConfigProvider(user: user),),
         ChangeNotifierProvider(create: (context) => LocksProvider.getInstance(),)
       ],

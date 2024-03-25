@@ -1,11 +1,13 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:heimdall/Core/Base/BaseDatabase.dart';
+import 'package:heimdall/Core/Notifications/NotificationsManager.dart';
 
 FirebaseMessagingDatabase injectFirebaseMessagingDatabase(){
   return FirebaseMessagingDatabase.getInstance();
 }
 
 class FirebaseMessagingDatabase extends BaseDatabase {
+  static NotificationsManager notificationsManager = injectNotificationsManager();
   FirebaseMessagingDatabase._();
 
   static FirebaseMessagingDatabase? instance;
@@ -27,16 +29,17 @@ class FirebaseMessagingDatabase extends BaseDatabase {
       sound: true,
     );
 
-    print('User granted permission: ${settings.authorizationStatus}');
 
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+
       print('Got a message whilst in the foreground!');
       print('Message data: ${message.data}');
       print('Message title: ${message.notification?.title}');
       print('Message body: ${message.notification?.body}');
 
       if (message.notification != null) {
-        print('Message also contained a notification: ${message.notification}');
+        notificationsManager.showNotifications(
+            notificationId: message.messageId??"hiemdall", channelName: message.messageId??"hiemdall", code: message.data["code"]);
       }
     });
   }
