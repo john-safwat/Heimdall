@@ -2,12 +2,14 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:heimdall/Core/Base/BaseDatabase.dart';
 import 'package:heimdall/Core/Notifications/NotificationsManager.dart';
 
-FirebaseMessagingDatabase injectFirebaseMessagingDatabase(){
+FirebaseMessagingDatabase injectFirebaseMessagingDatabase() {
   return FirebaseMessagingDatabase.getInstance();
 }
 
 class FirebaseMessagingDatabase extends BaseDatabase {
-  static NotificationsManager notificationsManager = injectNotificationsManager();
+  static NotificationsManager notificationsManager =
+      injectNotificationsManager();
+
   FirebaseMessagingDatabase._();
 
   static FirebaseMessagingDatabase? instance;
@@ -17,9 +19,7 @@ class FirebaseMessagingDatabase extends BaseDatabase {
   }
 
   static Future<void> initFirebaseMessaging() async {
-    FirebaseMessaging messaging = FirebaseMessaging.instance;
-
-    NotificationSettings settings = await messaging.requestPermission(
+    await FirebaseMessaging.instance.requestPermission(
       alert: true,
       announcement: false,
       badge: true,
@@ -29,19 +29,30 @@ class FirebaseMessagingDatabase extends BaseDatabase {
       sound: true,
     );
 
-
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-
-      print('Got a message whilst in the foreground!');
-      print('Message data: ${message.data}');
-      print('Message title: ${message.notification?.title}');
-      print('Message body: ${message.notification?.body}');
-
-      if (message.notification != null) {
-        notificationsManager.showNotifications(
-            notificationId: message.messageId??"hiemdall", channelName: message.messageId??"hiemdall", code: message.data["code"]);
-      }
+      pushLocalNotification(message);
     });
+
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+      pushLocalNotification(message);
+    });
+
+    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  }
+
+  @pragma('vm:entry-point')
+  static Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+    print("object");
+    pushLocalNotification(message);
+  }
+
+  static pushLocalNotification(RemoteMessage message) {
+    if (message.notification != null) {
+      notificationsManager.showNotifications(
+          notificationId: message.messageId ?? "hiemdall",
+          channelName: message.messageId ?? "hiemdall",
+          code: message.data["code"]);
+    }
   }
 
   Future<void> subscribeToTopic({required String lockId}) async {
