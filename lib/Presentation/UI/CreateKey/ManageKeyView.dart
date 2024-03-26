@@ -230,7 +230,8 @@ class _ManageKeyViewState extends BaseState<ManageKeyView, ManageKeyViewModel>
   Future<DateTimeRange> showRangeDatePiker(DateTimeRange selectedDate) async {
     DateTimeRange? date = await showDateRangePicker(
         context: context,
-        firstDate: DateTime.now(),
+        initialEntryMode: DatePickerEntryMode.calendarOnly,
+        firstDate:viewModel.key != null? selectedDate.start : DateTime.now(),
         lastDate: DateTime(DateTime.now().year + 1),
         barrierDismissible: false,
         initialDateRange: selectedDate);
