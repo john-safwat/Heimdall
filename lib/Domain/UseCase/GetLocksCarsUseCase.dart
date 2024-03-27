@@ -19,7 +19,7 @@ class GetLocksCarsUseCase {
 
   Future<List<LockCard>> invoke({required String uid}) async {
     var response = await repository.getCardsList(uid: uid);
-    var localData = await repository.getCardsFromCache();
+    var localData = repository.getCardsFromCache();
 
     var unSubscribedLocks = updateSubscriptionsState(response, localData);
 

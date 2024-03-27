@@ -7,6 +7,6 @@ abstract class CardsRepository{
   Future<List<LockCard>> getCardsList({required String uid});
   Future<LockCard> getCard({required String uid , required String lockId});
   Future<void> addCardsToCache({required List<LockCard> cards});
-  Future<List<LockCard>> getCardsFromCache();
+  List<LockCard> getCardsFromCache();
   Future<void> clearCache();
 }

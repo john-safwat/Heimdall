@@ -99,6 +99,7 @@ class MyApp extends StatelessWidget {
     setLocal();
 
     return MaterialApp(
+
       // remove the red debug banner
       debugShowCheckedModeBanner: false,
       localizationsDelegates:const [
