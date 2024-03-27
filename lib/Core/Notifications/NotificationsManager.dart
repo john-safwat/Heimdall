@@ -45,8 +45,7 @@ class NotificationsManager {
         onDidReceiveNotificationResponse: onDidReceiveNotificationResponse);
   }
 
-  void onDidReceiveNotificationResponse(
-      NotificationResponse notificationResponse) async {
+  void onDidReceiveNotificationResponse(NotificationResponse notificationResponse) async {
     final String? payload = notificationResponse.payload;
     if (notificationResponse.payload != null) {
       debugPrint('notification payload: $payload');
@@ -62,7 +61,9 @@ class NotificationsManager {
             channelDescription: "This Notification for Lock Action",
             importance: Importance.max,
             priority: Priority.high,
-            ticker: 'ticker');
+            ticker: localProvider.isEn()
+                ? messageHandler.handleNotificationTitleEnglish(code)
+                : messageHandler.handleNotificationTitleArabic(code));
     NotificationDetails notificationDetails =
         NotificationDetails(android: androidNotificationDetails);
     await flutterLocalNotificationsPlugin.show(

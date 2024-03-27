@@ -36,9 +36,9 @@ class HiveLockCardsLocalDataSourceImpl implements HiveLockCardsLocalDataSource {
   }
 
   @override
-  Future<List<LockCard>> getCards()async {
+  List<LockCard> getCards(){
     try {
-      var response = await database.getCards().timeout(const Duration(seconds: 60));
+      var response = database.getCards();
       return response.map((e) => e.toDomain()).toList();
     }on HiveError catch(e){
       throw HiveLocalDatabaseException();

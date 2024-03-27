@@ -45,8 +45,8 @@ class CardsRepositoryImpl implements CardsRepository {
   }
 
   @override
-  Future<List<LockCard>> getCardsFromCache() async{
-    var response = await localDataSource.getCards();
+  List<LockCard> getCardsFromCache(){
+    var response = localDataSource.getCards();
     return response;
   }
 

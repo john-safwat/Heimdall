@@ -59,8 +59,6 @@
                 <action android:name="com.htc.intent.action.QUICKBOOT_POWERON"/>
             </intent-filter>
         </receiver>
-
-
     </application>
     <queries>
         <!-- If your app checks for SMS support -->

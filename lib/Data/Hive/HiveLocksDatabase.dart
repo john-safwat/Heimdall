@@ -26,7 +26,7 @@ class HiveLocksDatabase extends BaseDatabase{
     await box.addAll(cards);
   }
 
-  Future<List<HiveLockCardDTO>> getCards()async{
+  List<HiveLockCardDTO> getCards(){
     box = Hive.box(constants.locksCardsBox);
     var response = box.values.cast<HiveLockCardDTO>().toList();
     return response;
