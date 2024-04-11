@@ -4,7 +4,6 @@ import 'package:heimdall/Core/Base/BaseViewModel.dart';
 import 'package:heimdall/Data/Models/Chat/ChatDTO.dart';
 import 'package:heimdall/Domain/Models/Chat/Chat.dart';
 import 'package:heimdall/Domain/Models/Contact/Contact.dart';
-import 'package:heimdall/Domain/Models/Users/User.dart';
 import 'package:heimdall/Domain/UseCase/GetMessagesUseCase.dart';
 import 'package:heimdall/Domain/UseCase/SendMessageUseCase.dart';
 import 'package:heimdall/Presentation/UI/ContactChat/ContactChatNavigator.dart';

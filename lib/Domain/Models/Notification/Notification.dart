@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:heimdall/Data/Models/Notification/NotificationDTO.dart';
 import 'package:flutter/material.dart';
+import 'package:heimdall/Data/Models/Notification/NotificationDTO.dart';
 
 class MyNotification {
   String id;

@@ -3,7 +3,6 @@ import 'package:heimdall/Domain/Models/Card/LockCard.dart';
 import 'package:heimdall/Domain/Models/Notification/Notification.dart';
 import 'package:heimdall/Domain/UseCase/GetCardUseCase.dart';
 import 'package:heimdall/Presentation/UI/NotificationDetails/NotificationDetailsNavigator.dart';
-import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
 import 'package:url_launcher/url_launcher.dart';
 
 class NotificationDetailsViewModel

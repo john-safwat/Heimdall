@@ -3,7 +3,6 @@ import 'package:heimdall/Core/Base/BaseState.dart';
 import 'package:heimdall/Presentation/UI/AboutUs/AboutUsNavigator.dart';
 import 'package:heimdall/Presentation/UI/AboutUs/AboutUsViewModel.dart';
 import 'package:heimdall/Presentation/UI/AboutUs/Widgets/TextCard.dart';
-
 import 'package:provider/provider.dart';
 
 class AboutUsView extends StatefulWidget {

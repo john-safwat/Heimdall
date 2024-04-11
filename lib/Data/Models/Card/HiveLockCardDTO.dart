@@ -1,5 +1,6 @@
 import 'package:heimdall/Domain/Models/Card/LockCard.dart';
 import 'package:hive/hive.dart';
+
 part 'HiveLockCardDTO.g.dart';
 
 @HiveType(typeId: 1)

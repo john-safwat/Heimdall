@@ -1,6 +1,5 @@
 import 'package:heimdall/Data/DataSource/FirebaseLockCardRemoteDataSourceImpl.dart';
 import 'package:heimdall/Data/DataSource/HiveLockCardsLocalDataSourceImpl.dart';
-import 'package:heimdall/Data/Models/Card/HiveLockCardDTO.dart';
 import 'package:heimdall/Domain/DataSource/FirebaseLockCardRemoteDataSource.dart';
 import 'package:heimdall/Domain/DataSource/HiveLockCardsLocalDataSource.dart';
 import 'package:heimdall/Domain/Models/Card/LockCard.dart';

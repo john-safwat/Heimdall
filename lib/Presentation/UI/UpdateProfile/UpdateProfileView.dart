@@ -10,7 +10,6 @@ import 'package:heimdall/Presentation/UI/UpdateProfile/UpdateProfileNavigator.da
 import 'package:heimdall/Presentation/UI/UpdateProfile/UpdateProfileViewModel.dart';
 import 'package:heimdall/Presentation/UI/Widgets/ErrorMessageWidget.dart';
 import 'package:icons_plus/icons_plus.dart';
-import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
 class UpdateProfileView extends StatefulWidget {

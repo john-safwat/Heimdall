@@ -42,8 +42,13 @@ class FirebaseMessagingDatabase extends BaseDatabase {
 
   @pragma('vm:entry-point')
   static Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-    print("object");
-    pushLocalNotification(message);
+    NotificationsManager notificationsManager = injectNotificationsManager();
+    if (message.notification != null) {
+      notificationsManager.showNotifications(
+          notificationId: message.messageId ?? "hiemdall",
+          channelName: message.messageId ?? "hiemdall",
+          code: message.data["code"]);
+    }
   }
 
   static pushLocalNotification(RemoteMessage message) {

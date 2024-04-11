@@ -18,6 +18,12 @@ class _HomeViewState extends BaseState<HomeView, HomeViewModel>
     implements HomeNavigator {
 
   @override
+  void initState() {
+    super.initState();
+    viewModel.appInitialization();
+  }
+
+  @override
   Widget build(BuildContext context) {
     super.build(context);
     return ChangeNotifierProvider(
@@ -33,28 +39,28 @@ class _HomeViewState extends BaseState<HomeView, HomeViewModel>
             bottomNavigationBar: BottomNavigationBar(
               items: const[
                 BottomNavigationBarItem(
-                    icon: Icon(Bootstrap.house),
-                    activeIcon: Icon(Bootstrap.house_fill),
+                    icon: Icon(EvaIcons.home_outline),
+                    activeIcon: Icon(EvaIcons.home),
                     label: ""
                 ),
                 BottomNavigationBarItem(
-                    icon: Icon(Bootstrap.key),
-                    activeIcon: Icon(Bootstrap.key_fill),
+                    icon: Icon(Icons.key_outlined),
+                    activeIcon: Icon(Icons.key),
                     label: ""
                 ),
                 BottomNavigationBarItem(
-                    icon: Icon(Bootstrap.chat_left_text),
-                    activeIcon: Icon(Bootstrap.chat_left_text_fill),
+                    icon: Icon(EvaIcons.message_square_outline),
+                    activeIcon: Icon(EvaIcons.message_square),
                     label: ""
                 ),
                 BottomNavigationBarItem(
-                    icon: Icon(Bootstrap.bell),
-                    activeIcon: Icon(Bootstrap.bell_fill),
+                    icon: Icon(EvaIcons.bell_outline),
+                    activeIcon: Icon(EvaIcons.bell),
                     label: ""
                 ),
                 BottomNavigationBarItem(
-                    icon: Icon(Bootstrap.person),
-                    activeIcon: Icon(Bootstrap.person_fill),
+                    icon: Icon(EvaIcons.person_outline),
+                    activeIcon: Icon(EvaIcons.person),
                     label: ""
                 ),
               ],

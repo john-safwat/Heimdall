@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:heimdall/Presentation/UI/CreateKey/ManageKeyViewModel.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class TimeWidget extends StatelessWidget {

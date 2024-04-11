@@ -1,7 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:heimdall/Core/Notifications/NotificationsManager.dart';
 import 'package:heimdall/Core/Providers/AppConfigProvider.dart';
 import 'package:heimdall/Core/Providers/LocalProvider.dart';
 import 'package:heimdall/Core/Providers/LocksProvider.dart';
@@ -33,8 +34,7 @@ import 'package:heimdall/Presentation/UI/UpdateProfile/UpdateProfileView.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:firebase_core/firebase_core.dart';
+
 import 'firebase_options.dart';
 
 void main()async{
@@ -43,12 +43,8 @@ void main()async{
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
 
-  NotificationsManager manager = injectNotificationsManager();
-  await manager.initMessaging();
   // await on hive init 
   await Hive.initFlutter();
-  HiveLocksDatabase locksDatabase = injectHiveLocksDatabase();
-  await locksDatabase.initDatabase();
   // call shared pref to get some value
   SharedPreferences prefs = await SharedPreferences.getInstance();
   var firstTime = prefs.getBool("firstTime");
@@ -57,6 +53,9 @@ void main()async{
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  HiveLocksDatabase locksDatabase = injectHiveLocksDatabase();
+  await locksDatabase.initDatabase();
   await FirebaseMessagingDatabase.initFirebaseMessaging();
   User? user = FirebaseAuth.instance.currentUser;
 

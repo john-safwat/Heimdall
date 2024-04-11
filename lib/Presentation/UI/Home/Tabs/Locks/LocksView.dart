@@ -91,7 +91,10 @@ class _LocksViewState extends BaseState<LocksView, LocksViewModel>
                           fixErrorFunction: value.loadCardsData
                       );
                     } else if (viewModel.loading) {
-                      return const Center(child: CircularProgressIndicator());
+                      return const Padding(
+                        padding: EdgeInsets.symmetric(vertical: 60.0),
+                        child: Center(child: CircularProgressIndicator()),
+                      );
                     } else if (viewModel.lockCardsList.isEmpty) {
                       return Lottie.asset(viewModel.getAnimation());
                     } else {
@@ -116,7 +119,7 @@ class _LocksViewState extends BaseState<LocksView, LocksViewModel>
             onPressed: () {
               viewModel.goToConfigureLocScreen();
             },
-            child: const Icon(Bootstrap.qr_code_scan),
+            child: const Icon(Icons.qr_code),
           ),
         ),
       ),

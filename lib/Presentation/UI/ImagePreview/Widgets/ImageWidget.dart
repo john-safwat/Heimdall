@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:heimdall/Core/Theme/MyTheme.dart';
 
 class ImageWidget extends StatelessWidget {
   String image ;

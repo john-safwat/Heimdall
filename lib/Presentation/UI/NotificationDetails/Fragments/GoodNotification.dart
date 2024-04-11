@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:heimdall/Domain/Models/Notification/Notification.dart';
 import 'package:heimdall/Presentation/UI/NotificationDetails/NotificationDetailsViewModel.dart';
 import 'package:heimdall/Presentation/UI/Widgets/LockCardWidget.dart';
 import 'package:provider/provider.dart';

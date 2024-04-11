@@ -3,7 +3,6 @@ import 'package:heimdall/Data/Repository/ContactsRepositoryImpl.dart';
 import 'package:heimdall/Data/Repository/UserRepositoryImpl.dart';
 import 'package:heimdall/Domain/Exceptions/RecursiveChatUnAvailableException.dart';
 import 'package:heimdall/Domain/Models/Contact/Contact.dart';
-import 'package:heimdall/Domain/Models/Users/User.dart';
 import 'package:heimdall/Domain/Repository/ContactsRepository.dart';
 import 'package:heimdall/Domain/Repository/UserRepository.dart';
 

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:heimdall/Core/Base/BaseState.dart';
-import 'package:heimdall/Core/Theme/MyTheme.dart';
 import 'package:heimdall/Domain/Models/Users/User.dart';
 import 'package:heimdall/Domain/UseCase/AddUserUseCase.dart';
 import 'package:heimdall/Domain/UseCase/CheckIfUserExistUseCase.dart';
@@ -28,6 +27,12 @@ class LoginView extends StatefulWidget {
 
 class _LoginViewState extends BaseState<LoginView, LoginViewModel>
     implements LoginNavigator {
+
+  @override
+  void initState() {
+    super.initState();
+    viewModel.appInitialization();
+  }
   @override
   Widget build(BuildContext context) {
     super.build(context);
