@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:heimdall/Presentation/UI/CreateKey/ManageKeyViewModel.dart';
-import 'package:heimdall/Presentation/UI/CreateKey/Widgets/WeekDaysPicker.dart';
 import 'package:heimdall/Presentation/UI/KeyDetails/KeyDetailsViewModel.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';

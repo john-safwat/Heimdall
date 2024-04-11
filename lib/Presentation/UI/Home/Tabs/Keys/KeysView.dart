@@ -7,8 +7,6 @@ import 'package:heimdall/Presentation/UI/Home/Tabs/Keys/KeysViewModel.dart';
 import 'package:heimdall/Presentation/UI/KeyDetails/KeyDetailsView.dart';
 import 'package:heimdall/Presentation/UI/Widgets/ErrorMessageWidget.dart';
 import 'package:heimdall/Presentation/UI/Widgets/KeyCardWidget.dart';
-import 'package:heimdall/Presentation/UI/Widgets/LanguageSwitch.dart';
-import 'package:heimdall/Presentation/UI/Widgets/ThemeSlider.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';

@@ -1,5 +1,4 @@
 import 'package:heimdall/Data/DataSource/FirebaseContactsRemoteDataSourceImpl.dart';
-import 'package:heimdall/Data/Models/Contact/ContactDTO.dart';
 import 'package:heimdall/Domain/DataSource/FirebaseContactsRemoteDataSource.dart';
 import 'package:heimdall/Domain/Models/Contact/Contact.dart';
 import 'package:heimdall/Domain/Repository/ContactsRepository.dart';

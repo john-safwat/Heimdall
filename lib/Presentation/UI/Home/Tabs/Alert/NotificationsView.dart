@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:heimdall/Core/Base/BaseState.dart';
-import 'package:heimdall/Data/Firebase/FirebaseMessagingDatabase.dart';
 import 'package:heimdall/Domain/Models/Notification/Notification.dart';
 import 'package:heimdall/Domain/UseCase/GetNotificationsListUseCase.dart';
 import 'package:heimdall/Presentation/UI/Home/Tabs/Alert/NotificationsNavigator.dart';

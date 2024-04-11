@@ -15,7 +15,6 @@ import 'package:heimdall/Presentation/UI/Login/LoginView.dart';
 import 'package:heimdall/Presentation/UI/ReportIssue/ReportIssueView.dart';
 import 'package:heimdall/Presentation/UI/Setting/SettingView.dart';
 import 'package:heimdall/Presentation/UI/UpdateProfile/UpdateProfileView.dart';
-import 'package:heimdall/Presentation/UI/Widgets/ThemeSlider.dart';
 import 'package:provider/provider.dart';
 
 class ProfileView extends StatefulWidget {

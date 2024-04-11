@@ -4,7 +4,6 @@ import 'package:heimdall/Core/Base/BaseState.dart';
 import 'package:heimdall/Domain/UseCase/SendFeedBackUseCase.dart';
 import 'package:heimdall/Presentation/UI/Feedback/FeedbackNavigator.dart';
 import 'package:heimdall/Presentation/UI/Feedback/FeedbackViewModel.dart';
-
 import 'package:provider/provider.dart';
 
 class FeedbackView extends StatefulWidget {

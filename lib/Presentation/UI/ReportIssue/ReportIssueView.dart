@@ -3,7 +3,6 @@ import 'package:heimdall/Core/Base/BaseState.dart';
 import 'package:heimdall/Domain/UseCase/SendReportUseCase.dart';
 import 'package:heimdall/Presentation/UI/ReportIssue/ReportIssueNavigator.dart';
 import 'package:heimdall/Presentation/UI/ReportIssue/ReportIssueViewModel.dart';
-
 import 'package:provider/provider.dart';
 
 class ReportIssueView extends StatefulWidget {

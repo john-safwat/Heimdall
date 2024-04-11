@@ -1,7 +1,5 @@
 
 import 'package:flutter/material.dart';
-import 'package:heimdall/Core/Providers/ThemeProvider.dart';
-import 'package:provider/provider.dart';
 
 class NegativeActionButton extends StatelessWidget {
   VoidCallback? negativeAction;

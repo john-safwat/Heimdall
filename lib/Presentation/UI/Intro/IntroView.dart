@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:heimdall/Core/Base/BaseState.dart';
-import 'package:heimdall/Core/Theme/MyTheme.dart';
 import 'package:heimdall/Presentation/UI/Intro/IntroNavigator.dart';
 import 'package:heimdall/Presentation/UI/Intro/IntroViewModel.dart';
 import 'package:heimdall/Presentation/UI/Login/LoginView.dart';
@@ -21,6 +20,13 @@ class IntroView extends StatefulWidget {
 }
 
 class _IntroViewState extends BaseState<IntroView , IntroViewModel> implements IntroNavigator {
+
+  @override
+  void initState() {
+    super.initState();
+    viewModel.appInitialization();
+  }
+
   @override
   Widget build(BuildContext context) {
     super.build(context);

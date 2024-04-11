@@ -8,7 +8,6 @@ import 'package:heimdall/Domain/Models/Log/Log.dart';
 import 'package:heimdall/Domain/Models/Notification/Notification.dart';
 import 'package:heimdall/Domain/Models/Users/User.dart';
 import 'package:heimdall/Domain/UseCase/ChangeLockStateUseCase.dart';
-import 'package:heimdall/Domain/UseCase/GetLockImagesListUseCase.dart';
 import 'package:heimdall/Domain/UseCase/GetUserDataUseCase.dart';
 import 'package:heimdall/Domain/UseCase/SetLockRealTimeDatabaseListenerUseCase.dart';
 import 'package:heimdall/Presentation/UI/KeyDetails/KeyDetailsNavigator.dart';
