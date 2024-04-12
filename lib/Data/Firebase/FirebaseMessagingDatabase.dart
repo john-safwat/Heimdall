@@ -1,6 +1,7 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:heimdall/Core/Base/BaseDatabase.dart';
 import 'package:heimdall/Core/Notifications/NotificationsManager.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 FirebaseMessagingDatabase injectFirebaseMessagingDatabase() {
   return FirebaseMessagingDatabase.getInstance();
@@ -43,20 +44,28 @@ class FirebaseMessagingDatabase extends BaseDatabase {
   @pragma('vm:entry-point')
   static Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
     NotificationsManager notificationsManager = injectNotificationsManager();
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    var local = pref.getString("local");
     if (message.notification != null) {
       notificationsManager.showNotifications(
           notificationId: message.messageId ?? "hiemdall",
           channelName: message.messageId ?? "hiemdall",
-          code: message.data["code"]);
+          code: message.data["code"],
+          local: local??"en"
+      );
     }
   }
 
-  static pushLocalNotification(RemoteMessage message) {
+  static pushLocalNotification(RemoteMessage message)async{
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    var local = pref.getString("local");
     if (message.notification != null) {
       notificationsManager.showNotifications(
           notificationId: message.messageId ?? "hiemdall",
           channelName: message.messageId ?? "hiemdall",
-          code: message.data["code"]);
+          code: message.data["code"],
+          local: local??"en"
+      );
     }
   }
 

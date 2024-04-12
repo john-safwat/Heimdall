@@ -37,36 +37,40 @@ class _HomeViewState extends BaseState<HomeView, HomeViewModel>
             ),
           
             bottomNavigationBar: BottomNavigationBar(
-              items: const[
+              items: [
                 BottomNavigationBarItem(
-                    icon: Icon(EvaIcons.home_outline),
-                    activeIcon: Icon(EvaIcons.home),
-                    label: ""
+                    icon: const Icon(EvaIcons.home_outline),
+                    activeIcon: const Icon(EvaIcons.home),
+                    label: viewModel.local!.locks
                 ),
                 BottomNavigationBarItem(
-                    icon: Icon(Icons.key_outlined),
-                    activeIcon: Icon(Icons.key),
-                    label: ""
+                    icon: const Icon(Icons.key_outlined),
+                    activeIcon: const Icon(Icons.key),
+                    label: viewModel.local!.keys
                 ),
                 BottomNavigationBarItem(
-                    icon: Icon(EvaIcons.message_square_outline),
-                    activeIcon: Icon(EvaIcons.message_square),
-                    label: ""
+                    icon: const Icon(EvaIcons.message_square_outline),
+                    activeIcon: const Icon(EvaIcons.message_square),
+                    label: viewModel.local!.chat
                 ),
                 BottomNavigationBarItem(
-                    icon: Icon(EvaIcons.bell_outline),
-                    activeIcon: Icon(EvaIcons.bell),
-                    label: ""
+                    icon: const Icon(EvaIcons.bell_outline),
+                    activeIcon: const Icon(EvaIcons.bell),
+                    label: viewModel.local!.alerts
                 ),
                 BottomNavigationBarItem(
-                    icon: Icon(EvaIcons.person_outline),
-                    activeIcon: Icon(EvaIcons.person),
-                    label: ""
+                    icon: const Icon(EvaIcons.person_outline),
+                    activeIcon: const Icon(EvaIcons.person),
+                    label: viewModel.local!.profile
                 ),
               ],
               iconSize: 20,
               type: BottomNavigationBarType.fixed,
               currentIndex: value.selectedIndex,
+              selectedItemColor: Theme.of(context).scaffoldBackgroundColor,
+              showSelectedLabels: true,
+              showUnselectedLabels: true,
+              selectedIconTheme: const IconThemeData(size: 26),
               onTap: (index) => value.changeIndex(index),
             ),
           
