@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:heimdall/Core/Notifications/NotificationMessageHandler.dart';
 import 'package:heimdall/Core/Providers/LocalProvider.dart';
+import 'package:heimdall/Core/Theme/MyTheme.dart';
 
 NotificationsManager injectNotificationsManager() {
   return NotificationsManager.getInstance(
@@ -20,26 +21,26 @@ class NotificationsManager {
 
   static NotificationsManager getInstance(
       {required NotificationMessageHandler messageHandler,
-      required LocalProvider localProvider}) {
+        required LocalProvider localProvider}) {
     return instance ??= NotificationsManager._(
         messageHandler: messageHandler, localProvider: localProvider);
   }
 
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-      FlutterLocalNotificationsPlugin();
+  FlutterLocalNotificationsPlugin();
 
   Future<void> initMessaging() async {
     flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<
-            AndroidFlutterLocalNotificationsPlugin>()
+        AndroidFlutterLocalNotificationsPlugin>()
         ?.requestNotificationsPermission();
 
     // initialise the plugin. app_icon needs to be a added as a drawable resource to the Android head project
     const AndroidInitializationSettings initializationSettingsAndroid =
-        AndroidInitializationSettings('ic_launcher');
+    AndroidInitializationSettings('ic_notifications');
 
     const InitializationSettings initializationSettings =
-        InitializationSettings(android: initializationSettingsAndroid);
+    InitializationSettings(android: initializationSettingsAndroid);
 
     flutterLocalNotificationsPlugin.initialize(initializationSettings,
         onDidReceiveNotificationResponse: onDidReceiveNotificationResponse);
@@ -54,24 +55,31 @@ class NotificationsManager {
 
   Future<void> showNotifications(
       {required String notificationId,
-      required String channelName,
-      required String code}) async {
+        required String channelName,
+        required String code, required String local}) async {
     AndroidNotificationDetails androidNotificationDetails =
-        AndroidNotificationDetails(notificationId, channelName,
-            channelDescription: "This Notification for Lock Action",
-            importance: Importance.max,
-            priority: Priority.high,
-            ticker: localProvider.isEn()
-                ? messageHandler.handleNotificationTitleEnglish(code)
-                : messageHandler.handleNotificationTitleArabic(code));
+    AndroidNotificationDetails(notificationId, channelName,
+        channelDescription: "This Notification for Lock Action",
+        importance: Importance.max,
+        icon: "ic_notifications",
+        channelShowBadge: true,
+        color: const Color(0xFF29384D),
+        colorized: true,
+        enableVibration: true,
+        playSound: true,
+        priority: Priority.high,
+        ticker: local == "en"
+            ? messageHandler.handleNotificationTitleEnglish(code)
+            : messageHandler.handleNotificationTitleArabic(code));
     NotificationDetails notificationDetails =
-        NotificationDetails(android: androidNotificationDetails);
+    NotificationDetails(android: androidNotificationDetails);
+    int id = DateTime.now().millisecondsSinceEpoch~/1000;
     await flutterLocalNotificationsPlugin.show(
-        1,
-        localProvider.isEn()
+        id,
+        local == "en"
             ? messageHandler.handleNotificationTitleEnglish(code)
             : messageHandler.handleNotificationTitleArabic(code),
-        localProvider.isEn()
+        local == "en"
             ? messageHandler.handleNotificationBodyEnglish(code)
             : messageHandler.handleNotificationBodyArabic(code),
         notificationDetails);

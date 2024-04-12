@@ -69,7 +69,7 @@ class _KeysViewState extends BaseState<KeysView, KeysViewModel>
                       ),
                     );
                   } else if (value.keysList.isEmpty) {
-                    return Lottie.asset(viewModel.getAnimation());
+                    return Expanded(child: Lottie.asset(viewModel.getAnimation()));
                   } else {
                     return Expanded(
                       child: GridView.builder(
