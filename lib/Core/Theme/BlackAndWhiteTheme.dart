@@ -9,7 +9,7 @@ class BlackAndWhiteTheme {
 
 
   static ThemeData blackAndWhiteTheme = ThemeData(
-
+      useMaterial3: true,
     // app bar theme
       appBarTheme: const AppBarTheme(
           backgroundColor: Colors.transparent,
@@ -176,6 +176,14 @@ class BlackAndWhiteTheme {
         rangePickerBackgroundColor: white,
       ),
 
+      navigationBarTheme: NavigationBarThemeData(
+        labelTextStyle: MaterialStateProperty.all(
+            const TextStyle(
+              color: white,
+              fontSize: 12,
+            )
+        ),
+      ),
     bottomNavigationBarTheme:const BottomNavigationBarThemeData(
       backgroundColor: black,
       selectedIconTheme: IconThemeData(color: white),

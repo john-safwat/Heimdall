@@ -15,6 +15,8 @@ class DarkPurpleTheme {
 
   // the darkPurple & lightPurple theme
   static ThemeData darkPurpleTheme = ThemeData(
+      useMaterial3: true,
+
     // app bar theme
       appBarTheme: const AppBarTheme(
           backgroundColor: Colors.transparent,
@@ -182,6 +184,14 @@ class DarkPurpleTheme {
         headerBackgroundColor: darkPurple,
         headerForegroundColor: lightPurple,
         rangePickerBackgroundColor: darkPurple,
+      ),
+      navigationBarTheme: NavigationBarThemeData(
+        labelTextStyle: MaterialStateProperty.all(
+          const TextStyle(
+            color: darkPurple,
+            fontSize: 12,
+          )
+        ),
       ),
       bottomNavigationBarTheme:const BottomNavigationBarThemeData(
           backgroundColor: lightPurple,

@@ -13,6 +13,8 @@ class PurpleAndWhiteTheme {
 
 
   static ThemeData purpleAndWhiteTheme = ThemeData(
+      useMaterial3: true,
+
     // app bar theme
       appBarTheme: const AppBarTheme(
           backgroundColor: Colors.transparent,
@@ -180,6 +182,14 @@ class PurpleAndWhiteTheme {
         headerBackgroundColor: white,
         headerForegroundColor: lightPurple,
         rangePickerBackgroundColor: white,
+      ),
+      navigationBarTheme: NavigationBarThemeData(
+        labelTextStyle: MaterialStateProperty.all(
+            const TextStyle(
+              color: white,
+              fontSize: 12,
+            )
+        ),
       ),
       bottomNavigationBarTheme:const BottomNavigationBarThemeData(
           backgroundColor: lightPurple,

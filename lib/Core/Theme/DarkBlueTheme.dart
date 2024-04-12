@@ -13,6 +13,8 @@ class DarkBlueTheme {
 
   // the darkBlue & gold theme
   static ThemeData darkBlueTheme = ThemeData(
+      useMaterial3: true,
+
     // app bar theme
       appBarTheme: const AppBarTheme(
           backgroundColor: Colors.transparent,
@@ -180,6 +182,14 @@ class DarkBlueTheme {
         headerBackgroundColor: darkBlue,
         headerForegroundColor: lightGold,
         rangePickerBackgroundColor: darkBlue,
+      ),
+      navigationBarTheme: NavigationBarThemeData(
+        labelTextStyle: MaterialStateProperty.all(
+            const TextStyle(
+              color: darkBlue,
+              fontSize: 12,
+            )
+        ),
       ),
       bottomNavigationBarTheme:const BottomNavigationBarThemeData(
           backgroundColor: lightGold,
