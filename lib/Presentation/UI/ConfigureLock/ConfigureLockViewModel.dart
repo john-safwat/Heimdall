@@ -13,7 +13,7 @@ class ConfigureLockViewModel extends BaseViewModel<ConfigureLockNavigator> {
   ConfigureLockViewModel(
       {required this.addLockCardUseCase, required this.getUserDataUseCase});
 
-  String lockId = 'n197o0uVQ1WLANpSG5yH1VnxSKn1';
+  String lockId = '';
   late String lockAvatar = avatars.first;
   List<String> avatars = [
     "1",
