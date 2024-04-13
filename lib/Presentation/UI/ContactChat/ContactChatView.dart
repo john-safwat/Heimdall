@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:heimdall/Core/Base/BaseState.dart';
 import 'package:heimdall/Domain/Models/Contact/Contact.dart';
@@ -7,7 +8,6 @@ import 'package:heimdall/Domain/UseCase/SendMessageUseCase.dart';
 import 'package:heimdall/Presentation/UI/ContactChat/ContactChatNavigator.dart';
 import 'package:heimdall/Presentation/UI/ContactChat/ContactChatViewModel.dart';
 import 'package:heimdall/Presentation/UI/ContactChat/Widgets/MessagesWidget.dart';
-import 'package:icons_plus/icons_plus.dart';
 import 'package:provider/provider.dart';
 
 class ContactChatView extends StatefulWidget {
@@ -163,7 +163,7 @@ class _ContactChatViewState
                           suffixIcon: InkWell(
                             onTap: () => viewModel.sendMessage(),
                             child: Icon(
-                              EvaIcons.paper_plane,
+                              EvaIcons.paperPlane,
                               size: 25,
                               color: Theme.of(context).primaryColor,
                             ),

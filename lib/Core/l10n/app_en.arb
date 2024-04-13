@@ -214,5 +214,14 @@
   "invalid" : "Invalid",
   "valid" : "Valid",
   "invalidKeyCredentials" : "Invalid Key Credentials Try Another Time",
-  "errorLoadingCachedData" : "Error Loading Cached Data"
+  "errorLoadingCachedData" : "Error Loading Cached Data",
+  "changePasswordDescription" : "Change Password for You Security",
+  "settingsDescription" : "Change Theme , Language",
+  "lockManagementDescription" : "Update Locks List, Password and Trip wire Settings",
+  "feedBackDescription" : "Give us Your Feedback",
+  "reportDescription" : "Send Report if You Have Problem",
+  "aboutUsDescription" : "Information About the App",
+  "deleteAccountDescription" : "All Your Info Will Be Deleted",
+  "signOurDescription" : "End This Account Session"
+
 }

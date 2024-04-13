@@ -1,3 +1,4 @@
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:heimdall/Core/Base/BaseState.dart';
@@ -9,7 +10,6 @@ import 'package:heimdall/Presentation/UI/Login/LoginView.dart';
 import 'package:heimdall/Presentation/UI/Registration/RegistrationNavigator.dart';
 import 'package:heimdall/Presentation/UI/Registration/RegistrationViewModel.dart';
 import 'package:heimdall/Presentation/UI/Widgets/LanguageSwitch.dart';
-import 'package:icons_plus/icons_plus.dart';
 import 'package:provider/provider.dart';
 
 class RegistrationView extends StatefulWidget {
@@ -142,7 +142,7 @@ class _RegistrationViewState
                                       child: Icon(
                                         value.passwordVisible
                                             ? EvaIcons.eye
-                                            : EvaIcons.eye_off,
+                                            : EvaIcons.eyeOff,
                                         size: 30,
                                       ),
                                     )),
@@ -180,7 +180,7 @@ class _RegistrationViewState
                                       child: Icon(
                                         value.passwordConfineVisible
                                             ? EvaIcons.eye
-                                            : EvaIcons.eye_off,
+                                            : EvaIcons.eyeOff,
                                         size: 30,
                                       ),
                                     )),

@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 class Button {
   int id;
-  IconData icon;
+  String icon;
   String title;
+  String description;
   Function onClickListener;
   Color color;
 
@@ -11,9 +12,7 @@ class Button {
       {required this.id,
       required this.icon,
       required this.title,
+      required this.description,
       required this.onClickListener,
       required this.color});
-
-
-
 }

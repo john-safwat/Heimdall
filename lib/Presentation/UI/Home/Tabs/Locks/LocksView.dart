@@ -1,3 +1,4 @@
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:heimdall/Core/Base/BaseState.dart';
 import 'package:heimdall/Domain/Models/Card/LockCard.dart';
@@ -9,7 +10,6 @@ import 'package:heimdall/Presentation/UI/LockDetails/LockDetailsView.dart';
 import 'package:heimdall/Presentation/UI/Widgets/ErrorMessageWidget.dart';
 import 'package:heimdall/Presentation/UI/Widgets/LockCardWidget.dart';
 import 'package:heimdall/Presentation/UI/Widgets/LockCardsListWdget.dart';
-import 'package:icons_plus/icons_plus.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 

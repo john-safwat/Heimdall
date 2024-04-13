@@ -26,41 +26,106 @@ class ProfileView extends StatefulWidget {
 
 class _ProfileViewState extends BaseState<ProfileView, ProfileViewModel>
     implements ProfileNavigator {
-
   @override
   Widget build(BuildContext context) {
     super.build(context);
     viewModel.setButtonsData();
     viewModel.appConfigProvider = Provider.of<AppConfigProvider>(context);
-    return Column(
-      children: [
-        UserProfileDataWidget(
-            user: viewModel.appConfigProvider!.getUser()!,
-            isEn: viewModel.localProvider!.isEn(),
-            buttonTitle: viewModel.local!.edit,
-            getIcon: viewModel.getIcon,
-            buttonAction: viewModel.goToUpdateProfileScreen),
-        Expanded(
-          child: ListView.separated(
-            padding:const EdgeInsets.symmetric(vertical: 10),
-            itemBuilder: (context, index) => CustomButton(button: viewModel.buttonsData[index]),
-            itemCount: viewModel.buttonsData.length,
-            separatorBuilder: (context, index) => const Padding(
-              padding:  EdgeInsets.symmetric(horizontal: 20.0),
-              child: Divider(thickness: 1,),
+
+    return Scaffold(
+      body: ListView(
+        padding: const EdgeInsets.all(10),
+        children: [
+          SizedBox(
+            width: viewModel.mediaQuery!.width,
+            height: viewModel.mediaQuery!.width*0.45,
+            child: Center(
+              child: Text(viewModel.local!.setting , style: TextStyle(
+                fontSize: 40,
+                color: Theme.of(context).primaryColor
+              ),),
             ),
           ),
-        ),
-      ],
+          UserProfileDataWidget(
+              user: viewModel.appConfigProvider!.getUser()!,
+              isEn: viewModel.localProvider!.isEn(),
+              buttonTitle: viewModel.local!.edit,
+              getIcon: viewModel.getIcon,
+              buttonAction: viewModel.goToUpdateProfileScreen),
+          const SizedBox(height: 10,),
+          Container(
+            padding: const EdgeInsets.symmetric(vertical: 15),
+            decoration: BoxDecoration(
+              color: Theme.of(context).primaryColor,
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Column(
+              children: [
+                CustomButton(button: viewModel.buttonsData[1]),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 40.0),
+                  child: Divider(color: Theme.of(context).scaffoldBackgroundColor.withOpacity(0.3),),
+                ),
+                CustomButton(button: viewModel.buttonsData[0]),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 40.0),
+                  child: Divider(color: Theme.of(context).scaffoldBackgroundColor.withOpacity(0.3),),
+                ),
+                CustomButton(button: viewModel.buttonsData[2]),
+              ],
+            ),
+          ),
+          const SizedBox(height: 10,),
+          Container(
+            padding: const EdgeInsets.symmetric(vertical: 15),
+            decoration: BoxDecoration(
+              color: Theme.of(context).primaryColor,
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Column(
+              children: [
+                CustomButton(button: viewModel.buttonsData[3]),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 40.0),
+                  child: Divider(color: Theme.of(context).scaffoldBackgroundColor.withOpacity(0.3),),
+                ),
+                CustomButton(button: viewModel.buttonsData[4]),
+              ],
+            ),
+          ),
+          const SizedBox(height: 10,),
+          Container(
+            padding: const EdgeInsets.symmetric(vertical: 15),
+            decoration: BoxDecoration(
+              color: Theme.of(context).primaryColor,
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Column(
+              children: [
+                CustomButton(button: viewModel.buttonsData[5]),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 40.0),
+                  child: Divider(color: Theme.of(context).scaffoldBackgroundColor.withOpacity(0.3),),
+                ),
+                CustomButton(button: viewModel.buttonsData[6]),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 40.0),
+                  child: Divider(color: Theme.of(context).scaffoldBackgroundColor.withOpacity(0.3),),
+                ),
+                CustomButton(button: viewModel.buttonsData[7]),
+              ],
+            ),
+          )
+        ],
+      ),
     );
   }
 
   @override
   ProfileViewModel initViewModel() {
     return ProfileViewModel(
-      signOutUserUseCase: injectSignOutUserUseCase(),
-      deleteUserAccountUseCase: injectDeleteUserAccountUseCase()
-    );
+        signOutUserUseCase: injectSignOutUserUseCase(),
+        deleteUserAccountUseCase: injectDeleteUserAccountUseCase());
   }
 
   @override

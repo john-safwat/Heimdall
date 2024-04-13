@@ -1,3 +1,4 @@
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:heimdall/Core/Base/BaseState.dart';
@@ -5,7 +6,6 @@ import 'package:heimdall/Domain/UseCase/AddLockCardUseCase.dart';
 import 'package:heimdall/Domain/UseCase/GetUserDataUseCase.dart';
 import 'package:heimdall/Presentation/UI/ConfigureLock/ConfigureLockNavigator.dart';
 import 'package:heimdall/Presentation/UI/ConfigureLock/ConfigureLockViewModel.dart';
-import 'package:icons_plus/icons_plus.dart';
 import 'package:provider/provider.dart';
 import 'package:qr_mobile_vision/qr_camera.dart';
 

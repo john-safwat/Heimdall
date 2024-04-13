@@ -46,7 +46,6 @@ dependencies:
   introduction_screen: ^3.1.12
   lottie: ^2.7.0
   animated_toggle_switch: ^0.8.0
-  icons_plus: ^5.0.0
   elegant_notification: ^1.11.2
   firebase_core: ^2.24.2
   firebase_auth: ^4.15.3
@@ -75,6 +74,8 @@ dependencies:
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   flutter_local_notifications: ^17.0.0
+  iconify_flutter_plus: ^1.0.3
+  eva_icons_flutter: ^3.1.0
 
 
 dev_dependencies:

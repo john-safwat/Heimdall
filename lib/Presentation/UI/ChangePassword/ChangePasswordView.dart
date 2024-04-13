@@ -1,9 +1,9 @@
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:heimdall/Core/Base/BaseState.dart';
 import 'package:heimdall/Domain/UseCase/ChangePasswordUseCase.dart';
 import 'package:heimdall/Presentation/UI/ChangePassword/ChangePasswordNavigator.dart';
 import 'package:heimdall/Presentation/UI/ChangePassword/ChangePasswordViewModel.dart';
-import 'package:icons_plus/icons_plus.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
@@ -63,7 +63,7 @@ class _ChangePasswordViewState
                         child: Icon(
                           !viewModel.passwordVisible
                               ? EvaIcons.eye
-                              : EvaIcons.eye_off,
+                              : EvaIcons.eyeOff,
                           size: 30,
                         ),
                       )),
@@ -95,7 +95,7 @@ class _ChangePasswordViewState
                         child: Icon(
                           !viewModel.newPasswordVisible
                               ? EvaIcons.eye
-                              : EvaIcons.eye_off,
+                              : EvaIcons.eyeOff,
                           size: 30,
                         ),
                       )),
@@ -129,7 +129,7 @@ class _ChangePasswordViewState
                         child: Icon(
                           !viewModel.newPasswordConfirmationVisible
                               ? EvaIcons.eye
-                              : EvaIcons.eye_off,
+                              : EvaIcons.eyeOff,
                           size: 30,
                         ),
                       )),

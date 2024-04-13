@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:heimdall/Core/Base/BaseState.dart';
@@ -9,7 +10,6 @@ import 'package:heimdall/Domain/UseCase/UploadUserImageUseCase.dart';
 import 'package:heimdall/Presentation/UI/ExtraInfo/ExtraInfoNavigator.dart';
 import 'package:heimdall/Presentation/UI/ExtraInfo/ExtraInfoViewModel.dart';
 import 'package:heimdall/Presentation/UI/Login/LoginView.dart';
-import 'package:icons_plus/icons_plus.dart';
 import 'package:provider/provider.dart';
 
 class ExtraInfoView extends StatefulWidget {
@@ -158,7 +158,7 @@ class _ExtraInfoViewState extends BaseState<ExtraInfoView, ExtraInfoViewModel>
                               borderRadius: BorderRadius.circular(20),
                               dropdownColor: Theme.of(context).scaffoldBackgroundColor,
                               // Down Arrow Icon
-                              icon: Icon(EvaIcons.arrow_down , color: Theme.of(context).primaryColor,),
+                              icon: Icon(EvaIcons.arrowDown , color: Theme.of(context).primaryColor,),
                               // Array list of items
                               items: value.genders.map((String items) {
                                 return DropdownMenuItem(

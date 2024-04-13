@@ -1,12 +1,12 @@
 import 'dart:ui';
 
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:heimdall/Core/Base/BaseViewModel.dart';
 import 'package:heimdall/Core/Theme/MyTheme.dart';
 import 'package:heimdall/Domain/UseCase/DeleteUserAccountUseCase.dart';
 import 'package:heimdall/Domain/UseCase/SignOutUserUseCase.dart';
 import 'package:heimdall/Presentation/Models/Button/Button.dart';
 import 'package:heimdall/Presentation/UI/Home/Tabs/Profile/ProfileNavigator.dart';
-import 'package:icons_plus/icons_plus.dart';
 
 class ProfileViewModel extends BaseViewModel<ProfileNavigator> {
   SignOutUserUseCase signOutUserUseCase;
@@ -23,50 +23,58 @@ class ProfileViewModel extends BaseViewModel<ProfileNavigator> {
     buttonsData = [
       Button(
           id: 1,
-          icon: EvaIcons.lock,
+          icon: "assets/SVG/passwordIcon.svg",
           title: local!.changePassword,
+          description: local!.changePasswordDescription,
           onClickListener: goToChangePasswordScreen,
           color: const Color(0xffff9500)),
       Button(
           id: 1,
-          icon: EvaIcons.settings,
+          icon: "assets/SVG/settingsIcon.svg",
           title: local!.setting,
+          description: local!.settingsDescription,
           onClickListener: goToSettingScreen,
           color: const Color(0xff007aff)),
       Button(
           id: 2,
-          icon: EvaIcons.lock,
+          icon: "assets/SVG/lockIcon.svg",
           title: local!.lockManagement,
+          description: local!.lockManagementDescription,
           onClickListener: goToLockManagementScreen,
           color: const Color(0xff4cd964)),
       Button(
           id: 3,
-          icon: EvaIcons.smiling_face_outline,
+          icon: "assets/SVG/personIcon.svg",
           title: local!.yourFeedBack,
+          description: local!.feedBackDescription,
           onClickListener: goToFeedbackScreen,
           color: const Color(0xff34aadc)),
       Button(
           id: 4,
-          icon: EvaIcons.alert_triangle,
+          icon: "assets/SVG/issueIcon.svg",
           title: local!.reportIssue,
+          description: local!.reportDescription,
           onClickListener: goToReportIssueScreen,
           color: const Color(0xffff9500)),
       Button(
           id: 5,
-          icon: EvaIcons.alert_circle,
+          icon: "assets/SVG/aboutUsIcon.svg",
           title: local!.aboutUs,
+          description: local!.aboutUsDescription,
           onClickListener: goToAboutUsScreen,
           color: const Color(0xff007aff)),
       Button(
           id: 6,
-          icon: EvaIcons.trash,
+          icon: "assets/SVG/deleteAccountIcon.svg",
           title: local!.deleteAccount,
+          description: local!.deleteAccountDescription,
           onClickListener: onDeleteAccountPress,
           color: const Color(0xFFF73645)),
       Button(
           id: 7,
-          icon: EvaIcons.arrow_circle_right,
+          icon: "assets/SVG/signOutIcon.svg",
           title: local!.signOut,
+          description: local!.signOurDescription,
           onClickListener: onSignOutPress,
           color: const Color(0xFFF73645))
     ];

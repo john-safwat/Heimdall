@@ -1,3 +1,4 @@
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:heimdall/Core/Base/BaseState.dart';
 import 'package:heimdall/Domain/Models/Contact/Contact.dart';
@@ -8,7 +9,8 @@ import 'package:heimdall/Presentation/UI/Home/Tabs/Chat/ChatNavigator.dart';
 import 'package:heimdall/Presentation/UI/Home/Tabs/Chat/ChatViewModel.dart';
 import 'package:heimdall/Presentation/UI/Home/Tabs/Chat/Widgets/ChatContactWidget.dart';
 import 'package:heimdall/Presentation/UI/Widgets/ErrorMessageWidget.dart';
-import 'package:icons_plus/icons_plus.dart';
+import 'package:iconify_flutter_plus/iconify_flutter_plus.dart';
+import 'package:iconify_flutter_plus/icons/ph.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
@@ -36,10 +38,7 @@ class _ChatViewState extends BaseState<ChatView, ChatViewModel>
         child: Scaffold(
           floatingActionButton: FloatingActionButton(
             onPressed: () => viewModel.showAddContactBottomSheet(),
-            child: const Icon(
-              BoxIcons.bx_chat,
-              size: 32,
-            ),
+            child: const Iconify(Ph.chats_fill),
           ),
           body: RefreshIndicator(
             onRefresh: () =>viewModel.loadContacts(),

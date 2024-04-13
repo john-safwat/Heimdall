@@ -12,7 +12,6 @@ import 'package:heimdall/Core/Notifications/NotificationsManager.dart';
 import 'package:heimdall/Core/Providers/AppConfigProvider.dart';
 import 'package:heimdall/Core/Providers/LocalProvider.dart';
 import 'package:heimdall/Core/Providers/ThemeProvider.dart';
-import 'package:heimdall/Data/Hive/HiveLocksDatabase.dart';
 import 'package:heimdall/Domain/Exceptions/ContactExistException.dart';
 import 'package:heimdall/Domain/Exceptions/FirebaseDatabaseException.dart';
 import 'package:heimdall/Domain/Exceptions/FirebaseImagesException.dart';

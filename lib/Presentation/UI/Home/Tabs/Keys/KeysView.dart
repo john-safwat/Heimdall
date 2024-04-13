@@ -1,3 +1,4 @@
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:heimdall/Core/Base/BaseState.dart';
 import 'package:heimdall/Domain/Models/Key/Key.dart';
@@ -7,7 +8,6 @@ import 'package:heimdall/Presentation/UI/Home/Tabs/Keys/KeysViewModel.dart';
 import 'package:heimdall/Presentation/UI/KeyDetails/KeyDetailsView.dart';
 import 'package:heimdall/Presentation/UI/Widgets/ErrorMessageWidget.dart';
 import 'package:heimdall/Presentation/UI/Widgets/KeyCardWidget.dart';
-import 'package:icons_plus/icons_plus.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 

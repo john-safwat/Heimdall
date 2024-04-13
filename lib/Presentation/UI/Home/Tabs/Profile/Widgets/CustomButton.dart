@@ -1,10 +1,14 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:heimdall/Core/Theme/MyTheme.dart';
 import 'package:heimdall/Presentation/Models/Button/Button.dart';
 
 class CustomButton extends StatelessWidget {
   Button button;
+
   CustomButton({required this.button, super.key});
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -14,30 +18,57 @@ class CustomButton extends StatelessWidget {
         child: Row(
           children: [
             Container(
-              padding: const EdgeInsets.all(5),
+              padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
                 color: button.color,
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(15),
               ),
-              child: Icon(
+              child: SvgPicture.asset(
                 button.icon,
-                size: 25,
-                color: MyTheme.white,
+                width: 26,
               ),
             ),
             const SizedBox(
               width: 10,
             ),
-            Text(
-              button.title,
-              style: Theme.of(context).textTheme.titleMedium,
-            ),
-            const Expanded(child: SizedBox()),
-            Icon(
-              Icons.arrow_forward_ios,
-              size: 20,
-              color: Theme.of(context).primaryColor,
-            )
+            button.description.isEmpty
+                ? Text(
+                    button.title,
+                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                        color: Theme.of(context).scaffoldBackgroundColor),
+                    textAlign: TextAlign.start,
+                  )
+                : Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          button.title,
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleMedium!
+                              .copyWith(
+                                  color: Theme.of(context)
+                                      .scaffoldBackgroundColor),
+                          textAlign: TextAlign.start,
+                        ),
+                        Text(
+                          button.description,
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyMedium!
+                              .copyWith(
+                                  color: Theme.of(context)
+                                      .scaffoldBackgroundColor
+                                      .withOpacity(0.7)),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          textAlign: TextAlign.start,
+                        ),
+                      ],
+                    ),
+                  ),
           ],
         ),
       ),

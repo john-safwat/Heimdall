@@ -1,10 +1,14 @@
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:heimdall/Core/Base/BaseState.dart';
 import 'package:heimdall/Presentation/UI/Home/HomeNavigator.dart';
 import 'package:heimdall/Presentation/UI/Home/HomeViewModel.dart';
-import 'package:icons_plus/icons_plus.dart';
+import 'package:iconify_flutter_plus/iconify_flutter_plus.dart';
+import 'package:iconify_flutter_plus/icons/ion.dart';
+import 'package:iconify_flutter_plus/icons/material_symbols.dart';
+import 'package:iconify_flutter_plus/icons/mdi.dart';
+import 'package:iconify_flutter_plus/icons/uil.dart';
 import 'package:provider/provider.dart';
-
 class HomeView extends StatefulWidget {
   static const String routeName = "Home";
 
@@ -38,7 +42,6 @@ class _HomeViewState extends BaseState<HomeView, HomeViewModel>
                   bottomNavigationBar: NavigationBar(
                     labelBehavior:
                         NavigationDestinationLabelBehavior.alwaysShow,
-                    height: 65,
                     overlayColor: MaterialStateProperty.all(
                         Theme.of(context).primaryColor),
                     selectedIndex: viewModel.selectedIndex,
@@ -49,35 +52,35 @@ class _HomeViewState extends BaseState<HomeView, HomeViewModel>
                         .withOpacity(0.25),
                     destinations: [
                       NavigationDestination(
-                          icon: Icon(EvaIcons.home_outline,
+                          icon: Iconify(MaterialSymbols.lock_outline,
                               color: Theme.of(context).scaffoldBackgroundColor),
-                          selectedIcon: Icon(EvaIcons.home,
+                          selectedIcon: Iconify(MaterialSymbols.lock_open,
                               color: Theme.of(context).scaffoldBackgroundColor),
                           label: viewModel.local!.locks),
                       NavigationDestination(
-                          icon: Icon(Icons.key_outlined,
+                          icon: Iconify(Mdi.key_chain,
                               color: Theme.of(context).scaffoldBackgroundColor),
-                          selectedIcon: Icon(Icons.key,
+                          selectedIcon: Iconify(Mdi.key_chain,
                               color: Theme.of(context).scaffoldBackgroundColor),
                           label: viewModel.local!.keys),
                       NavigationDestination(
-                          icon: Icon(EvaIcons.message_square_outline,
+                          icon: Icon(EvaIcons.messageSquareOutline,
                               color: Theme.of(context).scaffoldBackgroundColor),
-                          selectedIcon: Icon(EvaIcons.message_square,
+                          selectedIcon: Icon(EvaIcons.messageSquare,
                               color: Theme.of(context).scaffoldBackgroundColor),
                           label: viewModel.local!.chat),
                       NavigationDestination(
-                          icon: Icon(EvaIcons.bell_outline,
+                          icon: Icon(EvaIcons.bellOutline,
                               color: Theme.of(context).scaffoldBackgroundColor),
                           selectedIcon: Icon(EvaIcons.bell,
                               color: Theme.of(context).scaffoldBackgroundColor),
                           label: viewModel.local!.alerts),
                       NavigationDestination(
-                        icon: Icon(EvaIcons.person_outline,
+                        icon:Iconify(Uil.setting,
                             color: Theme.of(context).scaffoldBackgroundColor),
-                        selectedIcon: Icon(EvaIcons.person,
+                        selectedIcon: Iconify(Ion.settings,
                             color: Theme.of(context).scaffoldBackgroundColor),
-                        label: viewModel.local!.profile,
+                        label: viewModel.local!.setting,
                       ),
                     ],
                   ),

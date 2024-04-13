@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:heimdall/Core/Base/BaseState.dart';
@@ -9,7 +10,6 @@ import 'package:heimdall/Domain/UseCase/UpdateUserDataUseCase.dart';
 import 'package:heimdall/Presentation/UI/UpdateProfile/UpdateProfileNavigator.dart';
 import 'package:heimdall/Presentation/UI/UpdateProfile/UpdateProfileViewModel.dart';
 import 'package:heimdall/Presentation/UI/Widgets/ErrorMessageWidget.dart';
-import 'package:icons_plus/icons_plus.dart';
 import 'package:provider/provider.dart';
 
 class UpdateProfileView extends StatefulWidget {
@@ -245,7 +245,7 @@ class _UpdateProfileViewState
                               Theme.of(context).scaffoldBackgroundColor,
                           // Down Arrow Icon
                           icon: Icon(
-                            EvaIcons.arrow_down,
+                            EvaIcons.arrowDown,
                             color: Theme.of(context).primaryColor,
                           ),
                           // Array list of items

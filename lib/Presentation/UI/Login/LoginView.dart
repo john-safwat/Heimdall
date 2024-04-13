@@ -1,3 +1,4 @@
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:heimdall/Core/Base/BaseState.dart';
@@ -13,7 +14,6 @@ import 'package:heimdall/Presentation/UI/Login/LoginNavigator.dart';
 import 'package:heimdall/Presentation/UI/Login/LoginViewModel.dart';
 import 'package:heimdall/Presentation/UI/Registration/RegistrationView.dart';
 import 'package:heimdall/Presentation/UI/Widgets/LanguageSwitch.dart';
-import 'package:icons_plus/icons_plus.dart';
 import 'package:provider/provider.dart';
 
 class LoginView extends StatefulWidget {
@@ -127,7 +127,7 @@ class _LoginViewState extends BaseState<LoginView, LoginViewModel>
                                       child: Icon(
                                         value.visible
                                             ? EvaIcons.eye
-                                            : EvaIcons.eye_off,
+                                            : EvaIcons.eyeOff,
                                         size: 30,
                                       ),
                                     )),
