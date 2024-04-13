@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:heimdall/Core/Notifications/NotificationMessageHandler.dart';
 import 'package:heimdall/Core/Providers/LocalProvider.dart';
-import 'package:heimdall/Core/Theme/MyTheme.dart';
 
 NotificationsManager injectNotificationsManager() {
   return NotificationsManager.getInstance(

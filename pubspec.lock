@@ -337,6 +337,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.11.2"
+  eva_icons_flutter:
+    dependency: "direct main"
+    description:
+      name: eva_icons_flutter
+      sha256: "6d48a10b93590ab83eb092bee5adacdeb14f3d83f527a4b9e4092c363d56e2a8"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.1.0"
   fake_async:
     dependency: transitive
     description:
@@ -797,6 +805,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.2"
+  iconify_flutter_plus:
+    dependency: "direct main"
+    description:
+      name: iconify_flutter_plus
+      sha256: bd96bfbbba9dacbf57b38a066c9e300b411a6504a735cf9da9e633174661b821
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.3"
   icons_launcher:
     dependency: "direct main"
     description:
@@ -805,14 +821,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.7"
-  icons_plus:
-    dependency: "direct main"
-    description:
-      name: icons_plus
-      sha256: "8e2f601b8605d45dd55b106a0da084a1809125077a49574ca22e8bcd5b6e86f0"
-      url: "https://pub.dev"
-    source: hosted
-    version: "5.0.0"
   image:
     dependency: transitive
     description:

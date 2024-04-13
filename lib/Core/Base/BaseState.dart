@@ -1,5 +1,6 @@
 import 'package:elegant_notification/elegant_notification.dart';
 import 'package:elegant_notification/resources/arrays.dart';
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:heimdall/Core/Base/BaseNavigator.dart';
@@ -14,7 +15,6 @@ import 'package:heimdall/Core/Providers/LocalProvider.dart';
 import 'package:heimdall/Core/Providers/ThemeProvider.dart';
 import 'package:heimdall/Core/Theme/MyTheme.dart';
 import 'package:heimdall/Core/Utils/DialogUtils.dart';
-import 'package:icons_plus/icons_plus.dart';
 import 'package:provider/provider.dart';
 
 abstract class BaseState<T extends StatefulWidget , VM extends BaseViewModel> extends State<T> implements  BaseNavigator{
@@ -109,7 +109,7 @@ abstract class BaseState<T extends StatefulWidget , VM extends BaseViewModel> ex
   @override
   showSuccessNotification({required String message}){
     ElegantNotification(
-      icon:const Icon(EvaIcons.checkmark_circle , color: MyTheme.white,),
+      icon: const Icon(EvaIcons.checkmarkCircle , color: MyTheme.white,),
       description: Text(message , style: Theme.of(context).textTheme.titleSmall!.copyWith(color: MyTheme.white),),
       background: Colors.green,
       animation: AnimationType.fromTop,
@@ -125,7 +125,7 @@ abstract class BaseState<T extends StatefulWidget , VM extends BaseViewModel> ex
   @override
   showErrorNotification({required String message}){
     ElegantNotification(
-      icon:const Icon(EvaIcons.close_circle , color: MyTheme.white,),
+      icon: const Icon(EvaIcons.closeCircle , color: MyTheme.white,),
       description: Text(message , style: Theme.of(context).textTheme.titleSmall!.copyWith(color: MyTheme.white),),
       background: Colors.red,
       animation: AnimationType.fromTop,

@@ -141,6 +141,7 @@ class FirebaseAuthRemoteDataSourceImpl implements FirebaseAuthRemoteDataSource {
       // handle timeout exception
       throw TimeOutOperationsException(errorMessage: "Timeout");
     } catch (e) {
+      print(e);
       // handle unknown exceptions
       throw UnknownException(errorMessage: e.toString());
     }

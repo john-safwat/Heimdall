@@ -214,5 +214,13 @@
   "invalid" : "غير صالح",
   "valid" : "صالح",
   "invalidKeyCredentials" : "بيانات اعتماد المفتاح غير صالحة حاول مرة أخرى",
-  "errorLoadingCachedData" : "حدث خطأ أثناء تحميل البيانات المخزنة مؤقتًا"
+  "errorLoadingCachedData" : "حدث خطأ أثناء تحميل البيانات المخزنة مؤقتًا",
+  "changePasswordDescription" : "تغيير كلمة المرور بالنسبة لك الأمن",
+  "settingsDescription" : "تغيير المظهر واللغة",
+  "lockManagementDescription" : "قم بتحديث قائمة الأقفال وكلمة المرور وإعدادات مصيدة التطفل",
+  "feedBackDescription" : "أعطنا تقييمك",
+  "reportDescription" : "إرسال تقرير إذا كان لديك مشكلة",
+  "aboutUsDescription" : "معلومات حول التطبيق",
+  "deleteAccountDescription" : "سيتم حذف كافة المعلومات الخاصة بك",
+  "signOurDescription" : "قم بإنهاء جلسة الحساب هذه"
 }

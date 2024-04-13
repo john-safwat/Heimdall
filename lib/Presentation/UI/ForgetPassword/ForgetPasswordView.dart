@@ -1,9 +1,9 @@
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:heimdall/Core/Base/BaseState.dart';
 import 'package:heimdall/Domain/UseCase/ResetPasswordUseCase.dart';
 import 'package:heimdall/Presentation/UI/ForgetPassword/ForgetPasswordNavigator.dart';
 import 'package:heimdall/Presentation/UI/ForgetPassword/ForgetPasswordViewModel.dart';
-import 'package:icons_plus/icons_plus.dart';
 import 'package:lottie/lottie.dart';
 
 class ForgetPasswordView extends StatefulWidget {

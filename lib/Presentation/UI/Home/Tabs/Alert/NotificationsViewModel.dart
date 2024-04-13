@@ -1,3 +1,4 @@
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:heimdall/Core/Base/BaseViewModel.dart';
 import 'package:heimdall/Core/Extension/DateOnlyExtinsion.dart';
@@ -5,7 +6,6 @@ import 'package:heimdall/Core/Theme/MyTheme.dart';
 import 'package:heimdall/Domain/Models/Notification/Notification.dart';
 import 'package:heimdall/Domain/UseCase/GetNotificationsListUseCase.dart';
 import 'package:heimdall/Presentation/UI/Home/Tabs/Alert/NotificationsNavigator.dart';
-import 'package:icons_plus/icons_plus.dart';
 
 class NotificationsViewModel extends BaseViewModel<NotificationsNavigator> {
   GetNotificationsListUseCase getNotificationsListUseCase;
@@ -99,13 +99,13 @@ class NotificationsViewModel extends BaseViewModel<NotificationsNavigator> {
 
   IconData getIcon(String priority) {
     if (priority == "low") {
-      return EvaIcons.checkmark_circle;
+      return EvaIcons.checkmarkCircle;
     } else if (priority == "average") {
-      return EvaIcons.alert_triangle_outline;
+      return EvaIcons.alertTriangleOutline;
     } else if (priority == "high") {
-      return EvaIcons.alert_circle_outline;
+      return EvaIcons.alertCircleOutline;
     } else {
-      return EvaIcons.info_outline;
+      return EvaIcons.infoOutline;
     }
   }
 

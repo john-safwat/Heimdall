@@ -1,10 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:heimdall/Core/Base/BaseState.dart';
 import 'package:heimdall/Presentation/UI/ImagePreview/ImagePreviewNavigator.dart';
 import 'package:heimdall/Presentation/UI/ImagePreview/ImagePreviewViewModel.dart';
 import 'package:heimdall/Presentation/UI/ImagePreview/Widgets/ImageWidget.dart';
-import 'package:icons_plus/icons_plus.dart';
 import 'package:indexed_list_view/indexed_list_view.dart';
 import 'package:provider/provider.dart';
 import 'package:zoom_pinch_overlay/zoom_pinch_overlay.dart';
@@ -50,7 +50,7 @@ class _ImagePreviewViewModelState
                     actions: [
                       InkWell(
                         onTap: () => viewModel.showQuestionMessage(),
-                        child: const Icon(EvaIcons.download_outline)
+                        child: const Icon(EvaIcons.downloadOutline)
                       ),
                       const SizedBox(width: 20,)
                     ],
