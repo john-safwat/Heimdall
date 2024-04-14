@@ -38,7 +38,7 @@ class _ChatViewState extends BaseState<ChatView, ChatViewModel>
         child: Scaffold(
           floatingActionButton: FloatingActionButton(
             onPressed: () => viewModel.showAddContactBottomSheet(),
-            child: const Iconify(Ph.chats_fill),
+            child:  Iconify(Ph.chats_fill , color: Theme.of(context).scaffoldBackgroundColor,),
           ),
           body: RefreshIndicator(
             onRefresh: () =>viewModel.loadContacts(),

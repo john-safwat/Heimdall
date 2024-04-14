@@ -29,55 +29,57 @@ class _GalleryViewState extends BaseState<GalleryView, GalleryViewModel>
     super.build(context);
     return ChangeNotifierProvider(
       create: (context) => viewModel,
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(viewModel.local!.gallery),
-        ),
-        body: Column(
-          children: [
-            Expanded(
-                child: GridView.builder(
-              padding: const EdgeInsets.all(10),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-                  childAspectRatio: 1,
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 10),
-              itemBuilder: (context, index) => InkWell(
-                overlayColor: MaterialStateProperty.all(Colors.transparent),
-                onTap: () => viewModel.goToImagePreviewScreen(viewModel.images[index], "$index"),
-                child: CachedNetworkImage(
-                  imageUrl: viewModel.images[index],
-                  fit: BoxFit.cover,
-                  height: double.infinity,
-                  width: double.infinity,
-                  imageBuilder: (context, imageProvider) => ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: Hero(
-                      tag: "$index",
-                      child: Image(
-                        image: imageProvider,
-                        fit: BoxFit.cover,
+      child: SafeArea(
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text(viewModel.local!.gallery),
+          ),
+          body: Column(
+            children: [
+              Expanded(
+                  child: GridView.builder(
+                padding: const EdgeInsets.all(10),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3,
+                    childAspectRatio: 1,
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 10),
+                itemBuilder: (context, index) => InkWell(
+                  overlayColor: MaterialStateProperty.all(Colors.transparent),
+                  onTap: () => viewModel.goToImagePreviewScreen(viewModel.images[index], "$index"),
+                  child: CachedNetworkImage(
+                    imageUrl: viewModel.images[index],
+                    fit: BoxFit.cover,
+                    height: double.infinity,
+                    width: double.infinity,
+                    imageBuilder: (context, imageProvider) => ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Hero(
+                        tag: "$index",
+                        child: Image(
+                          image: imageProvider,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                    placeholder: (context, url) =>
+                        const Center(child: CircularProgressIndicator()),
+                    errorWidget: (context, url, error) => Container(
+                      decoration: BoxDecoration(
+                          color: Theme.of(context).primaryColor,
+                          borderRadius: BorderRadius.circular(20)),
+                      child: Icon(
+                        Icons.image,
+                        size: 45,
+                        color: Theme.of(context).scaffoldBackgroundColor,
                       ),
                     ),
                   ),
-                  placeholder: (context, url) =>
-                      const Center(child: CircularProgressIndicator()),
-                  errorWidget: (context, url, error) => Container(
-                    decoration: BoxDecoration(
-                        color: Theme.of(context).primaryColor,
-                        borderRadius: BorderRadius.circular(20)),
-                    child: Icon(
-                      Icons.image,
-                      size: 45,
-                      color: Theme.of(context).scaffoldBackgroundColor,
-                    ),
-                  ),
                 ),
-              ),
-              itemCount: viewModel.images.length,
-            ))
-          ],
+                itemCount: viewModel.images.length,
+              ))
+            ],
+          ),
         ),
       ),
     );

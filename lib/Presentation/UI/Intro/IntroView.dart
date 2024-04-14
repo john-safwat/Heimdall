@@ -43,86 +43,88 @@ class _IntroViewState extends BaseState<IntroView , IntroViewModel> implements I
 
     return ChangeNotifierProvider(
       create: (context) => viewModel,
-      child: Scaffold(
-        body: IntroductionScreen(
-          pages: [
-            // set language page
-            PageViewModel(
-              decoration: pageDecoration,
-              image: Lottie.asset(viewModel.getLocalAnimation()),
-              title: viewModel.local!.yourLanguage,
-              bodyWidget: const LanguageSwitch()
-            ),
-            // set theme page
-            PageViewModel(
+      child: SafeArea(
+        child: Scaffold(
+          body: IntroductionScreen(
+            pages: [
+              // set language page
+              PageViewModel(
                 decoration: pageDecoration,
-                image: Lottie.asset("assets/animations/theme.json"),
-                title: viewModel.local!.makeItYourOwn,
-                bodyWidget: ThemeSwitch()
+                image: Lottie.asset(viewModel.getLocalAnimation()),
+                title: viewModel.local!.yourLanguage,
+                bodyWidget: const LanguageSwitch()
+              ),
+              // set theme page
+              PageViewModel(
+                  decoration: pageDecoration,
+                  image: Lottie.asset("assets/animations/theme.json"),
+                  title: viewModel.local!.makeItYourOwn,
+                  bodyWidget: ThemeSwitch()
+              ),
+              // Welcome Message
+              PageViewModel(
+                  decoration: pageDecoration,
+                  image: Lottie.asset(viewModel.getHelloAnimation()),
+                  title: viewModel.local!.welcome,
+                  body: viewModel.local!.welcomeMessage
+              ),
+              // security Message
+              PageViewModel(
+                  decoration: pageDecoration,
+                  image: Lottie.asset(viewModel.getSecurityAnimation()),
+                  title: viewModel.local!.yourSecurity,
+                  body: viewModel.local!.yourSecurityMessage
+              ),
+              // security Message
+              PageViewModel(
+                  decoration: pageDecoration,
+                  image: Lottie.asset(viewModel.getQRAnimation()),
+                  title: viewModel.local!.qrCode,
+                  body: viewModel.local!.qrCodeMessage
+              ),
+              // security Message
+              PageViewModel(
+                  decoration: pageDecoration,
+                  image: Lottie.asset(viewModel.getChatAnimation()),
+                  title: viewModel.local!.chatTitle,
+                  body: viewModel.local!.chatMessage
+              ),
+              // security Message
+              PageViewModel(
+                  decoration: pageDecoration,
+                  image: Lottie.asset(viewModel.getKeyAnimation()),
+                  title: viewModel.local!.loginTitle,
+                  body: viewModel.local!.loginMessage
+              )
+            ],
+            done: Text(viewModel.local!.finish),
+            next: Text(viewModel.local!.next),
+            back: Text(viewModel.local!.back),
+            backStyle: ButtonStyle(
+                textStyle: MaterialStateProperty.all( Theme.of(context).textTheme.titleMedium),
+                foregroundColor: MaterialStateProperty.all(Theme.of(context).primaryColor)
+            ) ,
+            nextStyle:  ButtonStyle(
+                textStyle: MaterialStateProperty.all( Theme.of(context).textTheme.titleMedium),
+                foregroundColor: MaterialStateProperty.all(Theme.of(context).primaryColor)
             ),
-            // Welcome Message
-            PageViewModel(
-                decoration: pageDecoration,
-                image: Lottie.asset(viewModel.getHelloAnimation()),
-                title: viewModel.local!.welcome,
-                body: viewModel.local!.welcomeMessage
+            doneStyle: ButtonStyle(
+                textStyle: MaterialStateProperty.all( Theme.of(context).textTheme.titleMedium),
+                foregroundColor: MaterialStateProperty.all(Theme.of(context).primaryColor)
             ),
-            // security Message
-            PageViewModel(
-                decoration: pageDecoration,
-                image: Lottie.asset(viewModel.getSecurityAnimation()),
-                title: viewModel.local!.yourSecurity,
-                body: viewModel.local!.yourSecurityMessage
+            dotsDecorator: DotsDecorator(
+              size: const Size.square(10.0),
+              activeSize: const Size(20.0, 10.0),
+              activeColor: Theme.of(context).primaryColor,
+              color: Theme.of(context).secondaryHeaderColor,
+              spacing: const EdgeInsets.symmetric(horizontal: 3.0),
+              activeShape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(25.0)
+              ),
             ),
-            // security Message
-            PageViewModel(
-                decoration: pageDecoration,
-                image: Lottie.asset(viewModel.getQRAnimation()),
-                title: viewModel.local!.qrCode,
-                body: viewModel.local!.qrCodeMessage
-            ),
-            // security Message
-            PageViewModel(
-                decoration: pageDecoration,
-                image: Lottie.asset(viewModel.getChatAnimation()),
-                title: viewModel.local!.chatTitle,
-                body: viewModel.local!.chatMessage
-            ),
-            // security Message
-            PageViewModel(
-                decoration: pageDecoration,
-                image: Lottie.asset(viewModel.getKeyAnimation()),
-                title: viewModel.local!.loginTitle,
-                body: viewModel.local!.loginMessage
-            )
-          ],
-          done: Text(viewModel.local!.finish),
-          next: Text(viewModel.local!.next),
-          back: Text(viewModel.local!.back),
-          backStyle: ButtonStyle(
-              textStyle: MaterialStateProperty.all( Theme.of(context).textTheme.titleMedium),
-              foregroundColor: MaterialStateProperty.all(Theme.of(context).primaryColor)
-          ) ,
-          nextStyle:  ButtonStyle(
-              textStyle: MaterialStateProperty.all( Theme.of(context).textTheme.titleMedium),
-              foregroundColor: MaterialStateProperty.all(Theme.of(context).primaryColor)
+            showBackButton: true,
+            onDone: viewModel.onDonePress,
           ),
-          doneStyle: ButtonStyle(
-              textStyle: MaterialStateProperty.all( Theme.of(context).textTheme.titleMedium),
-              foregroundColor: MaterialStateProperty.all(Theme.of(context).primaryColor)
-          ),
-          dotsDecorator: DotsDecorator(
-            size: const Size.square(10.0),
-            activeSize: const Size(20.0, 10.0),
-            activeColor: Theme.of(context).primaryColor,
-            color: Theme.of(context).secondaryHeaderColor,
-            spacing: const EdgeInsets.symmetric(horizontal: 3.0),
-            activeShape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(25.0)
-            ),
-          ),
-          showBackButton: true,
-          onDone: viewModel.onDonePress,
         ),
       ),
     );

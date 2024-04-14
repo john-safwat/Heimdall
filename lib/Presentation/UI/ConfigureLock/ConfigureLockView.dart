@@ -27,218 +27,220 @@ class _ConfigureLockViewState
     return SafeArea(
       child: ChangeNotifierProvider(
         create: (context) => viewModel,
-        child: Scaffold(
-            appBar: AppBar(
-              title: Text(viewModel.local!.scanYourLock),
-            ),
-            body: Consumer<ConfigureLockViewModel>(
-              builder: (context, value, child) {
-                if (value.lockId.isEmpty) {
-                  return SingleChildScrollView(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Text(
-                          viewModel.local!.configureLockMessage1,
-                          style: Theme.of(context).textTheme.bodyLarge,
-                          textAlign: TextAlign.center,
-                        ),
-                        const SizedBox(height: 20),
-                        Text(
-                          viewModel.local!.configureLockMessage2,
-                          style: Theme.of(context).textTheme.bodyLarge,
-                          textAlign: TextAlign.center,
-                        ),
-                        const SizedBox(height: 30),
-                        Container(
-                          padding: const EdgeInsets.all(10),
-                          width: viewModel.mediaQuery!.width - 40,
-                          height: viewModel.mediaQuery!.width - 40,
-                          decoration: BoxDecoration(
-                              color: Theme.of(context).primaryColor,
-                              borderRadius: BorderRadius.circular(20)),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
-                            child: QrCamera(
-                              cameraDirection: CameraDirection.BACK,
-                              fit: BoxFit.fitWidth,
-                              formats: const [BarcodeFormats.QR_CODE],
-                              qrCodeCallback: (value) {
-                                viewModel.readLockId(value);
-                              },
+        child: SafeArea(
+          child: Scaffold(
+              appBar: AppBar(
+                title: Text(viewModel.local!.scanYourLock),
+              ),
+              body: Consumer<ConfigureLockViewModel>(
+                builder: (context, value, child) {
+                  if (value.lockId.isEmpty) {
+                    return SingleChildScrollView(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          Text(
+                            viewModel.local!.configureLockMessage1,
+                            style: Theme.of(context).textTheme.bodyLarge,
+                            textAlign: TextAlign.center,
+                          ),
+                          const SizedBox(height: 20),
+                          Text(
+                            viewModel.local!.configureLockMessage2,
+                            style: Theme.of(context).textTheme.bodyLarge,
+                            textAlign: TextAlign.center,
+                          ),
+                          const SizedBox(height: 30),
+                          Container(
+                            padding: const EdgeInsets.all(10),
+                            width: viewModel.mediaQuery!.width - 40,
+                            height: viewModel.mediaQuery!.width - 40,
+                            decoration: BoxDecoration(
+                                color: Theme.of(context).primaryColor,
+                                borderRadius: BorderRadius.circular(20)),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: QrCamera(
+                                cameraDirection: CameraDirection.BACK,
+                                fit: BoxFit.fitWidth,
+                                formats: const [BarcodeFormats.QR_CODE],
+                                qrCodeCallback: (value) {
+                                  viewModel.readLockId(value);
+                                },
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    );
+                  } else {
+                    return SingleChildScrollView(
+                      keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+                      padding: const EdgeInsets.all(20.0),
+                      child: Column(
+                        children: [
+                          // the lock card
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 30, vertical: 30),
+                            width: viewModel.mediaQuery!.width - 40,
+                            decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                    colors: [
+                                      Theme.of(context).primaryColor,
+                                      viewModel.cardColor
+                                    ],
+                                    begin: Alignment.topLeft,
+                                    end: Alignment.bottomRight),
+                                borderRadius: BorderRadius.circular(20)),
+                            child: Column(
+                              children: [
+                                // the lock name
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      flex: 2,
+                                      child: Text(
+                                        viewModel.nameController.text,
+                                        style: TextStyle(
+                                            fontSize: 36,
+                                            fontWeight: FontWeight.w900,
+                                            color: Theme.of(context)
+                                                .scaffoldBackgroundColor),
+                                      ),
+                                    ),
+                                    const Expanded(child: SizedBox())
+                                  ],
+                                ),
+                                // the lock avatar
+                                Image.asset(
+                                  "assets/avatars/avatar${viewModel.lockAvatar}.png",
+                                  width: double.infinity,
+                                  fit: BoxFit.fitWidth,
+                                )
+                              ],
                             ),
                           ),
-                        )
-                      ],
-                    ),
-                  );
-                } else {
-                  return SingleChildScrollView(
-                    keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-                    padding: const EdgeInsets.all(20.0),
-                    child: Column(
-                      children: [
-                        // the lock card
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 30, vertical: 30),
-                          width: viewModel.mediaQuery!.width - 40,
-                          decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                  colors: [
-                                    Theme.of(context).primaryColor,
-                                    viewModel.cardColor
-                                  ],
-                                  begin: Alignment.topLeft,
-                                  end: Alignment.bottomRight),
-                              borderRadius: BorderRadius.circular(20)),
-                          child: Column(
-                            children: [
-                              // the lock name
-                              Row(
-                                children: [
-                                  Expanded(
-                                    flex: 2,
-                                    child: Text(
-                                      viewModel.nameController.text,
-                                      style: TextStyle(
-                                          fontSize: 36,
-                                          fontWeight: FontWeight.w900,
-                                          color: Theme.of(context)
-                                              .scaffoldBackgroundColor),
-                                    ),
-                                  ),
-                                  const Expanded(child: SizedBox())
-                                ],
+                          const SizedBox(height: 20),
+                          // the name text field
+                          TextFormField(
+                            style: Theme.of(context).textTheme.bodyLarge,
+                            controller: value.nameController,
+                            validator: (value) {
+                              return viewModel.nameValidation(value ?? "");
+                            },
+                            autovalidateMode: AutovalidateMode.onUserInteraction,
+                            cursorColor: Theme.of(context).primaryColor,
+                            keyboardType: TextInputType.name,
+                            cursorHeight: 20,
+                            decoration: InputDecoration(
+                              prefixIcon: const Icon(
+                                EvaIcons.lock,
+                                size: 30,
                               ),
-                              // the lock avatar
-                              Image.asset(
-                                "assets/avatars/avatar${viewModel.lockAvatar}.png",
-                                width: double.infinity,
-                                fit: BoxFit.fitWidth,
-                              )
+                              hintText: value.local!.name,
+                            ),
+                          ),
+                          const SizedBox(height: 20),
+                          Row(
+                            children: [
+                              Expanded(
+                                flex: 6,
+                                child: ElevatedButton(
+                                    onPressed: () {
+                                      viewModel.showSelectImageBottomSheet();
+                                    },
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(15.0),
+                                      child: Text(
+                                        viewModel.local!.pickYourImage,
+                                        maxLines: 1,
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    )),
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              Expanded(
+                                  flex: 3,
+                                  child: InkWell(
+                                    onTap: () {
+                                      viewModel.onColorPickerClick();
+                                    },
+                                    child: Container(
+                                      padding:const EdgeInsets.all(12),
+                                      alignment: Alignment.center,
+                                      decoration: BoxDecoration(
+                                          color: viewModel.cardColor,
+                                          borderRadius:
+                                              BorderRadius.circular(10)),
+                                      child: Text(
+                                        viewModel.local!.color,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleMedium!
+                                            .copyWith(color: Colors.white),
+                                      ),
+                                    ),
+                                  ))
                             ],
                           ),
-                        ),
-                        const SizedBox(height: 20),
-                        // the name text field
-                        TextFormField(
-                          style: Theme.of(context).textTheme.bodyLarge,
-                          controller: value.nameController,
-                          validator: (value) {
-                            return viewModel.nameValidation(value ?? "");
-                          },
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-                          cursorColor: Theme.of(context).primaryColor,
-                          keyboardType: TextInputType.name,
-                          cursorHeight: 20,
-                          decoration: InputDecoration(
-                            prefixIcon: const Icon(
-                              EvaIcons.lock,
-                              size: 30,
-                            ),
-                            hintText: value.local!.name,
-                          ),
-                        ),
-                        const SizedBox(height: 20),
-                        Row(
-                          children: [
-                            Expanded(
-                              flex: 6,
-                              child: ElevatedButton(
-                                  onPressed: () {
-                                    viewModel.showSelectImageBottomSheet();
-                                  },
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(15.0),
-                                    child: Text(
-                                      viewModel.local!.pickYourImage,
-                                      maxLines: 1,
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  )),
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            Expanded(
-                                flex: 3,
-                                child: InkWell(
-                                  onTap: () {
-                                    viewModel.onColorPickerClick();
-                                  },
-                                  child: Container(
-                                    padding:const EdgeInsets.all(12),
-                                    alignment: Alignment.center,
-                                    decoration: BoxDecoration(
-                                        color: viewModel.cardColor,
-                                        borderRadius:
-                                            BorderRadius.circular(10)),
-                                    child: Text(
-                                      viewModel.local!.color,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleMedium!
-                                          .copyWith(color: Colors.white),
-                                    ),
-                                  ),
-                                ))
-                          ],
-                        ),
-                        const SizedBox(height: 20),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: ElevatedButton(
-                                  onPressed: () {
-                                    viewModel.saveCard();
-                                  },
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(15.0),
-                                    child: Text(
-                                      viewModel.local!.confirm,
-                                      maxLines: 1,
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  )),
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            Expanded(
-                              child: ElevatedButton(
-                                  onPressed: () {
-                                    value.readLockId("");
-                                  },
-                                  style: ButtonStyle(
-                                    shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                                      side: BorderSide(
-                                        width: 2,
-                                        color: Theme.of(context).primaryColor
+                          const SizedBox(height: 20),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: ElevatedButton(
+                                    onPressed: () {
+                                      viewModel.saveCard();
+                                    },
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(15.0),
+                                      child: Text(
+                                        viewModel.local!.confirm,
+                                        maxLines: 1,
+                                        textAlign: TextAlign.center,
                                       ),
-                                      borderRadius: BorderRadius.circular(10)
                                     )),
-                                    backgroundColor: MaterialStateProperty.all(Colors.transparent),
-                                    foregroundColor: MaterialStateProperty.all(Theme.of(context).primaryColor),
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(15.0),
-                                    child: Text(
-                                      viewModel.local!.reScan,
-                                      maxLines: 1,
-                                      textAlign: TextAlign.center,
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              Expanded(
+                                child: ElevatedButton(
+                                    onPressed: () {
+                                      value.readLockId("");
+                                    },
+                                    style: ButtonStyle(
+                                      shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                                        side: BorderSide(
+                                          width: 2,
+                                          color: Theme.of(context).primaryColor
+                                        ),
+                                        borderRadius: BorderRadius.circular(10)
+                                      )),
+                                      backgroundColor: MaterialStateProperty.all(Colors.transparent),
+                                      foregroundColor: MaterialStateProperty.all(Theme.of(context).primaryColor),
                                     ),
-                                  )),
-                            )
-                          ],
-                        )
-                      ],
-                    ),
-                  );
-                }
-              },
-            )),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(15.0),
+                                      child: Text(
+                                        viewModel.local!.reScan,
+                                        maxLines: 1,
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    )),
+                              )
+                            ],
+                          )
+                        ],
+                      ),
+                    );
+                  }
+                },
+              )),
+        ),
       ),
     );
   }

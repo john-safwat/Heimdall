@@ -43,103 +43,105 @@ class _ImagePreviewViewModelState
       create: (context) => viewModel,
       child: Consumer<ImagePreviewViewModel>(
         builder: (context, value, child) => OrientationBuilder(
-          builder: (context, orientation) => Scaffold(
-            appBar: orientation == Orientation.portrait
-                ? AppBar(
-                    title: Text(viewModel.local!.imagePreview),
-                    actions: [
-                      InkWell(
-                        onTap: () => viewModel.showQuestionMessage(),
-                        child: const Icon(EvaIcons.downloadOutline)
-                      ),
-                      const SizedBox(width: 20,)
-                    ],
-                  )
-                : null,
-            body: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                orientation == Orientation.portrait
-                    ? const Spacer()
-                    : const SizedBox(),
-                SizedBox(
-                  height: 230,
-                  child: IndexedListView.builder(
-                    minItemCount: 1,
-                    maxItemCount: viewModel.images.length,
-                    controller: viewModel.controller,
-                    scrollDirection: Axis.horizontal,
-                    physics: const PageScrollPhysics(),
-                    itemBuilder: (context, index) => ZoomOverlay(
-                      modalBarrierColor: Colors.black12,
-                      minScale: 0.5,
-                      maxScale: 4.0,
-                      animationCurve: Curves.fastOutSlowIn,
-                      animationDuration: const Duration(milliseconds: 300),
-                      twoTouchOnly: true,
-                      // Defaults to false
-                      child: CachedNetworkImage(
-                        imageUrl: viewModel.images[index],
-                        fit: BoxFit.cover,
-                        width: orientation == Orientation.portrait
-                            ? viewModel.mediaQuery!.width
-                            : null,
-                        imageBuilder: (context, imageProvider) => Hero(
-                          tag: "$index",
-                          child: Image(
-                            image: imageProvider,
-                            fit: BoxFit.cover,
-                          ),
+          builder: (context, orientation) => SafeArea(
+            child: Scaffold(
+              appBar: orientation == Orientation.portrait
+                  ? AppBar(
+                      title: Text(viewModel.local!.imagePreview),
+                      actions: [
+                        InkWell(
+                          onTap: () => viewModel.showQuestionMessage(),
+                          child: const Icon(EvaIcons.downloadOutline)
                         ),
-                        placeholder: (context, url) =>
-                        const Center(child: CircularProgressIndicator()),
-                        errorWidget: (context, url, error) => Container(
-                          decoration: BoxDecoration(
-                              color: Theme.of(context).primaryColor,
-                              borderRadius: BorderRadius.circular(20)),
-                          child: Icon(
-                            Icons.image,
-                            size: 45,
-                            color: Theme.of(context).scaffoldBackgroundColor,
+                        const SizedBox(width: 20,)
+                      ],
+                    )
+                  : null,
+              body: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  orientation == Orientation.portrait
+                      ? const Spacer()
+                      : const SizedBox(),
+                  SizedBox(
+                    height: 230,
+                    child: IndexedListView.builder(
+                      minItemCount: 1,
+                      maxItemCount: viewModel.images.length,
+                      controller: viewModel.controller,
+                      scrollDirection: Axis.horizontal,
+                      physics: const PageScrollPhysics(),
+                      itemBuilder: (context, index) => ZoomOverlay(
+                        modalBarrierColor: Colors.black12,
+                        minScale: 0.5,
+                        maxScale: 4.0,
+                        animationCurve: Curves.fastOutSlowIn,
+                        animationDuration: const Duration(milliseconds: 300),
+                        twoTouchOnly: true,
+                        // Defaults to false
+                        child: CachedNetworkImage(
+                          imageUrl: viewModel.images[index],
+                          fit: BoxFit.cover,
+                          width: orientation == Orientation.portrait
+                              ? viewModel.mediaQuery!.width
+                              : null,
+                          imageBuilder: (context, imageProvider) => Hero(
+                            tag: "$index",
+                            child: Image(
+                              image: imageProvider,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          placeholder: (context, url) =>
+                          const Center(child: CircularProgressIndicator()),
+                          errorWidget: (context, url, error) => Container(
+                            decoration: BoxDecoration(
+                                color: Theme.of(context).primaryColor,
+                                borderRadius: BorderRadius.circular(20)),
+                            child: Icon(
+                              Icons.image,
+                              size: 45,
+                              color: Theme.of(context).scaffoldBackgroundColor,
+                            ),
                           ),
                         ),
                       ),
                     ),
                   ),
-                ),
-                orientation == Orientation.portrait
-                    ? const Spacer()
-                    : const SizedBox(),
-                if (orientation == Orientation.portrait) Column(
-                        children: [
-                          SizedBox(
-                            height: 70,
-                            child: IndexedListView.separated(
-                              minItemCount: 1,
-                              maxItemCount: viewModel.images.length,
-                              separatorBuilder: (context, index) => const SizedBox(width: 10,),
-                              controller: viewModel.controller,
-                              cacheExtent: viewModel.images
-                                  .indexOf(viewModel.capturedImage)
-                                  .toDouble(),
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 10),
-                              scrollDirection: Axis.horizontal,
-                              itemBuilder: (context, index) => ImageWidget(
-                                  image: viewModel.images[index],
-                                  isSelected: index ==
-                                      viewModel.images
-                                          .indexOf(viewModel.capturedImage),
-                                  onImageClick: viewModel.onImageChange),
+                  orientation == Orientation.portrait
+                      ? const Spacer()
+                      : const SizedBox(),
+                  if (orientation == Orientation.portrait) Column(
+                          children: [
+                            SizedBox(
+                              height: 70,
+                              child: IndexedListView.separated(
+                                minItemCount: 1,
+                                maxItemCount: viewModel.images.length,
+                                separatorBuilder: (context, index) => const SizedBox(width: 10,),
+                                controller: viewModel.controller,
+                                cacheExtent: viewModel.images
+                                    .indexOf(viewModel.capturedImage)
+                                    .toDouble(),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 10),
+                                scrollDirection: Axis.horizontal,
+                                itemBuilder: (context, index) => ImageWidget(
+                                    image: viewModel.images[index],
+                                    isSelected: index ==
+                                        viewModel.images
+                                            .indexOf(viewModel.capturedImage),
+                                    onImageClick: viewModel.onImageChange),
+                              ),
                             ),
-                          ),
-                          const SizedBox(
-                            height: 15,
-                          )
-                        ],
-                      ) else const SizedBox()
-              ],
+                            const SizedBox(
+                              height: 15,
+                            )
+                          ],
+                        ) else const SizedBox()
+                ],
+              ),
             ),
           ),
         ),

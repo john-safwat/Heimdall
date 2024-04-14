@@ -19,47 +19,49 @@ class _ReportIssueViewState extends BaseState<ReportIssueView , ReportIssueViewM
     super.build(context);
     return ChangeNotifierProvider(
       create: (context) => viewModel,
-      child: Scaffold(
-        appBar: AppBar(title: Text(viewModel.local!.report,),),
-        body: ListView(
-          padding: const EdgeInsets.symmetric(horizontal: 20,),
-          children: [
-            const SizedBox(
-              height: 20,
-            ),
-            Text(viewModel.local!.weAreHereToHelp,style: Theme.of(context).textTheme.titleLarge ,textAlign: TextAlign.center,),
-            const SizedBox(
-              height: 20,
-            ),
-            Text(viewModel.local!.reportBodyText,style: Theme.of(context).textTheme.bodyLarge,textAlign: TextAlign.justify,),
-            const SizedBox(
-              height: 20,
-            ),
-            TextFormField(
-              maxLines: 5,
-              controller: viewModel.controller,
-              decoration: InputDecoration(
-                hintText: viewModel.local!.yourReport,
-                labelStyle: TextStyle(
-                  color: Theme.of(context).primaryColor,
+      child: SafeArea(
+        child: Scaffold(
+          appBar: AppBar(title: Text(viewModel.local!.report,),),
+          body: ListView(
+            padding: const EdgeInsets.symmetric(horizontal: 20,),
+            children: [
+              const SizedBox(
+                height: 20,
+              ),
+              Text(viewModel.local!.weAreHereToHelp,style: Theme.of(context).textTheme.titleLarge ,textAlign: TextAlign.center,),
+              const SizedBox(
+                height: 20,
+              ),
+              Text(viewModel.local!.reportBodyText,style: Theme.of(context).textTheme.bodyLarge,textAlign: TextAlign.justify,),
+              const SizedBox(
+                height: 20,
+              ),
+              TextFormField(
+                maxLines: 5,
+                controller: viewModel.controller,
+                decoration: InputDecoration(
+                  hintText: viewModel.local!.yourReport,
+                  labelStyle: TextStyle(
+                    color: Theme.of(context).primaryColor,
+                  ),
                 ),
               ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            ElevatedButton(
-                onPressed: () => viewModel.sendReport(),
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(viewModel.local!.sendYourReport),
-                    ],
-                  ),
-                ))
-          ],
+              const SizedBox(
+                height: 20,
+              ),
+              ElevatedButton(
+                  onPressed: () => viewModel.sendReport(),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(viewModel.local!.sendYourReport),
+                      ],
+                    ),
+                  ))
+            ],
+          ),
         ),
       ),
     );

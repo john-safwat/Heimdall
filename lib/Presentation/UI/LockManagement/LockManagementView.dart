@@ -18,8 +18,10 @@ class _LockManagementViewState extends BaseState<LockManagementView , LockManage
     super.build(context);
     return ChangeNotifierProvider(
       create: (context) => viewModel,
-      child: Scaffold(
-        appBar: AppBar(title: Text("LockManagement"),),
+      child: SafeArea(
+        child: Scaffold(
+          appBar: AppBar(title: Text("LockManagement"),),
+        ),
       ),
     );
   }

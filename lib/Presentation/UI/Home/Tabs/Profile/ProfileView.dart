@@ -34,30 +34,22 @@ class _ProfileViewState extends BaseState<ProfileView, ProfileViewModel>
 
     return Scaffold(
       body: ListView(
-        padding: const EdgeInsets.all(10),
+
         children: [
-          SizedBox(
-            width: viewModel.mediaQuery!.width,
-            height: viewModel.mediaQuery!.width*0.45,
-            child: Center(
-              child: Text(viewModel.local!.setting , style: TextStyle(
-                fontSize: 40,
-                color: Theme.of(context).primaryColor
-              ),),
-            ),
-          ),
+
           UserProfileDataWidget(
               user: viewModel.appConfigProvider!.getUser()!,
               isEn: viewModel.localProvider!.isEn(),
               buttonTitle: viewModel.local!.edit,
               getIcon: viewModel.getIcon,
               buttonAction: viewModel.goToUpdateProfileScreen),
-          const SizedBox(height: 10,),
+          const SizedBox(height: 20,),
           Container(
+            margin:const EdgeInsets.symmetric(horizontal: 15),
             padding: const EdgeInsets.symmetric(vertical: 15),
             decoration: BoxDecoration(
               color: Theme.of(context).primaryColor,
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(30),
             ),
             child: Column(
               children: [
@@ -77,10 +69,12 @@ class _ProfileViewState extends BaseState<ProfileView, ProfileViewModel>
           ),
           const SizedBox(height: 10,),
           Container(
+            margin:const EdgeInsets.symmetric(horizontal: 15),
+
             padding: const EdgeInsets.symmetric(vertical: 15),
             decoration: BoxDecoration(
               color: Theme.of(context).primaryColor,
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(30),
             ),
             child: Column(
               children: [
@@ -95,10 +89,12 @@ class _ProfileViewState extends BaseState<ProfileView, ProfileViewModel>
           ),
           const SizedBox(height: 10,),
           Container(
+            margin:const EdgeInsets.symmetric(horizontal: 15),
+
             padding: const EdgeInsets.symmetric(vertical: 15),
             decoration: BoxDecoration(
               color: Theme.of(context).primaryColor,
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(30),
             ),
             child: Column(
               children: [
@@ -115,7 +111,8 @@ class _ProfileViewState extends BaseState<ProfileView, ProfileViewModel>
                 CustomButton(button: viewModel.buttonsData[7]),
               ],
             ),
-          )
+          ),
+          const SizedBox(height: 20,),
         ],
       ),
     );

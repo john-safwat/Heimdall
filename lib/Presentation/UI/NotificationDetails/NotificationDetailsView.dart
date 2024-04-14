@@ -38,33 +38,35 @@ class _NotificationDetailsViewState
     super.build(context);
     return ChangeNotifierProvider(
       create: (context) => viewModel,
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(viewModel.notification.title),
-        ),
-        body: Consumer<NotificationDetailsViewModel>(
-          builder: (context, value, child) {
-            if(value.errorMessage != null){
-              return SingleChildScrollView(
-                child: ErrorMessageWidget(
-                    errorMessage: value.errorMessage!,
-                    fixErrorFunction: value.loadData
-                ),
-              );
-            }else if (value.loading){
-              return const Center(child: CircularProgressIndicator(),);
-            }else {
-              if (value.notification.code >= 100 &&
-                  value.notification.code < 200) {
-                return GoodNotification();
-              } else if (value.notification.code >= 200 &&
-                  value.notification.code < 300) {
-                return WarningNotification();
-              } else {
-                return DangerNotification();
+      child: SafeArea(
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text(viewModel.notification.title),
+          ),
+          body: Consumer<NotificationDetailsViewModel>(
+            builder: (context, value, child) {
+              if(value.errorMessage != null){
+                return SingleChildScrollView(
+                  child: ErrorMessageWidget(
+                      errorMessage: value.errorMessage!,
+                      fixErrorFunction: value.loadData
+                  ),
+                );
+              }else if (value.loading){
+                return const Center(child: CircularProgressIndicator(),);
+              }else {
+                if (value.notification.code >= 100 &&
+                    value.notification.code < 200) {
+                  return GoodNotification();
+                } else if (value.notification.code >= 200 &&
+                    value.notification.code < 300) {
+                  return WarningNotification();
+                } else {
+                  return DangerNotification();
+                }
               }
-            }
-          },
+            },
+          ),
         ),
       ),
     );
