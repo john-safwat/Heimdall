@@ -22,70 +22,72 @@ class _FeedbackViewState extends BaseState<FeedbackView, FeedbackViewModel>
     super.build(context);
     return ChangeNotifierProvider(
       create: (context) => viewModel,
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(viewModel.local!.feedback),
-        ),
-        body: Consumer<FeedbackViewModel>(
-          builder:(context, value, child) => Column(
-            children: [
-              Expanded(
-                child: ListView(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 20,),
-                  keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-                  children: [
-                    const SizedBox(height: 20,),
-                    Text(
-                      viewModel.local!.feedbackBodyText,
-                      textAlign: TextAlign.justify,
-                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                        fontWeight: FontWeight.w500,
+      child: SafeArea(
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text(viewModel.local!.feedback),
+          ),
+          body: Consumer<FeedbackViewModel>(
+            builder:(context, value, child) => Column(
+              children: [
+                Expanded(
+                  child: ListView(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20,),
+                    keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+                    children: [
+                      const SizedBox(height: 20,),
+                      Text(
+                        viewModel.local!.feedbackBodyText,
+                        textAlign: TextAlign.justify,
+                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 20,),
-                    RatingBar.builder(
-                      initialRating: viewModel.rating,
-                      minRating: 0,
-                      direction: Axis.horizontal,
-                      allowHalfRating: true,
-                      itemCount: 5,
-                      glowColor: Colors.amber,
-                      maxRating: 5,
-                      unratedColor: Colors.grey,
-                      itemPadding:const EdgeInsets.symmetric(horizontal: 5.0),
-                      itemBuilder: (context, _) => const Icon(
-                        Icons.star,
-                        color: Colors.amber,
+                      const SizedBox(height: 20,),
+                      RatingBar.builder(
+                        initialRating: viewModel.rating,
+                        minRating: 0,
+                        direction: Axis.horizontal,
+                        allowHalfRating: true,
+                        itemCount: 5,
+                        glowColor: Colors.amber,
+                        maxRating: 5,
+                        unratedColor: Colors.grey,
+                        itemPadding:const EdgeInsets.symmetric(horizontal: 5.0),
+                        itemBuilder: (context, _) => const Icon(
+                          Icons.star,
+                          color: Colors.amber,
+                        ),
+                        onRatingUpdate: (rating) {
+                          viewModel.changeRating(rating);
+                        },
                       ),
-                      onRatingUpdate: (rating) {
-                        viewModel.changeRating(rating);
-                      },
-                    ),
-                    const SizedBox(height: 20,),
-                    TextFormField(
-                      maxLines: 5,
-                      controller: viewModel.controller,
-                      decoration: InputDecoration(
-                        hintText: viewModel.local!.yourFeedBack,
+                      const SizedBox(height: 20,),
+                      TextFormField(
+                        maxLines: 5,
+                        controller: viewModel.controller,
+                        decoration: InputDecoration(
+                          hintText: viewModel.local!.yourFeedBack,
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 20,),
-                    ElevatedButton(
-                        onPressed: () => viewModel.sendFeedback(),
-                        child: Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(viewModel.local!.sendYourFeedback),
-                            ],
-                          ),
-                        ))
-                  ],
+                      const SizedBox(height: 20,),
+                      ElevatedButton(
+                          onPressed: () => viewModel.sendFeedback(),
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(viewModel.local!.sendYourFeedback),
+                              ],
+                            ),
+                          ))
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

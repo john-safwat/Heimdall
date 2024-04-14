@@ -26,206 +26,140 @@ class UserProfileDataWidget extends StatelessWidget {
         buttonAction();
       },
       overlayColor: MaterialStateProperty.all(Colors.transparent),
-      child: SizedBox(
-        height: 125,
-        child: Stack(
+      child: Container(
+        height: 180,
+        padding: const EdgeInsets.all(25),
+        decoration: BoxDecoration(
+            color: Theme.of(context).primaryColor,
+            borderRadius: BorderRadius.only(
+              bottomLeft:
+                  isEn ? const Radius.circular(80) : const Radius.circular(0),
+              bottomRight:
+                  isEn ? const Radius.circular(0) : const Radius.circular(80),
+            )),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // user image
             Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                      color: Theme.of(context).scaffoldBackgroundColor,
+                      borderRadius: BorderRadius.only(
+                        bottomRight: const Radius.circular(80),
+                        bottomLeft: const Radius.circular(80),
+                        topLeft: isEn
+                            ? const Radius.circular(15)
+                            : const Radius.circular(80),
+                        topRight: isEn
+                            ? const Radius.circular(80)
+                            : const Radius.circular(15),
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                            color: Colors.black.withOpacity(0.25),
+                            offset: const Offset(0, 4),
+                            blurRadius: 10)
+                      ]),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.only(
+                      bottomRight: const Radius.circular(80),
+                      bottomLeft: const Radius.circular(80),
+                      topLeft: isEn
+                          ? const Radius.circular(15)
+                          : const Radius.circular(80),
+                      topRight: isEn
+                          ? const Radius.circular(80)
+                          : const Radius.circular(15),
+                    ),
+                    child: CachedNetworkImage(
+                      imageUrl: user.photoURL ?? "",
+                      imageBuilder: (context, imageProvider) => Image(
+                        image: imageProvider,
+                        fit: BoxFit.cover,
+                        width: 125,
+                        height: 125,
+                      ),
+                      errorWidget: (context, url, error) => Image.asset(
+                        getIcon(),
+                        fit: BoxFit.cover,
+                        width: 125,
+                        height: 125,
+                      ),
+                      placeholder: (context, url) => Container(
+                        width: 125,
+                        height: 125,
+                        decoration: BoxDecoration(
+                            color: Theme.of(context).scaffoldBackgroundColor,
+                            borderRadius: BorderRadius.circular(15)),
+                        child: const Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              width: 20,
+            ),
+            // user name , email and edit profile button
+            Expanded(
+                child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(
-                  height: 40,
+                  height: 20,
                 ),
-                Expanded(
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(vertical: 10 , horizontal: 20),
-                    decoration: BoxDecoration(
-                        color: Theme.of(context).primaryColor,
-                        borderRadius: BorderRadius.circular(20)),
+                Text(
+                  user.displayName ?? "No Name",
+                  style: TextStyle(
+                    color: Theme.of(context).scaffoldBackgroundColor,
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  maxLines: 1,
+                ),
+                const Spacer(),
+                FittedBox(
+                    child: Text(
+                  user.email ?? "No Email",
+                  style: Theme.of(context).textTheme.displayMedium!.copyWith(
+                      color: Theme.of(context).scaffoldBackgroundColor),
+                )),
+                const Spacer(),
+                ElevatedButton(
+                  onPressed: () {
+                    buttonAction();
+                  },
+                  style: ButtonStyle(
+                    foregroundColor: MaterialStateProperty.all(
+                        Theme.of(context).primaryColor),
+                    backgroundColor: MaterialStateProperty.all(
+                        Theme.of(context).scaffoldBackgroundColor),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Expanded(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              user.displayName ?? "No Name",
-                              style: TextStyle(
-                                color: Theme.of(context).scaffoldBackgroundColor,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                              ),
-                              maxLines: 1,
-                            ),
-                            Text(
-                              user.email ?? "No Email",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyMedium!
-                                  .copyWith(
-                                      color: Theme.of(context)
-                                          .scaffoldBackgroundColor),
-                            ),
-                          ],
-                        )),
-                        const SizedBox(
-                          width: 90,
-                        )
+                        Text(
+                          buttonTitle,
+                          style: const TextStyle(
+                            fontSize: 16,
+                          ),
+                        ),
                       ],
                     ),
                   ),
                 )
               ],
-            ),
-            Positioned(
-              right: isEn ? 0:null,
-              left: isEn?null :0,
-              child: Container(
-                margin: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  border: Border.all(
-                      width: 2,
-                      color: Theme.of(context).primaryColor,
-                      strokeAlign: BorderSide.strokeAlignInside),
-                  color: Theme.of(context).scaffoldBackgroundColor,
-                  borderRadius: BorderRadius.circular(1000),
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(1000),
-                  child: CachedNetworkImage(
-                    imageUrl: user.photoURL ?? "",
-                    imageBuilder: (context, imageProvider) => Image(
-                      image: imageProvider,
-                      fit: BoxFit.cover,
-                      width: 96,
-                      height: 96,
-                    ),
-                    errorWidget: (context, url, error) => Image.asset(
-                      getIcon(),
-                      fit: BoxFit.cover,
-                      width: 96,
-                      height: 96,
-                    ),
-                    placeholder: (context, url) => Container(
-                      width: 96,
-                      height: 96,
-                      decoration: BoxDecoration(
-                          color: Theme.of(context).scaffoldBackgroundColor,
-                          borderRadius: BorderRadius.circular(15)),
-                      child: const Center(
-                        child: CircularProgressIndicator(),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
+            ))
           ],
         ),
-        // child: Row(
-        //   crossAxisAlignment: CrossAxisAlignment.start,
-        //   children: [
-        //     // user image
-        //     Column(
-        //       mainAxisAlignment: MainAxisAlignment.end,
-        //       children: [
-        //         Container(
-        //           decoration: BoxDecoration(
-        //               color: Theme.of(context).scaffoldBackgroundColor,
-        //               borderRadius: BorderRadius.only(
-        //                 bottomRight: const Radius.circular(80),
-        //                 bottomLeft:const Radius.circular(80),
-        //                 topLeft: isEn? const Radius.circular(15) : const Radius.circular(80),
-        //                 topRight: isEn?const Radius.circular(80) : const  Radius.circular(15),
-        //               ),
-        //               boxShadow: [
-        //                 BoxShadow(
-        //                     color: Colors.black.withOpacity(0.25),
-        //                     offset: const Offset(0,4),
-        //                     blurRadius: 10
-        //                 )
-        //               ]
-        //           ),
-        //           child: ClipRRect(
-        //             borderRadius: BorderRadius.only(
-        //               bottomRight: const Radius.circular(80),
-        //               bottomLeft:const Radius.circular(80),
-        //               topLeft: isEn? const Radius.circular(15) : const Radius.circular(80),
-        //               topRight: isEn?const Radius.circular(80) : const  Radius.circular(15),
-        //             ),
-        //             child: CachedNetworkImage(
-        //               imageUrl: user.photoURL ?? "",
-        //               imageBuilder: (context, imageProvider) => Image(
-        //                 image: imageProvider,
-        //                 fit: BoxFit.cover,
-        //                 width: 125,
-        //                 height: 125,
-        //               ),
-        //               errorWidget: (context, url, error) => Image.asset(
-        //                 getIcon(),
-        //                 fit: BoxFit.cover,
-        //                 width: 125,
-        //                 height: 125,
-        //               ),
-        //               placeholder: (context, url) => Container(
-        //                 width: 125,
-        //                 height: 125,
-        //                 decoration: BoxDecoration(
-        //                     color: Theme.of(context).scaffoldBackgroundColor,
-        //                     borderRadius: BorderRadius.circular(15)),
-        //                 child:const  Center(
-        //                   child: CircularProgressIndicator(),
-        //                 ),
-        //               ),
-        //             ),
-        //           ),
-        //         ),
-        //       ],
-        //     ),
-        //     const SizedBox(width: 20,),
-        //     // user name , email and edit profile button
-        //     Expanded(
-        //         child: Column(
-        //           crossAxisAlignment: CrossAxisAlignment.start,
-        //           children: [
-        //             const SizedBox(height: 20,),
-        //             Text(
-        //               user.displayName??"No Name",
-        //               style: TextStyle(
-        //                 color :Theme.of(context).scaffoldBackgroundColor,
-        //                 fontSize: 24,
-        //                 fontWeight: FontWeight.bold,
-        //               ),
-        //               maxLines: 1,
-        //             ),
-        //             const Spacer(),
-        //             FittedBox(child: Text(user.email??"No Email", style: Theme.of(context).textTheme.displayMedium!.copyWith(color:Theme.of(context).scaffoldBackgroundColor),)),
-        //             const Spacer(),
-        //             ElevatedButton(
-        //               onPressed: (){
-        //                 buttonAction();
-        //               },
-        //               style: ButtonStyle(
-        //                 foregroundColor: MaterialStateProperty.all(Theme.of(context).primaryColor),
-        //                 backgroundColor: MaterialStateProperty.all(Theme.of(context).scaffoldBackgroundColor),
-        //               ),
-        //               child: Padding(
-        //                 padding: const EdgeInsets.all(8.0),
-        //                 child: Row(
-        //                   mainAxisAlignment: MainAxisAlignment.center,
-        //                   children: [
-        //                     Text(buttonTitle , style: const TextStyle(
-        //                       fontSize: 16,
-        //                     ),),
-        //                   ],
-        //                 ),
-        //               ),
-        //             )
-        //           ],
-        //         )
-        //     )
-        //   ],
-        // ),
       ),
     );
   }

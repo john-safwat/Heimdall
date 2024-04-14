@@ -19,57 +19,59 @@ class _ForgetPasswordViewState extends BaseState<ForgetPasswordView , ForgetPass
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(viewModel.local!.forgetPasswordTitle),
-      ),
-      body: Column(
-        children: [
-          Expanded(child: SingleChildScrollView(
-            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-            child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  const SizedBox(height: 20,),
-                  Lottie.asset(viewModel.getImage() , fit: BoxFit.cover,),
-                  const SizedBox(height: 20,),
-                  // the text from field for the email
-                  Form(
-                    key: viewModel.formKey,
-                    child: TextFormField(
-                      style: Theme.of(context).textTheme.bodyLarge,
-                      controller: viewModel.emailController,
-                      validator: (value) {
-                        return viewModel.emailValidation(value ?? "");
-                      },
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      cursorColor: Theme.of(context).primaryColor,
-                      keyboardType: TextInputType.emailAddress,
-                      cursorHeight: 20,
-                      decoration: InputDecoration(
-                        prefixIcon: const Icon(
-                          EvaIcons.email,
-                          size: 30,
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(viewModel.local!.forgetPasswordTitle),
+        ),
+        body: Column(
+          children: [
+            Expanded(child: SingleChildScrollView(
+              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    const SizedBox(height: 20,),
+                    Lottie.asset(viewModel.getImage() , fit: BoxFit.cover,),
+                    const SizedBox(height: 20,),
+                    // the text from field for the email
+                    Form(
+                      key: viewModel.formKey,
+                      child: TextFormField(
+                        style: Theme.of(context).textTheme.bodyLarge,
+                        controller: viewModel.emailController,
+                        validator: (value) {
+                          return viewModel.emailValidation(value ?? "");
+                        },
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        cursorColor: Theme.of(context).primaryColor,
+                        keyboardType: TextInputType.emailAddress,
+                        cursorHeight: 20,
+                        decoration: InputDecoration(
+                          prefixIcon: const Icon(
+                            EvaIcons.email,
+                            size: 30,
+                          ),
+                          hintText: viewModel.local!.email,
                         ),
-                        hintText: viewModel.local!.email,
                       ),
                     ),
-                  ),
-                  const SizedBox(height: 20,),
-                  ElevatedButton(
-                    onPressed: viewModel.resetPassword,
-                    child: Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: Text(viewModel.local!.sendEmail),
+                    const SizedBox(height: 20,),
+                    ElevatedButton(
+                      onPressed: viewModel.resetPassword,
+                      child: Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: Text(viewModel.local!.sendEmail),
+                      )
                     )
-                  )
-                ],
+                  ],
+                ),
               ),
-            ),
-          ))
-        ],
+            ))
+          ],
+        ),
       ),
     );
   }

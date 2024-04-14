@@ -43,136 +43,138 @@ class _KeyDetailsViewState
     super.build(context);
     return ChangeNotifierProvider(
       create: (context) => viewModel,
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(viewModel.local!.keyDetails),
-        ),
-        body: Consumer<KeyDetailsViewModel>(
-          builder:(context, value, child) {
-            if (value.errorMessage != null) {
-              return SingleChildScrollView(
-                keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-                child: ErrorMessageWidget(
-                    errorMessage: value.errorMessage!,
-                    fixErrorFunction: value.loadUserData
-                ),
-              );
-            } else if (value.user == null) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            } else {
-              return ListView(
-                padding: const EdgeInsets.all(20),
-                children: [
-                  Text(
-                    viewModel.local!.youCanUseThisKey,
-                    style: Theme.of(context).textTheme.titleLarge,
-                    textAlign: TextAlign.center,
+      child: SafeArea(
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text(viewModel.local!.keyDetails),
+          ),
+          body: Consumer<KeyDetailsViewModel>(
+            builder:(context, value, child) {
+              if (value.errorMessage != null) {
+                return SingleChildScrollView(
+                  keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+                  child: ErrorMessageWidget(
+                      errorMessage: value.errorMessage!,
+                      fixErrorFunction: value.loadUserData
                   ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  const TimeWidget(),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  ElevatedButton(
-                      style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(
-                              viewModel.locksProvider.value["opened"] != null &&
-                                  viewModel.locksProvider.value["opened"]
-                                  ? MyTheme.green
-                                  : MyTheme.red)),
-                      onPressed: () {
-                        viewModel.changeLockState();
-                      },
-                      child: Padding(
-                        padding:
-                        const EdgeInsets.symmetric(horizontal: 0.0, vertical: 8),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              viewModel.locksProvider.value["opened"] != null &&
-                                  viewModel.locksProvider.value["opened"]
-                                  ? viewModel.local!.opened
-                                  : viewModel.local!.closed,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleMedium!
-                                  .copyWith(color: MyTheme.white),
-                            ),
-                            Switch(
-                              activeColor: MyTheme.white,
-                              inactiveThumbColor: MyTheme.black,
-                              inactiveTrackColor: MyTheme.white,
-                              value: viewModel.locksProvider.value["opened"] ?? false,
-                              onChanged: (value) => () {
-                                viewModel.changeLockState();
-                              },
-                            )
-                          ],
-                        ),
-                      )),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Text(
-                    viewModel.key.lockName,
-                    style: Theme.of(context).textTheme.titleMedium,
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                    child: Row(
-                      children: [
-                        const Expanded(child: Divider()),
-                        const SizedBox(width: 20),
-                        Text(
-                          viewModel.local!.validIn,
-                          style: Theme.of(context).textTheme.bodyLarge,
-                          textAlign: TextAlign.center,
-                        ),
-                        const SizedBox(width: 20),
-                        const Expanded(child: Divider()),
-                      ],
+                );
+              } else if (value.user == null) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else {
+                return ListView(
+                  padding: const EdgeInsets.all(20),
+                  children: [
+                    Text(
+                      viewModel.local!.youCanUseThisKey,
+                      style: Theme.of(context).textTheme.titleLarge,
+                      textAlign: TextAlign.center,
                     ),
-                  ),
-                  const SizedBox(height: 20),
-                  const DateWidget(),
-
-                  if(value.key.days!.isNotEmpty)...[
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const TimeWidget(),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    ElevatedButton(
+                        style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all(
+                                viewModel.locksProvider.value["opened"] != null &&
+                                    viewModel.locksProvider.value["opened"]
+                                    ? MyTheme.green
+                                    : MyTheme.red)),
+                        onPressed: () {
+                          viewModel.changeLockState();
+                        },
+                        child: Padding(
+                          padding:
+                          const EdgeInsets.symmetric(horizontal: 0.0, vertical: 8),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                viewModel.locksProvider.value["opened"] != null &&
+                                    viewModel.locksProvider.value["opened"]
+                                    ? viewModel.local!.opened
+                                    : viewModel.local!.closed,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleMedium!
+                                    .copyWith(color: MyTheme.white),
+                              ),
+                              Switch(
+                                activeColor: MyTheme.white,
+                                inactiveThumbColor: MyTheme.black,
+                                inactiveTrackColor: MyTheme.white,
+                                value: viewModel.locksProvider.value["opened"] ?? false,
+                                onChanged: (value) => () {
+                                  viewModel.changeLockState();
+                                },
+                              )
+                            ],
+                          ),
+                        )),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Text(
+                      viewModel.key.lockName,
+                      style: Theme.of(context).textTheme.titleMedium,
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                      child: Row(
+                        children: [
+                          const Expanded(child: Divider()),
+                          const SizedBox(width: 20),
+                          Text(
+                            viewModel.local!.validIn,
+                            style: Theme.of(context).textTheme.bodyLarge,
+                            textAlign: TextAlign.center,
+                          ),
+                          const SizedBox(width: 20),
+                          const Expanded(child: Divider()),
+                        ],
+                      ),
+                    ),
                     const SizedBox(height: 20),
-                    const WeekDays(),
-                  ],
-                  const SizedBox(height: 20),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                    child: Row(
-                      children: [
-                        const Expanded(child: Divider()),
-                        const SizedBox(width: 20),
-                        Text(
-                          viewModel.local!.by,
-                          style: Theme.of(context).textTheme.bodyLarge,
-                          textAlign: TextAlign.center,
-                        ),
-                        const SizedBox(width: 20),
-                        const Expanded(child: Divider()),
-                      ],
+                    const DateWidget(),
+        
+                    if(value.key.days!.isNotEmpty)...[
+                      const SizedBox(height: 20),
+                      const WeekDays(),
+                    ],
+                    const SizedBox(height: 20),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                      child: Row(
+                        children: [
+                          const Expanded(child: Divider()),
+                          const SizedBox(width: 20),
+                          Text(
+                            viewModel.local!.by,
+                            style: Theme.of(context).textTheme.bodyLarge,
+                            textAlign: TextAlign.center,
+                          ),
+                          const SizedBox(width: 20),
+                          const Expanded(child: Divider()),
+                        ],
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 20),
-                  UserCardWidget(user: viewModel.user!)
-                ],
-              );
-            }
-
-          },
+                    const SizedBox(height: 20),
+                    UserCardWidget(user: viewModel.user!)
+                  ],
+                );
+              }
+        
+            },
+          ),
         ),
       ),
     );

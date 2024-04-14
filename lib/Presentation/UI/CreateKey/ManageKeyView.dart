@@ -53,155 +53,157 @@ class _ManageKeyViewState extends BaseState<ManageKeyView, ManageKeyViewModel>
     super.build(context);
     return ChangeNotifierProvider(
         create: (context) => viewModel,
-        child: Scaffold(
-            appBar: AppBar(
-              title: Text(viewModel.local!.createKey),
-            ),
-            body:
-                Consumer<ManageKeyViewModel>(builder: (context, value, child) {
-              if (value.errorMessage != null) {
-                return ErrorMessageWidget(
-                    errorMessage: value.errorMessage!,
-                    fixErrorFunction: value.loadUserData);
-              } else if (value.user == null && value.key != null) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              } else {
-                return ListView(
-                  keyboardDismissBehavior:
-                      ScrollViewKeyboardDismissBehavior.onDrag,
-                  padding: const EdgeInsets.all(15),
-                  children: [
-                    Text(
-                      viewModel.local!.createKeyMessage,
-                      style: Theme.of(context).textTheme.titleLarge,
-                      textAlign: TextAlign.center,
-                    ),
-                    const SizedBox(height: 15),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                      child: Row(
+        child: SafeArea(
+          child: Scaffold(
+              appBar: AppBar(
+                title: Text(viewModel.local!.createKey),
+              ),
+              body:
+                  Consumer<ManageKeyViewModel>(builder: (context, value, child) {
+                if (value.errorMessage != null) {
+                  return ErrorMessageWidget(
+                      errorMessage: value.errorMessage!,
+                      fixErrorFunction: value.loadUserData);
+                } else if (value.user == null && value.key != null) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else {
+                  return ListView(
+                    keyboardDismissBehavior:
+                        ScrollViewKeyboardDismissBehavior.onDrag,
+                    padding: const EdgeInsets.all(15),
+                    children: [
+                      Text(
+                        viewModel.local!.createKeyMessage,
+                        style: Theme.of(context).textTheme.titleLarge,
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(height: 15),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                        child: Row(
+                          children: [
+                            const Expanded(child: Divider()),
+                            const SizedBox(width: 20),
+                            Text(
+                              viewModel.local!.validIn,
+                              style: Theme.of(context).textTheme.bodyLarge,
+                              textAlign: TextAlign.center,
+                            ),
+                            const SizedBox(width: 20),
+                            const Expanded(child: Divider()),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 15),
+                      Row(
                         children: [
-                          const Expanded(child: Divider()),
-                          const SizedBox(width: 20),
-                          Text(
-                            viewModel.local!.validIn,
-                            style: Theme.of(context).textTheme.bodyLarge,
-                            textAlign: TextAlign.center,
+                          TypeButtonWidget(
+                            selected: viewModel.validOnce,
+                            title: viewModel.local!.once,
+                            id: 1,
+                            onPress: viewModel.onTypeButtonPress,
                           ),
-                          const SizedBox(width: 20),
-                          const Expanded(child: Divider()),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          TypeButtonWidget(
+                            selected: !viewModel.validOnce,
+                            title: viewModel.local!.repeated,
+                            id: 2,
+                            onPress: viewModel.onTypeButtonPress,
+                          ),
                         ],
                       ),
-                    ),
-                    const SizedBox(height: 15),
-                    Row(
-                      children: [
-                        TypeButtonWidget(
-                          selected: viewModel.validOnce,
-                          title: viewModel.local!.once,
-                          id: 1,
-                          onPress: viewModel.onTypeButtonPress,
+                      const SizedBox(height: 20),
+                      Text(
+                        viewModel.local!.date,
+                        style: Theme.of(context).textTheme.bodyLarge,
+                      ),
+                      const SizedBox(height: 20),
+                      const DateWidget(),
+                      const SizedBox(height: 20),
+                      Text(
+                        viewModel.local!.time,
+                        style: Theme.of(context).textTheme.bodyLarge,
+                      ),
+                      const SizedBox(height: 20),
+                      const TimeWidget(),
+                      const SizedBox(height: 30),
+                      if (viewModel.key == null) ...[
+                        TextFormField(
+                          style: Theme.of(context).textTheme.bodyLarge,
+                          controller: value.emailController,
+                          validator: (value) {
+                            return viewModel.emailValidation(value ?? "");
+                          },
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          cursorColor: Theme.of(context).primaryColor,
+                          keyboardType: TextInputType.emailAddress,
+                          cursorHeight: 20,
+                          decoration: InputDecoration(
+                            prefixIcon: const Icon(
+                              EvaIcons.email,
+                              size: 30,
+                            ),
+                            hintText: value.local!.email,
+                          ),
                         ),
-                        const SizedBox(
-                          width: 10,
+                        const SizedBox(height: 20),
+                        ElevatedButton(
+                          onPressed: () => viewModel.createKey(),
+                          child: Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: Text(
+                              viewModel.local!.createKey,
+                            ),
+                          ),
                         ),
-                        TypeButtonWidget(
-                          selected: !viewModel.validOnce,
-                          title: viewModel.local!.repeated,
-                          id: 2,
-                          onPress: viewModel.onTypeButtonPress,
+                      ] else ...[
+                        Text(
+                          viewModel.local!.user,
+                          style: Theme.of(context).textTheme.bodyLarge,
+                        ),
+                        const SizedBox(height: 20),
+                        UserCardWidget(user: viewModel.user!),
+                        const SizedBox(height: 20),
+                        ElevatedButton(
+                          onPressed: () => viewModel.updateKey(),
+                          child: Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: Text(
+                              viewModel.local!.updateKey,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                        ElevatedButton(
+                          onPressed: () => viewModel.onDeleteButtonPress(),
+                          style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStateProperty.all(MyTheme.red),
+                              foregroundColor:
+                                  MaterialStateProperty.all(MyTheme.white)),
+                          child: Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: Text(
+                              viewModel.local!.deleteKey,
+                            ),
+                          ),
                         ),
                       ],
-                    ),
-                    const SizedBox(height: 20),
-                    Text(
-                      viewModel.local!.date,
-                      style: Theme.of(context).textTheme.bodyLarge,
-                    ),
-                    const SizedBox(height: 20),
-                    const DateWidget(),
-                    const SizedBox(height: 20),
-                    Text(
-                      viewModel.local!.time,
-                      style: Theme.of(context).textTheme.bodyLarge,
-                    ),
-                    const SizedBox(height: 20),
-                    const TimeWidget(),
-                    const SizedBox(height: 30),
-                    if (viewModel.key == null) ...[
-                      TextFormField(
-                        style: Theme.of(context).textTheme.bodyLarge,
-                        controller: value.emailController,
-                        validator: (value) {
-                          return viewModel.emailValidation(value ?? "");
-                        },
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                        cursorColor: Theme.of(context).primaryColor,
-                        keyboardType: TextInputType.emailAddress,
-                        cursorHeight: 20,
-                        decoration: InputDecoration(
-                          prefixIcon: const Icon(
-                            EvaIcons.email,
-                            size: 30,
-                          ),
-                          hintText: value.local!.email,
-                        ),
-                      ),
                       const SizedBox(height: 20),
-                      ElevatedButton(
-                        onPressed: () => viewModel.createKey(),
-                        child: Padding(
-                          padding: const EdgeInsets.all(15.0),
-                          child: Text(
-                            viewModel.local!.createKey,
-                          ),
-                        ),
-                      ),
-                    ] else ...[
                       Text(
-                        viewModel.local!.user,
-                        style: Theme.of(context).textTheme.bodyLarge,
-                      ),
-                      const SizedBox(height: 20),
-                      UserCardWidget(user: viewModel.user!),
-                      const SizedBox(height: 20),
-                      ElevatedButton(
-                        onPressed: () => viewModel.updateKey(),
-                        child: Padding(
-                          padding: const EdgeInsets.all(15.0),
-                          child: Text(
-                            viewModel.local!.updateKey,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 20),
-                      ElevatedButton(
-                        onPressed: () => viewModel.onDeleteButtonPress(),
-                        style: ButtonStyle(
-                            backgroundColor:
-                                MaterialStateProperty.all(MyTheme.red),
-                            foregroundColor:
-                                MaterialStateProperty.all(MyTheme.white)),
-                        child: Padding(
-                          padding: const EdgeInsets.all(15.0),
-                          child: Text(
-                            viewModel.local!.deleteKey,
-                          ),
-                        ),
+                        viewModel.local!.createKeyWarningMessage,
+                        style: Theme.of(context).textTheme.titleMedium,
+                        textAlign: TextAlign.center,
                       ),
                     ],
-                    const SizedBox(height: 20),
-                    Text(
-                      viewModel.local!.createKeyWarningMessage,
-                      style: Theme.of(context).textTheme.titleMedium,
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
-                );
-              }
-            })));
+                  );
+                }
+              })),
+        ));
   }
 
   @override
