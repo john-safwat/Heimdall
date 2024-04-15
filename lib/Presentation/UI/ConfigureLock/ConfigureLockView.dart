@@ -2,6 +2,7 @@ import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:heimdall/Core/Base/BaseState.dart';
+import 'package:heimdall/Domain/Models/Card/LockCard.dart';
 import 'package:heimdall/Domain/UseCase/AddLockCardUseCase.dart';
 import 'package:heimdall/Domain/UseCase/GetUserDataUseCase.dart';
 import 'package:heimdall/Presentation/UI/ConfigureLock/ConfigureLockNavigator.dart';
@@ -11,9 +12,8 @@ import 'package:qr_mobile_vision/qr_camera.dart';
 
 class ConfigureLockView extends StatefulWidget {
   static const String routeName = "ConfigureLock";
-
-  const ConfigureLockView({super.key});
-
+  LockCard? card;
+  ConfigureLockView({this.card , super.key});
   @override
   State<ConfigureLockView> createState() => _ConfigureLockViewState();
 }
@@ -21,6 +21,19 @@ class ConfigureLockView extends StatefulWidget {
 class _ConfigureLockViewState
     extends BaseState<ConfigureLockView, ConfigureLockViewModel>
     implements ConfigureLockNavigator {
+
+  @override
+  void initState() {
+    super.initState();
+    if(widget.card != null){
+      viewModel.lockId =widget.card!.lockId;
+      viewModel.lockAvatar =widget.card!.image;
+      viewModel.cardColor = Color(widget.card!.color);
+      viewModel.nameController = TextEditingController(text: widget.card!.name);
+      viewModel.card = widget.card!;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -115,7 +128,7 @@ class _ConfigureLockViewState
                                 ),
                                 // the lock avatar
                                 Image.asset(
-                                  "assets/avatars/avatar${viewModel.lockAvatar}.png",
+                                  viewModel.lockAvatar,
                                   width: double.infinity,
                                   fit: BoxFit.fitWidth,
                                 )
@@ -204,10 +217,10 @@ class _ConfigureLockViewState
                                       ),
                                     )),
                               ),
-                              const SizedBox(
-                                width: 10,
+                              SizedBox(
+                                width: viewModel.card == null ? 10 : 0,
                               ),
-                              Expanded(
+                              viewModel.card == null ?Expanded(
                                 child: ElevatedButton(
                                     onPressed: () {
                                       value.readLockId("");
@@ -231,7 +244,7 @@ class _ConfigureLockViewState
                                         textAlign: TextAlign.center,
                                       ),
                                     )),
-                              )
+                              ):const SizedBox()
                             ],
                           )
                         ],

@@ -17,4 +17,10 @@ class LogRepositoryImpl implements LogRepository{
     await remoteDataSource.addLog(log: log.toDataSource());
   }
 
+  @override
+  Future<List<Log>> getAllLogs({required String lockId}) async{
+    var response = await remoteDataSource.getAllLogs(lockId: lockId);
+    return response;
+  }
+
 }

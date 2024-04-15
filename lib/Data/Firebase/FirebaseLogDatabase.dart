@@ -2,12 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:heimdall/Core/Base/BaseDatabase.dart';
 import 'package:heimdall/Data/Models/Log/LogDTO.dart';
 
-FirebaseLogDatabase injectFirebaseLogDatabase(){
+FirebaseLogDatabase injectFirebaseLogDatabase() {
   return FirebaseLogDatabase.getInstance();
 }
 
-class FirebaseLogDatabase extends BaseDatabase{
-
+class FirebaseLogDatabase extends BaseDatabase {
   FirebaseLogDatabase._();
 
   static FirebaseLogDatabase? _instance;
@@ -17,16 +16,24 @@ class FirebaseLogDatabase extends BaseDatabase{
   }
 
   CollectionReference<LogDTO> getCollectionReference() {
-    return FirebaseFirestore.instance.collection(
-        constants.logCollection).withConverter(
-      fromFirestore: (snapshot, options) =>
-          LogDTO.fromFireStore(snapshot.data()!),
-      toFirestore: (value, options) => value.toFireStore(),);
+    return FirebaseFirestore.instance
+        .collection(constants.logCollection)
+        .withConverter(
+          fromFirestore: (snapshot, options) =>
+              LogDTO.fromFireStore(snapshot.data()!),
+          toFirestore: (value, options) => value.toFireStore(),
+        );
   }
 
-
-  Future<void> addLog({required LogDTO log})async {
+  Future<void> addLog({required LogDTO log}) async {
     await getCollectionReference().doc().set(log);
   }
 
+  Future<List<LogDTO>> getAllLogs({required String lockId}) async {
+    var response = await getCollectionReference()
+        .where("id", isEqualTo: lockId)
+        .get()
+        .then((value) => value.docs.map((e) => e.data()).toList());
+    return response;
+  }
 }
