@@ -39,4 +39,15 @@ class LockRepositoryImpl implements LockRepository {
     await lockRealtimeDatabaseRemoteDataSource.changeLockState(lockState: lockState);
   }
 
+  @override
+  Future<String> getLockPassword({required String lockId})async {
+    var response = await lockRealtimeDatabaseRemoteDataSource.getLockPassword(lockId: lockId);
+    return response;
+  }
+
+  @override
+  Future<void> updatePassword({required String lockId, required String password}) async{
+    await lockRealtimeDatabaseRemoteDataSource.updatePassword(lockId: lockId , password: password);
+  }
+
 }

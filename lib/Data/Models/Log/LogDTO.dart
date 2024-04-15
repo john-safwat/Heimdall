@@ -21,12 +21,12 @@ class LogDTO {
 
   LogDTO.fromFireStore(Map<String, dynamic> json)
       : this(
-          eventType: json["eventType"],
+          eventType: json["eventType"]??"Opening",
           id: json["id"],
-          method: json["method"],
+          method: json["method"]??"Physical",
           timeOpened: json["timeOpened"],
-          uid: json["userId"],
-          userName: json["userName"],
+          uid: json["userId"]??"Admin",
+          userName: json["userName"]??"Admin",
         );
 
   Map<String, dynamic> toFireStore() {

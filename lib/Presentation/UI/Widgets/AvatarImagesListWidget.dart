@@ -40,20 +40,20 @@ class _AvatarImagesListWidgetState extends State<AvatarImagesListWidget> {
               itemBuilder: (context, index) => InkWell(
                 overlayColor: MaterialStateProperty.all(Colors.transparent),
                 onTap: () {
-                  widget.onSelectedItemPress("${index+1}");
+                  widget.onSelectedItemPress(widget.images[index]);
                   setState(() {
-                    widget.selectedItem = "${index+1}";
+                    widget.selectedItem = widget.images[index];
                   });
                 },
                 child: Container(
                   padding: const EdgeInsets.all(20),
                   margin: const EdgeInsets.symmetric(horizontal: 10),
                   decoration: BoxDecoration(
-                    color: "${index+1}" == widget.selectedItem ? Theme.of(context).primaryColor : Colors.transparent,
+                    color: index == widget.images.indexOf(widget.selectedItem) ? Theme.of(context).primaryColor : Colors.transparent,
                     borderRadius: BorderRadius.circular(20),
                     border: Border.all(width: 2, color: Theme.of(context).primaryColor)
                   ),
-                  child: Image.asset("assets/avatars/avatar${widget.images[index]}.png"),
+                  child: Image.asset(widget.images[index]),
                 ),
               ),
               itemCount: widget.images.length,

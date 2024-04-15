@@ -135,7 +135,7 @@ abstract class BaseViewModel<N extends BaseNavigator> extends ChangeNotifier {
           bool didAuthenticate = await auth.authenticate(
               localizedReason: local!.authMessage,
               options: const AuthenticationOptions(
-                biometricOnly: true,
+                biometricOnly: false,
                 sensitiveTransaction: true,
                 stickyAuth: true,
               ),

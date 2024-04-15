@@ -8,7 +8,7 @@ class MyTheme {
   // define the colors for theme
   static const Color white = Color(0xFFFAFAFA);
   static const Color gray = Color(0xFF585858);
-  static const Color black = Color(0xFF1D1D1D);
+  static const Color black = Color(0xFF262d33);
   static const Color darkPurple = Color(0xFF191B41);
   static const Color lightPurple = Color(0xFF8D91F7);
   static const Color darkBlue = Color(0xFF29384D);

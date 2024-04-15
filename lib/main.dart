@@ -25,6 +25,8 @@ import 'package:heimdall/Presentation/UI/Intro/IntroView.dart';
 import 'package:heimdall/Presentation/UI/KeyDetails/KeyDetailsView.dart';
 import 'package:heimdall/Presentation/UI/LockDetails/LockDetailsView.dart';
 import 'package:heimdall/Presentation/UI/LockManagement/LockManagementView.dart';
+import 'package:heimdall/Presentation/UI/LockPassword/LockPasswordView.dart';
+import 'package:heimdall/Presentation/UI/LogList/LogListView.dart';
 import 'package:heimdall/Presentation/UI/Login/LoginView.dart';
 import 'package:heimdall/Presentation/UI/NotificationDetails/NotificationDetailsView.dart';
 import 'package:heimdall/Presentation/UI/Registration/RegistrationView.dart';
@@ -32,6 +34,7 @@ import 'package:heimdall/Presentation/UI/ReportIssue/ReportIssueView.dart';
 import 'package:heimdall/Presentation/UI/Setting/SettingView.dart';
 import 'package:heimdall/Presentation/UI/Splash/SplashScreen.dart';
 import 'package:heimdall/Presentation/UI/UpdateProfile/UpdateProfileView.dart';
+import 'package:heimdall/Presentation/UI/UsersList/UsersListView.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -129,13 +132,16 @@ class MyApp extends StatelessWidget {
         LockManagementView.routeName : (context) => const LockManagementView(),
         UpdateProfileView.routeName : (context) => const UpdateProfileView(),
         ChangePasswordView.routeName : (context) => const ChangePasswordView(),
-        ConfigureLockView.routeName : (context) => const ConfigureLockView(),
+        ConfigureLockView.routeName : (context) => ConfigureLockView(),
         LockDetailsView.routeName : (context) => LockDetailsView(),
         ImagePreviewView.routeName : (context) => ImagePreviewView(),
         GalleryView.routeName : (context) => GalleryView(),
         NotificationDetailsView.routeName : (context) => NotificationDetailsView(),
         ManageKeyView.routeName : (context) => ManageKeyView(),
-        KeyDetailsView.routeName : (context) => KeyDetailsView()
+        KeyDetailsView.routeName : (context) => KeyDetailsView(),
+        LockPasswordView.routeName : (context) => LockPasswordView(),
+        UsersListView.routeName : (context) => UsersListView(),
+        LogListView.routeName : (context) => LogListView()
       },
       // the initial route to start the program from
       home: SplashScreen(firstTime:firstTime??true , loggedIn: loggedIn??false,user: user ),

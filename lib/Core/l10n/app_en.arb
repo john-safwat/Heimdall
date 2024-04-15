@@ -148,7 +148,7 @@
   "confirm" : "Confirm",
   "reScan" : "Re-Scan",
   "color" : "Color",
-  "lockAdded" : "Lock Added Successfully To Your List",
+  "lockAdded" : "Lock Confirmed Successfully To Your List",
   "empty" : "It's Empty in Here",
   "lockDetails" : "Lock Details",
   "imagePreview" : "Image Preview",
@@ -222,6 +222,18 @@
   "reportDescription" : "Send Report if You Have Problem",
   "aboutUsDescription" : "Information About the App",
   "deleteAccountDescription" : "All Your Info Will Be Deleted",
-  "signOurDescription" : "End This Account Session"
-
+  "signOurDescription" : "End This Account Session",
+  "manageYourLocks" : "Manage Your Locks",
+  "tripwire" : "Tripwire",
+  "users" : "Users",
+  "log" : "Log",
+  "info" : "Info",
+  "delete" :"Delete",
+  "changeLockPassword" : "Change Lock Password",
+  "areYouSure" : "Are You Sure To Confirm",
+  "passwordUpdateSuccessfully" : "Password Updates Successfully",
+  "usersList" : "Users List",
+  "at" : "at",
+  "openedUsing" : "Opened Using",
+  "openedBy" : "Opened By"
 }

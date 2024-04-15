@@ -13,23 +13,25 @@ class ConfigureLockViewModel extends BaseViewModel<ConfigureLockNavigator> {
   ConfigureLockViewModel(
       {required this.addLockCardUseCase, required this.getUserDataUseCase});
 
+  LockCard? card;
+
   String lockId = '';
   late String lockAvatar = avatars.first;
   List<String> avatars = [
-    "1",
-    "2",
-    "3",
-    "4",
-    "5",
-    "6",
-    "7",
-    "8",
-    "9",
-    "10",
-    "11",
-    "12",
-    "13",
-    "14"
+    "assets/avatars/avatar1.png",
+    "assets/avatars/avatar2.png",
+    "assets/avatars/avatar3.png",
+    "assets/avatars/avatar4.png",
+    "assets/avatars/avatar5.png",
+    "assets/avatars/avatar6.png",
+    "assets/avatars/avatar7.png",
+    "assets/avatars/avatar8.png",
+    "assets/avatars/avatar9.png",
+    "assets/avatars/avatar10.png",
+    "assets/avatars/avatar11.png",
+    "assets/avatars/avatar12.png",
+    "assets/avatars/avatar13.png",
+    "assets/avatars/avatar14.png"
   ];
   late TextEditingController nameController =
       TextEditingController(text: local!.setLockName);
@@ -82,7 +84,7 @@ class ConfigureLockViewModel extends BaseViewModel<ConfigureLockNavigator> {
         await addLockCardUseCase.invoke(
             uid: appConfigProvider!.user!.uid,
             lockCard: LockCard(
-              image: "assets/avatars/avatar$lockAvatar.png",
+              image: lockAvatar,
               name: nameController.text,
               color: cardColor.value,
               lockId: lockId,

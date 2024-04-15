@@ -148,7 +148,7 @@
   "confirm" : "تاكيد",
   "reScan" : "مسح الكود",
   "color" : "اللون",
-  "lockAdded" : "تمت اضافة القفل اللي مجمعتك من الاقفال بنجاح",
+  "lockAdded" : "تم تأكيد القفل بنجاح في قائمتك",
   "empty" : "انها فارغة هنا",
   "lockDetails" : "تفاصيل القفل",
   "imagePreview" : "الصورة",
@@ -222,5 +222,18 @@
   "reportDescription" : "إرسال تقرير إذا كان لديك مشكلة",
   "aboutUsDescription" : "معلومات حول التطبيق",
   "deleteAccountDescription" : "سيتم حذف كافة المعلومات الخاصة بك",
-  "signOurDescription" : "قم بإنهاء جلسة الحساب هذه"
+  "signOurDescription" : "قم بإنهاء جلسة الحساب هذه",
+  "manageYourLocks" : "إدارة الأقفال الخاصة بك",
+  "tripwire" : "المصيدة",
+  "users" : "المستخدمين",
+  "log" : "سجل",
+  "info" : "معلومات",
+  "delete" :"خذف",
+  "changeLockPassword" : "تغيير كلمة مرور القفل",
+  "areYouSure" : "هل أنت متأكد من التأكيد",
+  "passwordUpdateSuccessfully" : "تم تحديث كلمة المرور بنجاح",
+  "usersList" : "قائمة المستخدمين",
+  "at" : "في",
+  "openedUsing" : "فتح باستخدام",
+  "openedBy" : "فتح بواسطه"
 }

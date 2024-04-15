@@ -23,4 +23,10 @@ class UserLockRepositoryImpl implements UserLockRepository {
     return response;
   }
 
+  @override
+  Future<List<MyUser>> getAllUsers({required String lockId}) async{
+    var response = await remoteDataSource.getAllUsers(lockId: lockId);
+    return response;
+  }
+
 }
