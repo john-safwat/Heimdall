@@ -5,7 +5,6 @@ import 'package:heimdall/Domain/Models/Card/LockCard.dart';
 import 'package:heimdall/Domain/UseCase/GetLocksCarsUseCase.dart';
 import 'package:heimdall/Presentation/Models/Button/Button.dart';
 import 'package:heimdall/Presentation/UI/LockManagement/LockManagementNavigator.dart';
-import 'package:heimdall/Presentation/UI/LockManagement/Widgets/BottomSheetOptions.dart';
 
 class LockManagementViewModel extends BaseViewModel<LockManagementNavigator> {
   GetLocksCarsUseCase getLocksCarsUseCase;

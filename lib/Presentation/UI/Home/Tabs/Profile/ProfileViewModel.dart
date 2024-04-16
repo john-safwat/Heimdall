@@ -1,6 +1,5 @@
 import 'dart:ui';
 
-import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:heimdall/Core/Base/BaseViewModel.dart';
 import 'package:heimdall/Core/Theme/MyTheme.dart';
 import 'package:heimdall/Domain/UseCase/DeleteUserAccountUseCase.dart';

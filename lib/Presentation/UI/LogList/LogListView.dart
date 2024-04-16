@@ -54,80 +54,91 @@ class _LogListViewState extends BaseState<LogListView, LogListViewModel>
                   ],
                 );
               } else {
-                return ListView.separated(
-                  padding: const EdgeInsets.all(20),
-                  itemBuilder: (context, index) => Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 20 , vertical: 15),
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).primaryColor,
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("${viewModel.local!.openedBy} : ${viewModel.logs[index].userName}",
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleMedium!
-                                .copyWith(
-                                color: Theme.of(context)
-                                    .scaffoldBackgroundColor)),
-                        const SizedBox(height: 12,),
-
-                        Text("${viewModel.local!.openedUsing} : ${viewModel.logs[index].method}",
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleMedium!
-                                .copyWith(
-                                color: Theme.of(context)
-                                    .scaffoldBackgroundColor)),
-
-                        const SizedBox(height: 12,),
-                        Text("${viewModel.local!.user} : ${viewModel.logs[index].uid}",
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleMedium!
-                                .copyWith(
-                                color: Theme.of(context)
-                                    .scaffoldBackgroundColor)),
-
-                        const SizedBox(height: 12,),
-                        Row(
-                          children: [
-                            Text(viewModel.local!.at,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleMedium!
-                                    .copyWith(
+                return RefreshIndicator(
+                  onRefresh: () => viewModel.loadLogsData(),
+                  backgroundColor: Theme.of(context).primaryColor,
+                  color: Theme.of(context).scaffoldBackgroundColor,
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: ListView.separated(
+                          padding: const EdgeInsets.all(10),
+                          itemBuilder: (context, index) => Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 20 , vertical: 15),
+                            decoration: BoxDecoration(
+                              color: Theme.of(context).primaryColor,
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text("${viewModel.local!.openedBy} : ${viewModel.logs[index].userName}",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleMedium!
+                                        .copyWith(
                                         color: Theme.of(context)
                                             .scaffoldBackgroundColor)),
-                            const SizedBox(width: 20,),
-                            Expanded(
-                              child: Container(
-                                padding: const EdgeInsets.all(8),
-                                decoration: BoxDecoration(
-                                  color: Theme.of(context).scaffoldBackgroundColor,
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: Text(
-                                  viewModel.logs[index].timeOpened.toString(),
-                                  textAlign: TextAlign.center,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .titleMedium,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
+                                const SizedBox(height: 12,),
 
-                      ],
-                    ),
+                                Text("${viewModel.local!.openedUsing} : ${viewModel.logs[index].method}",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleMedium!
+                                        .copyWith(
+                                        color: Theme.of(context)
+                                            .scaffoldBackgroundColor)),
+
+                                const SizedBox(height: 12,),
+                                Text("${viewModel.local!.user} : ${viewModel.logs[index].uid}",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleMedium!
+                                        .copyWith(
+                                        color: Theme.of(context)
+                                            .scaffoldBackgroundColor)),
+
+                                const SizedBox(height: 12,),
+                                Row(
+                                  children: [
+                                    Text(viewModel.local!.at,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleMedium!
+                                            .copyWith(
+                                                color: Theme.of(context)
+                                                    .scaffoldBackgroundColor)),
+                                    const SizedBox(width: 20,),
+                                    Expanded(
+                                      child: Container(
+                                        padding: const EdgeInsets.all(8),
+                                        decoration: BoxDecoration(
+                                          color: Theme.of(context).scaffoldBackgroundColor,
+                                          borderRadius: BorderRadius.circular(10),
+                                        ),
+                                        child: Text(
+                                          viewModel.logs[index].timeOpened.toString(),
+                                          textAlign: TextAlign.center,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .titleMedium,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+
+                              ],
+                            ),
+                          ),
+                          separatorBuilder: (context, index) => const SizedBox(
+                            height: 15,
+                          ),
+                          itemCount: viewModel.logs.length,
+                        ),
+                      ),
+                    ],
                   ),
-                  separatorBuilder: (context, index) => const SizedBox(
-                    height: 15,
-                  ),
-                  itemCount: viewModel.logs.length,
                 );
               }
             },

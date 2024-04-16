@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_masonry_view/flutter_masonry_view.dart';
 import 'package:heimdall/Core/Base/BaseState.dart';
 import 'package:heimdall/Domain/Models/Card/LockCard.dart';
 import 'package:heimdall/Domain/Models/Users/User.dart';
@@ -8,7 +9,6 @@ import 'package:heimdall/Presentation/UI/UsersList/UsersListNavigator.dart';
 import 'package:heimdall/Presentation/UI/UsersList/UsersListViewModel.dart';
 import 'package:heimdall/Presentation/UI/Widgets/ErrorMessageWidget.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_masonry_view/flutter_masonry_view.dart';
 
 class UsersListView extends StatefulWidget {
   static const String routeName = "UserList";

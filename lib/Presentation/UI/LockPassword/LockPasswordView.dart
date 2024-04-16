@@ -58,19 +58,21 @@ class _LockPasswordViewState
                       child: Container(
                         margin: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
-                            color: Theme.of(context).primaryColor,
-                            borderRadius: BorderRadius.circular(40)),
+                            // color: Theme.of(context).primaryColor,
+                            border: Border.all(
+                              width: 3,
+                              color: Theme.of(context).primaryColor,
+                            ),
+                            borderRadius: BorderRadius.circular(30)),
                         alignment: Alignment.center,
                         child: Text(
                           value.password,
-                          style: Theme.of(context)
-                              .textTheme
-                              .titleLarge!
-                              .copyWith(
-                                  fontSize: 28,
-                                  fontWeight: FontWeight.bold,
-                                  color: Theme.of(context)
-                                      .scaffoldBackgroundColor),
+                          style:
+                              Theme.of(context).textTheme.titleLarge!.copyWith(
+                                    fontSize: 28,
+                                    fontWeight: FontWeight.bold,
+                                    // color: Theme.of(context).scaffoldBackgroundColor
+                                  ),
                         ),
                       )),
                   Expanded(
@@ -162,7 +164,8 @@ class _LockPasswordViewState
                                           RoundedRectangleBorder(
                                               borderRadius:
                                                   BorderRadius.circular(30)))),
-                                  onPressed: () => viewModel.deleteDigitFromPassword(),
+                                  onPressed: () =>
+                                      viewModel.deleteDigitFromPassword(),
                                   child: Padding(
                                     padding: const EdgeInsets.all(5.0),
                                     child: SvgPicture.asset(
@@ -182,7 +185,7 @@ class _LockPasswordViewState
                                       shape: MaterialStateProperty.all(
                                           RoundedRectangleBorder(
                                               borderRadius:
-                                              BorderRadius.circular(30)))),
+                                                  BorderRadius.circular(30)))),
                                   onPressed: () => viewModel.clearPassword(),
                                   child: Padding(
                                     padding: const EdgeInsets.all(5.0),
@@ -211,7 +214,6 @@ class _LockPasswordViewState
     return LockPasswordViewModel(
         card: widget.card!,
         getLockPasswordUserCase: injectGetLockPasswordUserCase(),
-        updateLockPasswordUseCase: injectUpdateLockPasswordUseCase()
-    );
+        updateLockPasswordUseCase: injectUpdateLockPasswordUseCase());
   }
 }
