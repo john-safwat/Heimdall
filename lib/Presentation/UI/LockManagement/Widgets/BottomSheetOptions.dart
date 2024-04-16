@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:heimdall/Domain/Models/Card/LockCard.dart';
 import 'package:heimdall/Presentation/Models/Button/Button.dart';
@@ -14,7 +12,7 @@ class BottomSheetOptions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 265,
+      height: 280,
       margin: const EdgeInsets.all(15),
       padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
@@ -28,7 +26,8 @@ class BottomSheetOptions extends StatelessWidget {
                 crossAxisCount: 4,
                 crossAxisSpacing: 10,
                 mainAxisSpacing: 20,
-                childAspectRatio: 0.75),
+                childAspectRatio: 0.7
+            ),
             itemBuilder: (context, index) => InkWell(
               onTap: (){buttons[index].onClickListener(card);},
               overlayColor: MaterialStateProperty.all(Colors.transparent),

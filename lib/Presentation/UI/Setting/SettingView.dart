@@ -1,11 +1,7 @@
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:heimdall/Core/Base/BaseState.dart';
 import 'package:heimdall/Presentation/UI/Setting/SettingNavigator.dart';
 import 'package:heimdall/Presentation/UI/Setting/SettingViewModel.dart';
-import 'package:heimdall/Presentation/UI/Widgets/LanguageSwitch.dart';
 import 'package:provider/provider.dart';
 
 class SettingView extends StatefulWidget {

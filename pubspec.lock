@@ -273,6 +273,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.6"
+  cupertino_range_slider_improved:
+    dependency: "direct main"
+    description:
+      name: cupertino_range_slider_improved
+      sha256: "1843b97902a9add4532d650e22bbe0eb3a2faffbccb059f375ec3611aec27683"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.1"
   dart_style:
     dependency: transitive
     description:
