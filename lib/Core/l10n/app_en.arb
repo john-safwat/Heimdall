@@ -235,5 +235,15 @@
   "usersList" : "Users List",
   "at" : "at",
   "openedUsing" : "Opened Using",
-  "openedBy" : "Opened By"
+  "openedBy" : "Opened By",
+  "lockInfo" : "Lock Information",
+  "modelName" : "Model Name",
+  "components" : "Components",
+  "componentName" : "Component Name",
+  "description" : "Description",
+  "enterValidValue" : "Please enter a value.",
+  "enterValidNumber" : "Please enter a valid number.",
+  "enterValidXPoint" : "Value must be between 0 and 640.",
+  "enterValidYPoint" : "Value must be between 0 and 360.",
+  "tripwirePints" : "Tripwire Points"
 }

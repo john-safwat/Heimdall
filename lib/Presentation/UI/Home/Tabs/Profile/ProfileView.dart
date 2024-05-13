@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:heimdall/Core/Base/BaseState.dart';
 import 'package:heimdall/Core/Providers/AppConfigProvider.dart';
+import 'package:heimdall/Domain/UseCase/DeleteLockUseCase.dart';
 import 'package:heimdall/Domain/UseCase/DeleteUserAccountUseCase.dart';
+import 'package:heimdall/Domain/UseCase/GetLocksCarsUseCase.dart';
 import 'package:heimdall/Domain/UseCase/SignOutUserUseCase.dart';
 import 'package:heimdall/Presentation/UI/AboutUs/AboutUsView.dart';
 import 'package:heimdall/Presentation/UI/ChangePassword/ChangePasswordView.dart';
@@ -122,7 +124,10 @@ class _ProfileViewState extends BaseState<ProfileView, ProfileViewModel>
   ProfileViewModel initViewModel() {
     return ProfileViewModel(
         signOutUserUseCase: injectSignOutUserUseCase(),
-        deleteUserAccountUseCase: injectDeleteUserAccountUseCase());
+        deleteUserAccountUseCase: injectDeleteUserAccountUseCase(),
+      getLocksCarsUseCase: injectGetLocksCarsUseCase(),
+      deleteLockUseCase: injectDeleteLockUseCase()
+    );
   }
 
   @override

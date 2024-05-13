@@ -235,5 +235,16 @@
   "usersList" : "قائمة المستخدمين",
   "at" : "في",
   "openedUsing" : "فتح باستخدام",
-  "openedBy" : "فتح بواسطه"
+  "openedBy" : "فتح بواسطه",
+  "lockInfo" : "معلومات القفل",
+  "modelName" : "اسم الاصدار",
+  "components" : "القطع",
+  "componentName" : "اسم القطعة",
+  "description" : "الوصف",
+  "enterValidValue" : "ادخل قيمه من فضلك.",
+  "enterValidNumber" : "من فضلك أدخل رقما صالحا.",
+  "enterValidXPoint" : "يجب أن تكون القيمة بين 0 و640.",
+  "enterValidYPoint" : "يجب أن تكون القيمة بين 0 و360.",
+  "tripwirePints" : "نقاط Tripwire"
+
 }

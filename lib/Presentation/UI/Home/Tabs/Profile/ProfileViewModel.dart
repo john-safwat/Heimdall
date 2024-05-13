@@ -2,7 +2,9 @@ import 'dart:ui';
 
 import 'package:heimdall/Core/Base/BaseViewModel.dart';
 import 'package:heimdall/Core/Theme/MyTheme.dart';
+import 'package:heimdall/Domain/UseCase/DeleteLockUseCase.dart';
 import 'package:heimdall/Domain/UseCase/DeleteUserAccountUseCase.dart';
+import 'package:heimdall/Domain/UseCase/GetLocksCarsUseCase.dart';
 import 'package:heimdall/Domain/UseCase/SignOutUserUseCase.dart';
 import 'package:heimdall/Presentation/Models/Button/Button.dart';
 import 'package:heimdall/Presentation/UI/Home/Tabs/Profile/ProfileNavigator.dart';
@@ -10,10 +12,14 @@ import 'package:heimdall/Presentation/UI/Home/Tabs/Profile/ProfileNavigator.dart
 class ProfileViewModel extends BaseViewModel<ProfileNavigator> {
   SignOutUserUseCase signOutUserUseCase;
   DeleteUserAccountUseCase deleteUserAccountUseCase;
+  GetLocksCarsUseCase getLocksCarsUseCase;
+  DeleteLockUseCase deleteLockUseCase;
 
   ProfileViewModel(
       {required this.signOutUserUseCase,
-      required this.deleteUserAccountUseCase});
+      required this.deleteUserAccountUseCase,
+      required this.getLocksCarsUseCase,
+      required this.deleteLockUseCase});
 
   late List<Button> buttonsData;
 
@@ -115,6 +121,12 @@ class ProfileViewModel extends BaseViewModel<ProfileNavigator> {
   deleteAccount() async {
     navigator!.showLoading(message: local!.loading);
     try {
+      var locksList =
+          await getLocksCarsUseCase.invoke(uid: appConfigProvider!.user!.uid);
+      for (int i = 0; i < locksList.length; i++) {
+        await deleteLockUseCase.invoke(
+            uid: appConfigProvider!.user!.uid, lockId: locksList[i].lockId);
+      }
       await deleteUserAccountUseCase.invoke(uid: appConfigProvider!.user!.uid);
       navigator!.goBack();
       navigator!.goToLoginScreen();
@@ -175,9 +187,9 @@ class ProfileViewModel extends BaseViewModel<ProfileNavigator> {
   goToLoginScreen() {
     navigator!.goToLoginScreen();
   }
+
   // function to go to Change Password screen
-  goToChangePasswordScreen(){
+  goToChangePasswordScreen() {
     navigator!.goToChangePasswordScreen();
   }
-
 }

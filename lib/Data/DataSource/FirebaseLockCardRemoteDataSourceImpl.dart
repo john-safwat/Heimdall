@@ -75,4 +75,21 @@ class FirebaseLockCardRemoteDataSourceImpl implements FirebaseLockCardRemoteData
     }
   }
 
+  @override
+  Future<void> deleteLock({required String uid, required String lockId})async {
+    try {
+      await database
+          .deleteLock(uid: uid, lockId: lockId)
+          .timeout(const Duration(seconds: 60));
+    } on FirebaseException catch (e) {
+      throw FirebaseDatabaseException(errorMessage: e.code);
+    } on IOException {
+      throw InternetConnectionException(errorMessage: "I/O Exception");
+    } on TimeoutException catch (e) {
+      throw TimeOutOperationsException(errorMessage: "User Auth Timed Out");
+    } catch (e) {
+      throw UnknownException(errorMessage: "Unknown Error");
+    }
+  }
+
 }

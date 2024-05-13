@@ -29,4 +29,9 @@ class UserLockRepositoryImpl implements UserLockRepository {
     return response;
   }
 
+  @override
+  Future<void> deleteUser({required String uid, required String lockId}) async{
+    await remoteDataSource.deleteUser(uid: uid, lockId: lockId);
+  }
+
 }

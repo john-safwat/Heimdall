@@ -50,4 +50,22 @@ class LockRepositoryImpl implements LockRepository {
     await lockRealtimeDatabaseRemoteDataSource.updatePassword(lockId: lockId , password: password);
   }
 
+  @override
+  Future<String> getLastImage({required String lockId}) async{
+    var response = await lockRealtimeDatabaseRemoteDataSource.getLastImage(lockId: lockId);
+    return response;
+  }
+
+  @override
+  Future<bool> getUpdateState({required String lockId}) async{
+    var response = await lockRealtimeDatabaseRemoteDataSource.getUpdateState(lockId: lockId);
+    return response;
+  }
+
+  @override
+  Future<(int, int, int, int)> getTripwirePoints({required String lockId}) async{
+    var response = await lockRealtimeDatabaseRemoteDataSource.getTripwirePoints(lockId: lockId);
+    return response;
+  }
+
 }
