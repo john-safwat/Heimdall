@@ -45,4 +45,10 @@ class FirebaseCardsDatabase extends BaseDatabase {
     var response = await getCollectionReference(uid: uid).doc(lockId).get();
     return response.data()!;
   }
+
+  Future<void> deleteLock({required String uid , required String lockId})async{
+
+    await getCollectionReference(uid: uid).doc(lockId).delete();
+
+  }
 }

@@ -9,4 +9,5 @@ abstract class CardsRepository{
   Future<void> addCardsToCache({required List<LockCard> cards});
   List<LockCard> getCardsFromCache();
   Future<void> clearCache();
+  Future<void> deleteLock({required String uid , required String lockId});
 }

@@ -2,13 +2,16 @@ import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:heimdall/Core/Base/BaseState.dart';
 import 'package:heimdall/Domain/Models/Card/LockCard.dart';
+import 'package:heimdall/Domain/UseCase/DeleteLockUseCase.dart';
 import 'package:heimdall/Domain/UseCase/GetLocksCarsUseCase.dart';
 import 'package:heimdall/Presentation/UI/ConfigureLock/ConfigureLockView.dart';
+import 'package:heimdall/Presentation/UI/LockInfo/LockInfoView.dart';
 import 'package:heimdall/Presentation/UI/LockManagement/LockManagementNavigator.dart';
 import 'package:heimdall/Presentation/UI/LockManagement/LockManagementViewModel.dart';
 import 'package:heimdall/Presentation/UI/LockManagement/Widgets/BottomSheetOptions.dart';
 import 'package:heimdall/Presentation/UI/LockPassword/LockPasswordView.dart';
 import 'package:heimdall/Presentation/UI/LogList/LogListView.dart';
+import 'package:heimdall/Presentation/UI/TripwireSettings/TripwireSettingsView.dart';
 import 'package:heimdall/Presentation/UI/UsersList/UsersListView.dart';
 import 'package:heimdall/Presentation/UI/Widgets/ErrorMessageWidget.dart';
 import 'package:heimdall/Presentation/UI/Widgets/LockCardWidget.dart';
@@ -135,7 +138,8 @@ class _LockManagementViewState
   @override
   LockManagementViewModel initViewModel() {
     return LockManagementViewModel(
-        getLocksCarsUseCase: injectGetLocksCarsUseCase());
+        getLocksCarsUseCase: injectGetLocksCarsUseCase(),
+        deleteLockUseCase: injectDeleteLockUseCase());
   }
 
   @override
@@ -184,7 +188,7 @@ class _LockManagementViewState
   }
 
   @override
-  goToLogListScreen(LockCard card){
+  goToLogListScreen(LockCard card) {
     Navigator.push(
         context,
         MaterialPageRoute(
@@ -192,5 +196,25 @@ class _LockManagementViewState
             card: card,
           ),
         ));
+  }
+
+  @override
+  goToLockInfoScreen(LockCard card) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => LockInfoView(
+                  lockCard: card,
+                )));
+  }
+
+  @override
+  goToTripWireScreen(LockCard card) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => TripwireSettingsView(
+              lockCard: card,
+            )));
   }
 }

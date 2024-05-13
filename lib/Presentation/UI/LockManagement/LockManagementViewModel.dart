@@ -2,14 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:heimdall/Core/Base/BaseViewModel.dart';
 import 'package:heimdall/Core/Theme/MyTheme.dart';
 import 'package:heimdall/Domain/Models/Card/LockCard.dart';
+import 'package:heimdall/Domain/UseCase/DeleteLockUseCase.dart';
 import 'package:heimdall/Domain/UseCase/GetLocksCarsUseCase.dart';
 import 'package:heimdall/Presentation/Models/Button/Button.dart';
 import 'package:heimdall/Presentation/UI/LockManagement/LockManagementNavigator.dart';
 
 class LockManagementViewModel extends BaseViewModel<LockManagementNavigator> {
   GetLocksCarsUseCase getLocksCarsUseCase;
+  DeleteLockUseCase deleteLockUseCase;
 
-  LockManagementViewModel({required this.getLocksCarsUseCase});
+  LockManagementViewModel(
+      {required this.getLocksCarsUseCase, required this.deleteLockUseCase});
 
   TextEditingController searchController = TextEditingController();
   List<LockCard> lockCardsList = [];
@@ -58,7 +61,7 @@ class LockManagementViewModel extends BaseViewModel<LockManagementNavigator> {
         icon: "assets/SVG/aboutUsIcon.svg",
         title: local!.info,
         description: "",
-        onClickListener: goToAboutLockScreen,
+        onClickListener: goToLockInfoScreen,
         color: const Color(0xffff9500)),
     Button(
         id: 7,
@@ -69,36 +72,50 @@ class LockManagementViewModel extends BaseViewModel<LockManagementNavigator> {
         color: const Color(0xFFF73645)),
   ];
 
-
-  goToEditLockScreen(LockCard card){
+  goToEditLockScreen(LockCard card) {
     navigator!.goBack();
     navigator!.goToEditLockScreen(card: card);
   }
 
-  goToChangePasswordScreen(LockCard card){
+  goToChangePasswordScreen(LockCard card) {
     navigator!.goBack();
     navigator!.goToChangePasswordScreen(card);
   }
-  goToTripWireScreen(LockCard card){
 
+  goToTripWireScreen(LockCard card) {
+    navigator!.goToTripWireScreen(card);
   }
 
-  goToUsersListScreen(LockCard card){
+  goToUsersListScreen(LockCard card) {
     navigator!.goBack();
     navigator!.goToUsersListScreen(card);
   }
-  goToLogListScreen(LockCard card){
+
+  goToLogListScreen(LockCard card) {
     navigator!.goBack();
     navigator!.goToLogListScreen(card);
   }
-  goToAboutLockScreen(LockCard card){
 
+  goToLockInfoScreen(LockCard card) {
+    navigator!.goToLockInfoScreen(card);
   }
 
-  deleteLock(LockCard card){
-
+  deleteLock(LockCard card) async {
+    navigator!.showLoading(message: local!.loading);
+    try {
+      await deleteLockUseCase.invoke(
+          uid: appConfigProvider!.user!.uid, lockId: card.lockId);
+      allLocksCardList.removeAt(allLocksCardList.indexOf(card));
+      lockCardsList.removeAt(lockCardsList.indexOf(card));
+      navigator!.goBack();
+      navigator!.goBack();
+      notifyListeners();
+    } catch (e) {
+      navigator!.goBack();
+      navigator!.showErrorNotification(message: handleErrorMessage(e as Exception));
+      navigator!.goBack();
+    }
   }
-
 
   // function to load data fro
   loadCardsData() async {
@@ -142,7 +159,7 @@ class LockManagementViewModel extends BaseViewModel<LockManagementNavigator> {
   }
 
   onLockCardPress(LockCard card) {
-    navigator!.showOptionsModalBottomSheet( card: card);
+    navigator!.showOptionsModalBottomSheet(card: card);
   }
 
   // function to search in locks

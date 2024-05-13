@@ -87,4 +87,58 @@ class FirebaseLockRealtimeDatabaseRemoteDataSourceImpl
       throw UnknownException(errorMessage: "Unknown Error");
     }
   }
+
+  @override
+  Future<String> getLastImage({required String lockId}) async{
+    try {
+      var response = await database
+          .getLastImage(lockId: lockId)
+          .timeout(const Duration(seconds: 60));
+      return response;
+    } on FirebaseException catch (e) {
+      throw FirebaseDatabaseException(errorMessage: e.code);
+    } on IOException {
+      throw InternetConnectionException(errorMessage: "I/O Exception");
+    } on TimeoutException catch (e) {
+      throw TimeOutOperationsException(errorMessage: "User Auth Timed Out");
+    } catch (e) {
+      throw UnknownException(errorMessage: "Unknown Error");
+    }
+  }
+
+  @override
+  Future<bool> getUpdateState({required String lockId})async {
+    try {
+      var response = await database
+          .getUpdateState(lockId: lockId)
+          .timeout(const Duration(seconds: 60));
+      return response;
+    } on FirebaseException catch (e) {
+      throw FirebaseDatabaseException(errorMessage: e.code);
+    } on IOException {
+      throw InternetConnectionException(errorMessage: "I/O Exception");
+    } on TimeoutException catch (e) {
+      throw TimeOutOperationsException(errorMessage: "User Auth Timed Out");
+    } catch (e) {
+      throw UnknownException(errorMessage: "Unknown Error");
+    }
+  }
+
+  @override
+  Future<(int, int, int, int)> getTripwirePoints({required String lockId})async {
+    try {
+      var response = await database
+          .getTripwirePoints(lockId: lockId)
+          .timeout(const Duration(seconds: 60));
+      return response;
+    } on FirebaseException catch (e) {
+      throw FirebaseDatabaseException(errorMessage: e.code);
+    } on IOException {
+      throw InternetConnectionException(errorMessage: "I/O Exception");
+    } on TimeoutException catch (e) {
+      throw TimeOutOperationsException(errorMessage: "User Auth Timed Out");
+    } catch (e) {
+      throw UnknownException(errorMessage: "Unknown Error");
+    }
+  }
 }

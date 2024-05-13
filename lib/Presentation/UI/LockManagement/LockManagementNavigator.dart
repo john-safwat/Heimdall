@@ -7,5 +7,7 @@ abstract class LockManagementNavigator extends BaseNavigator{
   goToChangePasswordScreen(LockCard card);
   goToUsersListScreen(LockCard card);
   goToLogListScreen(LockCard card);
+  goToLockInfoScreen(LockCard card);
+  goToTripWireScreen(LockCard card);
 
 }

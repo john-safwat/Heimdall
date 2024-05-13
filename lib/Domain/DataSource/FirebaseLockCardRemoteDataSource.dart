@@ -6,4 +6,5 @@ abstract class FirebaseLockCardRemoteDataSource {
   Future<void> addLock({required String uid , required LockCardDTO lockCard});
   Future<List<LockCard>> getCardsList({required String uid});
   Future<LockCard> getCard({required String uid , required String lockId});
+  Future<void> deleteLock({required String uid , required String lockId});
 }

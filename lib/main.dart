@@ -24,6 +24,7 @@ import 'package:heimdall/Presentation/UI/ImagePreview/ImagePreviewView.dart';
 import 'package:heimdall/Presentation/UI/Intro/IntroView.dart';
 import 'package:heimdall/Presentation/UI/KeyDetails/KeyDetailsView.dart';
 import 'package:heimdall/Presentation/UI/LockDetails/LockDetailsView.dart';
+import 'package:heimdall/Presentation/UI/LockInfo/LockInfoView.dart';
 import 'package:heimdall/Presentation/UI/LockManagement/LockManagementView.dart';
 import 'package:heimdall/Presentation/UI/LockPassword/LockPasswordView.dart';
 import 'package:heimdall/Presentation/UI/LogList/LogListView.dart';
@@ -33,6 +34,7 @@ import 'package:heimdall/Presentation/UI/Registration/RegistrationView.dart';
 import 'package:heimdall/Presentation/UI/ReportIssue/ReportIssueView.dart';
 import 'package:heimdall/Presentation/UI/Setting/SettingView.dart';
 import 'package:heimdall/Presentation/UI/Splash/SplashScreen.dart';
+import 'package:heimdall/Presentation/UI/TripwireSettings/TripwireSettingsView.dart';
 import 'package:heimdall/Presentation/UI/UpdateProfile/UpdateProfileView.dart';
 import 'package:heimdall/Presentation/UI/UsersList/UsersListView.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -141,7 +143,9 @@ class MyApp extends StatelessWidget {
         KeyDetailsView.routeName : (context) => KeyDetailsView(),
         LockPasswordView.routeName : (context) => LockPasswordView(),
         UsersListView.routeName : (context) => UsersListView(),
-        LogListView.routeName : (context) => LogListView()
+        LogListView.routeName : (context) => LogListView(),
+        LockInfoView.routeName : (context) => LockInfoView(),
+        TripwireSettingsView.routeName : (context) => TripwireSettingsView()
       },
       // the initial route to start the program from
       home: SplashScreen(firstTime:firstTime??true , loggedIn: loggedIn??false,user: user ),

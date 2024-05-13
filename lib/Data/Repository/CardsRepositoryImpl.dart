@@ -54,4 +54,9 @@ class CardsRepositoryImpl implements CardsRepository {
     await localDataSource.deleteCards();
 
   }
+
+  @override
+  Future<void> deleteLock({required String uid, required String lockId}) async{
+    await remoteDataSource.deleteLock(uid: uid, lockId: lockId);
+  }
 }

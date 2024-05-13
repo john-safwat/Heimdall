@@ -45,4 +45,9 @@ class FirebaseLockUsersDatabase extends BaseDatabase {
         .then((value) => value.docs.map((e) => e.data()).toList());
     return response;
   }
+
+  Future<void> deleteUser({required String uid , required String lockId})async{
+    await getCollectionReference(lockId: lockId).doc(uid).delete();
+  }
+
 }
