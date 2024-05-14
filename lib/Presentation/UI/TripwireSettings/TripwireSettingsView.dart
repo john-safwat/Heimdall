@@ -4,10 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:heimdall/Core/Base/BaseState.dart';
 import 'package:heimdall/Domain/Models/Card/LockCard.dart';
 import 'package:heimdall/Domain/UseCase/GetTripwireParametersUseCase.dart';
+import 'package:heimdall/Domain/UseCase/UpdateRequestImageStateUseCase.dart';
 import 'package:heimdall/Presentation/UI/TripwireSettings/TripwireSettingsNavigator.dart';
 import 'package:heimdall/Presentation/UI/TripwireSettings/TripwireSettingsViewModel.dart';
 import 'package:heimdall/Presentation/UI/TripwireSettings/Widgets/LineWidget.dart';
 import 'package:heimdall/Presentation/UI/Widgets/ErrorMessageWidget.dart';
+import 'package:iconify_flutter_plus/iconify_flutter_plus.dart';
+import 'package:iconify_flutter_plus/icons/material_symbols.dart';
+import 'package:iconify_flutter_plus/icons/zondicons.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
@@ -79,8 +83,8 @@ class _TripwireSettingsViewState
                                         fit: BoxFit.cover,
                                         height: double.infinity,
                                         width: double.infinity,
-                                        imageBuilder: (context, imageProvider) =>
-                                            Stack(
+                                        imageBuilder:
+                                            (context, imageProvider) => Stack(
                                           children: [
                                             Image(
                                               image: imageProvider,
@@ -90,14 +94,21 @@ class _TripwireSettingsViewState
                                             CustomPaint(
                                               painter: LinePainter(
                                                 start: Offset(
-                                                    viewModel.x1,
-                                                    viewModel.y1),
+                                                    viewModel.x1, viewModel.y1),
                                                 end: Offset(
-                                                    viewModel.x2,
-                                                    viewModel.y2),
+                                                    viewModel.x2, viewModel.y2),
                                                 color: Theme.of(context)
                                                     .primaryColor,
                                                 strokeWidth: 5.0,
+                                              ),
+                                            ),
+                                            Container(
+                                              margin: const EdgeInsets.all(10),
+                                              alignment: Alignment.bottomRight,
+                                              child: ElevatedButton(onPressed: (){
+                                                viewModel.requestNewImage();
+                                              },
+                                                child: Iconify(MaterialSymbols.autorenew_rounded , color: Theme.of(context).scaffoldBackgroundColor,) ,
                                               ),
                                             )
                                           ],
@@ -109,8 +120,8 @@ class _TripwireSettingsViewState
                                         errorWidget: (context, url, error) =>
                                             Container(
                                           decoration: BoxDecoration(
-                                              color:
-                                                  Theme.of(context).primaryColor,
+                                              color: Theme.of(context)
+                                                  .primaryColor,
                                               borderRadius:
                                                   BorderRadius.circular(20)),
                                           child: Icon(
@@ -273,6 +284,12 @@ class _TripwireSettingsViewState
               }
             },
           ),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              viewModel.loadParameters();
+            },
+            child: Iconify(Zondicons.reload , color: Theme.of(context).scaffoldBackgroundColor,) ,
+          ),
         ),
       ),
     );
@@ -282,6 +299,8 @@ class _TripwireSettingsViewState
   TripwireSettingsViewModel initViewModel() {
     return TripwireSettingsViewModel(
         lockCard: widget.lockCard!,
-        getTripwireImageAndStateUseCase: injectGetTripwireParametersUseCase());
+        getTripwireImageAndStateUseCase: injectGetTripwireParametersUseCase(),
+        updateRequestImageStateUseCase: injectUpdateRequestImageStateUseCase()
+    );
   }
 }

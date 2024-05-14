@@ -45,8 +45,10 @@ class FirebaseLockCardRemoteDataSourceImpl implements FirebaseLockCardRemoteData
       var response = await database.getCardsList(uid: uid).timeout(const Duration(seconds: 60));
       return response.map((e) => e.toDomain()).toList();
     } on FirebaseAuthException catch (e){ // handle firebase auth exception in en of ar
+      print(e.toString());
       throw FirebaseUserAuthException(errorMessage: e.code);
     } on FirebaseException catch (e) { // handle firebase exception in en of ar
+      print(e.toString());
       throw FirebaseDatabaseException(errorMessage: e.code);
     }on IOException {
       throw InternetConnectionException(errorMessage: "I/O Exception");

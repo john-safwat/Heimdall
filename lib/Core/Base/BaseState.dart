@@ -117,7 +117,7 @@ abstract class BaseState<T extends StatefulWidget , VM extends BaseViewModel> ex
       progressIndicatorBackground: Colors.transparent,
       showProgressIndicator: false,
       width: viewModel.mediaQuery!.width,
-      radius: 15,
+      borderRadius: BorderRadius.circular(15),
       height: 50,
     ).show(context);
   }
@@ -133,7 +133,7 @@ abstract class BaseState<T extends StatefulWidget , VM extends BaseViewModel> ex
       progressIndicatorBackground: Colors.transparent,
       showProgressIndicator: false,
       width: viewModel.mediaQuery!.width,
-      radius: 15,
+      borderRadius: BorderRadius.circular(15),
       height: 50,
     ).show(context);
   }
@@ -154,7 +154,7 @@ abstract class BaseState<T extends StatefulWidget , VM extends BaseViewModel> ex
       progressIndicatorBackground: Colors.transparent,
       showProgressIndicator: false,
       width: viewModel.mediaQuery!.width,
-      radius: 15,
+      borderRadius: BorderRadius.circular(15),
       height: height,
     ).show(context);
   }

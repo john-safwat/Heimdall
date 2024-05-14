@@ -141,4 +141,21 @@ class FirebaseLockRealtimeDatabaseRemoteDataSourceImpl
       throw UnknownException(errorMessage: "Unknown Error");
     }
   }
+
+  @override
+  Future<void> updateImageState({required String lockId, required bool state}) async{
+    try {
+      await database
+          .updateImageState(lockId: lockId , state:state)
+          .timeout(const Duration(seconds: 60));
+    } on FirebaseException catch (e) {
+      throw FirebaseDatabaseException(errorMessage: e.code);
+    } on IOException {
+      throw InternetConnectionException(errorMessage: "I/O Exception");
+    } on TimeoutException catch (e) {
+      throw TimeOutOperationsException(errorMessage: "User Auth Timed Out");
+    } catch (e) {
+      throw UnknownException(errorMessage: "Unknown Error");
+    }
+  }
 }

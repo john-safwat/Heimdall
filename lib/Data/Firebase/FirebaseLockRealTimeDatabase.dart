@@ -92,4 +92,11 @@ class FirebaseLockRealTimeDatabase extends BaseDatabase {
     return (x1 , y1 , x2 , y2);
   }
 
+  Future<void> updateImageState({required String lockId , required bool state}) async {
+    var data =await FirebaseDatabase.instance
+        .ref('${constants.locksCollection}/$lockId')
+        .child("request_update")
+        .set(state);
+  }
+
 }

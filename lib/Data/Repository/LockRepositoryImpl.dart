@@ -68,4 +68,9 @@ class LockRepositoryImpl implements LockRepository {
     return response;
   }
 
+  @override
+  Future<void> updateImageState({required String lockId, required bool state}) async{
+    await lockRealtimeDatabaseRemoteDataSource.updateImageState(lockId: lockId, state: state);
+  }
+
 }
