@@ -3,15 +3,19 @@ import 'package:heimdall/Core/Base/BaseViewModel.dart';
 import 'package:heimdall/Core/Theme/MyTheme.dart';
 import 'package:heimdall/Domain/Models/Card/LockCard.dart';
 import 'package:heimdall/Domain/UseCase/GetTripwireParametersUseCase.dart';
+import 'package:heimdall/Domain/UseCase/UpdateRequestImageStateUseCase.dart';
 import 'package:heimdall/Presentation/UI/TripwireSettings/TripwireSettingsNavigator.dart';
 
 class TripwireSettingsViewModel
     extends BaseViewModel<TripwireSettingsNavigator> {
   GetTripwireParametersUseCase getTripwireImageAndStateUseCase;
+  UpdateRequestImageStateUseCase updateRequestImageStateUseCase;
   LockCard lockCard;
 
   TripwireSettingsViewModel(
-      {required this.lockCard, required this.getTripwireImageAndStateUseCase});
+      {required this.lockCard,
+      required this.getTripwireImageAndStateUseCase,
+      required this.updateRequestImageStateUseCase});
 
   String? errorMessage;
   String imageUrl = "";
@@ -45,10 +49,10 @@ class TripwireSettingsViewModel
       y1PointController.text = response.$3.$2.toString();
       x2PointController.text = response.$3.$3.toString();
       y2PointController.text = response.$3.$4.toString();
-      x1 = response.$3.$1.toDouble() * (360/620);
-      y1 = response.$3.$2.toDouble() * (360/620);
-      x2 = response.$3.$3.toDouble() * (360/620);
-      y2 = response.$3.$4.toDouble() * (360/620);
+      x1 = response.$3.$1.toDouble() * (360 / 620);
+      y1 = response.$3.$2.toDouble() * (360 / 620);
+      x2 = response.$3.$3.toDouble() * (360 / 620);
+      y2 = response.$3.$4.toDouble() * (360 / 620);
       notifyListeners();
     } catch (e) {
       errorMessage = handleErrorMessage(e as Exception);
@@ -56,11 +60,11 @@ class TripwireSettingsViewModel
     }
   }
 
-  updateLine(){
-    x1= double.parse(x1PointController.text)* (360/620);
-    y1= double.parse(y1PointController.text)* (360/620);
-    x2= double.parse(x2PointController.text)* (360/620);
-    y2= double.parse(y2PointController.text)* (360/620);
+  updateLine() {
+    x1 = double.parse(x1PointController.text) * (360 / 620);
+    y1 = double.parse(y1PointController.text) * (360 / 620);
+    x2 = double.parse(x2PointController.text) * (360 / 620);
+    y2 = double.parse(y2PointController.text) * (360 / 620);
   }
 
   String getImageEmptyAnimation() {
@@ -97,9 +101,19 @@ class TripwireSettingsViewModel
     if (number == null) {
       return local!.enterValidNumber;
     }
-    if (number < 0 || number > 640) {
+    if (number < 0 || number > 360) {
       return local!.enterValidYPoint;
     }
     return null; // No error, validation successful
+  }
+
+  void requestNewImage()async {
+    try{
+      await updateRequestImageStateUseCase.invoke(lockId: lockCard.lockId, state: !state);
+      state = !state;
+      notifyListeners();
+    }catch(e){
+      navigator!.showErrorNotification(message: handleErrorMessage(e as Exception));
+    }
   }
 }
