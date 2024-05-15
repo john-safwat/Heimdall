@@ -245,6 +245,9 @@
   "enterValidNumber" : "من فضلك أدخل رقما صالحا.",
   "enterValidXPoint" : "يجب أن تكون القيمة بين 0 و640.",
   "enterValidYPoint" : "يجب أن تكون القيمة بين 0 و360.",
-  "tripwirePints" : "نقاط Tripwire"
+  "tripwirePints" : "نقاط Tripwire",
+  "timer" : "المؤقت",
+  "timerInfo" : "يقوم هذا المؤقت بتعيين الحد الأدنى من الوقت بين إشعارات Tripwire",
+  "tripwireUpdated" : "تم تحديث إعدادات Tripwire بنجاح"
 
 }

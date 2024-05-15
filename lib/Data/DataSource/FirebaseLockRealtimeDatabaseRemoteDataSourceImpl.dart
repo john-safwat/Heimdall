@@ -72,10 +72,11 @@ class FirebaseLockRealtimeDatabaseRemoteDataSourceImpl
   }
 
   @override
-  Future<void> updatePassword({required String lockId, required String password}) async{
+  Future<void> updatePassword(
+      {required String lockId, required String password}) async {
     try {
       await database
-          .updatePassword(lockId: lockId , password: password)
+          .updatePassword(lockId: lockId, password: password)
           .timeout(const Duration(seconds: 60));
     } on FirebaseException catch (e) {
       throw FirebaseDatabaseException(errorMessage: e.code);
@@ -89,7 +90,7 @@ class FirebaseLockRealtimeDatabaseRemoteDataSourceImpl
   }
 
   @override
-  Future<String> getLastImage({required String lockId}) async{
+  Future<String> getLastImage({required String lockId}) async {
     try {
       var response = await database
           .getLastImage(lockId: lockId)
@@ -107,7 +108,7 @@ class FirebaseLockRealtimeDatabaseRemoteDataSourceImpl
   }
 
   @override
-  Future<bool> getUpdateState({required String lockId})async {
+  Future<bool> getUpdateState({required String lockId}) async {
     try {
       var response = await database
           .getUpdateState(lockId: lockId)
@@ -125,7 +126,8 @@ class FirebaseLockRealtimeDatabaseRemoteDataSourceImpl
   }
 
   @override
-  Future<(int, int, int, int)> getTripwirePoints({required String lockId})async {
+  Future<(int, int, int, int)> getTripwirePoints(
+      {required String lockId}) async {
     try {
       var response = await database
           .getTripwirePoints(lockId: lockId)
@@ -143,10 +145,52 @@ class FirebaseLockRealtimeDatabaseRemoteDataSourceImpl
   }
 
   @override
-  Future<void> updateImageState({required String lockId, required bool state}) async{
+  Future<void> updateImageState(
+      {required String lockId, required bool state}) async {
     try {
       await database
-          .updateImageState(lockId: lockId , state:state)
+          .updateImageState(lockId: lockId, state: state)
+          .timeout(const Duration(seconds: 60));
+    } on FirebaseException catch (e) {
+      throw FirebaseDatabaseException(errorMessage: e.code);
+    } on IOException {
+      throw InternetConnectionException(errorMessage: "I/O Exception");
+    } on TimeoutException catch (e) {
+      throw TimeOutOperationsException(errorMessage: "User Auth Timed Out");
+    } catch (e) {
+      throw UnknownException(errorMessage: "Unknown Error");
+    }
+  }
+
+  @override
+  Future<int> getTripwireTimer({required String lockId}) async {
+    try {
+      var response = await database
+          .getTripwireTimer(lockId: lockId)
+          .timeout(const Duration(seconds: 60));
+      return response;
+    } on FirebaseException catch (e) {
+      throw FirebaseDatabaseException(errorMessage: e.code);
+    } on IOException {
+      throw InternetConnectionException(errorMessage: "I/O Exception");
+    } on TimeoutException catch (e) {
+      throw TimeOutOperationsException(errorMessage: "User Auth Timed Out");
+    } catch (e) {
+      throw UnknownException(errorMessage: "Unknown Error");
+    }
+  }
+
+  @override
+  Future<void> updateTripwireParameters(
+      {required String lockId,
+      required int x1,
+      required int x2,
+      required int y1,
+      required int y2,
+      required int timer}) async{
+    try {
+      await database
+          .updateTripwireParameters(lockId: lockId, x1: x1, x2: x2, y1: y1, y2: y2, timer: timer)
           .timeout(const Duration(seconds: 60));
     } on FirebaseException catch (e) {
       throw FirebaseDatabaseException(errorMessage: e.code);

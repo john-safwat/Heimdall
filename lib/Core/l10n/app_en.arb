@@ -245,5 +245,8 @@
   "enterValidNumber" : "Please enter a valid number.",
   "enterValidXPoint" : "Value must be between 0 and 640.",
   "enterValidYPoint" : "Value must be between 0 and 360.",
-  "tripwirePints" : "Tripwire Points"
+  "tripwirePints" : "Tripwire Points",
+  "timer" : "Timer",
+  "timerInfo" : "This Timer Set The Minimum Time Between Notifications of Tripwire",
+  "tripwireUpdated" : "Tripwire Settings Updated Successfully"
 }
