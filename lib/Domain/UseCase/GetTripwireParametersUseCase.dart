@@ -13,10 +13,11 @@ class GetTripwireParametersUseCase {
 
   GetTripwireParametersUseCase({required this.lockRepository});
 
-  Future<(String, bool, (int , int , int , int))> invoke({required String lockId}) async {
+  Future<(String, bool, (int , int , int , int) , int)> invoke({required String lockId}) async {
     var url = await lockRepository.getLastImage(lockId: lockId);
     var state = await lockRepository.getUpdateState(lockId: lockId);
     var points  = await lockRepository.getTripwirePoints(lockId: lockId);
-    return (url, state , points);
+    var timer  = await lockRepository.getTripwireTimer(lockId: lockId);
+    return (url, state , points ,timer);
   }
 }
