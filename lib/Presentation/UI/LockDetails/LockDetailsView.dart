@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:heimdall/Core/Base/BaseState.dart';
 import 'package:heimdall/Core/Providers/LocksProvider.dart';
 import 'package:heimdall/Domain/Models/Card/LockCard.dart';
@@ -13,13 +12,12 @@ import 'package:heimdall/Presentation/UI/Gallery/GalleryView.dart';
 import 'package:heimdall/Presentation/UI/ImagePreview/ImagePreviewView.dart';
 import 'package:heimdall/Presentation/UI/LockDetails/LockDetailsNavigator.dart';
 import 'package:heimdall/Presentation/UI/LockDetails/LockDetailsViewModel.dart';
-import 'package:heimdall/Presentation/UI/LockDetails/Widgets/GalleryCardWidget.dart';
 import 'package:heimdall/Presentation/UI/Widgets/ErrorMessageWidget.dart';
 import 'package:heimdall/Presentation/UI/Widgets/KeyCardWidget.dart';
 import 'package:iconify_flutter_plus/iconify_flutter_plus.dart';
 import 'package:iconify_flutter_plus/icons/bi.dart';
 import 'package:iconify_flutter_plus/icons/ic.dart';
-import 'package:lottie/lottie.dart';
+import 'package:load_switch/load_switch.dart';
 import 'package:provider/provider.dart';
 
 class LockDetailsView extends StatefulWidget {
@@ -77,15 +75,17 @@ class _LockDetailsViewState
                     child: Center(child: CircularProgressIndicator()),
                   );
                 } else {
-                  return Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Column(
-                      children: [
-                        Expanded(
-                            child: Stack(
+                  return ListView(
+                    padding: const EdgeInsets.all(20),
+                    children: [
+                      SizedBox(
+                        height: 500,
+                        child: Stack(
                           children: [
                             Container(
-                              padding: const EdgeInsets.all(20),
+                              padding:
+                                  const EdgeInsets.fromLTRB(20, 10, 20, 40),
+                              alignment: Alignment.bottomCenter,
                               height: double.infinity,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
@@ -93,31 +93,81 @@ class _LockDetailsViewState
                               ),
                               child: Image.asset(viewModel.lockCard.image),
                             ),
-                          ],
-                        )),
-                        const SizedBox(height: 20),
-                        ElevatedButton(
-                            style: ButtonStyle(
-                              shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20)
-                              ))
-                            ),
-                            onPressed: () => viewModel.goToCreateKeyScreen(),
-                            child: Padding(
-                              padding: const EdgeInsets.all(20.0),
+                            Positioned.fill(
+                                child: Container(
+                              padding: const EdgeInsets.all(30),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  gradient: LinearGradient(
+                                      colors: [
+                                        Theme.of(context).primaryColor,
+                                        Theme.of(context)
+                                            .primaryColor
+                                            .withOpacity(0.5),
+                                        Theme.of(context)
+                                            .primaryColor
+                                            .withOpacity(0.3),
+                                        Colors.transparent
+                                      ],
+                                      begin: Alignment.topLeft,
+                                      end: Alignment.bottomRight)),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(viewModel.local!.createKey),
+                                  Expanded(
+                                    flex: 2,
+                                    child: Text(
+                                      viewModel.lockCard.name,
+                                      maxLines: 3,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                          fontSize: 36,
+                                          fontWeight: FontWeight.w900,
+                                          color: Theme.of(context)
+                                              .scaffoldBackgroundColor),
+                                    ),
+                                  ),
+                                  const Expanded(child: SizedBox())
                                 ],
                               ),
                             )),
-                        const SizedBox(height: 20),
-                        Row(
-                          children: [
-                            Expanded(
-                                child: Container(
-                                  padding:const EdgeInsets.all(10),
+                            Positioned.fill(
+                                child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  LoadSwitch(
+                                    value:
+                                        viewModel.locksProvider.value["opened"],
+                                    future: () async {
+                                      await viewModel.changeLockState();
+                                      return viewModel
+                                          .locksProvider.value["opened"];
+                                    },
+                                    style: SpinStyle.material,
+                                    onChange: (v) {},
+                                    onTap: (v) {},
+                                  )
+                                ],
+                              ),
+                            ))
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      Row(
+                        children: [
+                          Expanded(
+                              child: InkWell(
+                            overlayColor:
+                                MaterialStateProperty.all(Colors.transparent),
+                            onTap: () {
+                              viewModel.goToCreateKeyScreen();
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.all(15),
                               height: 140,
                               decoration: BoxDecoration(
                                   color: Theme.of(context).primaryColor,
@@ -125,91 +175,122 @@ class _LockDetailsViewState
                               child: Row(
                                 children: [
                                   Expanded(
-                                      child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Container(
-                                        padding: const EdgeInsets.all(20),
+                                      flex: 2,
+                                      child: Container(
+                                        height: double.infinity,
+                                        padding: const EdgeInsets.all(10),
                                         decoration: BoxDecoration(
                                             color: Theme.of(context)
                                                 .scaffoldBackgroundColor
-                                                .withOpacity(0.5),
+                                                .withOpacity(0.3),
                                             borderRadius:
-                                                BorderRadius.circular(1000)),
+                                                BorderRadius.circular(25)),
                                         child: Iconify(
                                           Ic.baseline_vpn_key,
                                           size: 30,
                                           color: Theme.of(context)
-                                              .secondaryHeaderColor,
+                                              .scaffoldBackgroundColor,
                                         ),
-                                      )
-                                    ],
-                                  )),
-                                  const SizedBox(width: 10,),
+                                      )),
+                                  const SizedBox(
+                                    width: 15,
+                                  ),
                                   Expanded(
+                                      flex: 3,
                                       child: Text(
-                                    viewModel.local!.keysList,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .titleLarge!
-                                        .copyWith(
-                                            color: Theme.of(context)
-                                                .scaffoldBackgroundColor,
-                                            fontWeight: FontWeight.bold),
-                                  ))
-                                ],
-                              ),
-                            )),
-                            const SizedBox(width: 20,),
-                            Expanded(
-                                child: Container(
-                                  padding:const EdgeInsets.all(10),
-                                  height: 140,
-                                  decoration: BoxDecoration(
-                                      color: Theme.of(context).primaryColor,
-                                      borderRadius: BorderRadius.circular(30)),
-                                  child: Row(
-                                    children: [
-                                      Expanded(
-                                          child: Column(
-                                            mainAxisAlignment: MainAxisAlignment.center,
-                                            children: [
-                                              Container(
-                                                padding: const EdgeInsets.all(20),
-                                                decoration: BoxDecoration(
-                                                    color: Theme.of(context)
-                                                        .scaffoldBackgroundColor
-                                                        .withOpacity(0.5),
-                                                    borderRadius:
-                                                    BorderRadius.circular(1000)),
-                                                child: Iconify(
-                                                  Bi.images,
-                                                  size: 30,
-                                                  color: Theme.of(context)
-                                                      .secondaryHeaderColor,
-                                                ),
-                                              )
-                                            ],
-                                          )),
-                                      const SizedBox(width: 10,),
-                                      Expanded(
-                                          child: Text(
-                                            viewModel.local!.gallery,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .titleLarge!
-                                                .copyWith(
+                                        viewModel.local!.createKey,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleLarge!
+                                            .copyWith(
                                                 color: Theme.of(context)
                                                     .scaffoldBackgroundColor,
                                                 fontWeight: FontWeight.bold),
-                                          ))
-                                    ],
+                                      ))
+                                ],
+                              ),
+                            ),
+                          )),
+                          const SizedBox(
+                            width: 20,
+                          ),
+                          Expanded(
+                              child: InkWell(
+                            overlayColor:
+                                MaterialStateProperty.all(Colors.transparent),
+                            onTap: () {
+                              viewModel.goToGalleryScreen();
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.all(15),
+                              height: 140,
+                              decoration: BoxDecoration(
+                                  color: Theme.of(context).primaryColor,
+                                  borderRadius: BorderRadius.circular(30)),
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                      flex: 2,
+                                      child: Container(
+                                        height: double.infinity,
+                                        padding: const EdgeInsets.all(10),
+                                        decoration: BoxDecoration(
+                                            color: Theme.of(context)
+                                                .scaffoldBackgroundColor
+                                                .withOpacity(0.3),
+                                            borderRadius:
+                                                BorderRadius.circular(25)),
+                                        child: Iconify(
+                                          Bi.images,
+                                          size: 30,
+                                          color: Theme.of(context)
+                                              .scaffoldBackgroundColor,
+                                        ),
+                                      )),
+                                  const SizedBox(
+                                    width: 15,
                                   ),
-                                )),
-                          ],
-                        )
-                      ],
-                    ),
+                                  Expanded(
+                                      flex: 3,
+                                      child: Text(
+                                        viewModel.local!.gallery,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleLarge!
+                                            .copyWith(
+                                                color: Theme.of(context)
+                                                    .scaffoldBackgroundColor,
+                                                fontWeight: FontWeight.bold),
+                                      ))
+                                ],
+                              ),
+                            ),
+                          )),
+                        ],
+                      ),
+                      const SizedBox(height: 20),
+                      Text(
+                        viewModel.local!.keysList,
+                        style: Theme.of(context).textTheme.titleMedium,
+                      ),
+                      const SizedBox(height: 20),
+                      GridView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        padding: const EdgeInsets.symmetric(vertical: 10),
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                mainAxisSpacing: 20,
+                                crossAxisSpacing: 20,
+                                childAspectRatio: 0.8),
+                        itemBuilder: (context, index) => KeyCardWidget(
+                          myKey: viewModel.keys[index],
+                          onClick: viewModel.onCardClick,
+                        ),
+                        itemCount: viewModel.keys.length,
+                      )
+                    ],
                   );
                 }
               }),

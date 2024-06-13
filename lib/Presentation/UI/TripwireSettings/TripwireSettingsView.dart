@@ -1,7 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:heimdall/Core/Base/BaseState.dart';
 import 'package:heimdall/Core/Providers/LocksProvider.dart';
 import 'package:heimdall/Domain/Models/Card/LockCard.dart';
