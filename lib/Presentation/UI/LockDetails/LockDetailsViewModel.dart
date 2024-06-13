@@ -139,7 +139,18 @@ class LockDetailsViewModel extends BaseViewModel<LockDetailsNavigator> {
       return "assets/animations/CameraGold.json";
     }
   }
-
+// function to return the icon of the app
+  String getIcon() {
+    if (themeProvider!.getTheme() == MyTheme.blackAndWhiteTheme) {
+      return "assets/images/appIcon2.png";
+    } else if (themeProvider!.getTheme() == MyTheme.purpleAndWhiteTheme) {
+      return "assets/images/appIcon3.png";
+    } else if (themeProvider!.getTheme() == MyTheme.darkPurpleTheme) {
+      return "assets/images/appIcon4.png";
+    } else {
+      return "assets/images/appIcon5.png";
+    }
+  }
   goToGalleryScreen() {
     navigator!.goToGalleryScreen(images: images);
   }
@@ -151,4 +162,5 @@ class LockDetailsViewModel extends BaseViewModel<LockDetailsNavigator> {
   onCardClick(EKey key){
     navigator!.goToManageKeyScreen(lockCard: lockCard, eKey: key);
   }
+
 }

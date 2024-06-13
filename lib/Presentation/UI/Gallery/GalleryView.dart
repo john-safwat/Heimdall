@@ -4,6 +4,7 @@ import 'package:heimdall/Core/Base/BaseState.dart';
 import 'package:heimdall/Presentation/UI/Gallery/GalleryNavigator.dart';
 import 'package:heimdall/Presentation/UI/Gallery/GalleryViewModel.dart';
 import 'package:heimdall/Presentation/UI/ImagePreview/ImagePreviewView.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
 class GalleryView extends StatefulWidget {
@@ -34,7 +35,9 @@ class _GalleryViewState extends BaseState<GalleryView, GalleryViewModel>
           appBar: AppBar(
             title: Text(viewModel.local!.gallery),
           ),
-          body: Column(
+          body: viewModel.images.isEmpty? Center(
+            child: Lottie.asset(viewModel.getAnimation()),
+          ) : Column(
             children: [
               Expanded(
                   child: GridView.builder(
