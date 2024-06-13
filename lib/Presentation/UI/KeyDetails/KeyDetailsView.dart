@@ -86,7 +86,7 @@ class _KeyDetailsViewState
                                     ? MyTheme.green
                                     : MyTheme.red)),
                         onPressed: () {
-                          viewModel.changeLockState();
+
                         },
                         child: Padding(
                           padding:

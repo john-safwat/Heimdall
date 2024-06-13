@@ -112,29 +112,32 @@ abstract class BaseState<T extends StatefulWidget , VM extends BaseViewModel> ex
       icon: const Icon(EvaIcons.checkmarkCircle , color: MyTheme.white,),
       description: Text(message , style: Theme.of(context).textTheme.titleSmall!.copyWith(color: MyTheme.white),),
       background: Colors.green,
-      animation: AnimationType.fromTop,
       displayCloseButton: false,
       progressIndicatorBackground: Colors.transparent,
       showProgressIndicator: false,
-      width: viewModel.mediaQuery!.width,
+      animation: AnimationType.fromBottom,
+      position: Alignment.bottomCenter,
+      width: viewModel.mediaQuery!.width-40,
       borderRadius: BorderRadius.circular(15),
-      height: 50,
+      height: 70,
     ).show(context);
   }
 
   @override
   showErrorNotification({required String message}){
     ElegantNotification(
+
       icon: const Icon(EvaIcons.closeCircle , color: MyTheme.white,),
       description: Text(message , style: Theme.of(context).textTheme.titleSmall!.copyWith(color: MyTheme.white),),
       background: Colors.red,
-      animation: AnimationType.fromTop,
-      displayCloseButton: false,
+      displayCloseButton: true,
       progressIndicatorBackground: Colors.transparent,
       showProgressIndicator: false,
-      width: viewModel.mediaQuery!.width,
+      animation: AnimationType.fromBottom,
+      position: Alignment.bottomCenter,
+      width: viewModel.mediaQuery!.width-40,
       borderRadius: BorderRadius.circular(15),
-      height: 50,
+      height: 70,
     ).show(context);
   }
 
@@ -149,11 +152,12 @@ abstract class BaseState<T extends StatefulWidget , VM extends BaseViewModel> ex
       icon:Icon(iconData , color: MyTheme.white,),
       description: Text(message , style: Theme.of(context).textTheme.titleSmall!.copyWith(color: MyTheme.white)),
       background: background,
-      animation: AnimationType.fromTop,
       displayCloseButton: false,
       progressIndicatorBackground: Colors.transparent,
       showProgressIndicator: false,
-      width: viewModel.mediaQuery!.width,
+      animation: AnimationType.fromBottom,
+      position: Alignment.bottomCenter,
+      width: viewModel.mediaQuery!.width-40,
       borderRadius: BorderRadius.circular(15),
       height: height,
     ).show(context);
