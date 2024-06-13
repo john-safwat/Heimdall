@@ -3,8 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:heimdall/Core/Base/BaseState.dart';
+import 'package:heimdall/Core/Providers/LocksProvider.dart';
 import 'package:heimdall/Domain/Models/Card/LockCard.dart';
 import 'package:heimdall/Domain/UseCase/GetTripwireParametersUseCase.dart';
+import 'package:heimdall/Domain/UseCase/SetLockRealTimeDatabaseListenerUseCase.dart';
 import 'package:heimdall/Domain/UseCase/UpdateRequestImageStateUseCase.dart';
 import 'package:heimdall/Domain/UseCase/UpdateTripwireParametersUseCase.dart';
 import 'package:heimdall/Presentation/UI/TripwireSettings/TripwireSettingsNavigator.dart';
@@ -35,12 +37,17 @@ class _TripwireSettingsViewState
   @override
   void initState() {
     super.initState();
+    viewModel.locksProvider =
+        Provider.of<LocksProvider>(context, listen: false);
+    viewModel.locksProvider.lockId = viewModel.lockCard.lockId;
     viewModel.loadParameters();
+    viewModel.setDatabaseListener();
   }
 
   @override
   Widget build(BuildContext context) {
     super.build(context);
+    viewModel.locksProvider = Provider.of<LocksProvider>(context);
     return ChangeNotifierProvider(
       create: (context) => viewModel,
       child: SafeArea(
@@ -50,11 +57,11 @@ class _TripwireSettingsViewState
           ),
           body: Consumer<TripwireSettingsViewModel>(
             builder: (context, value, child) {
-              if (viewModel.loading) {
+              if (viewModel.loading || viewModel.lockLoading) {
                 return const Center(
                   child: CircularProgressIndicator(),
                 );
-              } else if (viewModel.errorMessage != null) {
+              } else if (viewModel.errorMessage != null || viewModel.lockErrorMessage != null) {
                 return ErrorMessageWidget(
                     errorMessage: viewModel.errorMessage!,
                     fixErrorFunction: viewModel.loadParameters);
@@ -69,7 +76,8 @@ class _TripwireSettingsViewState
                         child: Row(
                           children: [
                             Expanded(
-                                child: viewModel.state
+                                child: viewModel.locksProvider.value["request_update"]!=null &&
+                                    viewModel.locksProvider.value["request_update"]
                                     ? Container(
                                         height: 220,
                                         width: double.infinity,
@@ -82,7 +90,7 @@ class _TripwireSettingsViewState
                                             value.getImageEmptyAnimation()),
                                       )
                                     : CachedNetworkImage(
-                                        imageUrl: viewModel.imageUrl,
+                                        imageUrl: viewModel.locksProvider.value["lastImage"]??"",
                                         fit: BoxFit.cover,
                                         height: double.infinity,
                                         width: double.infinity,
@@ -496,7 +504,8 @@ class _TripwireSettingsViewState
         lockCard: widget.lockCard!,
         getTripwireImageAndStateUseCase: injectGetTripwireParametersUseCase(),
         updateRequestImageStateUseCase: injectUpdateRequestImageStateUseCase(),
-        updateTripwireParametersUseCase: injectUpdateTripwireParametersUseCase()
+        updateTripwireParametersUseCase: injectUpdateTripwireParametersUseCase(),
+        setLockRealTimeDatabaseListenerUseCase: injectSetLockRealTimeDatabaseListenerUseCase()
     );
   }
 }

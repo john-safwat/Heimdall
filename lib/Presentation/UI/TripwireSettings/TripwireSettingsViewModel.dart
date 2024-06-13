@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:heimdall/Core/Base/BaseViewModel.dart';
+import 'package:heimdall/Core/Providers/LocksProvider.dart';
 import 'package:heimdall/Core/Theme/MyTheme.dart';
 import 'package:heimdall/Domain/Models/Card/LockCard.dart';
 import 'package:heimdall/Domain/UseCase/GetTripwireParametersUseCase.dart';
+import 'package:heimdall/Domain/UseCase/SetLockRealTimeDatabaseListenerUseCase.dart';
 import 'package:heimdall/Domain/UseCase/UpdateRequestImageStateUseCase.dart';
 import 'package:heimdall/Domain/UseCase/UpdateTripwireParametersUseCase.dart';
 import 'package:heimdall/Presentation/UI/TripwireSettings/TripwireSettingsNavigator.dart';
@@ -12,17 +14,22 @@ class TripwireSettingsViewModel
   GetTripwireParametersUseCase getTripwireImageAndStateUseCase;
   UpdateRequestImageStateUseCase updateRequestImageStateUseCase;
   UpdateTripwireParametersUseCase updateTripwireParametersUseCase;
+  SetLockRealTimeDatabaseListenerUseCase setLockRealTimeDatabaseListenerUseCase;
   LockCard lockCard;
-
+  late LocksProvider locksProvider;
   TripwireSettingsViewModel({required this.lockCard,
     required this.getTripwireImageAndStateUseCase,
     required this.updateRequestImageStateUseCase,
-    required this.updateTripwireParametersUseCase});
+    required this.updateTripwireParametersUseCase,
+    required this.setLockRealTimeDatabaseListenerUseCase
+  });
 
   String? errorMessage;
+  String? lockErrorMessage;
   String imageUrl = "";
   bool state = false;
   bool loading = true;
+  bool lockLoading= true;
 
 
   double x1 = 0;
@@ -39,6 +46,21 @@ class TripwireSettingsViewModel
   double timer = 0;
   int realTimer = 0;
 
+  setDatabaseListener() async {
+    lockErrorMessage = null;
+    lockLoading = true;
+    notifyListeners();
+    try {
+      await setLockRealTimeDatabaseListenerUseCase.invoke(
+          lockId: lockCard.lockId);
+      lockLoading = false;
+      notifyListeners();
+    } catch (e) {
+      lockErrorMessage = handleErrorMessage(e as Exception);
+      lockLoading = false;
+      notifyListeners();
+    }
+  }
 
   loadParameters() async {
     loading = true;

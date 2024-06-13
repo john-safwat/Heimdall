@@ -33,7 +33,7 @@ class FirebaseAuthUserDatabase extends BaseDatabase{
 
   // function to update user photo in firebase auth
   Future<User> updateUserPhoto(String photo)async{
-    await _firebase.currentUser!.updatePhotoURL(photo);
+    await FirebaseAuth.instance.currentUser!.updatePhotoURL(photo);
     return _firebase.currentUser!;
   }
 

@@ -34,8 +34,9 @@ class FirebaseImagesDatabase extends BaseDatabase{
 
   // upload image to firebase storage
   Future<String> updateImage({required String url , required XFile file})async{
+    await _firebaseStorage.refFromURL(url).delete();
     // upload image to firebase storage
-    var snapshot = await _firebaseStorage.refFromURL(url).putFile(File(file.path),  SettableMetadata(contentType: "image/jpeg"));
+    var snapshot = await _firebaseStorage.ref().child('images/${generateName()}').putFile(File(file.path),  SettableMetadata(contentType: "image/jpeg"));
     // get the image URL from firebase storage
     var downloadUrl = await snapshot.ref.getDownloadURL();
     return downloadUrl;
