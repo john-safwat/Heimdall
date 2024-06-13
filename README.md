@@ -184,7 +184,9 @@ John Safwat
 
 ## project documentation 
 
-[Smart Door Lock Documentation](chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://firebasestorage.googleapis.com/v0/b/heimdall-5aecb.appspot.com/o/Smart%20Door%20Lock%20Documentation.pdf?alt=media&token=f4daac14-cbf0-444d-a5da-d5c9b79f6202)
+Smart Door Lock Documentation
+<br>
+[![](https://img.shields.io/badge/View%20documentation-37a779?style=for-the-badge)](chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://firebasestorage.googleapis.com/v0/b/heimdall-5aecb.appspot.com/o/Smart%20Door%20Lock%20Documentation.pdf?alt=media&token=f4daac14-cbf0-444d-a5da-d5c9b79f6202)
 
 ## License
 
