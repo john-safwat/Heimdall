@@ -168,7 +168,7 @@ class _LockDetailsViewState
                             },
                             child: Container(
                               padding: const EdgeInsets.all(15),
-                              height: 140,
+                              height: 80,
                               decoration: BoxDecoration(
                                   color: Theme.of(context).primaryColor,
                                   borderRadius: BorderRadius.circular(30)),
@@ -197,15 +197,17 @@ class _LockDetailsViewState
                                   ),
                                   Expanded(
                                       flex: 3,
-                                      child: Text(
-                                        viewModel.local!.createKey,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .titleLarge!
-                                            .copyWith(
-                                                color: Theme.of(context)
-                                                    .scaffoldBackgroundColor,
-                                                fontWeight: FontWeight.bold),
+                                      child: FittedBox(
+                                        child: Text(
+                                          viewModel.local!.createKey,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyLarge!
+                                              .copyWith(
+                                                  color: Theme.of(context)
+                                                      .scaffoldBackgroundColor,
+                                                  fontWeight: FontWeight.bold),
+                                        ),
                                       ))
                                 ],
                               ),
@@ -223,7 +225,7 @@ class _LockDetailsViewState
                             },
                             child: Container(
                               padding: const EdgeInsets.all(15),
-                              height: 140,
+                              height: 80,
                               decoration: BoxDecoration(
                                   color: Theme.of(context).primaryColor,
                                   borderRadius: BorderRadius.circular(30)),
@@ -256,7 +258,7 @@ class _LockDetailsViewState
                                         viewModel.local!.gallery,
                                         style: Theme.of(context)
                                             .textTheme
-                                            .titleLarge!
+                                            .bodyLarge!
                                             .copyWith(
                                                 color: Theme.of(context)
                                                     .scaffoldBackgroundColor,

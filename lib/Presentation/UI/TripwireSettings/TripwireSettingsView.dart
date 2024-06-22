@@ -59,7 +59,8 @@ class _TripwireSettingsViewState
                 return const Center(
                   child: CircularProgressIndicator(),
                 );
-              } else if (viewModel.errorMessage != null || viewModel.lockErrorMessage != null) {
+              } else if (viewModel.errorMessage != null ||
+                  viewModel.lockErrorMessage != null) {
                 return ErrorMessageWidget(
                     errorMessage: viewModel.errorMessage!,
                     fixErrorFunction: viewModel.loadParameters);
@@ -74,8 +75,11 @@ class _TripwireSettingsViewState
                         child: Row(
                           children: [
                             Expanded(
-                                child: viewModel.locksProvider.value["request_update"]!=null &&
-                                    viewModel.locksProvider.value["request_update"]
+                                child: viewModel.locksProvider
+                                                .value["request_update"] !=
+                                            null &&
+                                        viewModel.locksProvider
+                                            .value["request_update"]
                                     ? Container(
                                         height: 220,
                                         width: double.infinity,
@@ -84,11 +88,38 @@ class _TripwireSettingsViewState
                                                 BorderRadius.circular(20),
                                             color:
                                                 Theme.of(context).primaryColor),
-                                        child: Lottie.asset(
-                                            value.getImageEmptyAnimation()),
-                                      )
+                                        child: Stack(
+                                          children: [
+                                            Center(
+                                              child: Lottie.asset(
+                                                  value.getImageEmptyAnimation()),
+                                            ),
+                                            Container(
+                                              margin: const EdgeInsets.all(10),
+                                              alignment: Alignment.bottomRight,
+                                              child: ElevatedButton(
+                                                onPressed: () {
+                                                  viewModel.requestNewImage();
+                                                },
+                                                style: ButtonStyle(
+                                                  backgroundColor: MaterialStateProperty.all(
+                                                    Theme.of(context).scaffoldBackgroundColor
+                                                  )
+                                                ),
+                                                child: Iconify(
+                                                  MaterialSymbols
+                                                      .autorenew_rounded,
+                                                  color: Theme.of(context)
+                                                      .primaryColor,
+                                                ),
+                                              ),
+                                            )
+                                          ],
+                                        ))
                                     : CachedNetworkImage(
-                                        imageUrl: viewModel.locksProvider.value["lastImage"]??"",
+                                        imageUrl: viewModel.locksProvider
+                                                .value["lastImage"] ??
+                                            "",
                                         fit: BoxFit.cover,
                                         height: double.infinity,
                                         width: double.infinity,
@@ -166,15 +197,22 @@ class _TripwireSettingsViewState
                         ),
                         Row(
                           children: [
-                            Expanded(child: Container(
+                            Expanded(
+                                child: Container(
                               padding: const EdgeInsets.all(10),
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                border: Border.all(width: 1 , color: Theme.of(context).primaryColor)
-                              ),
+                                  borderRadius: BorderRadius.circular(15),
+                                  border: Border.all(
+                                      width: 1,
+                                      color: Theme.of(context).primaryColor)),
                               child: Column(
                                 children: [
-                                  Text("X1" , style: Theme.of(context).textTheme.titleMedium, textAlign: TextAlign.center,),
+                                  Text(
+                                    "X1",
+                                    style:
+                                        Theme.of(context).textTheme.titleMedium,
+                                    textAlign: TextAlign.center,
+                                  ),
                                   Row(
                                     children: [
                                       Expanded(
@@ -190,28 +228,35 @@ class _TripwireSettingsViewState
                                           currentIndex: viewModel.x1,
                                           showPointer: true,
                                           customPointer: Row(
-                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
                                             children: [
                                               Container(
-                                                padding: const EdgeInsets.all(15),
+                                                padding:
+                                                    const EdgeInsets.all(15),
                                                 decoration: BoxDecoration(
                                                     border: Border.all(
                                                         width: 1,
-                                                        color: Theme.of(context).primaryColor),
-                                                    borderRadius: BorderRadius.circular(10)
-                                                ),
+                                                        color: Theme.of(context)
+                                                            .primaryColor),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10)),
                                               ),
                                             ],
                                           ),
-                                          unSelectedNumberStyle: Theme.of(context)
+                                          unSelectedNumberStyle: Theme.of(
+                                                  context)
                                               .textTheme
                                               .titleMedium!
                                               .copyWith(
-                                              color: Theme.of(context).secondaryHeaderColor),
+                                                  color: Theme.of(context)
+                                                      .secondaryHeaderColor),
                                           selectedNumberStyle: Theme.of(context)
                                               .textTheme
                                               .titleLarge!
-                                              .copyWith(fontWeight: FontWeight.bold),
+                                              .copyWith(
+                                                  fontWeight: FontWeight.bold),
                                         ),
                                       ),
                                     ],
@@ -222,15 +267,22 @@ class _TripwireSettingsViewState
                             const SizedBox(
                               width: 10,
                             ),
-                            Expanded(child: Container(
+                            Expanded(
+                                child: Container(
                               padding: const EdgeInsets.all(10),
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(15),
-                                  border: Border.all(width: 1 , color: Theme.of(context).primaryColor)
-                              ),
+                                  border: Border.all(
+                                      width: 1,
+                                      color: Theme.of(context).primaryColor)),
                               child: Column(
                                 children: [
-                                  Text("Y1" , style: Theme.of(context).textTheme.titleMedium, textAlign: TextAlign.center,),
+                                  Text(
+                                    "Y1",
+                                    style:
+                                        Theme.of(context).textTheme.titleMedium,
+                                    textAlign: TextAlign.center,
+                                  ),
                                   Row(
                                     children: [
                                       Expanded(
@@ -246,28 +298,35 @@ class _TripwireSettingsViewState
                                           currentIndex: viewModel.y1,
                                           showPointer: true,
                                           customPointer: Row(
-                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
                                             children: [
                                               Container(
-                                                padding: const EdgeInsets.all(15),
+                                                padding:
+                                                    const EdgeInsets.all(15),
                                                 decoration: BoxDecoration(
                                                     border: Border.all(
                                                         width: 1,
-                                                        color: Theme.of(context).primaryColor),
-                                                    borderRadius: BorderRadius.circular(10)
-                                                ),
+                                                        color: Theme.of(context)
+                                                            .primaryColor),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10)),
                                               ),
                                             ],
                                           ),
-                                          unSelectedNumberStyle: Theme.of(context)
+                                          unSelectedNumberStyle: Theme.of(
+                                                  context)
                                               .textTheme
                                               .titleMedium!
                                               .copyWith(
-                                              color: Theme.of(context).secondaryHeaderColor),
+                                                  color: Theme.of(context)
+                                                      .secondaryHeaderColor),
                                           selectedNumberStyle: Theme.of(context)
                                               .textTheme
                                               .titleLarge!
-                                              .copyWith(fontWeight: FontWeight.bold),
+                                              .copyWith(
+                                                  fontWeight: FontWeight.bold),
                                         ),
                                       ),
                                     ],
@@ -282,15 +341,22 @@ class _TripwireSettingsViewState
                         ),
                         Row(
                           children: [
-                            Expanded(child: Container(
+                            Expanded(
+                                child: Container(
                               padding: const EdgeInsets.all(10),
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(15),
-                                  border: Border.all(width: 1 , color: Theme.of(context).primaryColor)
-                              ),
+                                  border: Border.all(
+                                      width: 1,
+                                      color: Theme.of(context).primaryColor)),
                               child: Column(
                                 children: [
-                                  Text("X2" , style: Theme.of(context).textTheme.titleMedium, textAlign: TextAlign.center,),
+                                  Text(
+                                    "X2",
+                                    style:
+                                        Theme.of(context).textTheme.titleMedium,
+                                    textAlign: TextAlign.center,
+                                  ),
                                   Row(
                                     children: [
                                       Expanded(
@@ -306,28 +372,35 @@ class _TripwireSettingsViewState
                                           currentIndex: viewModel.x2,
                                           showPointer: true,
                                           customPointer: Row(
-                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
                                             children: [
                                               Container(
-                                                padding: const EdgeInsets.all(15),
+                                                padding:
+                                                    const EdgeInsets.all(15),
                                                 decoration: BoxDecoration(
                                                     border: Border.all(
                                                         width: 1,
-                                                        color: Theme.of(context).primaryColor),
-                                                    borderRadius: BorderRadius.circular(10)
-                                                ),
+                                                        color: Theme.of(context)
+                                                            .primaryColor),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10)),
                                               ),
                                             ],
                                           ),
-                                          unSelectedNumberStyle: Theme.of(context)
+                                          unSelectedNumberStyle: Theme.of(
+                                                  context)
                                               .textTheme
                                               .titleMedium!
                                               .copyWith(
-                                              color: Theme.of(context).secondaryHeaderColor),
+                                                  color: Theme.of(context)
+                                                      .secondaryHeaderColor),
                                           selectedNumberStyle: Theme.of(context)
                                               .textTheme
                                               .titleLarge!
-                                              .copyWith(fontWeight: FontWeight.bold),
+                                              .copyWith(
+                                                  fontWeight: FontWeight.bold),
                                         ),
                                       ),
                                     ],
@@ -338,15 +411,22 @@ class _TripwireSettingsViewState
                             const SizedBox(
                               width: 10,
                             ),
-                            Expanded(child: Container(
+                            Expanded(
+                                child: Container(
                               padding: const EdgeInsets.all(10),
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(15),
-                                  border: Border.all(width: 1 , color: Theme.of(context).primaryColor)
-                              ),
+                                  border: Border.all(
+                                      width: 1,
+                                      color: Theme.of(context).primaryColor)),
                               child: Column(
                                 children: [
-                                  Text("Y2" , style: Theme.of(context).textTheme.titleMedium, textAlign: TextAlign.center,),
+                                  Text(
+                                    "Y2",
+                                    style:
+                                        Theme.of(context).textTheme.titleMedium,
+                                    textAlign: TextAlign.center,
+                                  ),
                                   Row(
                                     children: [
                                       Expanded(
@@ -362,28 +442,35 @@ class _TripwireSettingsViewState
                                           currentIndex: viewModel.y2,
                                           showPointer: true,
                                           customPointer: Row(
-                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
                                             children: [
                                               Container(
-                                                padding: const EdgeInsets.all(15),
+                                                padding:
+                                                    const EdgeInsets.all(15),
                                                 decoration: BoxDecoration(
                                                     border: Border.all(
                                                         width: 1,
-                                                        color: Theme.of(context).primaryColor),
-                                                    borderRadius: BorderRadius.circular(10)
-                                                ),
+                                                        color: Theme.of(context)
+                                                            .primaryColor),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10)),
                                               ),
                                             ],
                                           ),
-                                          unSelectedNumberStyle: Theme.of(context)
+                                          unSelectedNumberStyle: Theme.of(
+                                                  context)
                                               .textTheme
                                               .titleMedium!
                                               .copyWith(
-                                              color: Theme.of(context).secondaryHeaderColor),
+                                                  color: Theme.of(context)
+                                                      .secondaryHeaderColor),
                                           selectedNumberStyle: Theme.of(context)
                                               .textTheme
                                               .titleLarge!
-                                              .copyWith(fontWeight: FontWeight.bold),
+                                              .copyWith(
+                                                  fontWeight: FontWeight.bold),
                                         ),
                                       ),
                                     ],
@@ -407,8 +494,9 @@ class _TripwireSettingsViewState
                           padding: const EdgeInsets.all(10),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(15),
-                              border: Border.all(width: 1 , color: Theme.of(context).primaryColor)
-                          ),
+                              border: Border.all(
+                                  width: 1,
+                                  color: Theme.of(context).primaryColor)),
                           child: Row(
                             children: [
                               Expanded(
@@ -431,9 +519,10 @@ class _TripwireSettingsViewState
                                         decoration: BoxDecoration(
                                             border: Border.all(
                                                 width: 1,
-                                                color: Theme.of(context).primaryColor),
-                                            borderRadius: BorderRadius.circular(10)
-                                        ),
+                                                color: Theme.of(context)
+                                                    .primaryColor),
+                                            borderRadius:
+                                                BorderRadius.circular(10)),
                                       ),
                                     ],
                                   ),
@@ -441,7 +530,8 @@ class _TripwireSettingsViewState
                                       .textTheme
                                       .titleMedium!
                                       .copyWith(
-                                      color: Theme.of(context).secondaryHeaderColor),
+                                          color: Theme.of(context)
+                                              .secondaryHeaderColor),
                                   selectedNumberStyle: Theme.of(context)
                                       .textTheme
                                       .titleMedium!
@@ -462,19 +552,18 @@ class _TripwireSettingsViewState
                           height: 20,
                         ),
                         ElevatedButton(
-                          onPressed: (){
-                            viewModel.updateParameters();
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.all(15.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(viewModel.local!.confirm),
-                              ],
-                            ),
-                          )
-                        )
+                            onPressed: () {
+                              viewModel.updateParameters();
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.all(15.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(viewModel.local!.confirm),
+                                ],
+                              ),
+                            ))
                       ],
                     ),
                   ],
@@ -502,8 +591,9 @@ class _TripwireSettingsViewState
         lockCard: widget.lockCard!,
         getTripwireImageAndStateUseCase: injectGetTripwireParametersUseCase(),
         updateRequestImageStateUseCase: injectUpdateRequestImageStateUseCase(),
-        updateTripwireParametersUseCase: injectUpdateTripwireParametersUseCase(),
-        setLockRealTimeDatabaseListenerUseCase: injectSetLockRealTimeDatabaseListenerUseCase()
-    );
+        updateTripwireParametersUseCase:
+            injectUpdateTripwireParametersUseCase(),
+        setLockRealTimeDatabaseListenerUseCase:
+            injectSetLockRealTimeDatabaseListenerUseCase());
   }
 }
