@@ -18,7 +18,7 @@ class FirebaseChatDatabase extends BaseDatabase{
 
   // get collection Messages collection references
    CollectionReference<ChatDTO> getCollectionReference(String contactId){
-    return FirebaseFirestore.instance.collection(constants.contactsCollection).doc(contactId).collection(ChatDTO.collectionName).withConverter(
+    return FirebaseFirestore.instance.collection(constants.contactsCollection).doc(contactId).collection(constants.messagesCollection).withConverter(
       fromFirestore: (snapshot, options) => ChatDTO.fromFireStore(snapshot.data()!),
       toFirestore: (value, options) => value.toFireStore(),
     );

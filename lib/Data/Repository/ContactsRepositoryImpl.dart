@@ -42,5 +42,10 @@ class ContactsRepositoryImpl implements ContactsRepository {
     await contactsRemoteDataSource.deleteUserContacts(uid: uid);
   }
 
+  @override
+  Future<void> updateContact({required Contact contact})async {
+    await contactsRemoteDataSource.updateContact(contact: contact.toDataSource());
+  }
+
 
 }
