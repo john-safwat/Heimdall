@@ -17,5 +17,5 @@ class Constants {
   final String logCollection = "Log";
   final String keysCollection = "Keys";
   final String locksCardsBox = "LocksCards";
-
+  final String messagesCollection = "Messages";
 }

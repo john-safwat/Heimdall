@@ -1,6 +1,5 @@
 import 'package:heimdall/Domain/Models/Chat/Chat.dart';
 class ChatDTO {
-  static const String collectionName = "Messages";
   String messageID;
   String senderID;
   int dateTime;

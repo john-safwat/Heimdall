@@ -6,26 +6,33 @@ import 'package:heimdall/Domain/Models/Chat/Chat.dart';
 import 'package:heimdall/Domain/Models/Contact/Contact.dart';
 import 'package:heimdall/Domain/UseCase/GetMessagesUseCase.dart';
 import 'package:heimdall/Domain/UseCase/SendMessageUseCase.dart';
+import 'package:heimdall/Domain/UseCase/UpdateContactUseCase.dart';
 import 'package:heimdall/Presentation/UI/ContactChat/ContactChatNavigator.dart';
 import 'package:heimdall/Presentation/UI/Widgets/ImagePIckLocationModalBottomSheetWidget.dart';
 
 class ContactChatViewModel extends BaseViewModel<ContactChatNavigator> {
   SendMessageUseCase sendMessageUseCase;
   GetMessagesUseCase getMessagesUseCase;
-  ContactChatViewModel({required this.sendMessageUseCase,required this.getMessagesUseCase});
-  List<Chat> chat = [];
+  UpdateContactUseCase updateContactUseCase;
+
+  ContactChatViewModel(
+      {required this.sendMessageUseCase,
+      required this.getMessagesUseCase,
+      required this.updateContactUseCase});
+
+  List<Chat> messages = [];
   TextEditingController controller = TextEditingController();
   late Contact contact;
   String? errorMessage;
 
   // function to get messages in chat
-  Stream<QuerySnapshot<ChatDTO>> loadChat(){
+  Stream<QuerySnapshot<ChatDTO>> loadChat() {
     return getMessagesUseCase.invoke(contactId: contact.contactId);
   }
 
   // function to send message
   sendMessage() async {
-    if (controller.text.isNotEmpty){
+    if (controller.text.isNotEmpty) {
       try {
         await sendMessageUseCase.invoke(
           chat: Chat(
@@ -36,10 +43,32 @@ class ContactChatViewModel extends BaseViewModel<ContactChatNavigator> {
           ),
           contactId: contact.contactId,
         );
+        contact.lastMessage =controller.text ;
+        contact.lastMessageTime = DateTime.now().millisecondsSinceEpoch;
         controller.text = "";
+        notifyListeners();
+
+        await updateContactUseCase.invoke(contact: contact);
       } catch (e) {
         navigator!.showErrorNotification(message: local!.errorSendingMessage);
         notifyListeners();
+      }
+    }
+  }
+
+  void sortMessagesByNewTime(){
+    for(int i = 0 ; i< messages.length-1 ; i++){
+      var swapped= false;
+      for(int j = 0 ; j<messages.length - i -1 ; j++ ){
+        if(messages[j].dateTime < messages[j+1].dateTime){
+          var temp = messages[j];
+          messages[j] = messages[j+1];
+          messages[j+1] = temp;
+          swapped = true;
+        }
+      }
+      if (swapped == false) {
+        break;
       }
     }
   }
@@ -56,11 +85,12 @@ class ContactChatViewModel extends BaseViewModel<ContactChatNavigator> {
 
   // navigation function
   showModalBottomSheet() {
-    navigator!.showCustomModalBottomSheet(widget: ImagePickLocationModalBottomSheetWidget(
-        title: local!.pickYourImagePickingMethod,
-        cameraTitle: local!.camera,
-        galleryTitle: local!.gallery,
-        openCamera: pickImageFromCamera,
-        openGallery: pickImageFromGallery));
+    navigator!.showCustomModalBottomSheet(
+        widget: ImagePickLocationModalBottomSheetWidget(
+            title: local!.pickYourImagePickingMethod,
+            cameraTitle: local!.camera,
+            galleryTitle: local!.gallery,
+            openCamera: pickImageFromCamera,
+            openGallery: pickImageFromGallery));
   }
 }

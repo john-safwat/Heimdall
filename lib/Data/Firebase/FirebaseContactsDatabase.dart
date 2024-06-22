@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:heimdall/Core/Base/BaseDatabase.dart';
 import 'package:heimdall/Data/Models/Contact/ContactDTO.dart';
+import 'package:heimdall/Domain/Models/Contact/Contact.dart';
 
 FirebaseContactsDatabase injectFirebaseContactsDatabase() {
   return FirebaseContactsDatabase.getInstance();
@@ -66,7 +67,7 @@ class FirebaseContactsDatabase extends BaseDatabase{
   }
 
   // function to delete user account contact
-  Future<void> deleteUserContact({required String uid})async{
+  Future<void> deleteUserContacts({required String uid})async{
     var data = await getCollectionReference().where("firstUserUID" ,isEqualTo: uid).get();
     var list = data.docs.map((e) => e.data()).toList();
     for(int i = 0 ; i<list.length ; i++){
@@ -78,5 +79,11 @@ class FirebaseContactsDatabase extends BaseDatabase{
       await getCollectionReference().doc(list[i].contactId).delete();
     }
   }
+
+  // function to update contact
+  Future<void> updateContact({required ContactDTO contact})async{
+    await getCollectionReference().doc(contact.contactId).update(contact.toFireStore());
+  }
+
 
 }

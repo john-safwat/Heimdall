@@ -5,6 +5,7 @@ import 'package:heimdall/Core/Base/BaseState.dart';
 import 'package:heimdall/Domain/Models/Contact/Contact.dart';
 import 'package:heimdall/Domain/UseCase/GetMessagesUseCase.dart';
 import 'package:heimdall/Domain/UseCase/SendMessageUseCase.dart';
+import 'package:heimdall/Domain/UseCase/UpdateContactUseCase.dart';
 import 'package:heimdall/Presentation/UI/ContactChat/ContactChatNavigator.dart';
 import 'package:heimdall/Presentation/UI/ContactChat/ContactChatViewModel.dart';
 import 'package:heimdall/Presentation/UI/ContactChat/Widgets/MessagesWidget.dart';
@@ -24,6 +25,7 @@ class _ContactChatViewState
     extends BaseState<ContactChatView, ContactChatViewModel>
     implements ContactChatNavigator {
   var messageController = TextEditingController();
+
   @override
   void initState() {
     super.initState();
@@ -41,14 +43,10 @@ class _ContactChatViewState
             appBar: AppBar(
               leadingWidth: 30,
               actions: <Widget>[
-                IconButton(
-                  icon: const Icon(Icons.call),
-                  iconSize: 22,
-                  onPressed: () {},
-                ), //IconButton
                 PopupMenuButton<Widget>(
                   color: Theme.of(context).scaffoldBackgroundColor,
-                  itemBuilder: (BuildContext context) => <PopupMenuEntry<Widget>>[
+                  itemBuilder: (BuildContext context) =>
+                      <PopupMenuEntry<Widget>>[
                     PopupMenuItem<Widget>(
                       onTap: () => value.removeContact(),
                       child: Row(
@@ -129,30 +127,34 @@ class _ContactChatViewState
             ),
             body: Column(
               children: [
-                 Expanded(
-                  child: StreamBuilder(
-                    stream: viewModel.loadChat(),
-                    builder: (context, snapshot) {
-                      if(snapshot.connectionState == ConnectionState.waiting){
-                        return const Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      }else if (snapshot.hasError){
-                        return ErrorWidget(viewModel.handleErrorMessage(snapshot.error! as Exception));
-                      } else {
-                        viewModel.chat =  snapshot.data!.docs.map((e) => e.data().toDomain()).toList();
-                        return ListView.builder(
-                          reverse: true,
-                          itemBuilder: (context, index) => MessageWidget(message: viewModel.chat[index]),
-                          itemCount: viewModel.chat.length,
-                        );
-                      }
-                    },
-                  )
-                ),
+                Expanded(
+                    child: StreamBuilder(
+                  stream: viewModel.loadChat(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    } else if (snapshot.hasError) {
+                      return ErrorWidget(viewModel
+                          .handleErrorMessage(snapshot.error! as Exception));
+                    } else {
+                      viewModel.messages = snapshot.data!.docs
+                          .map((e) => e.data().toDomain())
+                          .toList();
+                      viewModel.sortMessagesByNewTime();
+                      return ListView.builder(
+                        reverse: true,
+                        itemBuilder: (context, index) =>
+                            MessageWidget(message: viewModel.messages[index]),
+                        itemCount: viewModel.messages.length,
+                      );
+                    }
+                  },
+                )),
                 Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 10.0, vertical: 15),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 10.0, vertical: 15),
                   child: Row(
                     children: [
                       Expanded(
@@ -180,19 +182,7 @@ class _ContactChatViewState
                           ),
                         ),
                       ),
-                      const SizedBox(
-                        width: 5,
-                      ),
-                      ElevatedButton(
-                        onPressed: () {},
-                        style: ButtonStyle(
-                            shape:
-                                MaterialStateProperty.all(const CircleBorder())),
-                        child: const Padding(
-                          padding: EdgeInsets.symmetric(vertical: 15.0),
-                          child: Icon(Icons.mic),
-                        ),
-                      ),
+
                     ],
                   ),
                 ),
@@ -206,7 +196,10 @@ class _ContactChatViewState
 
   @override
   ContactChatViewModel initViewModel() {
-
-    return ContactChatViewModel(sendMessageUseCase: injectSendMessageUseCase(),getMessagesUseCase:injectGetMessagesUseCase());
+    return ContactChatViewModel(
+        sendMessageUseCase: injectSendMessageUseCase(),
+        getMessagesUseCase: injectGetMessagesUseCase(),
+        updateContactUseCase: injectUpdateContactUseCase()
+    );
   }
 }

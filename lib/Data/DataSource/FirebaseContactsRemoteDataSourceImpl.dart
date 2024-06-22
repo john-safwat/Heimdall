@@ -118,7 +118,27 @@ class FirebaseContactsRemoteDataSourceImpl
   Future<void> deleteUserContacts({required String uid}) async {
     try {
       await database
-          .deleteUserContact(uid: uid)
+          .deleteUserContacts(uid: uid)
+          .timeout(const Duration(seconds: 60));
+    } on FirebaseException catch (e) {
+      // handle firebase exception in en of ar
+      throw FirebaseDatabaseException(errorMessage: e.code);
+    } on IOException {
+      throw InternetConnectionException(errorMessage: "I/O Exception");
+    } on TimeoutException {
+      // handle timeout exception
+      throw TimeOutOperationsException(errorMessage: "Timeout");
+    } catch (e) {
+      // handle unknown exceptions
+      throw UnknownException(errorMessage: e.toString());
+    }
+  }
+
+  @override
+  Future<void> updateContact({required ContactDTO contact})async {
+    try {
+      await database
+          .updateContact(contact: contact)
           .timeout(const Duration(seconds: 60));
     } on FirebaseException catch (e) {
       // handle firebase exception in en of ar
