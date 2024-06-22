@@ -129,7 +129,7 @@ class TripwireSettingsViewModel
   void requestNewImage() async {
     try {
       await updateRequestImageStateUseCase.invoke(
-          lockId: lockCard.lockId, state: !state);
+          lockId: lockCard.lockId, state: true);
       state = !state;
       notifyListeners();
     } catch (e) {
