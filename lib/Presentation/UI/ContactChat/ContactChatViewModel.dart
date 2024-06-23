@@ -74,8 +74,19 @@ class ContactChatViewModel extends BaseViewModel<ContactChatNavigator> {
   }
 
   // function to block contact
-  blockContact() {
-    //todo to be implemented
+  blockContact()async {
+    if(contact.firstUserUID == appConfigProvider!.user!.uid){
+      contact.isBlockedByFirstUser = true;
+    }else{
+      contact.isBlockedBySecondUser = true;
+    }
+    try {
+      await updateContactUseCase.invoke(contact: contact);
+      notifyListeners();
+    } catch (e) {
+      navigator!.showErrorNotification(message: local!.errorSendingMessage);
+      notifyListeners();
+    }
   }
 
   // function to block Contact
@@ -92,5 +103,20 @@ class ContactChatViewModel extends BaseViewModel<ContactChatNavigator> {
             galleryTitle: local!.gallery,
             openCamera: pickImageFromCamera,
             openGallery: pickImageFromGallery));
+  }
+
+  unBlock()async {
+    if(contact.firstUserUID == appConfigProvider!.user!.uid){
+      contact.isBlockedByFirstUser = false;
+    }else{
+      contact.isBlockedBySecondUser = false;
+    }
+    try {
+      await updateContactUseCase.invoke(contact: contact);
+      notifyListeners();
+    } catch (e) {
+      navigator!.showErrorNotification(message: local!.errorSendingMessage);
+      notifyListeners();
+    }
   }
 }

@@ -248,6 +248,8 @@
   "tripwirePints" : "نقاط Tripwire",
   "timer" : "المؤقت",
   "timerInfo" : "يقوم هذا المؤقت بتعيين الحد الأدنى من الوقت بين إشعارات Tripwire",
-  "tripwireUpdated" : "تم تحديث إعدادات Tripwire بنجاح"
-
+  "tripwireUpdated" : "تم تحديث إعدادات Tripwire بنجاح",
+  "youHaveBlockedThisContact" : "لقد قمت بحظر جهة الاتصال هذه",
+  "unBlock" : "الغاء الحظر",
+  "youNoLongerCanSendMessages": "لم يعد بإمكانك إرسال رسائل إلى هذا الشخص"
 }
