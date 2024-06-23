@@ -152,40 +152,160 @@ class _ContactChatViewState
                     }
                   },
                 )),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 10.0, vertical: 15),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: TextFormField(
-                          controller: viewModel.controller,
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-                          cursorColor: Theme.of(context).primaryColor,
-                          decoration: InputDecoration(
-                            suffixIcon: InkWell(
-                              onTap: () => viewModel.sendMessage(),
-                              child: Icon(
-                                EvaIcons.paperPlane,
-                                size: 25,
-                                color: Theme.of(context).primaryColor,
-                              ),
-                            ),
-                            prefixIcon: InkWell(
-                              onTap: () => value.showModalBottomSheet(),
-                              child: const Icon(
-                                Icons.image,
-                                size: 25,
-                              ),
-                            ),
-                            hintText: value.local!.sendMessage,
+                if (viewModel.contact.isBlockedByFirstUser &&
+                    (viewModel.appConfigProvider!.user!.uid ==
+                        viewModel.contact.firstUserUID)) ...[
+                  Container(
+                    padding: const EdgeInsets.all(20),
+                    margin: const EdgeInsets.all(10),
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                        color: Theme.of(context).primaryColor,
+                        borderRadius: BorderRadius.circular(15)),
+                    child: Column(
+                      children: [
+                        Text(
+                          viewModel.local!.youHaveBlockedThisContact,
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyLarge!
+                              .copyWith(
+                                  color: Theme.of(context)
+                                      .scaffoldBackgroundColor),
+                        ),
+                        TextButton(
+                            onPressed: () {
+                              viewModel.unBlock();
+                            },
+                            child: Text(
+                              viewModel.local!.unBlock,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyLarge!
+                                  .copyWith(
+                                      color: Theme.of(context)
+                                          .scaffoldBackgroundColor,
+                                      decoration: TextDecoration.underline),
+                            ))
+                      ],
+                    ),
+                  )
+                ]
+                else if (viewModel.contact.isBlockedBySecondUser &&
+                    (viewModel.appConfigProvider!.user!.uid ==
+                        viewModel.contact.secondUserUID)) ...[
+                  Container(
+                    padding: const EdgeInsets.all(20),
+                    margin: const EdgeInsets.all(10),
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                        color: Theme.of(context).primaryColor,
+                        borderRadius: BorderRadius.circular(15)),
+                    child: Column(
+                      children: [
+                        Text(
+                          viewModel.local!.youHaveBlockedThisContact,
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyLarge!
+                              .copyWith(
+                              color: Theme.of(context)
+                                  .scaffoldBackgroundColor),
+                        ),
+                        TextButton(
+                            onPressed: () {
+                              viewModel.unBlock();
+                            },
+                            child: Text(
+                              viewModel.local!.unBlock,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyLarge!
+                                  .copyWith(
+                                  color: Theme.of(context)
+                                      .scaffoldBackgroundColor,
+                                  decoration: TextDecoration.underline),
+                            ))
+                      ],
+                    ),
+                  )
+                ]else if (viewModel.contact.isBlockedByFirstUser &&
+                    (viewModel.appConfigProvider!.user!.uid ==
+                        viewModel.contact.secondUserUID)) ...[
+                  Container(
+                    padding: const EdgeInsets.all(20),
+                    margin: const EdgeInsets.all(10),
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                        color: Theme.of(context).primaryColor,
+                        borderRadius: BorderRadius.circular(15)),
+                    child: Column(
+                      children: [
+                        Text(
+                          viewModel.local!.youNoLongerCanSendMessages,
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyLarge!
+                              .copyWith(
+                              color: Theme.of(context)
+                                  .scaffoldBackgroundColor),
+                        ),
+                      ],
+                    ),
+                  )
+                ]else if (viewModel.contact.isBlockedBySecondUser &&
+                    (viewModel.appConfigProvider!.user!.uid ==
+                        viewModel.contact.firstUserUID)) ...[
+                  Container(
+                    padding: const EdgeInsets.all(20),
+                    margin: const EdgeInsets.all(10),
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                        color: Theme.of(context).primaryColor,
+                        borderRadius: BorderRadius.circular(15)),
+                    child: Column(
+                      children: [
+                        Text(
+                          viewModel.local!.youNoLongerCanSendMessages,
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyLarge!
+                              .copyWith(
+                              color: Theme.of(context)
+                                  .scaffoldBackgroundColor),
+                        ),
+                      ],
+                    ),
+                  )
+                ]else ...[
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 10.0, vertical: 15),
+                    child: TextFormField(
+                      controller: viewModel.controller,
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      cursorColor: Theme.of(context).primaryColor,
+                      decoration: InputDecoration(
+                        suffixIcon: InkWell(
+                          onTap: () => viewModel.sendMessage(),
+                          child: Icon(
+                            EvaIcons.paperPlane,
+                            size: 25,
+                            color: Theme.of(context).primaryColor,
                           ),
                         ),
+                        prefixIcon: InkWell(
+                          onTap: () => value.showModalBottomSheet(),
+                          child: const Icon(
+                            Icons.image,
+                            size: 25,
+                          ),
+                        ),
+                        hintText: value.local!.sendMessage,
                       ),
-
-                    ],
+                    ),
                   ),
-                ),
+                ]
               ],
             ),
           ),
@@ -199,7 +319,6 @@ class _ContactChatViewState
     return ContactChatViewModel(
         sendMessageUseCase: injectSendMessageUseCase(),
         getMessagesUseCase: injectGetMessagesUseCase(),
-        updateContactUseCase: injectUpdateContactUseCase()
-    );
+        updateContactUseCase: injectUpdateContactUseCase());
   }
 }

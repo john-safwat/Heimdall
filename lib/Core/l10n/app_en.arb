@@ -248,5 +248,8 @@
   "tripwirePints" : "Tripwire Points",
   "timer" : "Timer",
   "timerInfo" : "This Timer Set The Minimum Time Between Notifications of Tripwire",
-  "tripwireUpdated" : "Tripwire Settings Updated Successfully"
+  "tripwireUpdated" : "Tripwire Settings Updated Successfully",
+  "youHaveBlockedThisContact" : "You Have Blocked This Contact",
+  "unBlock" : "UnBlock",
+  "youNoLongerCanSendMessages": "You No Longer Can Send Messages to This Person"
 }
