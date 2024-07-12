@@ -40,93 +40,88 @@ class _ChatViewState extends BaseState<ChatView, ChatViewModel>
             onPressed: () => viewModel.showAddContactBottomSheet(),
             child:  Iconify(Ph.chats_fill , color: Theme.of(context).scaffoldBackgroundColor,),
           ),
-          body: RefreshIndicator(
-            onRefresh: () =>viewModel.loadContacts(),
-            color: Theme.of(context).scaffoldBackgroundColor,
-            backgroundColor: Theme.of(context).primaryColor,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(viewModel.local!.messages,
-                          style: TextStyle(
-                            fontSize: 36,
-                            fontWeight: FontWeight.w600,
-                            color: Theme.of(context).primaryColor,
-                          )),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      TextFormField(
-                        style: Theme.of(context).textTheme.bodyLarge,
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                        cursorColor: Theme.of(context).primaryColor,
-                        cursorHeight: 20,
-                        onChanged: (value) {
-                          viewModel.search(value);
-                        },
-                        decoration: InputDecoration(
-                          prefixIcon: const Icon(
-                            EvaIcons.search,
-                            size: 30,
-                          ),
-                          hintText: viewModel.local!.findContact,
+          body: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(viewModel.local!.messages,
+                        style: TextStyle(
+                          fontSize: 36,
+                          fontWeight: FontWeight.w600,
+                          color: Theme.of(context).primaryColor,
+                        )),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    TextFormField(
+                      style: Theme.of(context).textTheme.bodyLarge,
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      cursorColor: Theme.of(context).primaryColor,
+                      cursorHeight: 20,
+                      onChanged: (value) {
+                        viewModel.search(value);
+                      },
+                      decoration: InputDecoration(
+                        prefixIcon: const Icon(
+                          EvaIcons.search,
+                          size: 30,
                         ),
+                        hintText: viewModel.local!.findContact,
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-                const SizedBox(
-                  height: 15,
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              Expanded(
+                child: Consumer<ChatViewModel>(
+                  builder: (context, value, child) {
+                    if (value.errorMessage != null) {
+                      return SingleChildScrollView(
+                        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+                        child: ErrorMessageWidget(
+                            errorMessage: value.errorMessage!,
+                            fixErrorFunction: value.loadContacts
+                        ),
+                      );
+                    } else if (value.loading) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    } else if (value.contacts.isEmpty) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Lottie.asset(viewModel.getNoChatAnimation()),
+                            const SizedBox(height: 20),
+                            Text(value.local!.youHaveNoContactsToChatWith , style: Theme.of(context).textTheme.titleMedium,textAlign: TextAlign.center,)
+                          ],
+                        )
+                      );
+                    } else {
+                      return ListView.builder(
+                        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+                        itemBuilder: (context, index) => ChatContactWidget(
+                          contact: value.contacts[index],
+                          uid: value.appConfigProvider!.user!.uid,
+                          navigationFunction: value.goToContactChatScreen,
+                          tag: viewModel.constants.userImageTag,
+                        ),
+                        itemCount: value.contacts.length,
+                      );
+                    }
+                  },
                 ),
-                Expanded(
-                  child: Consumer<ChatViewModel>(
-                    builder: (context, value, child) {
-                      if (value.errorMessage != null) {
-                        return SingleChildScrollView(
-                          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-                          child: ErrorMessageWidget(
-                              errorMessage: value.errorMessage!,
-                              fixErrorFunction: value.loadContacts
-                          ),
-                        );
-                      } else if (value.loading) {
-                        return const Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      } else if (value.contacts.isEmpty) {
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Lottie.asset(viewModel.getNoChatAnimation()),
-                              const SizedBox(height: 20),
-                              Text(value.local!.youHaveNoContactsToChatWith , style: Theme.of(context).textTheme.titleMedium,textAlign: TextAlign.center,)
-                            ],
-                          )
-                        );
-                      } else {
-                        return ListView.builder(
-                          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-                          itemBuilder: (context, index) => ChatContactWidget(
-                            contact: value.contacts[index],
-                            uid: value.appConfigProvider!.user!.uid,
-                            navigationFunction: value.goToContactChatScreen,
-                            tag: viewModel.constants.userImageTag,
-                          ),
-                          itemCount: value.contacts.length,
-                        );
-                      }
-                    },
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

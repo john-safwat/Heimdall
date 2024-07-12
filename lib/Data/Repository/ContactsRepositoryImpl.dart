@@ -26,15 +26,17 @@ class ContactsRepositoryImpl implements ContactsRepository {
   }
 
   @override
-  Future<List<Contact>> getFirstUserContact({required String uid}) async{
-    var response = await contactsRemoteDataSource.getFirstUserContact(uid: uid);
-    return response.map((e) => e.toDomain()).toList();
+  Stream<List<Contact>> getFirstUserContact({required String uid}) async*{
+    var response = contactsRemoteDataSource.getFirstUserContact(uid: uid);
+    var listOfContacts = await response.first;
+    yield listOfContacts.map((e) => e.toDomain()).toList();
   }
 
   @override
-  Future<List<Contact>> getSecondUserContact({required String uid})async{
+  Stream<List<Contact>> getSecondUserContact({required String uid})async*{
     var response = await contactsRemoteDataSource.getSecondUserContact(uid: uid);
-    return response.map((e) => e.toDomain()).toList();
+    var listOfContacts = await response.first;
+    yield listOfContacts.map((e) => e.toDomain()).toList();
   }
 
   @override

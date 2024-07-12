@@ -13,11 +13,11 @@ class GetContactsUseCase {
   ContactsRepository repository ;
   GetContactsUseCase({required this.repository});
 
-  Future<List<Contact>> invoke({required String uid})async{
-    var firstUserContacts = await repository.getFirstUserContact(uid: uid);
-    var secondContacts = await repository.getSecondUserContact(uid: uid);
+  Stream<List<Contact>> invoke({required String uid})async*{
+    var firstUserContacts = await repository.getFirstUserContact(uid: uid).first;
+    var secondContacts = await repository.getSecondUserContact(uid: uid).first;
     var response = sortByLastMessageTime(appendLists(firstUserContacts, secondContacts));
-    return response;
+    yield response;
   }
 
   List<Contact> appendLists(List<Contact> firstContacts , List<Contact> secondContact){
