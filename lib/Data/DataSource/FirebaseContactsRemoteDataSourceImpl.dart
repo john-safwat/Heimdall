@@ -73,12 +73,12 @@ class FirebaseContactsRemoteDataSourceImpl
   }
 
   @override
-  Future<List<ContactDTO>> getFirstUserContact({required String uid}) async {
+  Stream<List<ContactDTO>> getFirstUserContact({required String uid}) async* {
     try {
-      var response = await database
+      var response = database
           .getFirstUserContact(uid: uid)
           .timeout(const Duration(seconds: 60));
-      return response;
+      yield* response;
     } on FirebaseException catch (e) {
       // handle firebase exception in en of ar
       throw FirebaseDatabaseException(errorMessage: e.code);
@@ -94,12 +94,12 @@ class FirebaseContactsRemoteDataSourceImpl
   }
 
   @override
-  Future<List<ContactDTO>> getSecondUserContact({required String uid}) async {
+  Stream<List<ContactDTO>> getSecondUserContact({required String uid}) async* {
     try {
       var response = await database
           .getSecondUserContact(uid: uid)
           .timeout(const Duration(seconds: 60));
-      return response;
+      yield* response;
     } on FirebaseException catch (e) {
       // handle firebase exception in en of ar
       throw FirebaseDatabaseException(errorMessage: e.code);

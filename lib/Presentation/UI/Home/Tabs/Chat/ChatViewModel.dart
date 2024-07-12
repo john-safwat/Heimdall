@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:heimdall/Core/Base/BaseViewModel.dart';
 import 'package:heimdall/Core/Theme/MyTheme.dart';
@@ -21,8 +23,9 @@ class ChatViewModel extends BaseViewModel<ChatNavigator> {
   bool loading = false;
   String? errorMessage;
 
+  StreamController<List<Contact>> contactsStream = StreamController<List<Contact>>();
   // function to load user rooms
-  loadContacts() async {
+  Stream<List<Contact>> loadContacts() async* {
     allContacts = [];
     contacts = [];
     loading = true;
@@ -30,11 +33,15 @@ class ChatViewModel extends BaseViewModel<ChatNavigator> {
     notifyListeners();
 
     try {
-      allContacts =
-          await getContactsUseCase.invoke(uid: appConfigProvider!.user!.uid);
-      contacts = copyList();
-      loading = false;
-      notifyListeners();
+      StreamSubscription<List<Contact>> contactsStreamSubscription = contactsStream.stream.listen(
+        (listOfContacts) {
+          allContacts= listOfContacts;
+          contacts = copyList();
+          loading = false;
+          notifyListeners();
+        },
+      );
+      yield allContacts;
     } catch (e) {
       errorMessage = handleErrorMessage(e as Exception);
       notifyListeners();

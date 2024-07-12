@@ -56,14 +56,14 @@ class FirebaseContactsDatabase extends BaseDatabase{
   }
 
   // function to load rooms that user is the first user in
-  Future<List<ContactDTO>> getFirstUserContact({required String uid})async{
+  Stream<List<ContactDTO>> getFirstUserContact({required String uid})async*{
     var response =await getCollectionReference().where("firstUserUID" , isEqualTo: uid).get();
-    return response.docs.map((e) => e.data()).toList();
+    yield response.docs.map((e) => e.data()).toList();
   }
   // function to load rooms that user is the second user in
-  Future<List<ContactDTO>>  getSecondUserContact({required String uid})async{
+  Stream<List<ContactDTO>>  getSecondUserContact({required String uid})async*{
     var response =await getCollectionReference().where("secondUserUID" , isEqualTo: uid).get();
-    return response.docs.map((e) => e.data()).toList();
+    yield response.docs.map((e) => e.data()).toList();
   }
 
   // function to delete user account contact
